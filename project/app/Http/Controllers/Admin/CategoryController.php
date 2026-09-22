@@ -132,6 +132,19 @@ class CategoryController extends Controller
     }
 
     /**
+     * Toggle Category active/inactive status.
+     */
+    public function toggleStatus($id): RedirectResponse
+    {
+        $category = Category::findOrFail($id);
+        $category->status = ($category->status === 'active') ? 'inactive' : 'active';
+        $category->save();
+
+        return redirect()->route('admin.categories')
+            ->with('success', "Category '{$category->name}' status changed to " . ucfirst($category->status) . ".");
+    }
+
+    /**
      * Delete a subcategory.
      */
     public function destroySubcategory($id): RedirectResponse
@@ -148,5 +161,41 @@ class CategoryController extends Controller
 
         return redirect()->route('admin.categories')
             ->with('success', "Subcategory '{$name}' removed.");
+    }
+
+    /**
+     * Update an existing subcategory.
+     */
+    public function updateSubcategory(Request $request, $id): RedirectResponse
+    {
+        $subcategory = Subcategory::findOrFail($id);
+
+        $validated = $request->validate([
+            'name' => 'required|string|max:255',
+            'status' => 'nullable|in:active,inactive',
+        ]);
+
+        $validated['slug'] = Str::slug($validated['name']);
+        if ($request->filled('status')) {
+            $validated['status'] = $request->input('status');
+        }
+
+        $subcategory->update($validated);
+
+        return redirect()->route('admin.categories')
+            ->with('success', "Subcategory '{$subcategory->name}' updated successfully.");
+    }
+
+    /**
+     * Toggle Subcategory active/inactive status.
+     */
+    public function toggleSubcategoryStatus($id): RedirectResponse
+    {
+        $subcategory = Subcategory::findOrFail($id);
+        $subcategory->status = ($subcategory->status === 'active') ? 'inactive' : 'active';
+        $subcategory->save();
+
+        return redirect()->route('admin.categories')
+            ->with('success', "Subcategory '{$subcategory->name}' is now " . ucfirst($subcategory->status) . ".");
     }
 }

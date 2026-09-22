@@ -440,3 +440,385 @@ h1, h2, h3, h4, h5, h6, .page-title, .admin-card-title, .kpi-value, .sidebar-bra
   }
 }
 
+/* ==========================================================================
+   Categories & Taxonomy Module CSS
+   ========================================================================== */
+
+.cat-kpi-card {
+  background: #ffffff;
+  border: 1px solid var(--admin-border);
+  border-radius: 16px;
+  padding: 20px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.02);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+.cat-kpi-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 25px -4px rgba(0, 0, 0, 0.06);
+}
+.cat-kpi-icon {
+  width: 52px;
+  height: 52px;
+  border-radius: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.5rem;
+  flex-shrink: 0;
+}
+.cat-kpi-label {
+  letter-spacing: 0.05em;
+  font-size: 0.72rem;
+}
+.cat-kpi-subtext {
+  font-size: 0.75rem;
+}
+
+/* Gradients for Category Icon Badges */
+.cat-grad-0 { background: linear-gradient(135deg, #0284c7 0%, #0ea5e9 100%); color: #ffffff; box-shadow: 0 8px 16px rgba(2, 132, 199, 0.25); }
+.cat-grad-1 { background: linear-gradient(135deg, #7c3aed 0%, #a855f7 100%); color: #ffffff; box-shadow: 0 8px 16px rgba(124, 58, 237, 0.25); }
+.cat-grad-2 { background: linear-gradient(135deg, #059669 0%, #10b981 100%); color: #ffffff; box-shadow: 0 8px 16px rgba(5, 150, 105, 0.25); }
+.cat-grad-3 { background: linear-gradient(135deg, #d97706 0%, #f59e0b 100%); color: #ffffff; box-shadow: 0 8px 16px rgba(217, 119, 6, 0.25); }
+.cat-grad-4 { background: linear-gradient(135deg, #e11d48 0%, #f43f5e 100%); color: #ffffff; box-shadow: 0 8px 16px rgba(225, 29, 72, 0.25); }
+.cat-grad-5 { background: linear-gradient(135deg, #0d9488 0%, #14b8a6 100%); color: #ffffff; box-shadow: 0 8px 16px rgba(13, 148, 136, 0.25); }
+
+/* Category Modern Card */
+.category-card {
+  background: #ffffff;
+  border: 1px solid var(--admin-border);
+  border-radius: 20px;
+  box-shadow: 0 4px 20px rgba(15, 23, 42, 0.03);
+  transition: all 0.28s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+.category-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 18px 35px -8px rgba(15, 23, 42, 0.09), 0 4px 12px rgba(15, 23, 42, 0.04);
+  border-color: #cbd5e1;
+}
+.category-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: linear-gradient(90deg, #0284c7, #38bdf8, #818cf8);
+  opacity: 0;
+  transition: opacity 0.28s ease;
+}
+.category-card:hover::before {
+  opacity: 1;
+}
+
+.cat-avatar {
+  width: 54px;
+  height: 54px;
+  border-radius: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.55rem;
+  flex-shrink: 0;
+  transition: transform 0.25s ease;
+}
+.category-card:hover .cat-avatar {
+  transform: scale(1.05) rotate(2deg);
+}
+
+.cat-slug-badge {
+  font-size: 0.72rem;
+}
+.cat-status-dot {
+  font-size: 0.45rem;
+}
+.cat-desc-text {
+  min-height: 2.2rem;
+  line-height: 1.45;
+}
+.cat-subcat-header {
+  font-size: 0.68rem;
+  letter-spacing: 0.06em;
+}
+.cat-subcat-container {
+  min-height: 38px;
+}
+
+/* Subcategory Chips */
+.subcat-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 5px 12px;
+  background: #f8fafc;
+  border: 1px solid var(--admin-border);
+  border-radius: 30px;
+  font-size: 0.785rem;
+  font-weight: 600;
+  color: #1e293b !important;
+  transition: all 0.2s ease;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 5px 12px;
+  background: #f8fafc;
+}
+.subcat-chip:hover {
+  background: #f1f5f9;
+  border-color: #cbd5e1;
+}
+.subcat-chip.subcat-inactive {
+  opacity: 0.7;
+  border-style: dashed;
+  background: #f8fafc;
+}
+.subcat-actions {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+}
+.subcat-action-btn {
+  background: transparent;
+  border: none;
+  padding: 2px 4px;
+  line-height: 1;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  border-radius: 4px;
+  font-size: 0.76rem;
+  transition: all 0.15s ease;
+}
+.subcat-edit-btn {
+  color: #0284c7;
+}
+.subcat-edit-btn:hover {
+  color: #0369a1;
+  background: #e0f2fe;
+  transform: scale(1.15);
+}
+.subcat-del-btn {
+  color: #94a3b8;
+}
+.subcat-del-btn:hover {
+  color: #ef4444;
+  background: #fee2e2;
+  transform: scale(1.15);
+}
+
+/* Category Quick Status Badge Toggle Button */
+.cat-status-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 4px 11px;
+  border-radius: 30px;
+  font-size: 0.75rem;
+  font-weight: 700;
+  cursor: pointer;
+  border: 1px solid transparent;
+  transition: all 0.2s ease;
+  background: transparent;
+}
+.cat-status-badge.status-active {
+  background-color: #dcfce7;
+  color: #15803d;
+  border-color: #bbf7d0;
+}
+.cat-status-badge.status-active:hover {
+  background-color: #bbf7d0;
+  color: #14532d;
+  box-shadow: 0 2px 8px rgba(22, 163, 74, 0.2);
+}
+.cat-status-badge.status-inactive {
+  background-color: #fee2e2;
+  color: #b91c1c;
+  border-color: #fecaca;
+}
+.cat-status-badge.status-inactive:hover {
+  background-color: #fecaca;
+  color: #7f1d1d;
+  box-shadow: 0 2px 8px rgba(220, 38, 38, 0.2);
+}
+.cat-status-icon {
+  font-size: 0.72rem;
+  opacity: 0.65;
+  transition: transform 0.25s ease;
+}
+.cat-status-badge:hover .cat-status-icon {
+  transform: rotate(180deg);
+  opacity: 1;
+}
+
+/* Add Subcategory Ghost Button */
+.btn-add-sub-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 4px 10px;
+  border-radius: 30px;
+  font-size: 0.76rem;
+  font-weight: 700;
+  color: #0284c7;
+  background: #f0f9ff;
+  border: 1px dashed #7dd3fc;
+  text-decoration: none;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+.btn-add-sub-pill:hover {
+  background: #0284c7;
+  color: #ffffff;
+  border-style: solid;
+  border-color: #0284c7;
+}
+
+/* Search Box Toolbar */
+.cat-search-box {
+  min-width: 280px;
+  max-width: 360px;
+  flex-grow: 1;
+}
+
+/* Toolbar Filter Tabs */
+.filter-tab-btn {
+  padding: 6px 14px;
+  border-radius: 9999px;
+  font-size: 0.825rem;
+  font-weight: 600;
+  border: 1px solid var(--admin-border);
+  background: #ffffff;
+  color: #64748b;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+.filter-tab-btn:hover {
+  background: #f1f5f9;
+  color: #0f172a;
+}
+.filter-tab-btn.active {
+  background: #0f172a;
+  color: #ffffff;
+  border-color: #0f172a;
+}
+
+/* Icon Presets Grid in Modal */
+.icon-picker-grid {
+  display: grid;
+  grid-template-columns: repeat(8, 1fr);
+  gap: 8px;
+  max-height: 175px;
+  overflow-y: auto;
+  padding: 6px;
+  background: #f8fafc;
+  border-radius: 12px;
+  border: 1px solid var(--admin-border);
+}
+@media (max-width: 576px) {
+  .icon-picker-grid {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+.icon-preset-btn {
+  height: 42px;
+  border-radius: 10px;
+  border: 1px solid var(--admin-border);
+  background: #ffffff;
+  color: #475569;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.25rem;
+  cursor: pointer;
+  transition: all 0.18s ease;
+}
+.icon-preset-btn:hover {
+  background: #e0f2fe;
+  color: #0284c7;
+  border-color: #38bdf8;
+  transform: translateY(-2px);
+}
+.icon-preset-btn.active {
+  background: #0284c7;
+  color: #ffffff;
+  border-color: #0284c7;
+  box-shadow: 0 4px 10px rgba(2, 132, 199, 0.35);
+}
+
+.icon-preview-box {
+  width: 48px;
+  height: 48px;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.5rem;
+  background: #e0f2fe;
+  color: #0284c7;
+  border: 1px solid #bae6fd;
+  flex-shrink: 0;
+}
+
+/* Category Table View Utilities */
+.col-cat-main {
+  width: 250px;
+}
+.col-cat-actions {
+  width: 140px;
+}
+.cat-table-icon {
+  width: 40px;
+  height: 40px;
+}
+.cat-table-desc {
+  max-width: 200px;
+}
+.cat-modal-header-icon {
+  width: 36px;
+  height: 36px;
+}
+
+/* Meta Badges for Products & Subcategories */
+.cat-meta-subcat {
+  background-color: #f1f5f9 !important;
+  color: #1e293b !important;
+  border: 1px solid #cbd5e1 !important;
+  font-size: 0.785rem;
+}
+.cat-meta-subcat i {
+  color: #475569 !important;
+}
+.cat-meta-subcat span {
+  color: #1e293b !important;
+}
+
+.cat-meta-prod {
+  background-color: #e0f2fe !important;
+  color: #0369a1 !important;
+  border: 1px solid #bae6fd !important;
+  font-size: 0.785rem;
+}
+.cat-meta-prod i,
+.cat-meta-prod span {
+  color: #0369a1 !important;
+}
+
+/* Slate Color Utilities for High Contrast */
+.text-slate-900 { color: #0f172a !important; }
+.text-slate-800 { color: #1e293b !important; }
+.text-slate-700 { color: #334155 !important; }
+.text-slate-600 { color: #475569 !important; }
+.text-slate-500 { color: #64748b !important; }
+.text-slate-400 { color: #94a3b8 !important; }
+.bg-slate-100 { background-color: #f1f5f9 !important; }
+.bg-slate-50 { background-color: #f8fafc !important; }
+.border-slate-200 { border-color: #e2e8f0 !important; }
+.border-slate-300 { border-color: #cbd5e1 !important; }
+

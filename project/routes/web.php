@@ -86,8 +86,13 @@ Route::middleware('auth')->prefix('admin')->name('admin.')->group(function () {
         Route::post('/categories', 'store')->name('categories.store');
         Route::put('/categories/{id}', 'update')->name('categories.update');
         Route::delete('/categories/{id}', 'destroy')->name('categories.destroy');
+        Route::patch('/categories/{id}/toggle-status', 'toggleStatus')->name('categories.toggle-status');
+
+        // Subcategories
         Route::post('/categories/{category}/subcategories', 'storeSubcategory')->name('categories.subcategories.store');
+        Route::put('/categories/subcategories/{id}', 'updateSubcategory')->name('categories.subcategories.update');
         Route::delete('/categories/subcategories/{id}', 'destroySubcategory')->name('categories.subcategories.destroy');
+        Route::patch('/categories/subcategories/{id}/toggle-status', 'toggleSubcategoryStatus')->name('categories.subcategories.toggle-status');
 
         // Legacy compatibility
         Route::get('/categories.php', 'index');
