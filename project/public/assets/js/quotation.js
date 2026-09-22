@@ -281,7 +281,11 @@ const QuotationEngine = {
     HOC_UTILS.showToast(`Quotation ${newQuotation.id} saved successfully!`);
 
     setTimeout(() => {
-      window.location.href = `quotation-view.php?id=${encodeURIComponent(newQuotation.id)}`;
+      const destUrl = (window.HOC_ADMIN_ROUTES && typeof window.HOC_ADMIN_ROUTES.quotationView === 'function')
+        ? window.HOC_ADMIN_ROUTES.quotationView(newQuotation.id)
+        : `quotation-view.php?id=${encodeURIComponent(newQuotation.id)}`;
+      window.location.href = destUrl;
     }, 600);
   }
 };
+

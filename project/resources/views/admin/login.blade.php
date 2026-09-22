@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Login | Hari Om Computer</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800;900&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <link rel="stylesheet" href="{{ asset('assets/css/admin.css') }}">
+    <style>
+        body {
+            background: radial-gradient(circle at center, #1e293b 0%, #0f172a 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+        .login-box {
+            width: 100%;
+            max-width: 440px;
+            padding: 36px;
+            background: #ffffff;
+            border-radius: 16px;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+        }
+    </style>
+</head>
+<body>
+
+    <div class="login-box">
+        <div class="text-center mb-4">
+            <div class="d-inline-flex align-items-center justify-content-center bg-primary text-white rounded-3 mb-2" style="width: 52px; height: 52px; font-size: 1.6rem;">
+                <i class="bi bi-cpu"></i>
+            </div>
+            <h3 class="fw-bold text-slate-900 mb-1">HARI OM COMPUTER</h3>
+            <p class="text-muted small">Admin ERP & Sales Management Portal</p>
+        </div>
+
+        <!-- Demo Credentials Hint Alert -->
+        <div class="alert alert-info border-0 small py-2 px-3 mb-4 rounded-3">
+            <strong><i class="bi bi-info-circle-fill me-1"></i> Demo Credentials:</strong><br>
+            Email: <code class="text-primary fw-bold">admin@hariomcomputer.com</code><br>
+            Password: <code class="text-primary fw-bold">password</code>
+        </div>
+
+        <form id="admin-login-form">
+            <div class="mb-3">
+                <label class="form-label small fw-bold text-slate-700">Email Address</label>
+                <div class="input-group">
+                    <span class="input-group-text bg-light border-end-0"><i class="bi bi-envelope text-muted"></i></span>
+                    <input type="email" id="login-email" class="form-control border-start-0" required value="admin@hariomcomputer.com">
+                </div>
+            </div>
+
+            <div class="mb-3">
+                <div class="d-flex justify-content-between">
+                    <label class="form-label small fw-bold text-slate-700">Password</label>
+                    <a href="#" class="small text-decoration-none text-primary" onclick="alert('For demo prototype, password is: password')">Forgot password?</a>
+                </div>
+                <div class="input-group">
+                    <span class="input-group-text bg-light border-end-0"><i class="bi bi-shield-lock text-muted"></i></span>
+                    <input type="password" id="login-password" class="form-control border-start-0" required value="password">
+                </div>
+            </div>
+
+            <div class="form-check mb-4">
+                <input class="form-check-input" type="checkbox" id="rememberMe" checked>
+                <label class="form-check-label small text-muted" for="rememberMe">Remember my login session</label>
+            </div>
+
+            <button type="submit" class="btn btn-primary w-100 py-2 fw-bold shadow-sm">
+                <i class="bi bi-box-arrow-in-right me-1"></i> Sign In to Admin Panel
+            </button>
+
+            <div class="text-center mt-4">
+                <a href="{{ route('home') }}" class="text-decoration-none small text-muted">
+                    <i class="bi bi-arrow-left me-1"></i> Return to Store Frontend
+                </a>
+            </div>
+        </form>
+    </div>
+
+    <script src="{{ asset('assets/js/store-data.js') }}"></script>
+    <script>
+        document.getElementById("admin-login-form").addEventListener("submit", (e) => {
+            e.preventDefault();
+            const email = document.getElementById("login-email").value.trim();
+            const pass = document.getElementById("login-password").value.trim();
+
+            if (email === "admin@hariomcomputer.com" && pass === "password") {
+                sessionStorage.setItem("HOC_ADMIN_AUTH", "true");
+                window.location.href = "{{ route('admin.dashboard') }}";
+            } else {
+                alert("Invalid login credentials. Please use:\nadmin@hariomcomputer.com / password");
+            }
+        });
+    </script>
+</body>
+</html>

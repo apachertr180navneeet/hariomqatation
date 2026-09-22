@@ -382,15 +382,61 @@ h1, h2, h3, h4, h5, h6, .page-title, .admin-card-title, .kpi-value, .sidebar-bra
 .badge-soft-danger { background: #fee2e2; color: #b91c1c; font-weight: 700; }
 .badge-soft-secondary { background: #f1f5f9; color: #475569; font-weight: 700; }
 
+/* Backdrop Overlay for Mobile Sidebar */
+.sidebar-backdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(15, 23, 42, 0.65);
+  backdrop-filter: blur(3px);
+  z-index: 1035;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.3s ease, visibility 0.3s ease;
+}
+.sidebar-backdrop.show {
+  opacity: 1;
+  visibility: visible;
+}
+
 /* Responsive adjustments */
 @media (max-width: 991.98px) {
   .admin-sidebar {
     transform: translateX(-100%);
+    box-shadow: 0 0 30px rgba(0,0,0,0.3);
   }
   .admin-sidebar.show {
     transform: translateX(0);
   }
   .admin-wrapper {
     margin-left: 0;
+    width: 100%;
+  }
+  .admin-content {
+    padding: 20px 16px;
   }
 }
+
+@media (max-width: 575.98px) {
+  .page-header {
+    flex-direction: column;
+    align-items: flex-start !important;
+    gap: 12px;
+  }
+  .page-header .d-flex {
+    width: 100%;
+    justify-content: flex-start;
+    flex-wrap: wrap;
+  }
+  .kpi-value {
+    font-size: 1.45rem;
+  }
+  .admin-card-header {
+    flex-direction: column;
+    align-items: flex-start !important;
+    gap: 8px;
+  }
+}
+

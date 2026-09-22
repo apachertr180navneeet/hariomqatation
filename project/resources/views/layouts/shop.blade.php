@@ -33,10 +33,12 @@
             enquiry: "{{ route('enquiry') }}",
             quotationSuccess: "{{ route('quotation.success') }}",
             about: "{{ route('about') }}",
-            contact: "{{ route('contact') }}"
+            contact: "{{ route('contact') }}",
+            admin: "{{ route('admin.dashboard') }}"
         };
     </script>
 </head>
+
 <body>
 
     @if (!empty($showPromoStrip))
@@ -62,9 +64,14 @@
                 <span class="badge bg-primary text-white px-2 py-1">
                     <i class="bi bi-patch-check-fill me-1"></i> Authorized Store
                 </span>
+                <span>&bull;</span>
+                <a href="{{ route('admin.dashboard') }}" class="text-white text-opacity-75 text-decoration-none small">
+                    <i class="bi bi-shield-lock-fill text-warning me-1"></i> Admin ERP
+                </a>
             </div>
         </div>
     </div>
+
 
     <!-- Main Navbar -->
     <nav class="navbar navbar-expand-xl navbar-hoc sticky-top">
@@ -203,7 +210,9 @@
                         <li><a href="{{ route('contact') }}">Store Location</a></li>
                         <li><a href="{{ route('enquiry') }}">Enquiry Cart</a></li>
                         <li><a href="{{ route('products') }}">All Catalog</a></li>
+                        <li><a href="{{ route('admin.dashboard') }}"><i class="bi bi-shield-lock me-1"></i> Staff ERP Portal</a></li>
                     </ul>
+
                 </div>
 
                 <div class="col-6 col-md-3 col-lg-2">

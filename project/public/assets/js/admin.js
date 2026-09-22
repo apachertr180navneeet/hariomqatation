@@ -9,13 +9,48 @@ const AdminApp = {
     this.updateNotificationBadges();
   },
 
+  getUrl(routeKey, fallback, param) {
+    if (window.HOC_ADMIN_ROUTES && window.HOC_ADMIN_ROUTES[routeKey]) {
+      const val = window.HOC_ADMIN_ROUTES[routeKey];
+      return typeof val === 'function' ? val(param) : val;
+    }
+    return fallback;
+  },
+
   bindSidebar() {
     const toggleBtn = document.getElementById("sidebar-toggle-btn");
+    const closeBtn = document.getElementById("sidebar-close-btn");
+    const backdrop = document.getElementById("sidebar-backdrop");
     const sidebar = document.querySelector(".admin-sidebar");
-    if (toggleBtn && sidebar) {
+    
+    const openSidebar = () => {
+      if (sidebar) sidebar.classList.add("show");
+      if (backdrop) backdrop.classList.add("show");
+      document.body.style.overflow = "hidden";
+    };
+
+    const closeSidebar = () => {
+      if (sidebar) sidebar.classList.remove("show");
+      if (backdrop) backdrop.classList.remove("show");
+      document.body.style.overflow = "";
+    };
+
+    if (toggleBtn) {
       toggleBtn.addEventListener("click", () => {
-        sidebar.classList.toggle("show");
+        if (sidebar && sidebar.classList.contains("show")) {
+          closeSidebar();
+        } else {
+          openSidebar();
+        }
       });
+    }
+
+    if (closeBtn) {
+      closeBtn.addEventListener("click", closeSidebar);
+    }
+
+    if (backdrop) {
+      backdrop.addEventListener("click", closeSidebar);
     }
   },
 
@@ -91,10 +126,13 @@ const AdminApp = {
           "Expired": "badge-soft-secondary"
         }[q.status] || "badge-soft-secondary";
 
+        const qViewUrl = AdminApp.getUrl('quotationView', `quotation-view.php?id=${encodeURIComponent(q.id)}`, q.id);
+        const qPrintUrl = AdminApp.getUrl('quotationPrint', `quotation-print.php?id=${encodeURIComponent(q.id)}`, q.id);
+
         html += `
           <tr>
             <td>
-              <a href="quotation-view.php?id=${encodeURIComponent(q.id)}" class="fw-bold text-primary text-decoration-none">
+              <a href="${qViewUrl}" class="fw-bold text-primary text-decoration-none">
                 ${q.id}
               </a>
             </td>
@@ -111,8 +149,8 @@ const AdminApp = {
                   Actions
                 </button>
                 <ul class="dropdown-menu dropdown-menu-end shadow-sm">
-                  <li><a class="dropdown-item" href="quotation-view.php?id=${encodeURIComponent(q.id)}"><i class="bi bi-eye text-primary me-2"></i>View Quotation</a></li>
-                  <li><a class="dropdown-item" href="quotation-print.php?id=${encodeURIComponent(q.id)}" target="_blank"><i class="bi bi-printer text-dark me-2"></i>Print / PDF</a></li>
+                  <li><a class="dropdown-item" href="${qViewUrl}"><i class="bi bi-eye text-primary me-2"></i>View Quotation</a></li>
+                  <li><a class="dropdown-item" href="${qPrintUrl}" target="_blank"><i class="bi bi-printer text-dark me-2"></i>Print / PDF</a></li>
                   <li><hr class="dropdown-divider"></li>
                   <li><a class="dropdown-item btn-convert-sale" href="#" data-id="${q.id}"><i class="bi bi-receipt-cutoff text-success me-2"></i>Convert to Sale</a></li>
                 </ul>
@@ -132,6 +170,7 @@ const AdminApp = {
       if (lowItems.length === 0) {
         html = `<tr><td colspan="5" class="text-center text-success py-3"><i class="bi bi-check-circle me-1"></i>All inventory items are currently well-stocked.</td></tr>`;
       } else {
+        const invUrl = AdminApp.getUrl('inventory', 'inventory.php');
         lowItems.slice(0, 5).forEach(p => {
           html += `
             <tr>
@@ -143,7 +182,7 @@ const AdminApp = {
               <td class="text-danger fw-bold">${p.stock} units</td>
               <td class="text-muted">${p.minStock} units</td>
               <td>
-                <a href="inventory.php" class="btn btn-xs btn-outline-primary py-1 px-2 text-xs">
+                <a href="${invUrl}" class="btn btn-xs btn-outline-primary py-1 px-2 text-xs">
                   <i class="bi bi-plus-lg"></i> Stock In
                 </a>
               </td>
@@ -259,10 +298,13 @@ const AdminApp = {
           "Expired": "badge-soft-secondary"
         }[q.status] || "badge-soft-secondary";
 
+        const qViewUrl = AdminApp.getUrl('quotationView', `quotation-view.php?id=${encodeURIComponent(q.id)}`, q.id);
+        const qPrintUrl = AdminApp.getUrl('quotationPrint', `quotation-print.php?id=${encodeURIComponent(q.id)}`, q.id);
+
         html += `
           <tr>
             <td>
-              <a href="quotation-view.php?id=${encodeURIComponent(q.id)}" class="fw-bold text-primary text-decoration-none">
+              <a href="${qViewUrl}" class="fw-bold text-primary text-decoration-none">
                 ${q.id}
               </a>
             </td>
@@ -286,10 +328,10 @@ const AdminApp = {
             </td>
             <td class="text-end">
               <div class="btn-group btn-group-sm">
-                <a href="quotation-view.php?id=${encodeURIComponent(q.id)}" class="btn btn-outline-secondary" title="View Details">
+                <a href="${qViewUrl}" class="btn btn-outline-secondary" title="View Details">
                   <i class="bi bi-eye"></i>
                 </a>
-                <a href="quotation-print.php?id=${encodeURIComponent(q.id)}" target="_blank" class="btn btn-outline-primary" title="Print / PDF">
+                <a href="${qPrintUrl}" target="_blank" class="btn btn-outline-primary" title="Print / PDF">
                   <i class="bi bi-printer"></i>
                 </a>
                 <button type="button" class="btn btn-outline-success btn-convert-sale" data-id="${q.id}" title="Convert to Sale Invoice">
@@ -352,7 +394,7 @@ const AdminApp = {
           if (sale) {
             HOC_UTILS.showToast(`Invoice ${sale.invoiceNo} successfully generated from quotation!`);
             setTimeout(() => {
-              window.location.href = "sales.php";
+              window.location.href = AdminApp.getUrl('sales', 'sales.php');
             }, 800);
           }
         }
@@ -374,6 +416,7 @@ const AdminApp = {
       let html = "";
       list.forEach(p => {
         const isLow = p.stock <= p.minStock;
+        const pViewUrl = AdminApp.getUrl('productView', `product-view.php?id=${p.id}`, p.id);
         html += `
           <tr>
             <td>
@@ -382,7 +425,7 @@ const AdminApp = {
                   <i class="bi ${p.category === 'Laptops' ? 'bi-laptop' : p.category === 'Desktop Computers' ? 'bi-pc-display' : 'bi-cpu'} text-secondary fs-4"></i>
                 </div>
                 <div>
-                  <a href="product-view.php?id=${p.id}" class="fw-bold text-dark text-decoration-none d-block">${p.name}</a>
+                  <a href="${pViewUrl}" class="fw-bold text-dark text-decoration-none d-block">${p.name}</a>
                   <small class="text-muted">SKU: ${p.sku} | Brand: <strong>${p.brand}</strong></small>
                 </div>
               </div>
@@ -404,7 +447,7 @@ const AdminApp = {
             </td>
             <td class="text-end">
               <div class="btn-group btn-group-sm">
-                <a href="product-view.php?id=${p.id}" class="btn btn-outline-secondary" title="View"><i class="bi bi-eye"></i></a>
+                <a href="${pViewUrl}" class="btn btn-outline-secondary" title="View"><i class="bi bi-eye"></i></a>
                 <button type="button" class="btn btn-outline-primary btn-edit-product" data-id="${p.id}" title="Edit"><i class="bi bi-pencil"></i></button>
                 <button type="button" class="btn btn-outline-danger btn-delete-product" data-id="${p.id}" title="Delete"><i class="bi bi-trash"></i></button>
               </div>
