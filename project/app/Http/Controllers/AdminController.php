@@ -265,13 +265,10 @@ class AdminController extends Controller
     }
 
     /**
-     * Admin login portal.
+     * Admin login portal redirect.
      */
-    public function login(): View
+    public function login(): \Illuminate\Http\RedirectResponse
     {
-        return view('admin.login', [
-            'pageTitle' => 'Admin Login | Hari Om Computer',
-            'currentPage' => 'login',
-        ]);
+        return redirect()->route('admin.login');
     }
 }

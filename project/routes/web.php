@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Admin\AuthController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\ShopController;
 use Illuminate\Support\Facades\Route;
@@ -26,72 +27,90 @@ Route::controller(ShopController::class)->group(function () {
 
 /*
 |--------------------------------------------------------------------------
-| Web Routes - Hari Om Computer Admin ERP Portal
+| Web Routes - Hari Om Computer Admin Authentication (Guest Only)
 |--------------------------------------------------------------------------
 */
 
-Route::prefix('admin')->name('admin.')->controller(AdminController::class)->group(function () {
-    Route::redirect('/', '/admin/login');
+Route::middleware('guest')->group(function () {
+    Route::get('/login', [AuthController::class, 'showLoginForm'])->name('login');
 
-    Route::get('/dashboard', 'dashboard')->name('dashboard');
-    Route::get('/login', 'login')->name('login');
+    Route::prefix('admin')->name('admin.')->group(function () {
+        Route::get('/login', [AuthController::class, 'showLoginForm'])->name('login');
+        Route::post('/login', [AuthController::class, 'login'])->name('login.submit');
+        Route::get('/login.php', [AuthController::class, 'showLoginForm']);
+    });
+});
 
-    // Quotation Management
-    Route::get('/quotations', 'quotations')->name('quotations');
-    Route::get('/quotations/create', 'quotationCreate')->name('quotations.create');
-    Route::get('/quotations/view', 'quotationView')->name('quotations.view');
-    Route::get('/quotations/print', 'quotationPrint')->name('quotations.print');
+/*
+|--------------------------------------------------------------------------
+| Web Routes - Hari Om Computer Admin ERP Portal (Authenticated Only)
+|--------------------------------------------------------------------------
+*/
 
-    // Custom PC Builder ERP
-    Route::get('/pc-builder', 'pcBuilder')->name('pc.builder');
+Route::middleware('auth')->prefix('admin')->name('admin.')->group(function () {
+    Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
+    Route::get('/logout', [AuthController::class, 'logout']);
 
-    // Sales & Tax Invoices
-    Route::get('/sales', 'sales')->name('sales');
-    Route::get('/invoices/view', 'invoiceView')->name('invoices.view');
+    Route::controller(AdminController::class)->group(function () {
+        Route::get('/', 'dashboard');
+        Route::get('/dashboard', 'dashboard')->name('dashboard');
 
-    // Catalog & Products
-    Route::get('/products', 'products')->name('products');
-    Route::get('/products/add', 'productAdd')->name('products.add');
-    Route::get('/products/view', 'productView')->name('products.view');
-    Route::get('/laptops', 'laptops')->name('laptops');
-    Route::get('/computers', 'computers')->name('computers');
-    Route::get('/categories', 'categories')->name('categories');
-    Route::get('/brands', 'brands')->name('brands');
+        // Quotation Management
+        Route::get('/quotations', 'quotations')->name('quotations');
+        Route::get('/quotations/create', 'quotationCreate')->name('quotations.create');
+        Route::get('/quotations/view', 'quotationView')->name('quotations.view');
+        Route::get('/quotations/print', 'quotationPrint')->name('quotations.print');
 
-    // Operations & Accounting
-    Route::get('/inventory', 'inventory')->name('inventory');
-    Route::get('/customers', 'customers')->name('customers');
-    Route::get('/purchases', 'purchases')->name('purchases');
-    Route::get('/suppliers', 'suppliers')->name('suppliers');
-    Route::get('/payments', 'payments')->name('payments');
-    Route::get('/reports', 'reports')->name('reports');
-    Route::get('/website-mgmt', 'websiteMgmt')->name('website.mgmt');
-    Route::get('/settings', 'settings')->name('settings');
+        // Custom PC Builder ERP
+        Route::get('/pc-builder', 'pcBuilder')->name('pc.builder');
 
-    // Legacy Prototype compatibility aliases (.php extension support)
-    Route::get('/dashboard.php', 'dashboard');
-    Route::get('/quotations.php', 'quotations');
-    Route::get('/quotation-create.php', 'quotationCreate');
-    Route::get('/quotation-view.php', 'quotationView');
-    Route::get('/quotation-print.php', 'quotationPrint');
-    Route::get('/pc-builder.php', 'pcBuilder');
-    Route::get('/sales.php', 'sales');
-    Route::get('/invoice-view.php', 'invoiceView');
-    Route::get('/products.php', 'products');
-    Route::get('/product-add.php', 'productAdd');
-    Route::get('/product-view.php', 'productView');
-    Route::get('/laptops.php', 'laptops');
-    Route::get('/computers.php', 'computers');
-    Route::get('/categories.php', 'categories');
-    Route::get('/brands.php', 'brands');
-    Route::get('/inventory.php', 'inventory');
-    Route::get('/customers.php', 'customers');
-    Route::get('/purchases.php', 'purchases');
-    Route::get('/suppliers.php', 'suppliers');
-    Route::get('/payments.php', 'payments');
-    Route::get('/reports.php', 'reports');
-    Route::get('/website-mgmt.php', 'websiteMgmt');
-    Route::get('/settings.php', 'settings');
-    Route::get('/login.php', 'login');
+        // Sales & Tax Invoices
+        Route::get('/sales', 'sales')->name('sales');
+        Route::get('/invoices/view', 'invoiceView')->name('invoices.view');
+
+        // Catalog & Products
+        Route::get('/products', 'products')->name('products');
+        Route::get('/products/add', 'productAdd')->name('products.add');
+        Route::get('/products/view', 'productView')->name('products.view');
+        Route::get('/laptops', 'laptops')->name('laptops');
+        Route::get('/computers', 'computers')->name('computers');
+        Route::get('/categories', 'categories')->name('categories');
+        Route::get('/brands', 'brands')->name('brands');
+
+        // Operations & Accounting
+        Route::get('/inventory', 'inventory')->name('inventory');
+        Route::get('/customers', 'customers')->name('customers');
+        Route::get('/purchases', 'purchases')->name('purchases');
+        Route::get('/suppliers', 'suppliers')->name('suppliers');
+        Route::get('/payments', 'payments')->name('payments');
+        Route::get('/reports', 'reports')->name('reports');
+        Route::get('/website-mgmt', 'websiteMgmt')->name('website.mgmt');
+        Route::get('/settings', 'settings')->name('settings');
+
+        // Legacy Prototype compatibility aliases (.php extension support)
+        Route::get('/dashboard.php', 'dashboard');
+        Route::get('/quotations.php', 'quotations');
+        Route::get('/quotation-create.php', 'quotationCreate');
+        Route::get('/quotation-view.php', 'quotationView');
+        Route::get('/quotation-print.php', 'quotationPrint');
+        Route::get('/pc-builder.php', 'pcBuilder');
+        Route::get('/sales.php', 'sales');
+        Route::get('/invoice-view.php', 'invoiceView');
+        Route::get('/products.php', 'products');
+        Route::get('/product-add.php', 'productAdd');
+        Route::get('/product-view.php', 'productView');
+        Route::get('/laptops.php', 'laptops');
+        Route::get('/computers.php', 'computers');
+        Route::get('/categories.php', 'categories');
+        Route::get('/brands.php', 'brands');
+        Route::get('/inventory.php', 'inventory');
+        Route::get('/customers.php', 'customers');
+        Route::get('/purchases.php', 'purchases');
+        Route::get('/suppliers.php', 'suppliers');
+        Route::get('/payments.php', 'payments');
+        Route::get('/reports.php', 'reports');
+        Route::get('/website-mgmt.php', 'websiteMgmt');
+        Route::get('/settings.php', 'settings');
+    });
 });
 

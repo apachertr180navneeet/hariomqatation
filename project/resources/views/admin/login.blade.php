@@ -41,35 +41,53 @@
             <p class="text-muted small">Admin ERP & Sales Management Portal</p>
         </div>
 
+        <!-- Status & Flash Message Alert -->
+        @if (session('status'))
+            <div class="alert alert-success border-0 small py-2 px-3 mb-3 rounded-3">
+                <i class="bi bi-check-circle-fill me-1"></i> {{ session('status') }}
+            </div>
+        @endif
+
+        @if ($errors->any())
+            <div class="alert alert-danger border-0 small py-2 px-3 mb-3 rounded-3">
+                <i class="bi bi-exclamation-triangle-fill me-1"></i>
+                @foreach ($errors->all() as $error)
+                    <div>{{ $error }}</div>
+                @endforeach
+            </div>
+        @endif
+
         <!-- Demo Credentials Hint Alert -->
         <div class="alert alert-info border-0 small py-2 px-3 mb-4 rounded-3">
-            <strong><i class="bi bi-info-circle-fill me-1"></i> Demo Credentials:</strong><br>
+            <strong><i class="bi bi-info-circle-fill me-1"></i> Default Admin Credentials:</strong><br>
             Email: <code class="text-primary fw-bold">admin@hariomcomputer.com</code><br>
             Password: <code class="text-primary fw-bold">password</code>
         </div>
 
-        <form id="admin-login-form">
+        <form method="POST" action="{{ route('admin.login.submit') }}">
+            @csrf
+
             <div class="mb-3">
-                <label class="form-label small fw-bold text-slate-700">Email Address</label>
+                <label class="form-label small fw-bold text-slate-700" for="login-email">Email Address</label>
                 <div class="input-group">
                     <span class="input-group-text bg-light border-end-0"><i class="bi bi-envelope text-muted"></i></span>
-                    <input type="email" id="login-email" class="form-control border-start-0" required value="admin@hariomcomputer.com">
+                    <input type="email" name="email" id="login-email" class="form-control border-start-0 @error('email') is-invalid @enderror" required value="{{ old('email', 'admin@hariomcomputer.com') }}" autofocus>
                 </div>
             </div>
 
             <div class="mb-3">
                 <div class="d-flex justify-content-between">
-                    <label class="form-label small fw-bold text-slate-700">Password</label>
-                    <a href="#" class="small text-decoration-none text-primary" onclick="alert('For demo prototype, password is: password')">Forgot password?</a>
+                    <label class="form-label small fw-bold text-slate-700" for="login-password">Password</label>
+                    <span class="small text-muted">Default: <code>password</code></span>
                 </div>
                 <div class="input-group">
                     <span class="input-group-text bg-light border-end-0"><i class="bi bi-shield-lock text-muted"></i></span>
-                    <input type="password" id="login-password" class="form-control border-start-0" required value="password">
+                    <input type="password" name="password" id="login-password" class="form-control border-start-0 @error('password') is-invalid @enderror" required value="password">
                 </div>
             </div>
 
             <div class="form-check mb-4">
-                <input class="form-check-input" type="checkbox" id="rememberMe" checked>
+                <input class="form-check-input" type="checkbox" name="remember" id="rememberMe" value="1" {{ old('remember', true) ? 'checked' : '' }}>
                 <label class="form-check-label small text-muted" for="rememberMe">Remember my login session</label>
             </div>
 
@@ -85,20 +103,6 @@
         </form>
     </div>
 
-    <script src="{{ asset('assets/js/store-data.js') }}"></script>
-    <script>
-        document.getElementById("admin-login-form").addEventListener("submit", (e) => {
-            e.preventDefault();
-            const email = document.getElementById("login-email").value.trim();
-            const pass = document.getElementById("login-password").value.trim();
-
-            if (email === "admin@hariomcomputer.com" && pass === "password") {
-                sessionStorage.setItem("HOC_ADMIN_AUTH", "true");
-                window.location.href = "{{ route('admin.dashboard') }}";
-            } else {
-                alert("Invalid login credentials. Please use:\nadmin@hariomcomputer.com / password");
-            }
-        });
-    </script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
