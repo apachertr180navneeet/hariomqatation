@@ -94,13 +94,6 @@
                         <label class="form-label small fw-bold">Brand Name *</label>
                         <input type="text" name="name" class="form-control" required placeholder="e.g. Dell, Intel, Corsair">
                     </div>
-                    <div class="mb-3">
-                        <label class="form-label small fw-bold">Status *</label>
-                        <select name="status" class="form-select" required>
-                            <option value="active" selected>Active</option>
-                            <option value="inactive">Inactive</option>
-                        </select>
-                    </div>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Cancel</button>
@@ -127,13 +120,6 @@
                         <label class="form-label small fw-bold">Brand Name *</label>
                         <input type="text" name="name" id="edit_brand_name" class="form-control" required>
                     </div>
-                    <div class="mb-3">
-                        <label class="form-label small fw-bold">Status *</label>
-                        <select name="status" id="edit_brand_status" class="form-select" required>
-                            <option value="active">Active</option>
-                            <option value="inactive">Inactive</option>
-                        </select>
-                    </div>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Cancel</button>
@@ -149,7 +135,6 @@
 <script>
     function editBrandModal(brand) {
         document.getElementById('edit_brand_name').value = brand.name;
-        document.getElementById('edit_brand_status').value = brand.status || 'active';
         
         const form = document.getElementById('editBrandForm');
         form.action = "{{ url('admin/brands') }}/" + brand.id;

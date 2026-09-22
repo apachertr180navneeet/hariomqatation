@@ -113,26 +113,18 @@
                 </select>
             </div>
 
-            <div class="col-md-3">
+            <div class="col-md-4">
                 <label class="form-label small fw-bold">Physical Stock Balance</label>
                 <input type="text" class="form-control bg-light fw-bold text-success" readonly value="{{ $product->stock }} Units">
                 <small class="text-muted">Use the <a href="{{ route('admin.inventory') }}">Stock Ledger</a> to adjust inventory.</small>
             </div>
-            <div class="col-md-3">
+            <div class="col-md-4">
                 <label class="form-label small fw-bold">Minimum Stock Alert Threshold *</label>
                 <input type="number" name="min_stock" class="form-control" required value="{{ old('min_stock', $product->min_stock) }}">
             </div>
-            <div class="col-md-3">
+            <div class="col-md-4">
                 <label class="form-label small fw-bold">Warranty Period *</label>
                 <input type="text" name="warranty" class="form-control" required value="{{ old('warranty', $product->warranty) }}">
-            </div>
-            <div class="col-md-3">
-                <label class="form-label small fw-bold">Catalog Status *</label>
-                <select name="status" class="form-select" required>
-                    <option value="active" {{ old('status', $product->status) == 'active' ? 'selected' : '' }}>Active</option>
-                    <option value="inactive" {{ old('status', $product->status) == 'inactive' ? 'selected' : '' }}>Inactive</option>
-                    <option value="out_of_stock" {{ old('status', $product->status) == 'out_of_stock' ? 'selected' : '' }}>Out of Stock</option>
-                </select>
             </div>
         </div>
     </div>

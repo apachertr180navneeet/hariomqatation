@@ -119,13 +119,6 @@
                         <label class="form-label small fw-bold">Description</label>
                         <textarea name="description" class="form-control" rows="2" placeholder="Brief category description..."></textarea>
                     </div>
-                    <div class="mb-3">
-                        <label class="form-label small fw-bold">Status *</label>
-                        <select name="status" class="form-select" required>
-                            <option value="active" selected>Active</option>
-                            <option value="inactive">Inactive</option>
-                        </select>
-                    </div>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Cancel</button>
@@ -159,13 +152,6 @@
                     <div class="mb-3">
                         <label class="form-label small fw-bold">Description</label>
                         <textarea name="description" id="edit_cat_desc" class="form-control" rows="2"></textarea>
-                    </div>
-                    <div class="mb-3">
-                        <label class="form-label small fw-bold">Status *</label>
-                        <select name="status" id="edit_cat_status" class="form-select" required>
-                            <option value="active">Active</option>
-                            <option value="inactive">Inactive</option>
-                        </select>
                     </div>
                 </div>
                 <div class="modal-footer">
@@ -210,7 +196,6 @@
         document.getElementById('edit_cat_name').value = cat.name;
         document.getElementById('edit_cat_icon').value = cat.icon || 'bi-tags';
         document.getElementById('edit_cat_desc').value = cat.description || '';
-        document.getElementById('edit_cat_status').value = cat.status || 'active';
         
         const form = document.getElementById('editCategoryForm');
         form.action = "{{ url('admin/categories') }}/" + cat.id;

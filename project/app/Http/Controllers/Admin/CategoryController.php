@@ -38,9 +38,10 @@ class CategoryController extends Controller
             'name' => 'required|string|max:255|unique:categories,name',
             'icon' => 'nullable|string|max:100',
             'description' => 'nullable|string',
-            'status' => 'required|in:active,inactive',
+            'status' => 'nullable|in:active,inactive',
         ]);
 
+        $validated['status'] = $validated['status'] ?? 'active';
         $validated['slug'] = Str::slug($validated['name']);
         if (empty($validated['icon'])) {
             $validated['icon'] = 'bi-tags';
@@ -71,9 +72,10 @@ class CategoryController extends Controller
             'name' => 'required|string|max:255|unique:categories,name,' . $category->id,
             'icon' => 'nullable|string|max:100',
             'description' => 'nullable|string',
-            'status' => 'required|in:active,inactive',
+            'status' => 'nullable|in:active,inactive',
         ]);
 
+        $validated['status'] = $validated['status'] ?? $category->status ?? 'active';
         $validated['slug'] = Str::slug($validated['name']);
         if (empty($validated['icon'])) {
             $validated['icon'] = $category->icon ?: 'bi-tags';

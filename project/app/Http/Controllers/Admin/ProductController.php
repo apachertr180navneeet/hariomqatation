@@ -109,7 +109,7 @@ class ProductController extends Controller
             'stock' => 'required|integer|min:0',
             'min_stock' => 'required|integer|min:0',
             'warranty' => 'required|string|max:255',
-            'status' => 'required|in:active,inactive,out_of_stock',
+            'status' => 'nullable|in:active,inactive,out_of_stock',
             'socket' => 'nullable|string|max:100',
             'ram_type' => 'nullable|string|max:50',
             'wattage_req' => 'nullable|integer',
@@ -122,6 +122,7 @@ class ProductController extends Controller
             $validated['sku'] = 'HOC-' . strtoupper(Str::random(6));
         }
 
+        $validated['status'] = $validated['status'] ?? ($validated['stock'] > 0 ? 'active' : 'out_of_stock');
         $validated['slug'] = Str::slug($validated['name']) . '-' . Str::lower(Str::random(4));
         $validated['is_featured'] = $request->has('is_featured');
 
@@ -215,7 +216,7 @@ class ProductController extends Controller
             'gst_rate' => 'required|numeric|in:0,12,18,28',
             'min_stock' => 'required|integer|min:0',
             'warranty' => 'required|string|max:255',
-            'status' => 'required|in:active,inactive,out_of_stock',
+            'status' => 'nullable|in:active,inactive,out_of_stock',
             'socket' => 'nullable|string|max:100',
             'ram_type' => 'nullable|string|max:50',
             'wattage_req' => 'nullable|integer',
@@ -224,6 +225,7 @@ class ProductController extends Controller
             'is_featured' => 'nullable|boolean',
         ]);
 
+        $validated['status'] = $validated['status'] ?? $product->status ?? 'active';
         $validated['is_featured'] = $request->has('is_featured');
 
         $product->update($validated);

@@ -123,25 +123,17 @@
                 </select>
             </div>
 
-            <div class="col-md-3">
+            <div class="col-md-4">
                 <label class="form-label small fw-bold">Opening Stock Qty *</label>
                 <input type="number" name="stock" class="form-control" required value="{{ old('stock', 10) }}">
             </div>
-            <div class="col-md-3">
+            <div class="col-md-4">
                 <label class="form-label small fw-bold">Minimum Stock Alert Threshold *</label>
                 <input type="number" name="min_stock" class="form-control" required value="{{ old('min_stock', 3) }}">
             </div>
-            <div class="col-md-3">
+            <div class="col-md-4">
                 <label class="form-label small fw-bold">Warranty Period *</label>
                 <input type="text" name="warranty" class="form-control" required value="{{ old('warranty', '1 Year Onsite Warranty') }}">
-            </div>
-            <div class="col-md-3">
-                <label class="form-label small fw-bold">Catalog Status *</label>
-                <select name="status" class="form-select" required>
-                    <option value="active" {{ old('status') == 'active' ? 'selected' : '' }}>Active</option>
-                    <option value="inactive" {{ old('status') == 'inactive' ? 'selected' : '' }}>Inactive</option>
-                    <option value="out_of_stock" {{ old('status') == 'out_of_stock' ? 'selected' : '' }}>Out of Stock</option>
-                </select>
             </div>
         </div>
     </div>

@@ -35,9 +35,10 @@ class BrandController extends Controller
         $validated = $request->validate([
             'name' => 'required|string|max:255|unique:brands,name',
             'logo' => 'nullable|string|max:255',
-            'status' => 'required|in:active,inactive',
+            'status' => 'nullable|in:active,inactive',
         ]);
 
+        $validated['status'] = $validated['status'] ?? 'active';
         $validated['slug'] = Str::slug($validated['name']);
 
         $brand = Brand::create($validated);
@@ -64,9 +65,10 @@ class BrandController extends Controller
         $validated = $request->validate([
             'name' => 'required|string|max:255|unique:brands,name,' . $brand->id,
             'logo' => 'nullable|string|max:255',
-            'status' => 'required|in:active,inactive',
+            'status' => 'nullable|in:active,inactive',
         ]);
 
+        $validated['status'] = $validated['status'] ?? $brand->status ?? 'active';
         $validated['slug'] = Str::slug($validated['name']);
 
         $brand->update($validated);

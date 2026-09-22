@@ -58,26 +58,18 @@
                             <input type="text" id="cust-address" class="form-control" placeholder="e.g. 14, Industrial Area, Jodhpur">
                         </div>
 
-                        <div class="col-md-3">
+                        <input type="hidden" id="quote-status" value="Draft">
+                        <div class="col-md-4">
                             <label class="form-label small fw-bold">Quotation Number</label>
                             <input type="text" id="quote-number" class="form-control bg-light" readonly>
                         </div>
-                        <div class="col-md-3">
+                        <div class="col-md-4">
                             <label class="form-label small fw-bold">Quotation Date</label>
                             <input type="date" id="quote-date" class="form-control">
                         </div>
-                        <div class="col-md-3">
+                        <div class="col-md-4">
                             <label class="form-label small fw-bold">Valid Until Date</label>
                             <input type="date" id="quote-validity" class="form-control">
-                        </div>
-                        <div class="col-md-3">
-                            <label class="form-label small fw-bold">Initial Status</label>
-                            <select id="quote-status" class="form-select">
-                                <option value="Draft">Draft</option>
-                                <option value="Sent">Sent</option>
-                                <option value="Pending">Pending</option>
-                                <option value="Approved">Approved</option>
-                            </select>
                         </div>
                     </div>
                 </div>
