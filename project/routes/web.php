@@ -31,7 +31,7 @@ Route::controller(ShopController::class)->group(function () {
 */
 
 Route::prefix('admin')->name('admin.')->controller(AdminController::class)->group(function () {
-    Route::redirect('/', '/admin/dashboard');
+    Route::redirect('/', '/admin/login');
 
     Route::get('/dashboard', 'dashboard')->name('dashboard');
     Route::get('/login', 'login')->name('login');

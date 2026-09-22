@@ -49,7 +49,7 @@
                     <li><a href="{{ route('contact') }}">Store Location</a></li>
                     <li><a href="{{ route('enquiry') }}">Enquiry Cart</a></li>
                     <li><a href="{{ route('products') }}">All Catalog</a></li>
-                    <li><a href="{{ route('admin.dashboard') }}"><i class="bi bi-shield-lock me-1"></i> Staff ERP Portal</a></li>
+                    <li><a href="{{ route('admin.login') }}"><i class="bi bi-shield-lock me-1"></i> Staff ERP Portal</a></li>
                 </ul>
             </div>
 

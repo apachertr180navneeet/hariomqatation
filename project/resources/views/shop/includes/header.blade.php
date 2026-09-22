@@ -22,7 +22,7 @@
                 <i class="bi bi-patch-check-fill me-1"></i> Authorized Store
             </span>
             <span>&bull;</span>
-            <a href="{{ route('admin.dashboard') }}" class="text-white text-opacity-75 text-decoration-none small">
+            <a href="{{ route('admin.login') }}" class="text-white text-opacity-75 text-decoration-none small">
                 <i class="bi bi-shield-lock-fill text-warning me-1"></i> Admin ERP
             </a>
         </div>
