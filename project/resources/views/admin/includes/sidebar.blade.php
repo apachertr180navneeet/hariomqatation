@@ -78,7 +78,12 @@
         <li class="sidebar-item">
             <a href="{{ route('admin.inventory') }}" class="sidebar-link {{ ($currentPage ?? '') === 'inventory' ? 'active' : '' }}">
                 <i class="bi bi-boxes"></i> <span>Inventory Stock</span>
-                <span class="badge-counter bg-warning text-dark" id="badge-low-stock" style="display: none;">0</span>
+                @php
+                    $sidebarLowStock = \App\Models\Product::lowStock()->count();
+                @endphp
+                @if($sidebarLowStock > 0)
+                    <span class="badge-counter bg-warning text-dark">{{ $sidebarLowStock }}</span>
+                @endif
             </a>
         </li>
     </ul>

@@ -98,94 +98,9 @@ class AdminController extends Controller
         ]);
     }
 
-    /**
-     * Products catalog directory.
-     */
-    public function products(): View
-    {
-        return view('admin.products.index', [
-            'pageTitle' => 'Products Catalog | Hari Om Computer ERP',
-            'currentPage' => 'products',
-        ]);
-    }
-
-    /**
-     * Create product SKU entry.
-     */
-    public function productAdd(): View
-    {
-        return view('admin.products.add', [
-            'pageTitle' => 'Add New Product | Hari Om Computer ERP',
-            'currentPage' => 'product-add',
-        ]);
-    }
-
-    /**
-     * Product details and physical stock breakdown.
-     */
-    public function productView(Request $request): View
-    {
-        return view('admin.products.view', [
-            'pageTitle' => 'Product Details | Hari Om Computer ERP',
-            'currentPage' => 'products',
-            'productId' => $request->query('id', 'PROD-1001'),
-        ]);
-    }
-
-    /**
-     * Laptops dedicated catalog.
-     */
-    public function laptops(): View
-    {
-        return view('admin.laptops', [
-            'pageTitle' => 'Laptops Catalog | Hari Om Computer ERP',
-            'currentPage' => 'laptops',
-        ]);
-    }
-
-    /**
-     * Desktop PCs & workstations catalog.
-     */
-    public function computers(): View
-    {
-        return view('admin.computers', [
-            'pageTitle' => 'Desktop PCs Catalog | Hari Om Computer ERP',
-            'currentPage' => 'computers',
-        ]);
-    }
-
-    /**
-     * Categories taxonomy.
-     */
-    public function categories(): View
-    {
-        return view('admin.categories', [
-            'pageTitle' => 'Categories & Taxonomy | Hari Om Computer ERP',
-            'currentPage' => 'categories',
-        ]);
-    }
-
-    /**
-     * Partner brands management.
-     */
-    public function brands(): View
-    {
-        return view('admin.brands', [
-            'pageTitle' => 'Brands Management | Hari Om Computer ERP',
-            'currentPage' => 'brands',
-        ]);
-    }
-
-    /**
-     * Physical stock ledger and reorder alerts.
-     */
-    public function inventory(): View
-    {
-        return view('admin.inventory', [
-            'pageTitle' => 'Inventory Stock Management | Hari Om Computer ERP',
-            'currentPage' => 'inventory',
-        ]);
-    }
+    // Note: Products, Categories, Brands, Laptops, Computers, and Inventory are now managed
+    // by their respective specialized controllers: ProductController, CategoryController,
+    // BrandController, and InventoryController.
 
     /**
      * Customer CRM accounts.

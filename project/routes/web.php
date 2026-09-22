@@ -1,6 +1,10 @@
 <?php
 
 use App\Http\Controllers\Admin\AuthController;
+use App\Http\Controllers\Admin\BrandController;
+use App\Http\Controllers\Admin\CategoryController;
+use App\Http\Controllers\Admin\InventoryController;
+use App\Http\Controllers\Admin\ProductController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\ShopController;
 use Illuminate\Support\Facades\Route;
@@ -51,6 +55,69 @@ Route::middleware('auth')->prefix('admin')->name('admin.')->group(function () {
     Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
     Route::get('/logout', [AuthController::class, 'logout']);
 
+    // ==========================================
+    // Catalog & Inventory Modules
+    // ==========================================
+
+    // Products Catalog
+    Route::controller(ProductController::class)->group(function () {
+        Route::get('/products', 'index')->name('products');
+        Route::get('/products/add', 'create')->name('products.add');
+        Route::post('/products', 'store')->name('products.store');
+        Route::get('/products/view', 'show')->name('products.view');
+        Route::get('/products/{id}/edit', 'edit')->name('products.edit');
+        Route::put('/products/{id}', 'update')->name('products.update');
+        Route::delete('/products/{id}', 'destroy')->name('products.destroy');
+        Route::get('/laptops', 'laptops')->name('laptops');
+        Route::get('/computers', 'computers')->name('computers');
+        Route::get('/api/categories/{category}/subcategories', 'getSubcategoriesByCategory')->name('categories.subcategories.api');
+
+        // Legacy compatibility
+        Route::get('/products.php', 'index');
+        Route::get('/product-add.php', 'create');
+        Route::get('/product-view.php', 'show');
+        Route::get('/laptops.php', 'laptops');
+        Route::get('/computers.php', 'computers');
+    });
+
+    // Categories Taxonomy
+    Route::controller(CategoryController::class)->group(function () {
+        Route::get('/categories', 'index')->name('categories');
+        Route::post('/categories', 'store')->name('categories.store');
+        Route::put('/categories/{id}', 'update')->name('categories.update');
+        Route::delete('/categories/{id}', 'destroy')->name('categories.destroy');
+        Route::post('/categories/{category}/subcategories', 'storeSubcategory')->name('categories.subcategories.store');
+        Route::delete('/categories/subcategories/{id}', 'destroySubcategory')->name('categories.subcategories.destroy');
+
+        // Legacy compatibility
+        Route::get('/categories.php', 'index');
+    });
+
+    // Hardware Brands
+    Route::controller(BrandController::class)->group(function () {
+        Route::get('/brands', 'index')->name('brands');
+        Route::post('/brands', 'store')->name('brands.store');
+        Route::put('/brands/{id}', 'update')->name('brands.update');
+        Route::delete('/brands/{id}', 'destroy')->name('brands.destroy');
+
+        // Legacy compatibility
+        Route::get('/brands.php', 'index');
+    });
+
+    // Inventory Stock Ledger & Tracking
+    Route::controller(InventoryController::class)->group(function () {
+        Route::get('/inventory', 'index')->name('inventory');
+        Route::post('/inventory/inward', 'inward')->name('inventory.inward');
+        Route::post('/inventory/adjust', 'adjust')->name('inventory.adjust');
+        Route::get('/inventory/movements/{id}', 'movements')->name('inventory.movements');
+
+        // Legacy compatibility
+        Route::get('/inventory.php', 'index');
+    });
+
+    // ==========================================
+    // General ERP Modules
+    // ==========================================
     Route::controller(AdminController::class)->group(function () {
         Route::get('/', 'dashboard');
         Route::get('/dashboard', 'dashboard')->name('dashboard');
@@ -68,17 +135,7 @@ Route::middleware('auth')->prefix('admin')->name('admin.')->group(function () {
         Route::get('/sales', 'sales')->name('sales');
         Route::get('/invoices/view', 'invoiceView')->name('invoices.view');
 
-        // Catalog & Products
-        Route::get('/products', 'products')->name('products');
-        Route::get('/products/add', 'productAdd')->name('products.add');
-        Route::get('/products/view', 'productView')->name('products.view');
-        Route::get('/laptops', 'laptops')->name('laptops');
-        Route::get('/computers', 'computers')->name('computers');
-        Route::get('/categories', 'categories')->name('categories');
-        Route::get('/brands', 'brands')->name('brands');
-
         // Operations & Accounting
-        Route::get('/inventory', 'inventory')->name('inventory');
         Route::get('/customers', 'customers')->name('customers');
         Route::get('/purchases', 'purchases')->name('purchases');
         Route::get('/suppliers', 'suppliers')->name('suppliers');
@@ -96,14 +153,6 @@ Route::middleware('auth')->prefix('admin')->name('admin.')->group(function () {
         Route::get('/pc-builder.php', 'pcBuilder');
         Route::get('/sales.php', 'sales');
         Route::get('/invoice-view.php', 'invoiceView');
-        Route::get('/products.php', 'products');
-        Route::get('/product-add.php', 'productAdd');
-        Route::get('/product-view.php', 'productView');
-        Route::get('/laptops.php', 'laptops');
-        Route::get('/computers.php', 'computers');
-        Route::get('/categories.php', 'categories');
-        Route::get('/brands.php', 'brands');
-        Route::get('/inventory.php', 'inventory');
         Route::get('/customers.php', 'customers');
         Route::get('/purchases.php', 'purchases');
         Route::get('/suppliers.php', 'suppliers');
