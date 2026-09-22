@@ -152,12 +152,14 @@ main {
   white-space: nowrap;
 }
 
-.navbar-nav {
-  display: flex;
-  align-items: center;
-  flex-wrap: nowrap !important;
-  gap: 2px;
-  margin: 0 auto;
+@media (min-width: 1200px) {
+  .navbar-nav {
+    display: flex;
+    align-items: center;
+    flex-wrap: nowrap !important;
+    gap: 2px;
+    margin: 0 auto;
+  }
 }
 
 .nav-link-custom {
@@ -819,3 +821,249 @@ main {
   transform: scale(1.1) rotate(6deg);
   color: white;
 }
+
+/* ==========================================================================
+   PC Builder Tool Styles
+   ========================================================================== */
+.pcb-step-card {
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+  border-radius: var(--hoc-radius-lg);
+  padding: 24px;
+  margin-bottom: 24px;
+  box-shadow: var(--hoc-shadow-subtle);
+  transition: border-color 0.2s ease;
+}
+.pcb-step-card:hover {
+  border-color: #cbd5e1;
+}
+.pcb-step-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-bottom: 8px;
+}
+.pcb-step-title {
+  font-family: var(--hoc-font-heading);
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: var(--hoc-dark-navy);
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.pcb-step-badge {
+  font-size: 0.75rem;
+  font-weight: 700;
+  background: var(--hoc-primary-light);
+  color: var(--hoc-primary);
+  padding: 4px 12px;
+  border-radius: 9999px;
+  letter-spacing: 0.03em;
+}
+.component-choice-card {
+  border-radius: var(--hoc-radius-md);
+  transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+  background: #ffffff;
+}
+.component-choice-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 10px 25px -5px rgba(2, 132, 199, 0.12);
+  border-color: var(--hoc-primary) !important;
+}
+.component-choice-card.border-primary {
+  border-width: 2px !important;
+  box-shadow: 0 0 0 4px rgba(2, 132, 199, 0.15) !important;
+}
+.pcb-summary-sticky {
+  position: sticky;
+  top: 90px;
+  z-index: 10;
+}
+.pcb-summary-box {
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+  border-radius: var(--hoc-radius-lg);
+  padding: 24px;
+  box-shadow: var(--hoc-shadow-card);
+}
+
+/* ==========================================================================
+   Comprehensive Responsive Breakpoints (Mobile, Tablet, Desktop)
+   ========================================================================== */
+
+/* Tablet & Below (<= 1199px) - Navbar Collapse & Mobile Drawer */
+@media (max-width: 1199.98px) {
+  .navbar-nav {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 6px;
+    padding: 16px 0 10px;
+    width: 100%;
+  }
+  .nav-link-custom {
+    display: flex;
+    justify-content: flex-start;
+    padding: 10px 16px !important;
+    border-radius: 12px;
+    width: 100%;
+    font-size: 0.95rem;
+  }
+  .btn-pc-builder-nav {
+    margin-left: 0 !important;
+    margin-top: 6px;
+    justify-content: center;
+    border-radius: 12px;
+    padding: 11px 16px !important;
+    width: 100%;
+    text-align: center;
+  }
+  .header-search {
+    width: 100% !important;
+  }
+  .header-search input {
+    width: 100% !important;
+  }
+  .header-search input:focus {
+    width: 100% !important;
+  }
+}
+
+/* Medium Tablets & Mobile Landscape (<= 991px) */
+@media (max-width: 991.98px) {
+  .hero-section-v2 {
+    padding: 55px 0 50px;
+    text-align: center;
+  }
+  .hero-badge-v2 {
+    margin: 0 auto 18px;
+    font-size: 0.78rem;
+    padding: 5px 14px;
+  }
+  .hero-title-v2 {
+    font-size: clamp(2rem, 5vw, 2.75rem);
+  }
+  .hero-subtitle-v2 {
+    margin: 0 auto 26px;
+    font-size: 1.02rem;
+  }
+  .hero-section-v2 .d-flex.flex-wrap.gap-3 {
+    justify-content: center;
+  }
+  .quick-tags {
+    justify-content: center;
+  }
+  .hero-rig-showcase {
+    max-width: 520px;
+    margin: 0 auto;
+    text-align: left;
+    padding: 26px;
+  }
+  .pcb-summary-sticky {
+    position: relative;
+    top: 0;
+    margin-top: 15px;
+  }
+}
+
+/* Mobile Phones (<= 767px) */
+@media (max-width: 767.98px) {
+  .top-bar {
+    font-size: 0.75rem;
+    padding: 6px 0;
+  }
+  .promo-strip-top {
+    font-size: 0.75rem;
+    padding: 6px 12px;
+  }
+  .hero-title-v2 {
+    font-size: 1.85rem;
+    line-height: 1.2;
+    margin-bottom: 16px;
+  }
+  .hero-subtitle-v2 {
+    font-size: 0.92rem;
+    line-height: 1.55;
+    margin-bottom: 22px;
+  }
+  .product-visual-art {
+    height: 165px;
+  }
+  .product-visual-art.art-desktop {
+    min-height: 165px !important;
+  }
+  .estimator-card {
+    padding: 22px;
+  }
+  .estimator-pill-btn {
+    padding: 8px 12px;
+    font-size: 0.8rem;
+    width: 100%;
+    justify-content: center;
+  }
+  .stat-item {
+    gap: 10px;
+  }
+  .stat-icon-circle {
+    width: 40px;
+    height: 40px;
+    min-width: 40px;
+    font-size: 1.25rem;
+  }
+  .stat-val {
+    font-size: 1.1rem;
+  }
+  .stat-label {
+    font-size: 0.7rem;
+  }
+  .brand-text-main {
+    font-size: 1.05rem;
+  }
+  .brand-tagline {
+    font-size: 0.68rem;
+  }
+  .brand-icon-box {
+    width: 38px;
+    height: 38px;
+    font-size: 1.25rem;
+  }
+  .whatsapp-float {
+    bottom: 18px;
+    right: 18px;
+    width: 50px;
+    height: 50px;
+    font-size: 1.65rem;
+  }
+}
+
+/* Extra Small Phones (<= 575px) */
+@media (max-width: 575.98px) {
+  .hero-title-v2 {
+    font-size: 1.65rem;
+  }
+  .hero-badge-v2 {
+    font-size: 0.7rem;
+    padding: 4px 10px;
+  }
+  .product-body-v3 {
+    padding: 14px;
+  }
+  .price-current {
+    font-size: 1.15rem;
+  }
+  .pcb-step-card {
+    padding: 16px;
+  }
+  .pcb-summary-box {
+    padding: 16px;
+  }
+  .feature-box {
+    padding: 18px;
+  }
+  .review-card {
+    padding: 18px;
+  }
+}
+

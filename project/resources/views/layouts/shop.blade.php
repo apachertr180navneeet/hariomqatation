@@ -79,11 +79,26 @@
                 </div>
             </a>
 
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#storeNavbar" aria-controls="storeNavbar" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
+            <div class="d-flex align-items-center gap-2 d-xl-none">
+                <a href="{{ route('enquiry') }}" class="btn btn-sm btn-outline-primary position-relative d-flex align-items-center gap-1 fw-semibold text-nowrap px-2 py-1" title="Enquiry Cart">
+                    <i class="bi bi-cart4 fs-5"></i>
+                    <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger enquiry-count-badge" style="display: none;">
+                        0
+                    </span>
+                </a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#storeNavbar" aria-controls="storeNavbar" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+            </div>
 
             <div class="collapse navbar-collapse" id="storeNavbar">
+                <div class="d-xl-none mb-2 mt-3">
+                    <form class="position-relative w-100" action="{{ route('products') }}" method="GET">
+                        <i class="bi bi-search text-muted position-absolute" style="left: 14px; top: 11px;"></i>
+                        <input type="text" name="search" class="form-control rounded-pill ps-5" placeholder="Search RTX 4060, i7, Dell..." value="{{ request('search') }}">
+                    </form>
+                </div>
+
                 <ul class="navbar-nav mx-auto mb-2 mb-xl-0">
                     <li class="nav-item">
                         <a class="nav-link-custom {{ request()->routeIs('home') ? 'active' : '' }}" href="{{ route('home') }}">Home</a>
@@ -113,8 +128,8 @@
                     </li>
                 </ul>
 
-                <div class="d-flex align-items-center gap-3">
-                    <form class="header-search d-none d-xl-block" id="header-search-form" action="{{ route('products') }}" method="GET">
+                <div class="d-none d-xl-flex align-items-center gap-3">
+                    <form class="header-search" id="header-search-form" action="{{ route('products') }}" method="GET">
                         <i class="bi bi-search search-icon text-muted" style="position: absolute; left: 16px; top: 12px;"></i>
                         <input type="text" name="search" class="form-control" id="header-search-input" placeholder="Search RTX 4060, i7, Dell..." value="{{ request('search') }}">
                     </form>
