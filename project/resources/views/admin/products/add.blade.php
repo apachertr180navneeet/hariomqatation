@@ -39,7 +39,9 @@
             <div class="col-md-4">
                 <div class="d-flex justify-content-between align-items-center mb-1">
                     <label class="form-label small fw-bold mb-0">Category *</label>
-                    <a href="{{ route('admin.categories') }}" target="_blank" class="small text-decoration-none">+ New Category</a>
+                    <button type="button" class="btn btn-link btn-sm p-0 text-decoration-none fw-semibold" data-bs-toggle="modal" data-bs-target="#quickAddCategoryModal">
+                        <i class="bi bi-plus-circle me-1"></i>New Category
+                    </button>
                 </div>
                 <select name="category_id" id="category_select" class="form-select" required onchange="updateSubcategories()">
                     <option value="">-- Select Category --</option>
@@ -48,7 +50,7 @@
                             {{ $cat->name }}
                         </option>
                     @empty
-                        <option value="" disabled>No categories yet. Click '+ New Category' above.</option>
+                        <option value="" disabled id="empty_cat_opt">No categories yet. Click '+ New Category'.</option>
                     @endforelse
                 </select>
             </div>
@@ -61,16 +63,18 @@
             <div class="col-md-4">
                 <div class="d-flex justify-content-between align-items-center mb-1">
                     <label class="form-label small fw-bold mb-0">Brand *</label>
-                    <a href="{{ route('admin.brands') }}" target="_blank" class="small text-decoration-none">+ New Brand</a>
+                    <button type="button" class="btn btn-link btn-sm p-0 text-decoration-none fw-semibold" data-bs-toggle="modal" data-bs-target="#quickAddBrandModal">
+                        <i class="bi bi-plus-circle me-1"></i>New Brand
+                    </button>
                 </div>
-                <select name="brand_id" class="form-select" required>
+                <select name="brand_id" id="brand_select" class="form-select" required>
                     <option value="">-- Select Brand --</option>
                     @forelse($brands as $brand)
                         <option value="{{ $brand->id }}" {{ old('brand_id') == $brand->id ? 'selected' : '' }}>
                             {{ $brand->name }}
                         </option>
                     @empty
-                        <option value="" disabled>No brands yet. Click '+ New Brand' above.</option>
+                        <option value="" disabled id="empty_brand_opt">No brands yet. Click '+ New Brand'.</option>
                     @endforelse
                 </select>
             </div>
@@ -191,6 +195,64 @@
         <a href="{{ route('admin.products') }}" class="btn btn-outline-secondary py-2">Cancel</a>
     </div>
 </form>
+
+<!-- Modal: Quick Add Category -->
+<div class="modal fade" id="quickAddCategoryModal" tabindex="-1" aria-labelledby="quickAddCategoryModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <form id="quickCategoryForm">
+                @csrf
+                <div class="modal-header">
+                    <h5 class="modal-title fw-bold" id="quickAddCategoryModalLabel"><i class="bi bi-tags text-primary me-2"></i>Quick Add Category</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="mb-3">
+                        <label class="form-label small fw-bold">Category Name *</label>
+                        <input type="text" id="quick_cat_name" name="name" class="form-control" required placeholder="e.g. Laptops, Processors, Monitors">
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label small fw-bold">Bootstrap Icon Class</label>
+                        <input type="text" id="quick_cat_icon" name="icon" class="form-control" value="bi-tags" placeholder="e.g. bi-laptop, bi-cpu">
+                    </div>
+                    <input type="hidden" name="status" value="active">
+                    <div id="quick_cat_msg" class="small"></div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Cancel</button>
+                    <button type="button" class="btn btn-primary fw-bold" onclick="submitQuickCategory()"><i class="bi bi-check-lg me-1"></i>Save & Select</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<!-- Modal: Quick Add Brand -->
+<div class="modal fade" id="quickAddBrandModal" tabindex="-1" aria-labelledby="quickAddBrandModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <form id="quickBrandForm">
+                @csrf
+                <div class="modal-header">
+                    <h5 class="modal-title fw-bold" id="quickAddBrandModalLabel"><i class="bi bi-award text-primary me-2"></i>Quick Add Brand</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="mb-3">
+                        <label class="form-label small fw-bold">Brand Name *</label>
+                        <input type="text" id="quick_brand_name" name="name" class="form-control" required placeholder="e.g. Dell, HP, Intel, ASUS">
+                    </div>
+                    <input type="hidden" name="status" value="active">
+                    <div id="quick_brand_msg" class="small"></div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Cancel</button>
+                    <button type="button" class="btn btn-primary fw-bold" onclick="submitQuickBrand()"><i class="bi bi-check-lg me-1"></i>Save & Select</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
 @endsection
 
 @push('scripts')
@@ -216,6 +278,106 @@
                 subSelect.appendChild(opt);
             });
         }
+    }
+
+    function submitQuickCategory() {
+        const nameInput = document.getElementById('quick_cat_name');
+        const iconInput = document.getElementById('quick_cat_icon');
+        const msgDiv = document.getElementById('quick_cat_msg');
+        
+        if (!nameInput.value.trim()) {
+            msgDiv.innerHTML = '<span class="text-danger">Category name is required.</span>';
+            return;
+        }
+
+        const formData = new FormData();
+        formData.append('_token', '{{ csrf_token() }}');
+        formData.append('name', nameInput.value.trim());
+        formData.append('icon', iconInput.value.trim() || 'bi-tags');
+        formData.append('status', 'active');
+
+        fetch("{{ route('admin.categories.store') }}", {
+            method: 'POST',
+            headers: {
+                'X-Requested-With': 'XMLHttpRequest',
+                'Accept': 'application/json'
+            },
+            body: formData
+        })
+        .then(res => res.json())
+        .then(data => {
+            if (data.success && data.category) {
+                const select = document.getElementById('category_select');
+                const emptyOpt = document.getElementById('empty_cat_opt');
+                if (emptyOpt) emptyOpt.remove();
+
+                const opt = document.createElement('option');
+                opt.value = data.category.id;
+                opt.text = data.category.name;
+                opt.selected = true;
+                select.appendChild(opt);
+
+                categoryData[data.category.id] = data.category;
+                categoryData[data.category.id].subcategories = [];
+                updateSubcategories();
+
+                nameInput.value = '';
+                msgDiv.innerHTML = '';
+                bootstrap.Modal.getInstance(document.getElementById('quickAddCategoryModal')).hide();
+            } else {
+                msgDiv.innerHTML = '<span class="text-danger">' + (data.message || 'Error creating category.') + '</span>';
+            }
+        })
+        .catch(err => {
+            msgDiv.innerHTML = '<span class="text-danger">Error saving category. Check if name already exists.</span>';
+        });
+    }
+
+    function submitQuickBrand() {
+        const nameInput = document.getElementById('quick_brand_name');
+        const msgDiv = document.getElementById('quick_brand_msg');
+        
+        if (!nameInput.value.trim()) {
+            msgDiv.innerHTML = '<span class="text-danger">Brand name is required.</span>';
+            return;
+        }
+
+        const formData = new FormData();
+        formData.append('_token', '{{ csrf_token() }}');
+        formData.append('name', nameInput.value.trim());
+        formData.append('status', 'active');
+
+        fetch("{{ route('admin.brands.store') }}", {
+            method: 'POST',
+            headers: {
+                'X-Requested-With': 'XMLHttpRequest',
+                'Accept': 'application/json'
+            },
+            body: formData
+        })
+        .then(res => res.json())
+        .then(data => {
+            if (data.success && data.brand) {
+                const select = document.getElementById('brand_select');
+                const emptyOpt = document.getElementById('empty_brand_opt');
+                if (emptyOpt) emptyOpt.remove();
+
+                const opt = document.createElement('option');
+                opt.value = data.brand.id;
+                opt.text = data.brand.name;
+                opt.selected = true;
+                select.appendChild(opt);
+
+                nameInput.value = '';
+                msgDiv.innerHTML = '';
+                bootstrap.Modal.getInstance(document.getElementById('quickAddBrandModal')).hide();
+            } else {
+                msgDiv.innerHTML = '<span class="text-danger">' + (data.message || 'Error creating brand.') + '</span>';
+            }
+        })
+        .catch(err => {
+            msgDiv.innerHTML = '<span class="text-danger">Error saving brand. Check if name already exists.</span>';
+        });
     }
 
     document.addEventListener("DOMContentLoaded", () => {

@@ -51,21 +51,6 @@
     <div class="sidebar-nav-section">Catalog & Inventory</div>
     <ul class="sidebar-menu">
         <li class="sidebar-item">
-            <a href="{{ route('admin.products') }}" class="sidebar-link {{ ($currentPage ?? '') === 'products' ? 'active' : '' }}">
-                <i class="bi bi-box-seam"></i> <span>Products</span>
-            </a>
-        </li>
-        <li class="sidebar-item">
-            <a href="{{ route('admin.laptops') }}" class="sidebar-link {{ ($currentPage ?? '') === 'laptops' ? 'active' : '' }}">
-                <i class="bi bi-laptop"></i> <span>Laptops</span>
-            </a>
-        </li>
-        <li class="sidebar-item">
-            <a href="{{ route('admin.computers') }}" class="sidebar-link {{ ($currentPage ?? '') === 'computers' ? 'active' : '' }}">
-                <i class="bi bi-pc-display"></i> <span>Desktop PCs</span>
-            </a>
-        </li>
-        <li class="sidebar-item">
             <a href="{{ route('admin.categories') }}" class="sidebar-link {{ ($currentPage ?? '') === 'categories' ? 'active' : '' }}">
                 <i class="bi bi-tags"></i> <span>Categories</span>
             </a>
@@ -73,6 +58,11 @@
         <li class="sidebar-item">
             <a href="{{ route('admin.brands') }}" class="sidebar-link {{ ($currentPage ?? '') === 'brands' ? 'active' : '' }}">
                 <i class="bi bi-award"></i> <span>Brands</span>
+            </a>
+        </li>
+        <li class="sidebar-item">
+            <a href="{{ route('admin.products') }}" class="sidebar-link {{ in_array(($currentPage ?? ''), ['products', 'product-add']) ? 'active' : '' }}">
+                <i class="bi bi-box-seam"></i> <span>Products</span>
             </a>
         </li>
         <li class="sidebar-item">
@@ -84,6 +74,16 @@
                 @if($sidebarLowStock > 0)
                     <span class="badge-counter bg-warning text-dark">{{ $sidebarLowStock }}</span>
                 @endif
+            </a>
+        </li>
+        <li class="sidebar-item">
+            <a href="{{ route('admin.laptops') }}" class="sidebar-link {{ ($currentPage ?? '') === 'laptops' ? 'active' : '' }}">
+                <i class="bi bi-laptop"></i> <span>Laptops</span>
+            </a>
+        </li>
+        <li class="sidebar-item">
+            <a href="{{ route('admin.computers') }}" class="sidebar-link {{ ($currentPage ?? '') === 'computers' ? 'active' : '' }}">
+                <i class="bi bi-pc-display"></i> <span>Desktop PCs</span>
             </a>
         </li>
     </ul>

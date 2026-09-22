@@ -40,7 +40,15 @@ class BrandController extends Controller
 
         $validated['slug'] = Str::slug($validated['name']);
 
-        Brand::create($validated);
+        $brand = Brand::create($validated);
+
+        if ($request->wantsJson() || $request->ajax()) {
+            return response()->json([
+                'success' => true,
+                'brand' => $brand,
+                'message' => "Brand '{$brand->name}' created successfully.",
+            ]);
+        }
 
         return redirect()->route('admin.brands')
             ->with('success', "Brand '{$validated['name']}' created successfully.");

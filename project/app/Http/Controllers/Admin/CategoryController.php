@@ -46,7 +46,15 @@ class CategoryController extends Controller
             $validated['icon'] = 'bi-tags';
         }
 
-        Category::create($validated);
+        $category = Category::create($validated);
+
+        if ($request->wantsJson() || $request->ajax()) {
+            return response()->json([
+                'success' => true,
+                'category' => $category,
+                'message' => "Category '{$category->name}' created successfully.",
+            ]);
+        }
 
         return redirect()->route('admin.categories')
             ->with('success', "Category '{$validated['name']}' created successfully.");
