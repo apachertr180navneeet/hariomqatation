@@ -1,4 +1,4 @@
-@extends('layouts.shop')
+@extends('shop.includes.app')
 
 @section('content')
 <!-- About Hero -->

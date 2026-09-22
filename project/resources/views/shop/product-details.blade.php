@@ -1,4 +1,4 @@
-@extends('layouts.shop')
+@extends('shop.includes.app')
 
 @section('content')
 <!-- Product Details Breadcrumb -->
@@ -185,7 +185,7 @@
 
         document.getElementById("btn-details-get-quote").onclick = () => {
             DataStore.addToEnquiryCart(p.id, 1);
-            window.location.href = window.HOC_ROUTES.enquiry;
+            window.location.href = "{{ route('enquiry') }}";
         };
 
         const waMsg = `Hello Hari Om Computer, I would like to enquire about the price and availability of: *${p.name}* (SKU: ${p.sku}) listed at ${HOC_UTILS.formatINR(p.sellingPrice)}.`;

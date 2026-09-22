@@ -1,4 +1,4 @@
-@extends('layouts.admin')
+@extends('admin.includes.app')
 
 @push('styles')
 <link rel="stylesheet" href="{{ asset('assets/css/store.css') }}">
@@ -78,8 +78,7 @@
         const quoteBtn = document.getElementById("btn-request-pc-quote");
         if (quoteBtn) {
             quoteBtn.addEventListener("click", () => {
-                const quoteCreateUrl = window.HOC_ADMIN_ROUTES?.quotationCreate || "{{ route('admin.quotations.create') }}";
-                window.location.href = quoteCreateUrl;
+                window.location.href = "{{ route('admin.quotations.create') }}";
             });
         }
     });

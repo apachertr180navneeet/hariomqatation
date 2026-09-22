@@ -1,4 +1,4 @@
-@extends('layouts.shop')
+@extends('shop.includes.app')
 
 @section('content')
 <!-- Page Breadcrumbs -->
@@ -55,7 +55,7 @@
                 const art = getArtClass(p.subcategory);
                 const specParts = (p.specs || "").split("|").map(s => s.trim()).filter(s => s.length > 0).slice(0, 3);
                 const pillsHtml = specParts.map(s => `<span class="spec-micro-pill">${s}</span>`).join("");
-                const detailUrl = `${window.HOC_ROUTES.productDetails}?id=${p.id}`;
+                const detailUrl = `/product-details?id=${p.id}`;
 
                 html += `
                     <div class="col-md-6 col-lg-4">

@@ -9,15 +9,8 @@ const AdminApp = {
     this.updateNotificationBadges();
   },
 
-  getUrl(routeKey, fallback, param) {
-    if (window.HOC_ADMIN_ROUTES && window.HOC_ADMIN_ROUTES[routeKey]) {
-      const val = window.HOC_ADMIN_ROUTES[routeKey];
-      return typeof val === 'function' ? val(param) : val;
-    }
-    return fallback;
-  },
-
   bindSidebar() {
+
     const toggleBtn = document.getElementById("sidebar-toggle-btn");
     const closeBtn = document.getElementById("sidebar-close-btn");
     const backdrop = document.getElementById("sidebar-backdrop");
@@ -126,8 +119,8 @@ const AdminApp = {
           "Expired": "badge-soft-secondary"
         }[q.status] || "badge-soft-secondary";
 
-        const qViewUrl = AdminApp.getUrl('quotationView', `quotation-view.php?id=${encodeURIComponent(q.id)}`, q.id);
-        const qPrintUrl = AdminApp.getUrl('quotationPrint', `quotation-print.php?id=${encodeURIComponent(q.id)}`, q.id);
+        const qViewUrl = `/admin/quotations/view?id=${encodeURIComponent(q.id)}`;
+        const qPrintUrl = `/admin/quotations/print?id=${encodeURIComponent(q.id)}`;
 
         html += `
           <tr>
@@ -170,7 +163,7 @@ const AdminApp = {
       if (lowItems.length === 0) {
         html = `<tr><td colspan="5" class="text-center text-success py-3"><i class="bi bi-check-circle me-1"></i>All inventory items are currently well-stocked.</td></tr>`;
       } else {
-        const invUrl = AdminApp.getUrl('inventory', 'inventory.php');
+        const invUrl = "/admin/inventory";
         lowItems.slice(0, 5).forEach(p => {
           html += `
             <tr>
@@ -298,8 +291,8 @@ const AdminApp = {
           "Expired": "badge-soft-secondary"
         }[q.status] || "badge-soft-secondary";
 
-        const qViewUrl = AdminApp.getUrl('quotationView', `quotation-view.php?id=${encodeURIComponent(q.id)}`, q.id);
-        const qPrintUrl = AdminApp.getUrl('quotationPrint', `quotation-print.php?id=${encodeURIComponent(q.id)}`, q.id);
+        const qViewUrl = `/admin/quotations/view?id=${encodeURIComponent(q.id)}`;
+        const qPrintUrl = `/admin/quotations/print?id=${encodeURIComponent(q.id)}`;
 
         html += `
           <tr>
@@ -347,29 +340,33 @@ const AdminApp = {
 
     render(quotes);
 
-    // Search and Status filters
+    // Filter events
     const searchInput = document.getElementById("search-quote-input");
     const statusFilter = document.getElementById("filter-quote-status");
 
-    const filterHandler = () => {
-      const qText = (searchInput?.value || "").toLowerCase();
-      const statusVal = statusFilter?.value || "ALL";
+    const applyFilters = () => {
+      const q = (searchInput?.value || "").toLowerCase();
+      const status = statusFilter?.value || "ALL";
 
-      const filtered = quotes.filter(q => {
-        const matchesText = q.id.toLowerCase().includes(qText) ||
-          q.customerName.toLowerCase().includes(qText) ||
-          (q.company && q.company.toLowerCase().includes(qText)) ||
-          q.mobile.includes(qText);
-        const matchesStatus = statusVal === "ALL" || q.status === statusVal;
-        return matchesText && matchesStatus;
+      const filtered = quotes.filter(item => {
+        const matchesQuery = 
+          item.id.toLowerCase().includes(q) ||
+          item.customerName.toLowerCase().includes(q) ||
+          (item.company && item.company.toLowerCase().includes(q)) ||
+          item.mobile.includes(q);
+        
+        const matchesStatus = status === "ALL" || item.status === status;
+
+        return matchesQuery && matchesStatus;
       });
+
       render(filtered);
     };
 
-    if (searchInput) searchInput.addEventListener("input", filterHandler);
-    if (statusFilter) statusFilter.addEventListener("change", filterHandler);
+    if (searchInput) searchInput.addEventListener("input", applyFilters);
+    if (statusFilter) statusFilter.addEventListener("change", applyFilters);
 
-    // Status change event
+    // Dynamic status select change handler
     tbody.addEventListener("change", (e) => {
       if (e.target.classList.contains("quote-status-select")) {
         const qId = e.target.getAttribute("data-id");
@@ -378,12 +375,12 @@ const AdminApp = {
         if (q) {
           q.status = newStatus;
           DataStore.saveQuotation(q);
-          HOC_UTILS.showToast(`Quotation ${qId} updated to ${newStatus}`);
+          HOC_UTILS.showToast(`Quotation ${qId} status updated to ${newStatus}`);
         }
       }
     });
 
-    // Convert to sale click handler
+    // Convert to Sale action
     document.addEventListener("click", (e) => {
       const convertBtn = e.target.closest(".btn-convert-sale");
       if (convertBtn) {
@@ -394,7 +391,7 @@ const AdminApp = {
           if (sale) {
             HOC_UTILS.showToast(`Invoice ${sale.invoiceNo} successfully generated from quotation!`);
             setTimeout(() => {
-              window.location.href = AdminApp.getUrl('sales', 'sales.php');
+              window.location.href = "/admin/sales";
             }, 800);
           }
         }
@@ -416,7 +413,7 @@ const AdminApp = {
       let html = "";
       list.forEach(p => {
         const isLow = p.stock <= p.minStock;
-        const pViewUrl = AdminApp.getUrl('productView', `product-view.php?id=${p.id}`, p.id);
+        const pViewUrl = `/admin/products/view?id=${p.id}`;
         html += `
           <tr>
             <td>

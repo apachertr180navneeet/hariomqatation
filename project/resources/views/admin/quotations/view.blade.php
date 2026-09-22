@@ -1,4 +1,4 @@
-@extends('layouts.admin')
+@extends('admin.includes.app')
 
 @section('content')
 <!-- Page Actions Bar -->
@@ -197,10 +197,7 @@
         document.getElementById("view-amount-words").innerText = HOC_UTILS.numberToWordsINR(q.grandTotal);
 
         // Print Preview Link
-        const printUrl = window.HOC_ADMIN_ROUTES?.quotationPrint 
-            ? window.HOC_ADMIN_ROUTES.quotationPrint(q.id) 
-            : `quotation-print.php?id=${encodeURIComponent(q.id)}`;
-        document.getElementById("btn-open-print-preview").href = printUrl;
+        document.getElementById("btn-open-print-preview").href = `/admin/quotations/print?id=${encodeURIComponent(q.id)}`;
 
         // Save Status button
         document.getElementById("btn-save-status-change").onclick = () => {
@@ -217,8 +214,7 @@
                 const sale = DataStore.convertQuotationToSale(q.id, "Bank Transfer");
                 if (sale) {
                     HOC_UTILS.showToast(`Invoice ${sale.invoiceNo} successfully created!`);
-                    const salesUrl = window.HOC_ADMIN_ROUTES?.sales || "sales.php";
-                    setTimeout(() => window.location.href = salesUrl, 700);
+                    setTimeout(() => window.location.href = "{{ route('admin.sales') }}", 700);
                 }
             }
         };

@@ -326,9 +326,10 @@ const PCBuilder = {
 
         HOC_UTILS.showToast("Custom PC added to your Enquiry Cart!");
         setTimeout(() => {
-          window.location.href = (window.HOC_ROUTES && window.HOC_ROUTES.enquiry) || "/enquiry";
+          window.location.href = "/enquiry";
         }, 600);
       });
     }
   }
 };
+

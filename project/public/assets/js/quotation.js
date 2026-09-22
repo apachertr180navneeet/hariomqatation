@@ -281,10 +281,7 @@ const QuotationEngine = {
     HOC_UTILS.showToast(`Quotation ${newQuotation.id} saved successfully!`);
 
     setTimeout(() => {
-      const destUrl = (window.HOC_ADMIN_ROUTES && typeof window.HOC_ADMIN_ROUTES.quotationView === 'function')
-        ? window.HOC_ADMIN_ROUTES.quotationView(newQuotation.id)
-        : `quotation-view.php?id=${encodeURIComponent(newQuotation.id)}`;
-      window.location.href = destUrl;
+      window.location.href = `/admin/quotations/view?id=${encodeURIComponent(newQuotation.id)}`;
     }, 600);
   }
 };

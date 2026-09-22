@@ -1,4 +1,4 @@
-@extends('layouts.admin')
+@extends('admin.includes.app')
 
 @section('content')
 <div class="page-header">
@@ -87,10 +87,7 @@
         document.getElementById("view-prod-stock").innerText = `${p.stock} Units`;
         document.getElementById("view-prod-minstock").innerText = p.minStock;
 
-        const storeUrl = window.HOC_ROUTES?.productDetails 
-            ? `${window.HOC_ROUTES.productDetails}?id=${p.id}` 
-            : `../shop/product-details.php?id=${p.id}`;
-        document.getElementById("btn-view-in-store").href = storeUrl;
+        document.getElementById("btn-view-in-store").href = `/product-details?id=${encodeURIComponent(p.id)}`;
     });
 </script>
 @endpush

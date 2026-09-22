@@ -1,4 +1,4 @@
-@extends('layouts.shop')
+@extends('shop.includes.app')
 
 @section('content')
 <main class="container my-5">

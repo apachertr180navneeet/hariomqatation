@@ -1,4 +1,4 @@
-@extends('layouts.admin')
+@extends('admin.includes.app')
 
 @section('content')
 <div class="page-header">
@@ -41,9 +41,7 @@
 
         let html = "";
         laptops.forEach(p => {
-            const pViewUrl = window.HOC_ADMIN_ROUTES?.productView 
-                ? window.HOC_ADMIN_ROUTES.productView(p.id) 
-                : `product-view.php?id=${p.id}`;
+            const pViewUrl = `/admin/products/view?id=${encodeURIComponent(p.id)}`;
 
             html += `
                 <tr>

@@ -1,4 +1,4 @@
-@extends('layouts.admin')
+@extends('admin.includes.app')
 
 @section('content')
 <div class="page-header">
@@ -41,15 +41,8 @@
 
         let html = "";
         sales.forEach(s => {
-            const invUrl = window.HOC_ADMIN_ROUTES?.invoiceView 
-                ? window.HOC_ADMIN_ROUTES.invoiceView(s.invoiceNo) 
-                : `invoice-view.php?id=${encodeURIComponent(s.invoiceNo)}`;
-
-            const quoteUrl = s.quotationNo ? (
-                window.HOC_ADMIN_ROUTES?.quotationView 
-                    ? window.HOC_ADMIN_ROUTES.quotationView(s.quotationNo) 
-                    : `quotation-view.php?id=${encodeURIComponent(s.quotationNo)}`
-            ) : null;
+            const invUrl = `/admin/invoices/view?id=${encodeURIComponent(s.invoiceNo)}`;
+            const quoteUrl = s.quotationNo ? `/admin/quotations/view?id=${encodeURIComponent(s.quotationNo)}` : null;
 
             html += `
                 <tr>

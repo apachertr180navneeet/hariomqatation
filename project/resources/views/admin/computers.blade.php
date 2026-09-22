@@ -1,4 +1,4 @@
-@extends('layouts.admin')
+@extends('admin.includes.app')
 
 @section('content')
 <div class="page-header">
@@ -23,11 +23,8 @@
 
         let html = "";
         pcs.forEach(p => {
-            const pViewUrl = window.HOC_ADMIN_ROUTES?.productView 
-                ? window.HOC_ADMIN_ROUTES.productView(p.id) 
-                : `product-view.php?id=${p.id}`;
-            const quoteCreateUrl = window.HOC_ADMIN_ROUTES?.quotationCreate 
-                || "{{ route('admin.quotations.create') }}";
+            const pViewUrl = `/admin/products/view?id=${encodeURIComponent(p.id)}`;
+            const quoteCreateUrl = "{{ route('admin.quotations.create') }}";
 
             html += `
                 <div class="col-md-6">

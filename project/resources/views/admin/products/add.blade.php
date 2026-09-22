@@ -1,4 +1,4 @@
-@extends('layouts.admin')
+@extends('admin.includes.app')
 
 @section('content')
 <div class="page-header">
@@ -162,8 +162,7 @@
 
         HOC_UTILS.showToast(`Product ${newProd.name} added successfully!`);
         setTimeout(() => {
-            const redirectUrl = window.HOC_ADMIN_ROUTES?.products || "{{ route('admin.products') }}";
-            window.location.href = redirectUrl;
+            window.location.href = "{{ route('admin.products') }}";
         }, 700);
     }
 </script>

@@ -43,7 +43,7 @@ const StoreApp = {
         e.preventDefault();
         const prodId = quickQuoteBtn.getAttribute("data-id");
         DataStore.addToEnquiryCart(prodId, 1);
-        window.location.href = (window.HOC_ROUTES && window.HOC_ROUTES.enquiry) || "/enquiry";
+        window.location.href = "/enquiry";
       }
     });
 
@@ -54,8 +54,7 @@ const StoreApp = {
         e.preventDefault();
         const query = document.getElementById("header-search-input")?.value.trim();
         if (query) {
-          const baseUrl = (window.HOC_ROUTES && window.HOC_ROUTES.products) || "/products";
-          window.location.href = `${baseUrl}?search=${encodeURIComponent(query)}`;
+          window.location.href = `/products?search=${encodeURIComponent(query)}`;
         }
       });
     }
@@ -76,13 +75,14 @@ const StoreApp = {
             <div class="mb-3"><i class="bi bi-cart-x text-muted" style="font-size: 3rem;"></i></div>
             <h5 class="text-muted">Your Enquiry Cart is empty</h5>
             <p class="text-muted small">Explore our laptops, desktop PCs, or build a custom rig to request a price quotation.</p>
-            <a href="${(window.HOC_ROUTES && window.HOC_ROUTES.products) || '/products'}" class="btn btn-primary mt-2"><i class="bi bi-shop me-1"></i> Browse Products</a>
+            <a href="/products" class="btn btn-primary mt-2"><i class="bi bi-shop me-1"></i> Browse Products</a>
           </td>
         </tr>
       `;
       if (summaryBox) summaryBox.style.display = "none";
       return;
     }
+
 
     if (summaryBox) summaryBox.style.display = "block";
 
@@ -225,9 +225,10 @@ const StoreApp = {
 
         // Redirect to success page with quote number
         sessionStorage.setItem("HOC_LATEST_ENQUIRY", JSON.stringify(newQuote));
-        window.location.href = (window.HOC_ROUTES && window.HOC_ROUTES.quotationSuccess) || "/quotation-success";
+        window.location.href = "/quotation-success";
       });
     }
+
 
     // WhatsApp Enquiry Button Handler
     const waBtn = document.getElementById("btn-whatsapp-enquiry");
