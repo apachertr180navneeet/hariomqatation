@@ -79,6 +79,9 @@
 @endsection
 
 @push('scripts')
+<script>
+    window.__SERVER_PRODUCTS__ = @json($productsJson ?? []);
+</script>
 <script src="{{ asset('assets/js/pc-builder.js') }}"></script>
 <script>
     document.addEventListener("DOMContentLoaded", () => {

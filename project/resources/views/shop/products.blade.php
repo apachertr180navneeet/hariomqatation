@@ -125,7 +125,8 @@
         const countLabel = document.getElementById("catalog-count-label");
         if (!grid || typeof DataStore === 'undefined') return;
 
-        const allProducts = DataStore.getProducts();
+        const dbProducts = @json($productsJson ?? []);
+        const allProducts = (dbProducts && dbProducts.length > 0) ? dbProducts : (typeof DataStore !== 'undefined' ? DataStore.getProducts() : []);
 
         // Read URL Query params
         const urlParams = new URLSearchParams(window.location.search);

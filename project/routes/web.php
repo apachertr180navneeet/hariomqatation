@@ -3,9 +3,13 @@
 use App\Http\Controllers\Admin\AuthController;
 use App\Http\Controllers\Admin\BrandController;
 use App\Http\Controllers\Admin\CategoryController;
+use App\Http\Controllers\Admin\CustomerController;
 use App\Http\Controllers\Admin\InventoryController;
 use App\Http\Controllers\Admin\ProductController;
+use App\Http\Controllers\Admin\PurchaseController;
 use App\Http\Controllers\Admin\QuotationController;
+use App\Http\Controllers\Admin\SalesController;
+use App\Http\Controllers\Admin\SupplierController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\ShopController;
 use Illuminate\Support\Facades\Route;
@@ -25,6 +29,7 @@ Route::controller(ShopController::class)->group(function () {
     Route::get('/product-details', 'productDetails')->name('product.details');
     Route::get('/pc-builder', 'pcBuilder')->name('pc.builder');
     Route::get('/enquiry', 'enquiry')->name('enquiry');
+    Route::post('/enquiry', 'submitEnquiry')->name('enquiry.submit');
     Route::get('/quotation-success', 'quotationSuccess')->name('quotation.success');
     Route::get('/about', 'about')->name('about');
     Route::get('/contact', 'contact')->name('contact');
@@ -141,6 +146,51 @@ Route::middleware('auth')->prefix('admin')->name('admin.')->group(function () {
     });
 
     // ==========================================
+    // Customer CRM Accounts
+    // ==========================================
+    Route::controller(CustomerController::class)->group(function () {
+        Route::get('/customers', 'index')->name('customers');
+        Route::post('/customers', 'store')->name('customers.store');
+        Route::put('/customers/{id}', 'update')->name('customers.update');
+        Route::delete('/customers/{id}', 'destroy')->name('customers.destroy');
+        Route::get('/customers.php', 'index');
+    });
+
+    // ==========================================
+    // Sales Orders & GST Tax Invoices
+    // ==========================================
+    Route::controller(SalesController::class)->group(function () {
+        Route::get('/sales', 'index')->name('sales');
+        Route::get('/invoices/view', 'invoice')->name('invoices.view');
+        Route::get('/invoices/{id}', 'invoice')->name('invoices.show');
+        Route::post('/quotations/{id}/convert', 'convertFromQuotation')->name('quotations.convert');
+        Route::get('/sales.php', 'index');
+        Route::get('/invoice-view.php', 'invoice');
+    });
+
+    // ==========================================
+    // Suppliers Directory & Vendor Accounts
+    // ==========================================
+    Route::controller(SupplierController::class)->group(function () {
+        Route::get('/suppliers', 'index')->name('suppliers');
+        Route::post('/suppliers', 'store')->name('suppliers.store');
+        Route::put('/suppliers/{id}', 'update')->name('suppliers.update');
+        Route::delete('/suppliers/{id}', 'destroy')->name('suppliers.destroy');
+        Route::get('/suppliers.php', 'index');
+    });
+
+    // ==========================================
+    // Purchases & Stock Inward Bills
+    // ==========================================
+    Route::controller(PurchaseController::class)->group(function () {
+        Route::get('/purchases', 'index')->name('purchases');
+        Route::get('/purchases/create', 'create')->name('purchases.create');
+        Route::post('/purchases', 'store')->name('purchases.store');
+        Route::get('/purchases/{id}', 'show')->name('purchases.show');
+        Route::get('/purchases.php', 'index');
+    });
+
+    // ==========================================
     // General ERP Modules
     // ==========================================
     Route::controller(AdminController::class)->group(function () {
@@ -150,14 +200,7 @@ Route::middleware('auth')->prefix('admin')->name('admin.')->group(function () {
         // Custom PC Builder ERP
         Route::get('/pc-builder', 'pcBuilder')->name('pc.builder');
 
-        // Sales & Tax Invoices
-        Route::get('/sales', 'sales')->name('sales');
-        Route::get('/invoices/view', 'invoiceView')->name('invoices.view');
-
         // Operations & Accounting
-        Route::get('/customers', 'customers')->name('customers');
-        Route::get('/purchases', 'purchases')->name('purchases');
-        Route::get('/suppliers', 'suppliers')->name('suppliers');
         Route::get('/payments', 'payments')->name('payments');
         Route::get('/reports', 'reports')->name('reports');
         Route::get('/website-mgmt', 'websiteMgmt')->name('website.mgmt');
@@ -166,11 +209,6 @@ Route::middleware('auth')->prefix('admin')->name('admin.')->group(function () {
         // Legacy Prototype compatibility aliases (.php extension support)
         Route::get('/dashboard.php', 'dashboard');
         Route::get('/pc-builder.php', 'pcBuilder');
-        Route::get('/sales.php', 'sales');
-        Route::get('/invoice-view.php', 'invoiceView');
-        Route::get('/customers.php', 'customers');
-        Route::get('/purchases.php', 'purchases');
-        Route::get('/suppliers.php', 'suppliers');
         Route::get('/payments.php', 'payments');
         Route::get('/reports.php', 'reports');
         Route::get('/website-mgmt.php', 'websiteMgmt');

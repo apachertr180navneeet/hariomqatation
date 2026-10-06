@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Product;
 use App\Models\Quotation;
 use App\Models\QuotationItem;
+use App\Models\StockMovement;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -219,16 +220,44 @@ class QuotationController extends Controller
     public function updateStatus(Request $request, $id): RedirectResponse
     {
         $quotation = is_numeric($id) 
-            ? Quotation::findOrFail($id)
-            : Quotation::where('quotation_no', $id)->firstOrFail();
+            ? Quotation::with('items')->findOrFail($id)
+            : Quotation::with('items')->where('quotation_no', $id)->firstOrFail();
 
         $validated = $request->validate([
             'status' => 'required|string|in:Draft,Sent,Pending,Approved,Converted,Rejected,Expired',
         ]);
 
-        $quotation->update(['status' => $validated['status']]);
+        $oldStatus = $quotation->status;
+        $newStatus = $validated['status'];
 
-        return back()->with('success', "Quotation {$quotation->quotation_no} marked as {$validated['status']}.");
+        // If converted into a sale, deduct inventory stock and record movements
+        if ($newStatus === 'Converted' && $oldStatus !== 'Converted') {
+            foreach ($quotation->items as $qItem) {
+                if ($qItem->product_id) {
+                    $product = Product::find($qItem->product_id);
+                    if ($product) {
+                        $prevStock = $product->stock;
+                        $newStock = max(0, $prevStock - $qItem->quantity);
+                        $product->update(['stock' => $newStock]);
+
+                        StockMovement::create([
+                            'product_id' => $product->id,
+                            'type' => 'outward',
+                            'quantity' => $qItem->quantity,
+                            'balance_after' => $newStock,
+                            'unit_cost' => $product->purchase_price,
+                            'reference_no' => $quotation->quotation_no,
+                            'notes' => "Stock deduction for converted quotation {$quotation->quotation_no}",
+                            'user_id' => Auth::id(),
+                        ]);
+                    }
+                }
+            }
+        }
+
+        $quotation->update(['status' => $newStatus]);
+
+        return back()->with('success', "Quotation {$quotation->quotation_no} marked as {$newStatus}.");
     }
 
     /**

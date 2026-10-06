@@ -20,63 +20,68 @@
 <!-- Laptops Grid -->
 <main class="container my-5">
     <div class="row g-4" id="laptops-grid">
-        <!-- Populated dynamically via JS -->
-    </div>
-</main>
-@endsection
-
-@push('scripts')
-<script>
-    document.addEventListener("DOMContentLoaded", () => {
-        const grid = document.getElementById("laptops-grid");
-        if (!grid || typeof DataStore === 'undefined') return;
-
-        const laptops = DataStore.getProducts().filter(p => p.category === "Laptops");
-
-        let html = "";
-        laptops.forEach(p => {
-            const discountPct = p.mrp ? Math.round(((p.mrp - p.sellingPrice) / p.mrp) * 100) : 0;
-            const specParts = (p.specs || "").split("|").map(s => s.trim()).filter(s => s.length > 0).slice(0, 3);
-            const pillsHtml = specParts.map(s => `<span class="spec-micro-pill">${s}</span>`).join("");
-            const detailUrl = `/product-details?id=${p.id}`;
-
-            html += `
-                <div class="col-md-6 col-lg-4">
-                    <div class="product-card-v3">
-                        <div class="product-visual-art art-laptop">
-                            ${discountPct > 0 ? `<span class="product-badge-discount">${discountPct}% OFF</span>` : ''}
-                            <span class="product-badge-brand">${p.brand}</span>
-                            <i class="bi bi-laptop product-art-icon"></i>
+        @forelse($laptops as $laptop)
+            @php
+                $discountPct = ($laptop->mrp && $laptop->mrp > $laptop->selling_price) ? round((($laptop->mrp - $laptop->selling_price) / $laptop->mrp) * 100) : 0;
+                $specParts = array_filter(array_map('trim', explode('|', $laptop->specs)));
+                $specParts = array_slice($specParts, 0, 4);
+                $detailUrl = route('product.details', ['id' => $laptop->id]);
+            @endphp
+            <div class="col-md-6 col-lg-4">
+                <div class="product-card-v3">
+                    <div class="product-visual-art art-laptop" style="min-height: 200px;">
+                        @if($discountPct > 0)
+                            <span class="product-badge-discount">{{ $discountPct }}% OFF</span>
+                        @endif
+                        <span class="product-badge-brand">{{ $laptop->brand->name ?? 'Branded' }}</span>
+                        <i class="bi bi-laptop product-art-icon" style="font-size: 4.5rem;"></i>
+                    </div>
+                    <div class="product-body-v3">
+                        <div class="product-category-sub">{{ $laptop->subcategory->name ?? 'Laptop' }}</div>
+                        <a href="{{ $detailUrl }}" class="product-title fs-5">{{ $laptop->name }}</a>
+                        
+                        <div class="product-specs-pill-row mb-3">
+                            @foreach($specParts as $spec)
+                                <span class="spec-micro-pill">{{ $spec }}</span>
+                            @endforeach
                         </div>
-                        <div class="product-body-v3">
-                            <div class="product-category-sub">${p.subcategory || 'Laptop'}</div>
-                            <a href="${detailUrl}" class="product-title">${p.name}</a>
-                            
-                            <div class="product-specs-pill-row">
-                                ${pillsHtml}
+
+                        <div class="product-pricing mt-auto">
+                            <div class="d-flex align-items-baseline justify-content-between mb-3">
+                                <div>
+                                    <span class="price-current">₹{{ number_format($laptop->selling_price, 2) }}</span>
+                                    @if($laptop->mrp > $laptop->selling_price)
+                                        <span class="price-mrp">₹{{ number_format($laptop->mrp, 2) }}</span>
+                                    @endif
+                                </div>
+                                <span class="stock-pill stock-in">
+                                    <span class="pulse-dot me-1"></span> 
+                                    {{ $laptop->stock > 0 ? $laptop->stock . ' In Stock' : 'Showroom Ready' }}
+                                </span>
                             </div>
 
-                            <div class="product-pricing">
-                                <div class="d-flex align-items-baseline justify-content-between mb-3">
-                                    <div>
-                                        <span class="price-current">${HOC_UTILS.formatINR(p.sellingPrice)}</span>
-                                        ${p.mrp ? `<span class="price-mrp">${HOC_UTILS.formatINR(p.mrp)}</span>` : ''}
-                                    </div>
-                                    <span class="stock-pill stock-in"><span class="pulse-dot me-1"></span> In Stock (${p.stock})</span>
-                                </div>
-                                <div class="d-grid gap-2">
-                                    <button class="btn btn-primary btn-sm btn-add-enquiry" data-id="${p.id}">
-                                        <i class="bi bi-cart-plus me-1"></i> Add to Enquiry
-                                    </button>
-                                    <a href="${detailUrl}" class="btn btn-outline-secondary btn-sm">View Full Specs</a>
-                                </div>
+                            <div class="d-flex gap-2">
+                                <button class="btn btn-primary btn-sm flex-grow-1 btn-add-enquiry" 
+                                        data-id="{{ $laptop->id }}" 
+                                        data-name="{{ $laptop->name }}" 
+                                        data-sku="{{ $laptop->sku }}" 
+                                        data-price="{{ $laptop->selling_price }}">
+                                    <i class="bi bi-cart-plus me-1"></i> Add to Enquiry
+                                </button>
+                                <a href="{{ $detailUrl }}" class="btn btn-outline-secondary btn-sm">Details</a>
                             </div>
                         </div>
                     </div>
                 </div>
-            `;
-        });
-        grid.innerHTML = html;
-    });
-</script>
-@endpush
+            </div>
+        @empty
+            <div class="col-12 text-center py-5">
+                <i class="bi bi-laptop display-3 text-muted mb-3 d-block"></i>
+                <h5>No Laptops in Catalog</h5>
+                <p class="text-muted small">Check back soon or explore our full product catalog.</p>
+                <a href="{{ route('products') }}" class="btn btn-primary fw-bold">View All Products</a>
+            </div>
+        @endforelse
+    </div>
+</main>
+@endsection

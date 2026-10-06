@@ -25,12 +25,19 @@
         </div>
     </div>
 
-    <div class="d-flex flex-wrap gap-2">
+    <div class="d-flex flex-wrap align-items-center gap-2">
+        <form method="POST" action="{{ route('admin.quotations.convert', $quotation->id) }}" class="d-inline m-0">
+            @csrf
+            <button type="submit" class="btn btn-primary fw-bold rounded-3 shadow-sm d-flex align-items-center gap-1.5" title="Generate GST Tax Invoice">
+                <i class="bi bi-receipt"></i>
+                <span>Convert to Tax Invoice</span>
+            </button>
+        </form>
         <a href="{{ route('admin.quotations.print', ['id' => $quotation->id]) }}" target="_blank" class="btn btn-outline-primary fw-semibold rounded-3">
-            <i class="bi bi-printer me-1"></i> Print / Generate PDF
+            <i class="bi bi-printer me-1"></i> Print / PDF
         </a>
         <button type="button" class="btn btn-outline-success fw-semibold rounded-3" id="btn-send-quote-wa">
-            <i class="bi bi-whatsapp me-1"></i> Send on WhatsApp
+            <i class="bi bi-whatsapp me-1"></i> WhatsApp
         </button>
         <a href="{{ route('admin.quotations') }}" class="btn btn-outline-secondary fw-semibold rounded-3">
             <i class="bi bi-arrow-left me-1"></i> Back to List

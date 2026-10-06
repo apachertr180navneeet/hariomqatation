@@ -32,6 +32,7 @@
 
 @push('scripts')
 <script>
+    window.__SERVER_PRODUCTS__ = @json($componentsJson ?? []);
     document.addEventListener("DOMContentLoaded", () => {
         const grid = document.getElementById("components-grid");
         if (!grid || typeof DataStore === 'undefined') return;

@@ -2,19 +2,103 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Brand;
+use App\Models\Category;
+use App\Models\Customer;
+use App\Models\Invoice;
+use App\Models\Product;
+use App\Models\Purchase;
+use App\Models\Quotation;
+use App\Models\Supplier;
 use Illuminate\Http\Request;
+use Illuminate\Support\Carbon;
 use Illuminate\View\View;
 
 class AdminController extends Controller
 {
     /**
-     * Executive Dashboard with KPI cards, Chart.js trends, and recent quotes.
+     * Executive Dashboard with live DB KPI cards, Chart.js trends, and recent quotes.
      */
     public function dashboard(): View
     {
+        $todayStart = Carbon::today();
+        $monthStart = Carbon::now()->startOfMonth();
+
+        // Quotations & Sales metrics from DB
+        $todayQuotesSum = Quotation::where('created_at', '>=', $todayStart)->sum('grand_total');
+        $monthlyQuotesSum = Quotation::where('created_at', '>=', $monthStart)->sum('grand_total');
+        $approvedSalesSum = Quotation::whereIn('status', ['Approved', 'Converted'])->sum('grand_total');
+
+        $totalQuotes = Quotation::count();
+        $pendingQuotes = Quotation::whereIn('status', ['Pending', 'Draft'])->count();
+        $approvedQuotes = Quotation::where('status', 'Approved')->count();
+        $convertedQuotes = Quotation::where('status', 'Converted')->count();
+
+        // Invoiced Sales & Financials
+        $totalInvoiced = Invoice::where('status', 'Issued')->sum('grand_total');
+        $totalCollected = Invoice::where('status', 'Issued')->sum('paid_amount');
+        $totalOutstanding = Invoice::where('status', 'Issued')->sum('balance_amount');
+        $totalInvoicesCount = Invoice::count();
+        $totalCustomers = Customer::count();
+        $totalSuppliers = Supplier::count();
+        $totalPurchasesValue = Purchase::where('status', 'Received')->sum('grand_total');
+
+        // Inventory & Products metrics
+        $totalProducts = Product::count();
+        $lowStockCount = Product::lowStock()->count();
+        $totalStockUnits = Product::sum('stock');
+        $inventoryCostValue = Product::selectRaw('SUM(stock * purchase_price) as val')->value('val') ?? 0;
+        $lowStockItems = Product::lowStock()->with(['category', 'brand'])->take(5)->get();
+
+        // Recent real quotations from DB
+        $recentQuotations = Quotation::latest()->take(6)->get();
+        $recentInvoices = Invoice::latest()->take(5)->get();
+
+        // Monthly trends (Last 6 months)
+        $chartMonths = [];
+        $chartRevenue = [];
+        for ($i = 5; $i >= 0; $i--) {
+            $monthDate = Carbon::now()->subMonths($i);
+            $chartMonths[] = $monthDate->format('M Y');
+            $rev = Quotation::whereYear('created_at', $monthDate->year)
+                ->whereMonth('created_at', $monthDate->month)
+                ->sum('grand_total');
+            $chartRevenue[] = (float) $rev;
+        }
+
+        // Category distribution for pie chart
+        $categoriesWithCount = Category::withCount('products')->having('products_count', '>', 0)->get();
+        $catLabels = $categoriesWithCount->pluck('name')->toArray();
+        $catCounts = $categoriesWithCount->pluck('products_count')->toArray();
+
         return view('admin.dashboard', [
             'pageTitle' => 'Admin Dashboard | Hari Om Computer ERP',
             'currentPage' => 'dashboard',
+            'todaySales' => $todayQuotesSum,
+            'monthlySales' => $monthlyQuotesSum,
+            'approvedSales' => $approvedSalesSum,
+            'totalQuotes' => $totalQuotes,
+            'pendingQuotes' => $pendingQuotes,
+            'approvedQuotes' => $approvedQuotes,
+            'convertedQuotes' => $convertedQuotes,
+            'totalInvoiced' => $totalInvoiced,
+            'totalCollected' => $totalCollected,
+            'totalOutstanding' => $totalOutstanding,
+            'totalInvoicesCount' => $totalInvoicesCount,
+            'totalCustomers' => $totalCustomers,
+            'totalSuppliers' => $totalSuppliers,
+            'totalPurchasesValue' => $totalPurchasesValue,
+            'totalProducts' => $totalProducts,
+            'lowStockCount' => $lowStockCount,
+            'totalStockUnits' => $totalStockUnits,
+            'inventoryCostValue' => $inventoryCostValue,
+            'lowStockItems' => $lowStockItems,
+            'recentQuotations' => $recentQuotations,
+            'recentInvoices' => $recentInvoices,
+            'chartMonths' => $chartMonths,
+            'chartRevenue' => $chartRevenue,
+            'catLabels' => $catLabels,
+            'catCounts' => $catCounts,
         ]);
     }
 

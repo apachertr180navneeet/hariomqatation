@@ -20,67 +20,71 @@
 <!-- Computers Grid -->
 <main class="container my-5">
     <div class="row g-4" id="computers-grid">
-        <!-- Populated via JS -->
-    </div>
-</main>
-@endsection
+        @forelse($computers as $pc)
+            @php
+                $discountPct = ($pc->mrp && $pc->mrp > $pc->selling_price) ? round((($pc->mrp - $pc->selling_price) / $pc->mrp) * 100) : 0;
+                $specParts = array_filter(array_map('trim', explode('|', $pc->specs)));
+                $specParts = array_slice($specParts, 0, 4);
+                $detailUrl = route('product.details', ['id' => $pc->id]);
+            @endphp
+            <div class="col-md-6 col-lg-6">
+                <div class="product-card-v3">
+                    <div class="row g-0 h-100">
+                        <div class="col-md-5 product-visual-art art-desktop h-100" style="min-height: 220px;">
+                            @if($discountPct > 0)
+                                <span class="product-badge-discount">{{ $discountPct }}% OFF</span>
+                            @endif
+                            <span class="product-badge-brand">{{ $pc->brand->name ?? 'Custom Build' }}</span>
+                            <i class="bi bi-pc-display product-art-icon" style="font-size: 5rem;"></i>
+                        </div>
+                        <div class="col-md-7 d-flex flex-column">
+                            <div class="product-body-v3">
+                                <div class="product-category-sub">{{ $pc->subcategory->name ?? 'Desktop Tower' }}</div>
+                                <a href="{{ $detailUrl }}" class="product-title fs-5">{{ $pc->name }}</a>
+                                
+                                <div class="product-specs-pill-row mb-3">
+                                    @foreach($specParts as $spec)
+                                        <span class="spec-micro-pill">{{ $spec }}</span>
+                                    @endforeach
+                                </div>
 
-@push('scripts')
-<script>
-    document.addEventListener("DOMContentLoaded", () => {
-        const grid = document.getElementById("computers-grid");
-        if (!grid || typeof DataStore === 'undefined') return;
-
-        const pcs = DataStore.getProducts().filter(p => p.category === "Desktop Computers");
-
-        let html = "";
-        pcs.forEach(p => {
-            const discountPct = p.mrp ? Math.round(((p.mrp - p.sellingPrice) / p.mrp) * 100) : 0;
-            const specParts = (p.specs || "").split("|").map(s => s.trim()).filter(s => s.length > 0).slice(0, 3);
-            const pillsHtml = specParts.map(s => `<span class="spec-micro-pill">${s}</span>`).join("");
-            const detailUrl = `/product-details?id=${p.id}`;
-
-            html += `
-                <div class="col-md-6 col-lg-6">
-                    <div class="product-card-v3">
-                        <div class="row g-0 h-100">
-                            <div class="col-md-5 product-visual-art art-desktop h-100" style="min-height: 220px;">
-                                ${discountPct > 0 ? `<span class="product-badge-discount">${discountPct}% OFF</span>` : ''}
-                                <span class="product-badge-brand">${p.brand}</span>
-                                <i class="bi bi-pc-display product-art-icon" style="font-size: 5rem;"></i>
-                            </div>
-                            <div class="col-md-7 d-flex flex-column">
-                                <div class="product-body-v3">
-                                    <div class="product-category-sub">${p.subcategory}</div>
-                                    <a href="${detailUrl}" class="product-title fs-5">${p.name}</a>
-                                    
-                                    <div class="product-specs-pill-row mb-3">
-                                        ${pillsHtml}
+                                <div class="product-pricing mt-auto">
+                                    <div class="d-flex align-items-baseline justify-content-between mb-3">
+                                        <div>
+                                            <span class="price-current">₹{{ number_format($pc->selling_price, 2) }}</span>
+                                            @if($pc->mrp > $pc->selling_price)
+                                                <span class="price-mrp">₹{{ number_format($pc->mrp, 2) }}</span>
+                                            @endif
+                                        </div>
+                                        <span class="stock-pill stock-in">
+                                            <span class="pulse-dot me-1"></span> 
+                                            {{ $pc->stock > 0 ? $pc->stock . ' Units Ready' : 'Showroom Ready' }}
+                                        </span>
                                     </div>
-
-                                    <div class="product-pricing">
-                                        <div class="d-flex align-items-baseline justify-content-between mb-3">
-                                            <div>
-                                                <span class="price-current">${HOC_UTILS.formatINR(p.sellingPrice)}</span>
-                                                ${p.mrp ? `<span class="price-mrp">${HOC_UTILS.formatINR(p.mrp)}</span>` : ''}
-                                            </div>
-                                            <span class="stock-pill stock-in"><span class="pulse-dot me-1"></span> Ready in Showroom</span>
-                                        </div>
-                                        <div class="d-flex gap-2">
-                                            <button class="btn btn-primary btn-sm flex-grow-1 btn-add-enquiry" data-id="${p.id}">
-                                                <i class="bi bi-cart-plus me-1"></i> Add to Enquiry
-                                            </button>
-                                            <a href="${detailUrl}" class="btn btn-outline-secondary btn-sm">Details</a>
-                                        </div>
+                                    <div class="d-flex gap-2">
+                                        <button class="btn btn-primary btn-sm flex-grow-1 btn-add-enquiry" 
+                                                data-id="{{ $pc->id }}" 
+                                                data-name="{{ $pc->name }}" 
+                                                data-sku="{{ $pc->sku }}" 
+                                                data-price="{{ $pc->selling_price }}">
+                                            <i class="bi bi-cart-plus me-1"></i> Add to Enquiry
+                                        </button>
+                                        <a href="{{ $detailUrl }}" class="btn btn-outline-secondary btn-sm">Details</a>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
-            `;
-        });
-        grid.innerHTML = html;
-    });
-</script>
-@endpush
+            </div>
+        @empty
+            <div class="col-12 text-center py-5">
+                <i class="bi bi-pc-display display-3 text-muted mb-3 d-block"></i>
+                <h5>No Pre-Configured Computers in Catalog</h5>
+                <p class="text-muted small">Configure your custom rig using our interactive builder.</p>
+                <a href="{{ route('pc.builder') }}" class="btn btn-primary fw-bold">Open PC Builder</a>
+            </div>
+        @endforelse
+    </div>
+</main>
+@endsection

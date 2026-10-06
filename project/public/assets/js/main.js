@@ -243,12 +243,48 @@ const StoreApp = {
           notes: notes ? `Customer Note: ${notes}` : "Submitted via Hari Om Computer Online Portal"
         };
 
-        DataStore.saveQuotation(newQuote);
-        DataStore.clearEnquiryCart();
+        const csrfToken = document.querySelector('meta[name="csrf-token"]')?.getAttribute('content');
 
-        // Redirect to success page with quote number
-        sessionStorage.setItem("HOC_LATEST_ENQUIRY", JSON.stringify(newQuote));
-        window.location.href = "/quotation-success";
+        // Post directly to Laravel backend MySQL
+        fetch('/enquiry', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'Accept': 'application/json',
+            'X-CSRF-TOKEN': csrfToken || ''
+          },
+          body: JSON.stringify({
+            name: name,
+            mobile: mobile,
+            email: email,
+            company: company,
+            gstin: gstin,
+            address: address,
+            notes: notes,
+            items: cart
+          })
+        })
+        .then(res => res.json())
+        .then(data => {
+          if (data && data.success) {
+            newQuote.id = data.quotation_no || quoteNo;
+            DataStore.saveQuotation(newQuote);
+            DataStore.clearEnquiryCart();
+            sessionStorage.setItem("HOC_LATEST_ENQUIRY", JSON.stringify(newQuote));
+            window.location.href = data.redirect || `/quotation-success?quote=${encodeURIComponent(newQuote.id)}`;
+          } else {
+            DataStore.saveQuotation(newQuote);
+            DataStore.clearEnquiryCart();
+            sessionStorage.setItem("HOC_LATEST_ENQUIRY", JSON.stringify(newQuote));
+            window.location.href = `/quotation-success?quote=${encodeURIComponent(newQuote.id)}`;
+          }
+        })
+        .catch(() => {
+          DataStore.saveQuotation(newQuote);
+          DataStore.clearEnquiryCart();
+          sessionStorage.setItem("HOC_LATEST_ENQUIRY", JSON.stringify(newQuote));
+          window.location.href = `/quotation-success?quote=${encodeURIComponent(newQuote.id)}`;
+        });
       });
     }
 

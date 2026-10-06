@@ -1338,11 +1338,14 @@ const DataStore = {
   },
 
   getProducts() {
+    if (window.__SERVER_PRODUCTS__ && Array.isArray(window.__SERVER_PRODUCTS__) && window.__SERVER_PRODUCTS__.length > 0) {
+      return window.__SERVER_PRODUCTS__;
+    }
     return this.get().products || [];
   },
 
   getProductById(id) {
-    return this.getProducts().find(p => p.id === id);
+    return this.getProducts().find(p => String(p.id) === String(id));
   },
 
   getQuotations() {
