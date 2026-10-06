@@ -83,12 +83,12 @@
             <span class="navbar-toggler-icon"></span>
         </button>
 
-        <!-- Navbar Links -->
+            <!-- Navbar Links -->
         <div class="collapse navbar-collapse" id="storeNavbar">
-            <ul class="navbar-nav mx-xl-3 mb-2 mb-xl-0">
+            <ul class="navbar-nav ms-xl-3 mb-2 mb-xl-0">
                 <li class="nav-item">
                     <a class="nav-link-unimart {{ request()->routeIs('home') ? 'active' : '' }}" href="{{ route('home') }}">
-                        <i class="bi bi-house-door d-none d-xxl-inline me-1"></i> Home
+                        Home
                     </a>
                 </li>
                 <li class="nav-item">
@@ -121,14 +121,6 @@
                     <a class="nav-link-unimart {{ request()->routeIs('contact') ? 'active' : '' }}" href="{{ route('contact') }}">Contact</a>
                 </li>
             </ul>
-
-            <!-- Right Fast Info Badge -->
-            <div class="d-none d-xl-flex align-items-center ms-auto">
-                <span class="badge bg-white bg-opacity-15 text-white fw-bold px-3 py-2 rounded-pill border border-white border-opacity-20 d-flex align-items-center gap-2">
-                    <i class="bi bi-patch-check-fill text-warning"></i>
-                    <span>100% Genuine Hardware &bull; GST Input Credit</span>
-                </span>
-            </div>
         </div>
     </div>
 </nav>

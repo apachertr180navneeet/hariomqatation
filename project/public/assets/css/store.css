@@ -1499,19 +1499,22 @@ nav .flex-sm-fill > div:first-child p {
   font-weight: 800;
   font-size: 0.88rem;
   letter-spacing: 0.04em;
-  padding: 14px 24px;
+  padding: 13px 20px;
   min-width: 270px;
   border-radius: 0;
   display: inline-flex;
   align-items: center;
+  justify-content: space-between;
   border: none;
   box-shadow: none;
   transition: all 0.2s ease;
+  text-decoration: none !important;
 }
 .btn-department-trigger:hover,
 .btn-department-trigger:focus {
   background: #070e1b !important;
   color: #ffffff !important;
+  text-decoration: none !important;
 }
 .btn-department-trigger i {
   color: #38bdf8;
@@ -1535,6 +1538,7 @@ nav .flex-sm-fill > div:first-child p {
   color: #334155;
   padding: 10px 18px;
   transition: all 0.18s ease;
+  text-decoration: none !important;
 }
 .department-dropdown-menu .dropdown-item:hover {
   background-color: #f0f9ff;
@@ -1542,28 +1546,48 @@ nav .flex-sm-fill > div:first-child p {
   padding-left: 22px;
 }
 
+.navbar-unimart a,
+.navbar-unimart .nav-link,
+.nav-link-unimart {
+  text-decoration: none !important;
+}
+
 .nav-link-unimart {
   font-family: var(--hoc-font-body);
   font-weight: 600;
   font-size: 0.92rem;
   color: #ffffff !important;
-  padding: 14px 14px !important;
+  padding: 13px 18px !important;
+  margin: 0;
   display: inline-flex;
   align-items: center;
-  position: relative;
-  transition: all 0.2s ease;
+  border-radius: 0;
+  transition: background-color 0.15s ease, color 0.15s ease;
   white-space: nowrap;
+  text-decoration: none !important;
+  position: relative;
 }
-.nav-link-unimart:hover {
-  background: rgba(255, 255, 255, 0.14);
+.nav-link-unimart:hover,
+.nav-link-unimart:focus {
+  background: rgba(255, 255, 255, 0.15) !important;
   color: #ffffff !important;
-  border-radius: 6px;
+  text-decoration: none !important;
 }
 .nav-link-unimart.active {
-  background: rgba(255, 255, 255, 0.22);
+  background: rgba(0, 0, 0, 0.14) !important;
   color: #ffffff !important;
   font-weight: 700;
-  border-radius: 6px;
+  text-decoration: none !important;
+}
+.nav-link-unimart.active::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 18px;
+  right: 18px;
+  height: 3px;
+  background: #ffffff;
+  border-radius: 3px 3px 0 0;
 }
 
 .badge-nav-hot {
@@ -1573,9 +1597,10 @@ nav .flex-sm-fill > div:first-child p {
   font-weight: 800;
   padding: 2px 6px;
   border-radius: 4px;
-  margin-left: 5px;
+  margin-left: 6px;
   letter-spacing: 0.05em;
-  box-shadow: 0 2px 6px rgba(239, 68, 68, 0.4);
+  display: inline-block;
+  line-height: 1;
 }
 
 /* 4. Hero Section (3-Column Layout) */
