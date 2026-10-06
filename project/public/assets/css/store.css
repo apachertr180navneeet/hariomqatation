@@ -3434,7 +3434,39 @@ nav .flex-sm-fill > div:first-child p {
   border-radius: 4px;
 }
 
-
-
-
-
+/* Desktop & Laptop Box Render Styles */
+.hw-box-desktop {
+  background: linear-gradient(135deg, #020914 0%, #0c192c 60%, #004d80 100%);
+  color: #ffffff;
+  border: 1px solid #0284c7;
+}
+.hw-box-laptop {
+  background: linear-gradient(135deg, #090e1a 0%, #1e293b 60%, #334155 100%);
+  color: #ffffff;
+  border: 1px solid #475569;
+}
+.pcmart-spec-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  background: #f1f5f9;
+  color: #334155;
+  font-size: 0.72rem;
+  font-weight: 600;
+  padding: 3px 8px;
+  border-radius: 6px;
+  border: 1px solid #e2e8f0;
+}
+.pcmart-spec-chip i {
+  color: #0284c7;
+  font-size: 0.75rem;
+}
+.pcmart-desktop-card {
+  transition: all 0.25s ease;
+  border: 1px solid #e2e8f0;
+}
+.pcmart-desktop-card:hover {
+  transform: translateY(-4px);
+  border-color: #0284c7 !important;
+  box-shadow: 0 14px 28px -6px rgba(2, 132, 199, 0.16) !important;
+}
