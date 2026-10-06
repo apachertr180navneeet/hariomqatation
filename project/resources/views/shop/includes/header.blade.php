@@ -1,30 +1,111 @@
-@if (!empty($showPromoStrip))
-<!-- Top Flash Promo Strip -->
-<div class="promo-strip-top">
-    <div class="container d-flex justify-content-center align-items-center flex-wrap gap-2">
-        <span><span class="promo-badge-flash">SHOWROOM SPECIAL</span> ⚡ Get FREE RGB Gaming Keyboard & Mouse Combo on all Custom PC Builds above ₹50,000 this week!</span>
-    </div>
-</div>
-@endif
-
-<!-- Top Announcement Bar -->
-<div class="top-bar">
-    <div class="container d-flex justify-content-between align-items-center flex-wrap gap-2">
-        <div class="d-flex align-items-center gap-3">
-            <span><i class="bi bi-geo-alt-fill text-info me-1"></i> Plot No. 42, Station Road, Near Sojati Gate, Jodhpur, Rajasthan</span>
-            <span class="d-none d-md-inline">&bull;</span>
-            <span class="d-none d-md-inline"><i class="bi bi-telephone-fill text-info me-1"></i> +91 98290 12345 / 0291-2654321</span>
+<!-- Top Announcement Micro-Bar (Unimart Style) -->
+<div class="unimart-top-bar">
+    <div class="container d-flex justify-content-between align-items-center flex-wrap gap-2 py-1">
+        <div class="d-flex align-items-center gap-3 top-bar-left small">
+            <span><i class="bi bi-geo-alt-fill text-primary me-1"></i> Station Road, Near Sojati Gate, Jodhpur</span>
+            <span class="d-none d-md-inline text-muted opacity-50">|</span>
+            <span class="d-none d-md-inline"><i class="bi bi-clock-fill text-primary me-1"></i> 10:00 AM - 8:30 PM (Mon - Sat)</span>
         </div>
-        <div class="d-flex align-items-center gap-3">
-            <a href="{{ route('contact') }}"><i class="bi bi-clock me-1"></i> Showroom Hours: 10:00 AM - 8:30 PM</a>
-            <span>&bull;</span>
-            <span class="badge bg-primary text-white px-2 py-1">
+        <div class="d-flex align-items-center gap-3 top-bar-right small">
+            <a href="tel:+919829012345" class="top-bar-link d-none d-sm-inline">
+                <i class="bi bi-telephone-fill text-primary me-1"></i> +91 98290 12345
+            </a>
+            <span class="d-none d-sm-inline text-muted opacity-50">|</span>
+            <span class="badge bg-primary-subtle text-primary fw-bold px-2 py-1">
                 <i class="bi bi-patch-check-fill me-1"></i> Authorized Store
             </span>
-            <span>&bull;</span>
-            <a href="{{ route('admin.login') }}" class="text-white text-opacity-75 text-decoration-none small">
-                <i class="bi bi-shield-lock-fill text-warning me-1"></i> Admin ERP
+            <span class="text-muted opacity-50">|</span>
+            <a href="{{ route('enquiry') }}" class="top-bar-link">
+                <i class="bi bi-file-earmark-text text-primary me-1"></i> Track Quotation
+            </a>
+            <span class="text-muted opacity-50">|</span>
+            <a href="{{ route('admin.login') }}" class="top-bar-link">
+                <i class="bi bi-shield-lock-fill text-warning me-1"></i> Staff ERP
             </a>
         </div>
     </div>
 </div>
+
+<!-- Middle Header (Unimart Search Bar & Action Pills) -->
+<header class="unimart-middle-header py-3 bg-white">
+    <div class="container">
+        <div class="row align-items-center gy-3">
+            <!-- Brand Logo -->
+            <div class="col-12 col-md-auto d-flex justify-content-between align-items-center">
+                <a class="navbar-brand-logo d-flex align-items-center gap-3 text-decoration-none" href="{{ route('home') }}">
+                    <div class="brand-icon-box">
+                        <i class="bi bi-cpu"></i>
+                    </div>
+                    <div>
+                        <div class="brand-text-main">HARI OM COMPUTER</div>
+                        <div class="brand-tagline">Electronics & Hardware Megastore</div>
+                    </div>
+                </a>
+
+                <!-- Mobile Header Actions -->
+                <div class="d-flex align-items-center gap-2 d-lg-none">
+                    <a href="{{ route('enquiry') }}" class="btn btn-sm btn-outline-primary position-relative px-2 py-1" title="Enquiry Cart">
+                        <i class="bi bi-cart4 fs-5"></i>
+                        <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger enquiry-count-badge" style="display: none;">0</span>
+                    </a>
+                </div>
+            </div>
+
+            <!-- Centered Electronics Search Bar with Category Dropdown -->
+            <div class="col-12 col-lg">
+                <form class="unimart-search-bar" id="header-search-form" action="{{ route('products') }}" method="GET">
+                    <div class="search-category-dropdown">
+                        <select name="cat" id="header-search-category" class="search-cat-select">
+                            <option value="ALL">All Categories</option>
+                            <option value="Desktop Computers" {{ request('cat') == 'Desktop Computers' ? 'selected' : '' }}>Desktop PCs</option>
+                            <option value="Laptops" {{ request('cat') == 'Laptops' ? 'selected' : '' }}>Laptops</option>
+                            <option value="Components" {{ request('cat') == 'Components' ? 'selected' : '' }}>Components</option>
+                            <option value="Display & Monitors" {{ request('cat') == 'Display' || request('cat') == 'Display & Monitors' ? 'selected' : '' }}>Monitors</option>
+                            <option value="Accessories" {{ request('cat') == 'Accessories' ? 'selected' : '' }}>Accessories</option>
+                            <option value="Networking" {{ request('cat') == 'Networking' ? 'selected' : '' }}>Networking</option>
+                        </select>
+                    </div>
+                    <div class="search-input-field flex-grow-1 position-relative">
+                        <input type="text" name="search" id="header-search-input" class="search-kw-input" placeholder="Search laptops, gaming PCs, GPUs, processors..." value="{{ request('search') }}">
+                    </div>
+                    <button type="submit" class="search-action-btn">
+                        <i class="bi bi-search me-1"></i>
+                        <span class="d-none d-sm-inline">Search</span>
+                    </button>
+                </form>
+            </div>
+
+            <!-- Right Header Actions (Hotline, PC Builder, Cart) -->
+            <div class="col-auto d-none d-lg-flex align-items-center gap-3 ms-auto">
+                <!-- Hotline Call Pill -->
+                <a href="tel:+919829012345" class="header-action-pill text-decoration-none">
+                    <div class="action-icon-circle bg-light text-primary">
+                        <i class="bi bi-headset"></i>
+                    </div>
+                    <div class="action-text-box">
+                        <span class="action-micro-label">Customer Support</span>
+                        <strong class="action-main-val">+91 98290 12345</strong>
+                    </div>
+                </a>
+
+                <!-- PC Configurator Button -->
+                <a href="{{ route('pc.builder') }}" class="btn btn-outline-primary d-flex align-items-center gap-2 px-3 py-2 rounded-pill fw-semibold shadow-sm">
+                    <i class="bi bi-motherboard text-primary"></i>
+                    <span>PC Builder</span>
+                </a>
+
+                <!-- Cart / Quotation Pill -->
+                <a href="{{ route('enquiry') }}" class="header-action-pill header-cart-pill text-decoration-none">
+                    <div class="action-icon-circle bg-primary text-white position-relative shadow-sm">
+                        <i class="bi bi-cart3"></i>
+                        <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger enquiry-count-badge" style="display: none;">0</span>
+                    </div>
+                    <div class="action-text-box">
+                        <span class="action-micro-label">Quotation Cart</span>
+                        <strong class="action-main-val text-primary">Enquiry List</strong>
+                    </div>
+                </a>
+            </div>
+        </div>
+    </div>
+</header>

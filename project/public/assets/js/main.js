@@ -47,15 +47,17 @@ const StoreApp = {
       }
     });
 
-    // Header quick search
+    // Header quick search with category support (Unimart style)
     const headerSearch = document.getElementById("header-search-form");
     if (headerSearch) {
       headerSearch.addEventListener("submit", (e) => {
         e.preventDefault();
         const query = document.getElementById("header-search-input")?.value.trim();
-        if (query) {
-          window.location.href = `/products?search=${encodeURIComponent(query)}`;
-        }
+        const cat = document.getElementById("header-search-category")?.value;
+        const params = new URLSearchParams();
+        if (query) params.append("search", query);
+        if (cat && cat !== "ALL") params.append("cat", cat);
+        window.location.href = `/products${params.toString() ? '?' + params.toString() : ''}`;
       });
     }
   },

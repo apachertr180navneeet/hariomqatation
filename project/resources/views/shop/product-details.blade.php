@@ -20,7 +20,7 @@
         <!-- Product Gallery Side -->
         <div class="col-lg-5">
             <div class="card border-0 shadow-sm p-4 rounded-4 text-center bg-white">
-                <div class="d-flex align-items-center justify-content-center bg-light rounded-3 p-4 mb-3" style="min-height: 320px;">
+                <div class="d-flex align-items-center justify-content-center bg-light rounded-3 p-4 mb-3" id="prod-main-icon-container" style="min-height: 320px;">
                     <i id="prod-main-icon" class="bi bi-laptop text-secondary" style="font-size: 8rem;"></i>
                 </div>
                 <div class="row g-2 justify-content-center">
@@ -170,12 +170,22 @@
             document.getElementById("prod-discount-badge").style.display = "none";
         }
 
-        // Icon
+        // High-end category art presentation
         const mainIcon = document.getElementById("prod-main-icon");
-        if (p.category === 'Laptops') mainIcon.className = "bi bi-laptop text-secondary";
-        else if (p.category === 'Desktop Computers') mainIcon.className = "bi bi-pc-display text-primary";
-        else if (p.category === 'Display & Monitors') mainIcon.className = "bi bi-display text-secondary";
-        else mainIcon.className = "bi bi-cpu text-primary";
+        const iconBox = document.getElementById("prod-main-icon-container");
+        if (iconBox && mainIcon) {
+            let artCls = "art-cpu";
+            let artIcon = "bi-cpu";
+            if (p.category === 'Laptops') { artCls = "art-laptop"; artIcon = "bi-laptop"; }
+            else if (p.category === 'Desktop Computers') { artCls = "art-desktop"; artIcon = "bi-pc-display"; }
+            else if (p.category === 'Display & Monitors') { artCls = "art-monitor"; artIcon = "bi-display"; }
+            else if ((p.specs || "").toLowerCase().includes('rtx') || (p.specs || "").toLowerCase().includes('graphics')) { artCls = "art-gpu"; artIcon = "bi-gpu-card"; }
+            else if ((p.specs || "").toLowerCase().includes('ram') || (p.specs || "").toLowerCase().includes('ssd')) { artCls = "art-ram"; artIcon = "bi-device-ssd"; }
+
+            iconBox.className = `d-flex align-items-center justify-content-center rounded-4 p-4 mb-3 product-visual-art ${artCls}`;
+            mainIcon.className = `bi ${artIcon} product-art-icon`;
+            mainIcon.style.fontSize = "7.5rem";
+        }
 
         // Buttons
         document.getElementById("btn-details-add-enquiry").onclick = () => {
