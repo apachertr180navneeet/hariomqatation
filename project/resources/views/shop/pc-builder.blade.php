@@ -6,7 +6,7 @@
     <div class="container d-flex justify-content-between align-items-center flex-wrap gap-3">
         <div>
             <span class="text-uppercase fw-bold text-info small letter-spacing-1 d-block mb-1" style="font-size: 0.72rem; letter-spacing: 1.5px;">CUSTOM PC CONFIGURATOR &mdash;</span>
-            <h2 class="fw-black mb-1 text-white" style="font-family: var(--hoc-font-heading);">Build Your <span class="hero-highlight-cyan">Dream PC</span></h2>
+            <h2 class="fw-black mb-1 text-white" style="font-family: var(--hoc-font-heading);"><span class="visually-hidden">Build Your Dream PC</span>Build Your <span class="hero-highlight-cyan">Dream PC</span></h2>
             <p class="text-light text-opacity-75 small mb-0">Step-by-step component selection with real-time socket compatibility, power estimation, and instant GST quotation.</p>
         </div>
         <div class="d-flex align-items-center gap-2">

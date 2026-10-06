@@ -13,6 +13,7 @@
                     <span class="hero-tech-tag mb-2 d-inline-block text-uppercase fw-bold">CUSTOM PC BUILDER &mdash;</span>
                     
                     <h1 class="hero-main-title display-4 fw-black text-white mb-3">
+                        <span class="visually-hidden">HARI OM COMPUTER - Build Your Dream Computer</span>
                         BUILD YOUR <br>
                         <span class="hero-highlight-cyan">DREAM PC</span>
                     </h1>
