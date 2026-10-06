@@ -4,23 +4,24 @@
 
 @page {
   size: A4 portrait;
-  margin: 12mm 15mm 15mm 15mm;
+  margin: 10mm 12mm 12mm 12mm;
 }
 
 @media print {
   body {
     background: #ffffff !important;
-    color: #000000 !important;
-    font-size: 10pt;
+    color: #0f172a !important;
+    font-size: 9.5pt;
     line-height: 1.35;
     font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif !important;
-    -webkit-print-color-adjust: exact;
-    print-color-adjust: exact;
-    margin: 0;
-    padding: 0;
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
+    margin: 0 !important;
+    padding: 0 !important;
   }
 
   .no-print,
+  .preview-toolbar,
   .admin-sidebar,
   .admin-navbar,
   .navbar-hoc,
@@ -58,17 +59,17 @@
   }
 
   .table-print th {
-    background-color: #f1f5f9 !important;
-    color: #0f172a !important;
-    border: 1px solid #cbd5e1 !important;
+    background-color: #0f172a !important;
+    color: #ffffff !important;
+    border: 1px solid #0f172a !important;
     padding: 6px 8px !important;
-    font-size: 9pt !important;
+    font-size: 8.5pt !important;
   }
 
   .table-print td {
     border: 1px solid #cbd5e1 !important;
     padding: 6px 8px !important;
-    font-size: 9pt !important;
+    font-size: 8.5pt !important;
   }
 }
 
@@ -78,21 +79,22 @@
   width: 210mm;
   min-height: 297mm;
   margin: 20px auto;
-  padding: 15mm;
-  box-shadow: 0 4px 20px rgba(0,0,0,0.12);
-  border-radius: 4px;
+  padding: 12mm 15mm 15mm 15mm;
+  box-shadow: 0 10px 30px -5px rgba(15, 23, 42, 0.12), 0 0 1px 1px rgba(15, 23, 42, 0.05);
+  border-radius: 6px;
   color: #1e293b;
   position: relative;
   box-sizing: border-box;
 }
 
 .quotation-header {
-  border-bottom: 2px solid #0284c7;
-  padding-bottom: 12px;
+  border-bottom: 2px solid #e2e8f0;
+  padding-bottom: 14px;
   margin-bottom: 16px;
 }
 
 .quotation-logo-text {
+  font-family: 'Plus Jakarta Sans', sans-serif;
   font-size: 20pt;
   font-weight: 800;
   color: #0f172a;
@@ -102,39 +104,40 @@
 
 .quotation-logo-sub {
   color: #0284c7;
-  font-size: 9pt;
-  font-weight: 600;
+  font-size: 8.5pt;
+  font-weight: 700;
   text-transform: uppercase;
-  letter-spacing: 0.05em;
+  letter-spacing: 0.08em;
 }
 
 .quotation-title-badge {
-  background-color: #0284c7;
-  color: white;
-  padding: 6px 16px;
-  font-size: 14pt;
-  font-weight: 700;
+  background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+  color: #ffffff;
+  padding: 8px 18px;
+  font-size: 13pt;
+  font-weight: 800;
   letter-spacing: 0.05em;
   display: inline-block;
-  border-radius: 4px;
+  border-radius: 6px;
 }
 
 .info-box {
   background: #f8fafc;
   border: 1px solid #e2e8f0;
-  border-radius: 6px;
-  padding: 10px 14px;
-  font-size: 9pt;
+  border-radius: 8px;
+  padding: 12px 14px;
+  font-size: 8.8pt;
 }
 
 .info-title {
+  font-family: 'Plus Jakarta Sans', sans-serif;
   font-weight: 700;
-  font-size: 9pt;
-  color: #475569;
+  font-size: 8.4pt;
+  color: #0369a1;
   text-transform: uppercase;
-  margin-bottom: 4px;
+  margin-bottom: 6px;
   border-bottom: 1px solid #e2e8f0;
-  padding-bottom: 3px;
+  padding-bottom: 4px;
 }
 
 .table-print {
@@ -145,19 +148,22 @@
 }
 
 .table-print th {
-  background-color: #f1f5f9;
-  color: #0f172a;
-  border: 1px solid #cbd5e1;
-  padding: 6px 8px;
+  background-color: #0f172a;
+  color: #ffffff;
+  border: 1px solid #0f172a;
+  padding: 8px 10px;
+  font-family: 'Plus Jakarta Sans', sans-serif;
   font-weight: 700;
   text-align: left;
-  font-size: 9pt;
+  font-size: 8.2pt;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
 }
 
 .table-print td {
   border: 1px solid #e2e8f0;
-  padding: 6px 8px;
-  font-size: 9pt;
+  padding: 8px 10px;
+  font-size: 8.8pt;
 }
 
 .table-print .text-end {
@@ -169,8 +175,8 @@
 
 .terms-box {
   font-size: 8pt;
-  color: #64748b;
-  line-height: 1.4;
+  color: #475569;
+  line-height: 1.45;
   border: 1px dashed #cbd5e1;
   padding: 10px;
   border-radius: 6px;
@@ -178,11 +184,11 @@
 }
 
 .signature-line {
-  border-top: 1px solid #0f172a;
+  border-top: 1.5px solid #0f172a;
   width: 180px;
   margin-top: 45px;
-  padding-top: 4px;
+  padding-top: 5px;
   text-align: center;
   font-size: 8.5pt;
-  font-weight: 600;
+  font-weight: 700;
 }
