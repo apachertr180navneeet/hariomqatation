@@ -2,407 +2,221 @@
 
 @section('content')
 <!-- =========================================================================
-     Mobile Horizontal Category Scroll Strip (App-Style 1-Tap Browsing for Mobile)
+     1. HERO SHOWCASE SECTION ("BUILD YOUR DREAM PC")
      ========================================================================= -->
-<div class="mobile-cat-scroll-strip d-lg-none py-2 bg-white border-bottom">
+<section class="pcmart-hero-section py-4 py-lg-5">
     <div class="container">
-        <div class="cat-chips-scroll-container">
-            <a href="{{ route('products') }}" class="cat-chip-pill active">
-                <i class="bi bi-grid-fill text-primary"></i> All Items
-            </a>
-            <a href="{{ route('laptops') }}" class="cat-chip-pill">
-                <i class="bi bi-laptop text-primary"></i> Laptops
-            </a>
-            <a href="{{ route('computers') }}" class="cat-chip-pill">
-                <i class="bi bi-pc-display text-info"></i> Desktops
-            </a>
-            <a href="{{ route('pc.builder') }}" class="cat-chip-pill chip-pill-hot">
-                <i class="bi bi-motherboard text-danger"></i> PC Builder <span class="badge bg-danger text-white ms-1" style="font-size: 0.6rem;">HOT</span>
-            </a>
-            <a href="{{ route('components') }}" class="cat-chip-pill">
-                <i class="bi bi-gpu-card text-warning"></i> RTX GPUs
-            </a>
-            <a href="{{ route('components') }}" class="cat-chip-pill">
-                <i class="bi bi-cpu text-success"></i> CPUs
-            </a>
-            <a href="{{ route('components') }}" class="cat-chip-pill">
-                <i class="bi bi-memory text-primary"></i> DDR5 RAM
-            </a>
-            <a href="{{ route('products', ['cat' => 'Display']) }}" class="cat-chip-pill">
-                <i class="bi bi-display text-info"></i> Monitors
-            </a>
-            <a href="{{ route('products', ['cat' => 'Accessories']) }}" class="cat-chip-pill">
-                <i class="bi bi-keyboard text-dark"></i> Accessories
-            </a>
-        </div>
-    </div>
-</div>
+        <div class="pcmart-hero-card position-relative overflow-hidden rounded-4">
+            <div class="row align-items-center g-4 position-relative" style="z-index: 2;">
+                <!-- Left Column: Title, Subtitle, CTA Buttons & 4 Feature Badges -->
+                <div class="col-lg-5 col-12 text-white ps-lg-5 py-4">
+                    <span class="hero-tech-tag mb-2 d-inline-block text-uppercase fw-bold">CUSTOM PC BUILDER &mdash;</span>
+                    
+                    <h1 class="hero-main-title display-4 fw-black text-white mb-3">
+                        BUILD YOUR <br>
+                        <span class="hero-highlight-cyan">DREAM PC</span>
+                    </h1>
 
-<!-- =========================================================================
-     Unimart Home Electronics - Hero Showcase Section (3-Column Layout)
-     ========================================================================= -->
-<section class="unimart-hero-section py-3 py-md-4">
-    <div class="container">
-        <div class="row g-3 align-items-stretch">
-            <!-- Left Column: Vertical Category Menu (Desktop only) -->
-            <div class="col-lg-3 d-none d-lg-block">
-                <div class="unimart-category-sidebar">
-                    <div class="category-sidebar-header">
-                        <i class="bi bi-list-ul me-2"></i>
-                        <span>All Categories</span>
-                    </div>
-                    <ul class="category-sidebar-list">
-                        <li>
-                            <a href="{{ route('laptops') }}" class="sidebar-cat-link">
-                                <span class="d-flex align-items-center gap-2">
-                                    <i class="bi bi-laptop text-primary"></i>
-                                    <span>Laptops & Ultrabooks</span>
-                                </span>
-                                <i class="bi bi-chevron-right text-muted small"></i>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="{{ route('computers') }}" class="sidebar-cat-link">
-                                <span class="d-flex align-items-center gap-2">
-                                    <i class="bi bi-pc-display text-info"></i>
-                                    <span>Desktop Computers</span>
-                                </span>
-                                <i class="bi bi-chevron-right text-muted small"></i>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="{{ route('pc.builder') }}" class="sidebar-cat-link active-link">
-                                <span class="d-flex align-items-center gap-2">
-                                    <i class="bi bi-motherboard text-danger"></i>
-                                    <span>Custom Gaming Rigs</span>
-                                </span>
-                                <span class="badge bg-danger text-white micro-badge">HOT</span>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="{{ route('components') }}" class="sidebar-cat-link">
-                                <span class="d-flex align-items-center gap-2">
-                                    <i class="bi bi-cpu text-success"></i>
-                                    <span>Processors & CPUs</span>
-                                </span>
-                                <i class="bi bi-chevron-right text-muted small"></i>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="{{ route('components') }}" class="sidebar-cat-link">
-                                <span class="d-flex align-items-center gap-2">
-                                    <i class="bi bi-gpu-card text-warning"></i>
-                                    <span>Graphics Cards (RTX)</span>
-                                </span>
-                                <i class="bi bi-chevron-right text-muted small"></i>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="{{ route('components') }}" class="sidebar-cat-link">
-                                <span class="d-flex align-items-center gap-2">
-                                    <i class="bi bi-memory text-primary"></i>
-                                    <span>Motherboards & RAM</span>
-                                </span>
-                                <i class="bi bi-chevron-right text-muted small"></i>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="{{ route('components') }}" class="sidebar-cat-link">
-                                <span class="d-flex align-items-center gap-2">
-                                    <i class="bi bi-device-ssd text-secondary"></i>
-                                    <span>NVMe SSDs & Storage</span>
-                                </span>
-                                <i class="bi bi-chevron-right text-muted small"></i>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="{{ route('products', ['cat' => 'Display']) }}" class="sidebar-cat-link">
-                                <span class="d-flex align-items-center gap-2">
-                                    <i class="bi bi-display text-info"></i>
-                                    <span>Gaming & 4K Monitors</span>
-                                </span>
-                                <i class="bi bi-chevron-right text-muted small"></i>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="{{ route('products', ['cat' => 'Accessories']) }}" class="sidebar-cat-link">
-                                <span class="d-flex align-items-center gap-2">
-                                    <i class="bi bi-keyboard text-dark"></i>
-                                    <span>Keyboards & Mice</span>
-                                </span>
-                                <i class="bi bi-chevron-right text-muted small"></i>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="{{ route('products', ['cat' => 'Networking']) }}" class="sidebar-cat-link">
-                                <span class="d-flex align-items-center gap-2">
-                                    <i class="bi bi-router text-primary"></i>
-                                    <span>WiFi Routers & Switches</span>
-                                </span>
-                                <i class="bi bi-chevron-right text-muted small"></i>
-                            </a>
-                        </li>
-                    </ul>
-                    <div class="category-sidebar-footer">
-                        <a href="{{ route('products') }}" class="d-flex align-items-center justify-content-between text-decoration-none">
-                            <span class="fw-bold small text-primary"><i class="bi bi-grid me-1"></i> View All 500+ Items</span>
-                            <i class="bi bi-arrow-right text-primary small"></i>
+                    <p class="hero-subtitle text-light text-opacity-80 mb-4 lead">
+                        Choose components. Check compatibility. Get the best performance for your budget.
+                    </p>
+
+                    <div class="d-flex flex-wrap align-items-center gap-3 mb-4">
+                        <a href="{{ route('pc.builder') }}" class="btn btn-primary btn-lg rounded-pill px-4 py-3 fw-bold d-flex align-items-center gap-2 shadow-lg">
+                            <span>Start Building</span>
+                            <i class="bi bi-arrow-right"></i>
+                        </a>
+                        <a href="#popular-pc-builds" class="btn btn-outline-light btn-lg rounded-pill px-4 py-3 fw-semibold">
+                            View Popular Builds
                         </a>
                     </div>
-                </div>
-            </div>
 
-            <!-- Center Column: Main Hero Electronics Showcase Banner -->
-            <div class="col-lg-6 col-12">
-                <div class="unimart-hero-banner position-relative">
-                    <div class="row align-items-center h-100 position-relative" style="z-index: 2;">
-                        <!-- Text Content -->
-                        <div class="col-12 col-md-7 pe-md-1">
-                            <div class="d-flex align-items-center gap-2 mb-2">
-                                <span class="badge bg-warning text-dark fw-bold px-2 py-1 text-uppercase" style="font-size: 0.72rem;">
-                                    <i class="bi bi-lightning-charge-fill me-1"></i> 2024 Tech Lineup
-                                </span>
-                                <span class="badge bg-info-subtle text-info fw-semibold px-2 py-1" style="font-size: 0.72rem;">
-                                    <i class="bi bi-patch-check-fill me-1"></i> Authorized Store
-                                </span>
-                            </div>
-
-                            <h1 class="hero-banner-title mb-2">
-                                Custom Gaming & <br>
-                                <span class="glow-cyan-text">Workstation PCs</span>
-                            </h1>
-
-                            <p class="hero-banner-desc mb-3 small">
-                                Assembled with 14th Gen Intel Core & NVIDIA RTX 40-Series. Stress-tested with Arctic MX paste & clean routing in Jodhpur.
-                            </p>
-
-                            <div class="d-flex flex-wrap gap-2 mb-3">
-                                <span class="hero-spec-pill"><i class="bi bi-cpu text-info"></i> Intel 14th Gen</span>
-                                <span class="hero-spec-pill"><i class="bi bi-gpu-card text-success"></i> RTX 4060/4070</span>
-                                <span class="hero-spec-pill"><i class="bi bi-memory text-warning"></i> 32GB DDR5</span>
-                            </div>
-
-                            <div class="d-flex align-items-baseline gap-2 mb-3">
-                                <span class="text-light text-opacity-75 small">Custom builds from</span>
-                                <strong class="fs-4 text-cyan fw-bold">₹28,990</strong>
-                                <span class="badge bg-danger-subtle text-danger small">18% GST Inc.</span>
-                            </div>
-
-                            <div class="d-flex flex-wrap align-items-center gap-2">
-                                <a href="{{ route('pc.builder') }}" class="btn btn-primary fw-bold px-3 py-2 rounded-pill shadow-sm d-flex align-items-center gap-2">
-                                    <i class="bi bi-motherboard"></i>
-                                    <span>Build Custom PC</span>
-                                </a>
-                                <a href="{{ route('computers') }}" class="btn btn-outline-light btn-sm fw-bold px-3 py-2 rounded-pill">
-                                    Ready Rigs <i class="bi bi-chevron-right ms-1"></i>
-                                </a>
-                            </div>
+                    <!-- 4 Trust / Spec Metrics below buttons -->
+                    <div class="row g-3 pt-3 border-top border-white border-opacity-15 small">
+                        <div class="col-6 d-flex align-items-center gap-2">
+                            <i class="bi bi-patch-check-fill text-info fs-5"></i>
+                            <span class="text-light text-opacity-90">100% Compatible Parts</span>
                         </div>
-
-                        <!-- Product Showcase Image -->
-                        <div class="col-12 col-md-5 text-center mt-3 mt-md-0">
-                            <div class="hero-visual-img-wrapper position-relative">
-                                <img src="{{ asset('assets/images/hero_gaming_pc.jpg') }}" alt="Custom Gaming PC Rig" class="img-fluid rounded-4 shadow-lg hero-hardware-img">
-                                <div class="hero-img-badge mt-2">
-                                    <span class="badge bg-dark bg-opacity-75 text-cyan border border-info border-opacity-25 rounded-pill px-3 py-1 shadow small">
-                                        <i class="bi bi-water me-1"></i> Liquid Cooling Loop
-                                    </span>
-                                </div>
-                            </div>
+                        <div class="col-6 d-flex align-items-center gap-2">
+                            <i class="bi bi-calculator-fill text-info fs-5"></i>
+                            <span class="text-light text-opacity-90">Real-time Price Calculation</span>
+                        </div>
+                        <div class="col-6 d-flex align-items-center gap-2">
+                            <i class="bi bi-lightning-charge-fill text-info fs-5"></i>
+                            <span class="text-light text-opacity-90">Power Consumption Estimation</span>
+                        </div>
+                        <div class="col-6 d-flex align-items-center gap-2">
+                            <i class="bi bi-share-fill text-info fs-5"></i>
+                            <span class="text-light text-opacity-90">Save & Share Your Build</span>
                         </div>
                     </div>
-
-                    <!-- Ambient Glow Effect -->
-                    <div class="hero-ambient-circle"></div>
                 </div>
-            </div>
 
-            <!-- Right Column: Dual Promotional Cards (Responsive Grid) -->
-            <div class="col-lg-3 col-12">
-                <div class="row g-3 h-100">
-                    <!-- Promo Card 1: Laptops -->
-                    <div class="col-12 col-md-6 col-lg-12">
-                        <div class="unimart-promo-card promo-card-laptops h-100 position-relative overflow-hidden">
-                            <div class="row align-items-center g-2 h-100">
-                                <div class="col-7">
-                                    <span class="badge bg-danger text-white mb-2 font-monospace" style="font-size: 0.68rem;">SAVE UP TO 30%</span>
-                                    <h5 class="fw-bold text-white mb-1" style="font-size: 1.05rem;">Gaming & Business Laptops</h5>
-                                    <p class="text-light text-opacity-75 small mb-2" style="font-size: 0.74rem;">ASUS, Dell & HP from ₹38,990.</p>
-                                    <a href="{{ route('laptops') }}" class="btn btn-sm btn-light fw-bold rounded-pill px-3 py-1" style="font-size: 0.78rem;">
-                                        Shop Laptops <i class="bi bi-arrow-right ms-1"></i>
-                                    </a>
-                                </div>
-                                <div class="col-5 text-center">
-                                    <img src="{{ asset('assets/images/promo_laptop.jpg') }}" alt="Laptops" class="img-fluid rounded-3 promo-img-thumb shadow">
-                                </div>
-                            </div>
-                        </div>
+                <!-- Center Column: Photorealistic Liquid-Cooled RGB Rig -->
+                <div class="col-lg-4 col-12 text-center py-3">
+                    <div class="hero-rig-wrapper position-relative">
+                        <img src="{{ asset('assets/images/hero_gaming_pc.jpg') }}" alt="Custom Gaming PC Rig" class="img-fluid rounded-4 shadow-2xl hero-chassis-image">
                     </div>
+                </div>
 
-                    <!-- Promo Card 2: PC Configurator -->
-                    <div class="col-12 col-md-6 col-lg-12">
-                        <div class="unimart-promo-card promo-card-builder h-100 position-relative overflow-hidden">
-                            <div class="row align-items-center g-2 h-100">
-                                <div class="col-7">
-                                    <span class="badge bg-primary text-white mb-2 font-monospace border border-white border-opacity-25" style="font-size: 0.68rem;">INSTANT GST QUOTE</span>
-                                    <h5 class="fw-bold text-white mb-1" style="font-size: 1.05rem;">Custom PC Configurator</h5>
-                                    <p class="text-light text-opacity-75 small mb-2" style="font-size: 0.74rem;">Real-time socket verification.</p>
-                                    <a href="{{ route('pc.builder') }}" class="btn btn-sm btn-primary fw-bold rounded-pill px-3 py-1 border border-white border-opacity-25" style="font-size: 0.78rem;">
-                                        Launch Builder <i class="bi bi-sliders ms-1"></i>
-                                    </a>
+                <!-- Right Column: Interactive Hardware Checklist Stack (Reference Design) -->
+                <div class="col-lg-3 col-12 pe-lg-5 py-3">
+                    <div class="hardware-stack-card p-3 rounded-4 bg-dark bg-opacity-75 border border-white border-opacity-15">
+                        <div class="hardware-stack-list d-flex flex-column gap-2">
+                            <!-- CPU -->
+                            <a href="{{ route('components', ['sub' => 'Processor']) }}" class="stack-item d-flex align-items-center gap-3 p-2 rounded-3 text-decoration-none">
+                                <div class="stack-icon-box"><i class="bi bi-cpu text-info fs-5"></i></div>
+                                <div>
+                                    <div class="stack-item-title text-white fw-bold">CPU</div>
+                                    <div class="stack-item-sub text-muted small">Intel / AMD</div>
                                 </div>
-                                <div class="col-5 text-center">
-                                    <img src="{{ asset('assets/images/promo_builder.jpg') }}" alt="PC Builder" class="img-fluid rounded-3 promo-img-thumb shadow">
+                            </a>
+                            <!-- GPU -->
+                            <a href="{{ route('components', ['sub' => 'Graphics Card']) }}" class="stack-item d-flex align-items-center gap-3 p-2 rounded-3 text-decoration-none">
+                                <div class="stack-icon-box"><i class="bi bi-gpu-card text-warning fs-5"></i></div>
+                                <div>
+                                    <div class="stack-item-title text-white fw-bold">GPU</div>
+                                    <div class="stack-item-sub text-muted small">NVIDIA / AMD</div>
                                 </div>
-                            </div>
+                            </a>
+                            <!-- RAM -->
+                            <a href="{{ route('components', ['sub' => 'RAM']) }}" class="stack-item d-flex align-items-center gap-3 p-2 rounded-3 text-decoration-none">
+                                <div class="stack-icon-box"><i class="bi bi-memory text-primary fs-5"></i></div>
+                                <div>
+                                    <div class="stack-item-title text-white fw-bold">RAM</div>
+                                    <div class="stack-item-sub text-muted small">DDR4 / DDR5</div>
+                                </div>
+                            </a>
+                            <!-- Storage -->
+                            <a href="{{ route('components', ['sub' => 'SSD']) }}" class="stack-item d-flex align-items-center gap-3 p-2 rounded-3 text-decoration-none">
+                                <div class="stack-icon-box"><i class="bi bi-device-ssd text-secondary fs-5"></i></div>
+                                <div>
+                                    <div class="stack-item-title text-white fw-bold">Storage</div>
+                                    <div class="stack-item-sub text-muted small">NVMe / SSD / HDD</div>
+                                </div>
+                            </a>
+                            <!-- Power Supply -->
+                            <a href="{{ route('components', ['sub' => 'SMPS/PSU']) }}" class="stack-item d-flex align-items-center gap-3 p-2 rounded-3 text-decoration-none">
+                                <div class="stack-icon-box"><i class="bi bi-plug text-danger fs-5"></i></div>
+                                <div>
+                                    <div class="stack-item-title text-white fw-bold">Power Supply</div>
+                                    <div class="stack-item-sub text-muted small">ATX / SFX</div>
+                                </div>
+                            </a>
+                            <!-- Cabinet -->
+                            <a href="{{ route('computers') }}" class="stack-item d-flex align-items-center gap-3 p-2 rounded-3 text-decoration-none">
+                                <div class="stack-icon-box"><i class="bi bi-pc fs-5 text-info"></i></div>
+                                <div>
+                                    <div class="stack-item-title text-white fw-bold">Cabinet</div>
+                                    <div class="stack-item-sub text-muted small">ATX / mATX / ITX</div>
+                                </div>
+                            </a>
                         </div>
                     </div>
                 </div>
             </div>
+
+            <!-- Background Ambient Glow Circles -->
+            <div class="hero-glow-blob blob-1"></div>
+            <div class="hero-glow-blob blob-2"></div>
         </div>
     </div>
 </section>
 
 <!-- =========================================================================
-     Unimart 4-Column Trust & Service Badges Strip
+     2. HARDWARE CATEGORY ICON STRIP (10 DEPARTMENTS - REFERENCE DESIGN)
      ========================================================================= -->
-<section class="py-3 bg-white border-top border-bottom">
+<section class="py-4 bg-white border-bottom">
     <div class="container">
-        <div class="row g-3">
-            <div class="col-6 col-lg-3">
-                <div class="service-feature-card">
-                    <div class="service-icon-box bg-primary-subtle text-primary">
-                        <i class="bi bi-truck"></i>
+        <div class="row row-cols-2 row-cols-sm-3 row-cols-md-5 row-cols-lg-10 g-3 text-center">
+            <!-- 1. Processors -->
+            <div class="col">
+                <a href="{{ route('components', ['sub' => 'Processor']) }}" class="pcmart-category-pill text-decoration-none d-flex flex-column align-items-center">
+                    <div class="category-pill-box bg-light border rounded-3 p-3 mb-2">
+                        <i class="bi bi-cpu fs-2 text-primary"></i>
                     </div>
-                    <div>
-                        <div class="service-title">Showroom Pickup & Courier</div>
-                        <div class="service-desc">Same-day pickup in Jodhpur or express dispatch</div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-6 col-lg-3">
-                <div class="service-feature-card">
-                    <div class="service-icon-box bg-success-subtle text-success">
-                        <i class="bi bi-patch-check-fill"></i>
-                    </div>
-                    <div>
-                        <div class="service-title">100% Genuine Hardware</div>
-                        <div class="service-desc">Official warranty from authorized distributors</div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-6 col-lg-3">
-                <div class="service-feature-card">
-                    <div class="service-icon-box bg-warning-subtle text-warning">
-                        <i class="bi bi-receipt-cutoff"></i>
-                    </div>
-                    <div>
-                        <div class="service-title">18% GST Input Credit</div>
-                        <div class="service-desc">Verified B2B tax invoice for companies & labs</div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-6 col-lg-3">
-                <div class="service-feature-card">
-                    <div class="service-icon-box bg-info-subtle text-info">
-                        <i class="bi bi-headset"></i>
-                    </div>
-                    <div>
-                        <div class="service-title">In-House Tech Engineers</div>
-                        <div class="service-desc">Free bench testing, assembly & lifetime support</div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
-
-<!-- =========================================================================
-     Shop by Categories (Visual Grid)
-     ========================================================================= -->
-<section class="py-5 bg-light">
-    <div class="container">
-        <div class="d-flex justify-content-between align-items-end mb-4">
-            <div>
-                <span class="text-primary text-uppercase fw-bold small">Explore Hardware</span>
-                <h2 class="fw-bold mb-0">Popular Electronics Categories</h2>
-            </div>
-            <a href="{{ route('products') }}" class="text-primary fw-bold text-decoration-none">
-                View All Categories <i class="bi bi-arrow-right"></i>
-            </a>
-        </div>
-
-        <div class="row g-3 g-md-4">
-            <div class="col-6 col-md-4 col-lg-3">
-                <a href="{{ route('laptops') }}" class="category-card">
-                    <div class="category-icon-wrapper" style="background: linear-gradient(135deg, #eff6ff 0%, #dbeafe 100%); color: #0284c7;">
-                        <i class="bi bi-laptop"></i>
-                    </div>
-                    <div class="category-card-title">Laptops & Ultrabooks</div>
-                    <div class="category-card-count">Gaming, Student & Business</div>
+                    <span class="category-pill-label text-dark fw-semibold small">Processors</span>
                 </a>
             </div>
-            <div class="col-6 col-md-4 col-lg-3">
-                <a href="{{ route('computers') }}" class="category-card">
-                    <div class="category-icon-wrapper" style="background: linear-gradient(135deg, #f5f3ff 0%, #ede9fe 100%); color: #6366f1;">
-                        <i class="bi bi-pc-display"></i>
+            <!-- 2. Graphics Cards -->
+            <div class="col">
+                <a href="{{ route('components', ['sub' => 'Graphics Card']) }}" class="pcmart-category-pill text-decoration-none d-flex flex-column align-items-center">
+                    <div class="category-pill-box bg-light border rounded-3 p-3 mb-2">
+                        <i class="bi bi-gpu-card fs-2 text-warning"></i>
                     </div>
-                    <div class="category-card-title">Desktop Computers</div>
-                    <div class="category-card-count">Office, Workstation & Gaming</div>
+                    <span class="category-pill-label text-dark fw-semibold small">Graphics Cards</span>
                 </a>
             </div>
-            <div class="col-6 col-md-4 col-lg-3">
-                <a href="{{ route('components') }}" class="category-card">
-                    <div class="category-icon-wrapper" style="background: linear-gradient(135deg, #ecfdf5 0%, #d1fae5 100%); color: #059669;">
-                        <i class="bi bi-cpu"></i>
+            <!-- 3. Motherboards -->
+            <div class="col">
+                <a href="{{ route('components', ['sub' => 'Motherboard']) }}" class="pcmart-category-pill text-decoration-none d-flex flex-column align-items-center">
+                    <div class="category-pill-box bg-light border rounded-3 p-3 mb-2">
+                        <i class="bi bi-motherboard fs-2 text-info"></i>
                     </div>
-                    <div class="category-card-title">Processors & CPUs</div>
-                    <div class="category-card-count">Intel 14th Gen & AMD Ryzen</div>
+                    <span class="category-pill-label text-dark fw-semibold small">Motherboards</span>
                 </a>
             </div>
-            <div class="col-6 col-md-4 col-lg-3">
-                <a href="{{ route('components') }}" class="category-card">
-                    <div class="category-icon-wrapper" style="background: linear-gradient(135deg, #fffbeb 0%, #fef3c7 100%); color: #d97706;">
-                        <i class="bi bi-gpu-card"></i>
+            <!-- 4. RAM Memory -->
+            <div class="col">
+                <a href="{{ route('components', ['sub' => 'RAM']) }}" class="pcmart-category-pill text-decoration-none d-flex flex-column align-items-center">
+                    <div class="category-pill-box bg-light border rounded-3 p-3 mb-2">
+                        <i class="bi bi-memory fs-2 text-success"></i>
                     </div>
-                    <div class="category-card-title">Graphics Cards</div>
-                    <div class="category-card-count">NVIDIA RTX 4000 Series</div>
+                    <span class="category-pill-label text-dark fw-semibold small">RAM Memory</span>
                 </a>
             </div>
-            <div class="col-6 col-md-4 col-lg-3">
-                <a href="{{ route('components') }}" class="category-card">
-                    <div class="category-icon-wrapper" style="background: linear-gradient(135deg, #faf5ff 0%, #f3e8ff 100%); color: #9333ea;">
-                        <i class="bi bi-device-ssd"></i>
+            <!-- 5. Storage -->
+            <div class="col">
+                <a href="{{ route('components', ['sub' => 'SSD']) }}" class="pcmart-category-pill text-decoration-none d-flex flex-column align-items-center">
+                    <div class="category-pill-box bg-light border rounded-3 p-3 mb-2">
+                        <i class="bi bi-device-ssd fs-2 text-secondary"></i>
                     </div>
-                    <div class="category-card-title">RAM & Storage</div>
-                    <div class="category-card-count">NVMe Gen4 SSDs & DDR5</div>
+                    <span class="category-pill-label text-dark fw-semibold small">Storage (SSD/HDD)</span>
                 </a>
             </div>
-            <div class="col-6 col-md-4 col-lg-3">
-                <a href="{{ route('products', ['cat' => 'Display']) }}" class="category-card">
-                    <div class="category-icon-wrapper" style="background: linear-gradient(135deg, #ecfeff 0%, #cffafe 100%); color: #0891b2;">
-                        <i class="bi bi-display"></i>
+            <!-- 6. Power Supply -->
+            <div class="col">
+                <a href="{{ route('components', ['sub' => 'SMPS/PSU']) }}" class="pcmart-category-pill text-decoration-none d-flex flex-column align-items-center">
+                    <div class="category-pill-box bg-light border rounded-3 p-3 mb-2">
+                        <i class="bi bi-plug fs-2 text-danger"></i>
                     </div>
-                    <div class="category-card-title">Monitors & LED</div>
-                    <div class="category-card-count">Gaming & 4K IPS Panels</div>
+                    <span class="category-pill-label text-dark fw-semibold small">Power Supply</span>
                 </a>
             </div>
-            <div class="col-6 col-md-4 col-lg-3">
-                <a href="{{ route('products', ['cat' => 'Accessories']) }}" class="category-card">
-                    <div class="category-icon-wrapper" style="background: linear-gradient(135deg, #f1f5f9 0%, #e2e8f0 100%); color: #334155;">
-                        <i class="bi bi-keyboard"></i>
+            <!-- 7. PC Cabinets -->
+            <div class="col">
+                <a href="{{ route('computers') }}" class="pcmart-category-pill text-decoration-none d-flex flex-column align-items-center">
+                    <div class="category-pill-box bg-light border rounded-3 p-3 mb-2">
+                        <i class="bi bi-pc fs-2 text-dark"></i>
                     </div>
-                    <div class="category-card-title">Accessories</div>
-                    <div class="category-card-count">Keyboards, Mouse & UPS</div>
+                    <span class="category-pill-label text-dark fw-semibold small">PC Cabinets</span>
                 </a>
             </div>
-            <div class="col-6 col-md-4 col-lg-3">
-                <a href="{{ route('products', ['cat' => 'Networking']) }}" class="category-card">
-                    <div class="category-icon-wrapper" style="background: linear-gradient(135deg, #eff6ff 0%, #dbeafe 100%); color: #2563eb;">
-                        <i class="bi bi-router"></i>
+            <!-- 8. CPU Coolers -->
+            <div class="col">
+                <a href="{{ route('components') }}" class="pcmart-category-pill text-decoration-none d-flex flex-column align-items-center">
+                    <div class="category-pill-box bg-light border rounded-3 p-3 mb-2">
+                        <i class="bi bi-fan fs-2 text-info"></i>
                     </div>
-                    <div class="category-card-title">Networking</div>
-                    <div class="category-card-count">Routers, Switches & WiFi</div>
+                    <span class="category-pill-label text-dark fw-semibold small">CPU Coolers</span>
+                </a>
+            </div>
+            <!-- 9. Monitors -->
+            <div class="col">
+                <a href="{{ route('products', ['cat' => 'Display']) }}" class="pcmart-category-pill text-decoration-none d-flex flex-column align-items-center">
+                    <div class="category-pill-box bg-light border rounded-3 p-3 mb-2">
+                        <i class="bi bi-display fs-2 text-primary"></i>
+                    </div>
+                    <span class="category-pill-label text-dark fw-semibold small">Monitors</span>
+                </a>
+            </div>
+            <!-- 10. Accessories -->
+            <div class="col">
+                <a href="{{ route('products', ['cat' => 'Accessories']) }}" class="pcmart-category-pill text-decoration-none d-flex flex-column align-items-center">
+                    <div class="category-pill-box bg-light border rounded-3 p-3 mb-2">
+                        <i class="bi bi-headphones fs-2 text-dark"></i>
+                    </div>
+                    <span class="category-pill-label text-dark fw-semibold small">Accessories</span>
                 </a>
             </div>
         </div>
@@ -410,136 +224,479 @@
 </section>
 
 <!-- =========================================================================
-     Unimart Featured Electronics & Hardware Showcase (Filterable Tabs)
-     ========================================================================= -->
-<section class="py-5 bg-white">
-    <div class="container">
-        <div class="d-flex flex-wrap justify-content-between align-items-end mb-4 gap-3">
-            <div>
-                <span class="text-primary text-uppercase fw-bold small">Direct Distributor Inventory</span>
-                <h2 class="fw-bold mb-0">Featured Electronics & Systems</h2>
-            </div>
-            
-            <!-- Unimart Category Filter Tabs -->
-            <div class="unimart-filter-tabs-wrapper" id="home-featured-filter-tabs">
-                <button class="unimart-tab-btn active" data-filter="ALL">All Products</button>
-                <button class="unimart-tab-btn" data-filter="Desktop Computers">Desktop PCs</button>
-                <button class="unimart-tab-btn" data-filter="Laptops">Laptops</button>
-                <button class="unimart-tab-btn" data-filter="Components">Components</button>
-                <button class="unimart-tab-btn" data-filter="Display & Monitors">Monitors</button>
-            </div>
-        </div>
-
-        <div class="row g-3 g-md-4" id="home-featured-products-grid">
-            @forelse($featuredProducts as $p)
-                @php
-                    $catName = $p->category->name ?? '';
-                    $subName = $p->subcategory->name ?? '';
-                    $artClass = 'art-default';
-                    $artIcon = 'bi-cpu-fill';
-                    if ($catName === 'Laptops') { $artClass = 'art-laptop'; $artIcon = 'bi-laptop'; }
-                    elseif ($catName === 'Desktop Computers') { $artClass = 'art-desktop'; $artIcon = 'bi-pc-display'; }
-                    elseif (str_contains($catName, 'Display') || str_contains($catName, 'Monitor')) { $artClass = 'art-monitor'; $artIcon = 'bi-display'; }
-                    elseif (str_contains($subName, 'Graphics') || str_contains($subName, 'GPU')) { $artClass = 'art-gpu'; $artIcon = 'bi-gpu-card'; }
-                    elseif (str_contains($subName, 'Processor') || str_contains($subName, 'CPU')) { $artClass = 'art-cpu'; $artIcon = 'bi-cpu'; }
-                    elseif (str_contains($subName, 'RAM') || str_contains($subName, 'SSD')) { $artClass = 'art-ram'; $artIcon = 'bi-device-ssd'; }
-
-                    $discountPct = ($p->mrp && $p->mrp > $p->selling_price) ? round((($p->mrp - $p->selling_price) / $p->mrp) * 100) : 0;
-                    $savings = ($p->mrp && $p->mrp > $p->selling_price) ? ($p->mrp - $p->selling_price) : 0;
-                    $specParts = array_slice(array_filter(array_map('trim', explode('|', $p->specs))), 0, 3);
-                    $detailUrl = route('product.details', ['id' => $p->id]);
-                @endphp
-                <div class="col-6 col-md-4 col-lg-3">
-                    <div class="unimart-product-card">
-                        <div class="unimart-card-media {{ $artClass }}">
-                            <div class="card-badge-top-left">
-                                @if($discountPct > 0)
-                                    <span class="badge-discount">-{{ $discountPct }}%</span>
-                                @endif
-                                <span class="badge-brand">{{ $p->brand->name ?? 'Branded' }}</span>
-                            </div>
-                            <div class="card-badge-top-right">
-                                <span class="badge-stock"><span class="pulse-dot-green"></span> In Stock</span>
-                            </div>
-                            <div class="card-media-center">
-                                <i class="bi {{ $artIcon }} product-art-icon"></i>
-                            </div>
-                            <div class="card-hover-actions">
-                                <a href="{{ $detailUrl }}" class="card-quick-action-btn" title="View Specifications">
-                                    <i class="bi bi-eye"></i>
-                                </a>
-                                <button type="button" class="card-quick-action-btn btn-add-enquiry" data-id="{{ $p->id }}" title="Add to Enquiry">
-                                    <i class="bi bi-cart-plus"></i>
-                                </button>
-                            </div>
-                        </div>
-                        <div class="unimart-card-body">
-                            <div class="card-cat-label">{{ $p->subcategory->name ?? ($p->category->name ?? 'Hardware') }}</div>
-                            <a href="{{ $detailUrl }}" class="unimart-product-title" title="{{ $p->name }}">{{ $p->name }}</a>
-                            
-                            <div class="card-rating-strip mb-2">
-                                <span class="text-warning small">
-                                    <i class="bi bi-star-fill"></i>
-                                    <i class="bi bi-star-fill"></i>
-                                    <i class="bi bi-star-fill"></i>
-                                    <i class="bi bi-star-fill"></i>
-                                    <i class="bi bi-star-fill"></i>
-                                </span>
-                                <span class="rating-num ms-1">4.9</span>
-                                <span class="rating-count text-muted">(24)</span>
-                            </div>
-
-                            <div class="unimart-specs-row mb-3">
-                                @foreach($specParts as $spec)
-                                    <span class="unimart-spec-tag">{{ $spec }}</span>
-                                @endforeach
-                            </div>
-
-                            <div class="card-footer-pricing pt-2 border-top">
-                                <div class="d-flex align-items-baseline justify-content-between mb-2">
-                                    <div>
-                                        <div class="unimart-price-current">₹{{ number_format($p->selling_price, 2) }}</div>
-                                        @if($p->mrp && $p->mrp > $p->selling_price)
-                                            <div class="unimart-price-mrp">MRP: ₹{{ number_format($p->mrp, 2) }}</div>
-                                        @endif
-                                    </div>
-                                    @if($savings > 0)
-                                        <span class="badge-savings">Save ₹{{ number_format($savings, 0) }}</span>
-                                    @endif
-                                </div>
-                                <div class="d-grid gap-2">
-                                    <button class="btn btn-primary btn-sm btn-add-enquiry py-2 fw-semibold" data-id="{{ $p->id }}" data-name="{{ $p->name }}" data-price="{{ $p->selling_price }}">
-                                        <i class="bi bi-cart-plus me-1"></i> Add to Quote
-                                    </button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            @empty
-                <!-- Fallback in case DB is being seeded -->
-            @endforelse
-        </div>
-    </div>
-</section>
-
-<!-- =========================================================================
-     Unimart Electronics Promo Banner Strip (Custom PC Builder Callout)
+     3. THREE FEATURED PROMO CARDS (ROW OF 3 - REFERENCE DESIGN)
      ========================================================================= -->
 <section class="py-4 bg-light">
     <div class="container">
-        <div class="unimart-banner-strip">
-            <div class="row align-items-center gy-3">
-                <div class="col-lg-8">
-                    <span class="badge bg-warning text-dark fw-bold mb-2 font-monospace">CUSTOM PC CONFIGURATOR</span>
-                    <h3 class="fw-bold text-white mb-2">Assemble Your Dream Computer with Real-Time Compatibility</h3>
-                    <p class="text-light text-opacity-80 small mb-0">
-                        Select CPU, GPU, Motherboard, RAM & Cabinets with automatic socket verification and download an official B2B quotation PDF instantly.
-                    </p>
+        <div class="row g-4">
+            <!-- Promo 1: Latest Intel Processors -->
+            <div class="col-lg-4 col-md-6 col-12">
+                <div class="pcmart-promo-banner promo-banner-intel rounded-4 p-4 text-white position-relative overflow-hidden h-100">
+                    <div class="row align-items-center g-2 h-100 position-relative" style="z-index: 2;">
+                        <div class="col-7">
+                            <span class="badge-promo-tag text-uppercase fw-bold font-monospace mb-2 d-inline-block">POWER YOUR PERFORMANCE</span>
+                            <h4 class="fw-bold mb-1">Latest Intel Processors</h4>
+                            <p class="small text-light text-opacity-80 mb-3">13th & 14th Gen Processors for Gaming & Productivity</p>
+                            <a href="{{ route('components', ['sub' => 'Processor']) }}" class="btn btn-primary btn-sm rounded-pill px-3 py-2 fw-semibold">
+                                Shop Now <i class="bi bi-arrow-right ms-1"></i>
+                            </a>
+                        </div>
+                        <div class="col-5 text-center">
+                            <img src="{{ asset('assets/images/promo_builder.jpg') }}" alt="Intel Processors" class="img-fluid rounded-3 shadow-sm promo-box-img">
+                        </div>
+                    </div>
                 </div>
-                <div class="col-lg-4 text-lg-end">
-                    <a href="{{ route('pc.builder') }}" class="btn btn-light btn-lg px-4 py-3 fw-bold rounded-pill shadow-sm">
-                        <i class="bi bi-sliders me-1 text-primary"></i> Launch PC Configurator
+            </div>
+
+            <!-- Promo 2: GeForce RTX 40 Series -->
+            <div class="col-lg-4 col-md-6 col-12">
+                <div class="pcmart-promo-banner promo-banner-nvidia rounded-4 p-4 text-white position-relative overflow-hidden h-100">
+                    <div class="row align-items-center g-2 h-100 position-relative" style="z-index: 2;">
+                        <div class="col-7">
+                            <span class="badge-promo-tag text-uppercase fw-bold font-monospace mb-2 d-inline-block text-warning">ULTIMATE GAMING POWER</span>
+                            <h4 class="fw-bold mb-1">GeForce RTX 40 Series</h4>
+                            <p class="small text-light text-opacity-80 mb-3">Experience next-gen gaming with AI performance</p>
+                            <a href="{{ route('components', ['sub' => 'Graphics Card']) }}" class="btn btn-warning btn-sm rounded-pill px-3 py-2 fw-semibold text-dark">
+                                Shop Now <i class="bi bi-arrow-right ms-1"></i>
+                            </a>
+                        </div>
+                        <div class="col-5 text-center">
+                            <img src="{{ asset('assets/images/promo_builder.jpg') }}" alt="GeForce RTX 40 Series" class="img-fluid rounded-3 shadow-sm promo-box-img">
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Promo 3: Pre-Built Gaming PCs -->
+            <div class="col-lg-4 col-md-12 col-12">
+                <div class="pcmart-promo-banner promo-banner-prebuilt rounded-4 p-4 text-white position-relative overflow-hidden h-100">
+                    <div class="row align-items-center g-2 h-100 position-relative" style="z-index: 2;">
+                        <div class="col-7">
+                            <span class="badge-promo-tag text-uppercase fw-bold font-monospace mb-2 d-inline-block text-info">READY TO BUY?</span>
+                            <h4 class="fw-bold mb-1">Pre-Built Gaming PCs</h4>
+                            <p class="small text-light text-opacity-80 mb-3">High performance systems for every budget</p>
+                            <a href="{{ route('computers') }}" class="btn btn-light btn-sm rounded-pill px-3 py-2 fw-semibold text-primary">
+                                View PCs <i class="bi bi-arrow-right ms-1"></i>
+                            </a>
+                        </div>
+                        <div class="col-5 text-center">
+                            <img src="{{ asset('assets/images/hero_gaming_pc.jpg') }}" alt="Pre-Built Gaming PCs" class="img-fluid rounded-3 shadow-sm promo-box-img">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- =========================================================================
+     4. BEST SELLING COMPONENTS (6-COLUMN GRID WITH TABS - REFERENCE DESIGN)
+     ========================================================================= -->
+<section class="py-5 bg-white">
+    <div class="container">
+        <div class="d-flex flex-wrap justify-content-between align-items-center mb-4 gap-3">
+            <div>
+                <h3 class="fw-bold mb-0 text-dark">Best Selling Components</h3>
+            </div>
+
+            <div class="d-flex align-items-center gap-3">
+                <!-- Filter Tabs -->
+                <div class="pcmart-filter-tabs d-flex flex-wrap gap-1" id="components-filter-tabs">
+                    <button class="tab-btn active" data-filter="ALL">All</button>
+                    <button class="tab-btn" data-filter="Processor">Processors</button>
+                    <button class="tab-btn" data-filter="Graphics Card">Graphics Cards</button>
+                    <button class="tab-btn" data-filter="Motherboard">Motherboards</button>
+                    <button class="tab-btn" data-filter="RAM">RAM</button>
+                    <button class="tab-btn" data-filter="SSD">Storage</button>
+                    <button class="tab-btn" data-filter="SMPS/PSU">Power Supply</button>
+                </div>
+                <a href="{{ route('components') }}" class="text-primary fw-bold text-decoration-none small d-none d-md-inline">
+                    View All <i class="bi bi-arrow-right"></i>
+                </a>
+            </div>
+        </div>
+
+        <!-- 6 Component Cards Grid -->
+        <div class="row row-cols-2 row-cols-md-3 row-cols-lg-6 g-3" id="home-components-grid">
+            <!-- 1. Intel Core i5-13600K -->
+            <div class="col">
+                <div class="pcmart-product-card card h-100 border rounded-3 position-relative bg-white">
+                    <div class="d-flex justify-content-between align-items-center p-2 position-absolute top-0 start-0 end-0" style="z-index: 2;">
+                        <span class="badge bg-danger fw-bold rounded-1" style="font-size: 0.65rem;">-12%</span>
+                        <button class="btn btn-sm btn-link text-muted p-0" title="Add to Wishlist">
+                            <i class="bi bi-heart fs-6"></i>
+                        </button>
+                    </div>
+                    <div class="product-media-box p-3 text-center d-flex align-items-center justify-content-center" style="height: 145px;">
+                        <div class="hw-box-render hw-box-intel text-center">
+                            <div class="hw-box-badge-tag bg-white text-primary mb-1">INTEL CORE</div>
+                            <i class="bi bi-cpu-fill fs-2 mb-1"></i>
+                            <div class="fw-bold small" style="font-size: 0.65rem;">i5-13600K</div>
+                        </div>
+                    </div>
+                    <div class="card-body p-2 d-flex flex-column">
+                        <a href="{{ route('components', ['sub' => 'Processor']) }}" class="product-card-title text-decoration-none text-dark fw-bold mb-1" title="Intel Core i5-13600K">
+                            Intel Core i5-13600K
+                        </a>
+                        <div class="d-flex align-items-center gap-1 mb-2 small text-warning" style="font-size: 0.72rem;">
+                            <i class="bi bi-star-fill"></i>
+                            <span class="text-dark fw-bold ms-1">4.6</span>
+                            <span class="text-muted">(1.2k)</span>
+                        </div>
+                        <div class="mt-auto">
+                            <div class="d-flex align-items-baseline gap-1 mb-2">
+                                <strong class="fs-6 text-dark fw-black">₹22,999</strong>
+                                <span class="text-muted text-decoration-line-through small" style="font-size: 0.72rem;">₹25,999</span>
+                            </div>
+                            <button class="btn btn-primary btn-sm w-100 rounded-2 fw-semibold btn-add-enquiry" data-id="101" data-name="Intel Core i5-13600K" data-price="22999">
+                                Add to Cart
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 2. AMD Ryzen 7 7800X3D -->
+            <div class="col">
+                <div class="pcmart-product-card card h-100 border rounded-3 position-relative bg-white">
+                    <div class="d-flex justify-content-between align-items-center p-2 position-absolute top-0 start-0 end-0" style="z-index: 2;">
+                        <span class="badge bg-danger fw-bold rounded-1" style="font-size: 0.65rem;">-18%</span>
+                        <button class="btn btn-sm btn-link text-muted p-0" title="Add to Wishlist">
+                            <i class="bi bi-heart fs-6"></i>
+                        </button>
+                    </div>
+                    <div class="product-media-box p-3 text-center d-flex align-items-center justify-content-center" style="height: 145px;">
+                        <div class="hw-box-render hw-box-amd text-center">
+                            <div class="hw-box-badge-tag bg-warning text-dark mb-1">RYZEN 7</div>
+                            <i class="bi bi-cpu-fill fs-2 text-warning mb-1"></i>
+                            <div class="fw-bold small" style="font-size: 0.65rem;">7800X3D</div>
+                        </div>
+                    </div>
+                    <div class="card-body p-2 d-flex flex-column">
+                        <a href="{{ route('components', ['sub' => 'Processor']) }}" class="product-card-title text-decoration-none text-dark fw-bold mb-1" title="AMD Ryzen 7 7800X3D">
+                            AMD Ryzen 7 7800X3D
+                        </a>
+                        <div class="d-flex align-items-center gap-1 mb-2 small text-warning" style="font-size: 0.72rem;">
+                            <i class="bi bi-star-fill"></i>
+                            <span class="text-dark fw-bold ms-1">4.8</span>
+                            <span class="text-muted">(890)</span>
+                        </div>
+                        <div class="mt-auto">
+                            <div class="d-flex align-items-baseline gap-1 mb-2">
+                                <strong class="fs-6 text-dark fw-black">₹34,999</strong>
+                                <span class="text-muted text-decoration-line-through small" style="font-size: 0.72rem;">₹42,999</span>
+                            </div>
+                            <button class="btn btn-primary btn-sm w-100 rounded-2 fw-semibold btn-add-enquiry" data-id="102" data-name="AMD Ryzen 7 7800X3D" data-price="34999">
+                                Add to Cart
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 3. ASUS GeForce RTX 4070 SUPER 12GB -->
+            <div class="col">
+                <div class="pcmart-product-card card h-100 border rounded-3 position-relative bg-white">
+                    <div class="d-flex justify-content-between align-items-center p-2 position-absolute top-0 start-0 end-0" style="z-index: 2;">
+                        <span class="badge bg-danger fw-bold rounded-1" style="font-size: 0.65rem;">-10%</span>
+                        <button class="btn btn-sm btn-link text-muted p-0" title="Add to Wishlist">
+                            <i class="bi bi-heart fs-6"></i>
+                        </button>
+                    </div>
+                    <div class="product-media-box p-3 text-center d-flex align-items-center justify-content-center" style="height: 145px;">
+                        <div class="hw-box-render hw-box-gpu text-center">
+                            <div class="hw-box-badge-tag bg-success text-white mb-1">GEFORCE RTX</div>
+                            <i class="bi bi-gpu-card fs-2 text-warning mb-1"></i>
+                            <div class="fw-bold small" style="font-size: 0.65rem;">4070 SUPER</div>
+                        </div>
+                    </div>
+                    <div class="card-body p-2 d-flex flex-column">
+                        <a href="{{ route('components', ['sub' => 'Graphics Card']) }}" class="product-card-title text-decoration-none text-dark fw-bold mb-1" title="ASUS GeForce RTX 4070 SUPER 12GB">
+                            ASUS GeForce RTX 4070 SUPER 12GB
+                        </a>
+                        <div class="d-flex align-items-center gap-1 mb-2 small text-warning" style="font-size: 0.72rem;">
+                            <i class="bi bi-star-fill"></i>
+                            <span class="text-dark fw-bold ms-1">4.7</span>
+                            <span class="text-muted">(650)</span>
+                        </div>
+                        <div class="mt-auto">
+                            <div class="d-flex align-items-baseline gap-1 mb-2">
+                                <strong class="fs-6 text-dark fw-black">₹59,999</strong>
+                                <span class="text-muted text-decoration-line-through small" style="font-size: 0.72rem;">₹66,999</span>
+                            </div>
+                            <button class="btn btn-primary btn-sm w-100 rounded-2 fw-semibold btn-add-enquiry" data-id="103" data-name="ASUS GeForce RTX 4070 SUPER 12GB" data-price="59999">
+                                Add to Cart
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 4. MSI B760M Mortar WiFi -->
+            <div class="col">
+                <div class="pcmart-product-card card h-100 border rounded-3 position-relative bg-white">
+                    <div class="d-flex justify-content-between align-items-center p-2 position-absolute top-0 start-0 end-0" style="z-index: 2;">
+                        <span class="badge bg-danger fw-bold rounded-1" style="font-size: 0.65rem;">-15%</span>
+                        <button class="btn btn-sm btn-link text-muted p-0" title="Add to Wishlist">
+                            <i class="bi bi-heart fs-6"></i>
+                        </button>
+                    </div>
+                    <div class="product-media-box p-3 text-center d-flex align-items-center justify-content-center" style="height: 145px;">
+                        <div class="hw-box-render hw-box-mb text-center">
+                            <div class="hw-box-badge-tag bg-info text-dark mb-1">MOTHERBOARD</div>
+                            <i class="bi bi-motherboard fs-2 text-info mb-1"></i>
+                            <div class="fw-bold small" style="font-size: 0.65rem;">B760M WiFi</div>
+                        </div>
+                    </div>
+                    <div class="card-body p-2 d-flex flex-column">
+                        <a href="{{ route('components', ['sub' => 'Motherboard']) }}" class="product-card-title text-decoration-none text-dark fw-bold mb-1" title="MSI B760M Mortar WiFi">
+                            MSI B760M Mortar WiFi
+                        </a>
+                        <div class="d-flex align-items-center gap-1 mb-2 small text-warning" style="font-size: 0.72rem;">
+                            <i class="bi bi-star-fill"></i>
+                            <span class="text-dark fw-bold ms-1">4.5</span>
+                            <span class="text-muted">(430)</span>
+                        </div>
+                        <div class="mt-auto">
+                            <div class="d-flex align-items-baseline gap-1 mb-2">
+                                <strong class="fs-6 text-dark fw-black">₹16,999</strong>
+                                <span class="text-muted text-decoration-line-through small" style="font-size: 0.72rem;">₹19,999</span>
+                            </div>
+                            <button class="btn btn-primary btn-sm w-100 rounded-2 fw-semibold btn-add-enquiry" data-id="104" data-name="MSI B760M Mortar WiFi" data-price="16999">
+                                Add to Cart
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 5. Corsair Vengeance 32GB DDR5 6000MHz -->
+            <div class="col">
+                <div class="pcmart-product-card card h-100 border rounded-3 position-relative bg-white">
+                    <div class="d-flex justify-content-between align-items-center p-2 position-absolute top-0 start-0 end-0" style="z-index: 2;">
+                        <span class="badge bg-danger fw-bold rounded-1" style="font-size: 0.65rem;">-20%</span>
+                        <button class="btn btn-sm btn-link text-muted p-0" title="Add to Wishlist">
+                            <i class="bi bi-heart fs-6"></i>
+                        </button>
+                    </div>
+                    <div class="product-media-box p-3 text-center d-flex align-items-center justify-content-center" style="height: 145px;">
+                        <div class="hw-box-render hw-box-ram text-center">
+                            <div class="hw-box-ram-lightbar"></div>
+                            <div class="hw-box-badge-tag bg-secondary text-white mb-1 mt-1">DDR5 RGB</div>
+                            <i class="bi bi-memory fs-2 text-success mb-1"></i>
+                            <div class="fw-bold small" style="font-size: 0.65rem;">32GB 6000MHz</div>
+                        </div>
+                    </div>
+                    <div class="card-body p-2 d-flex flex-column">
+                        <a href="{{ route('components', ['sub' => 'RAM']) }}" class="product-card-title text-decoration-none text-dark fw-bold mb-1" title="Corsair Vengeance 32GB DDR5 6000MHz">
+                            Corsair Vengeance 32GB DDR5 6000MHz
+                        </a>
+                        <div class="d-flex align-items-center gap-1 mb-2 small text-warning" style="font-size: 0.72rem;">
+                            <i class="bi bi-star-fill"></i>
+                            <span class="text-dark fw-bold ms-1">4.8</span>
+                            <span class="text-muted">(920)</span>
+                        </div>
+                        <div class="mt-auto">
+                            <div class="d-flex align-items-baseline gap-1 mb-2">
+                                <strong class="fs-6 text-dark fw-black">₹8,499</strong>
+                                <span class="text-muted text-decoration-line-through small" style="font-size: 0.72rem;">₹10,999</span>
+                            </div>
+                            <button class="btn btn-primary btn-sm w-100 rounded-2 fw-semibold btn-add-enquiry" data-id="105" data-name="Corsair Vengeance 32GB DDR5 6000MHz" data-price="8499">
+                                Add to Cart
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 6. Samsung 1TB 990 PRO NVMe SSD -->
+            <div class="col">
+                <div class="pcmart-product-card card h-100 border rounded-3 position-relative bg-white">
+                    <div class="d-flex justify-content-between align-items-center p-2 position-absolute top-0 start-0 end-0" style="z-index: 2;">
+                        <span class="badge bg-danger fw-bold rounded-1" style="font-size: 0.65rem;">-17%</span>
+                        <button class="btn btn-sm btn-link text-muted p-0" title="Add to Wishlist">
+                            <i class="bi bi-heart fs-6"></i>
+                        </button>
+                    </div>
+                    <div class="product-media-box p-3 text-center d-flex align-items-center justify-content-center" style="height: 145px;">
+                        <div class="hw-box-render hw-box-ssd text-center">
+                            <div class="hw-box-badge-tag bg-danger text-white mb-1">NVMe PCIe 4.0</div>
+                            <i class="bi bi-device-ssd fs-2 text-danger mb-1"></i>
+                            <div class="fw-bold small" style="font-size: 0.65rem;">990 PRO 1TB</div>
+                        </div>
+                    </div>
+                    <div class="card-body p-2 d-flex flex-column">
+                        <a href="{{ route('components', ['sub' => 'SSD']) }}" class="product-card-title text-decoration-none text-dark fw-bold mb-1" title="Samsung 1TB 990 PRO NVMe SSD">
+                            Samsung 1TB 990 PRO NVMe SSD
+                        </a>
+                        <div class="d-flex align-items-center gap-1 mb-2 small text-warning" style="font-size: 0.72rem;">
+                            <i class="bi bi-star-fill"></i>
+                            <span class="text-dark fw-bold ms-1">4.9</span>
+                            <span class="text-muted">(1.1k)</span>
+                        </div>
+                        <div class="mt-auto">
+                            <div class="d-flex align-items-baseline gap-1 mb-2">
+                                <strong class="fs-6 text-dark fw-black">₹7,999</strong>
+                                <span class="text-muted text-decoration-line-through small" style="font-size: 0.72rem;">₹9,699</span>
+                            </div>
+                            <button class="btn btn-primary btn-sm w-100 rounded-2 fw-semibold btn-add-enquiry" data-id="106" data-name="Samsung 1TB 990 PRO NVMe SSD" data-price="7999">
+                                Add to Cart
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- =========================================================================
+     5. POPULAR PC BUILDS (4 TIERED CARDS - REFERENCE DESIGN)
+     ========================================================================= -->
+<section class="py-5 bg-light" id="popular-pc-builds">
+    <div class="container">
+        <div class="d-flex justify-content-between align-items-center mb-4">
+            <div>
+                <h3 class="fw-bold mb-0 text-dark">Popular PC Builds</h3>
+            </div>
+            <a href="{{ route('computers') }}" class="text-primary fw-bold text-decoration-none small">
+                View All Builds <i class="bi bi-arrow-right"></i>
+            </a>
+        </div>
+
+        <div class="row g-4">
+            <!-- 1. Budget Gaming PC -->
+            <div class="col-lg-3 col-md-6 col-12">
+                <div class="pcmart-build-card card h-100 border-0 rounded-4 shadow-sm p-3 bg-white">
+                    <div class="d-flex justify-content-between align-items-start mb-2">
+                        <div>
+                            <h5 class="fw-bold mb-0 text-dark">Budget Gaming PC</h5>
+                            <span class="text-muted small">Great performance under budget</span>
+                        </div>
+                    </div>
+                    <div class="build-price-tag mb-3">
+                        <strong class="fs-4 text-primary fw-black">₹50,000</strong>
+                    </div>
+
+                    <div class="row g-2 align-items-center mb-3">
+                        <div class="col-7">
+                            <ul class="list-unstyled d-flex flex-column gap-1 small text-secondary mb-0" style="font-size: 0.78rem;">
+                                <li><i class="bi bi-cpu text-primary me-1"></i> Ryzen 5 5600</li>
+                                <li><i class="bi bi-gpu-card text-warning me-1"></i> RTX 3050 8GB</li>
+                                <li><i class="bi bi-memory text-info me-1"></i> 16GB DDR4</li>
+                                <li><i class="bi bi-device-ssd text-success me-1"></i> 1TB NVMe SSD</li>
+                                <li><i class="bi bi-plug text-danger me-1"></i> 550W PSU</li>
+                            </ul>
+                        </div>
+                        <div class="col-5 text-center">
+                            <img src="{{ asset('assets/images/hero_gaming_pc.jpg') }}" alt="Budget Rig" class="img-fluid rounded-3 shadow-sm build-thumb-img">
+                        </div>
+                    </div>
+
+                    <a href="{{ route('computers') }}" class="btn btn-primary btn-sm w-100 rounded-pill fw-bold mt-auto">
+                        View Build &rarr;
+                    </a>
+                </div>
+            </div>
+
+            <!-- 2. Mid-Range Gaming PC -->
+            <div class="col-lg-3 col-md-6 col-12">
+                <div class="pcmart-build-card card h-100 border-0 rounded-4 shadow-sm p-3 bg-white">
+                    <div class="d-flex justify-content-between align-items-start mb-2">
+                        <div>
+                            <h5 class="fw-bold mb-0 text-dark">Mid-Range Gaming PC</h5>
+                            <span class="text-muted small">Most popular build</span>
+                        </div>
+                    </div>
+                    <div class="build-price-tag mb-3">
+                        <strong class="fs-4 text-primary fw-black">₹75,000</strong>
+                    </div>
+
+                    <div class="row g-2 align-items-center mb-3">
+                        <div class="col-7">
+                            <ul class="list-unstyled d-flex flex-column gap-1 small text-secondary mb-0" style="font-size: 0.78rem;">
+                                <li><i class="bi bi-cpu text-primary me-1"></i> Ryzen 7 7700</li>
+                                <li><i class="bi bi-gpu-card text-warning me-1"></i> RTX 4060 8GB</li>
+                                <li><i class="bi bi-memory text-info me-1"></i> 32GB DDR5</li>
+                                <li><i class="bi bi-device-ssd text-success me-1"></i> 1TB NVMe SSD</li>
+                                <li><i class="bi bi-plug text-danger me-1"></i> 650W PSU</li>
+                            </ul>
+                        </div>
+                        <div class="col-5 text-center">
+                            <img src="{{ asset('assets/images/hero_gaming_pc.jpg') }}" alt="Mid-Range Rig" class="img-fluid rounded-3 shadow-sm build-thumb-img">
+                        </div>
+                    </div>
+
+                    <a href="{{ route('computers') }}" class="btn btn-primary btn-sm w-100 rounded-pill fw-bold mt-auto">
+                        View Build &rarr;
+                    </a>
+                </div>
+            </div>
+
+            <!-- 3. High-End Gaming PC -->
+            <div class="col-lg-3 col-md-6 col-12">
+                <div class="pcmart-build-card card h-100 border-0 rounded-4 shadow-sm p-3 bg-white">
+                    <div class="d-flex justify-content-between align-items-start mb-2">
+                        <div>
+                            <h5 class="fw-bold mb-0 text-dark">High-End Gaming PC</h5>
+                            <span class="text-muted small">Ultimate gaming performance</span>
+                        </div>
+                    </div>
+                    <div class="build-price-tag mb-3">
+                        <strong class="fs-4 text-success fw-black">₹1,50,000</strong>
+                    </div>
+
+                    <div class="row g-2 align-items-center mb-3">
+                        <div class="col-7">
+                            <ul class="list-unstyled d-flex flex-column gap-1 small text-secondary mb-0" style="font-size: 0.78rem;">
+                                <li><i class="bi bi-cpu text-primary me-1"></i> Ryzen 7 7800X3D</li>
+                                <li><i class="bi bi-gpu-card text-warning me-1"></i> RTX 4070 Ti 12GB</li>
+                                <li><i class="bi bi-memory text-info me-1"></i> 32GB DDR5</li>
+                                <li><i class="bi bi-device-ssd text-success me-1"></i> 2TB NVMe SSD</li>
+                                <li><i class="bi bi-plug text-danger me-1"></i> 750W PSU</li>
+                            </ul>
+                        </div>
+                        <div class="col-5 text-center">
+                            <img src="{{ asset('assets/images/hero_gaming_pc.jpg') }}" alt="High-End Rig" class="img-fluid rounded-3 shadow-sm build-thumb-img">
+                        </div>
+                    </div>
+
+                    <a href="{{ route('computers') }}" class="btn btn-primary btn-sm w-100 rounded-pill fw-bold mt-auto">
+                        View Build &rarr;
+                    </a>
+                </div>
+            </div>
+
+            <!-- 4. Creator Workstation -->
+            <div class="col-lg-3 col-md-6 col-12">
+                <div class="pcmart-build-card card h-100 border-0 rounded-4 shadow-sm p-3 bg-white">
+                    <div class="d-flex justify-content-between align-items-start mb-2">
+                        <div>
+                            <h5 class="fw-bold mb-0 text-dark">Creator Workstation</h5>
+                            <span class="text-muted small">For professionals</span>
+                        </div>
+                    </div>
+                    <div class="build-price-tag mb-3">
+                        <strong class="fs-4 text-primary fw-black">₹1,20,000</strong>
+                    </div>
+
+                    <div class="row g-2 align-items-center mb-3">
+                        <div class="col-7">
+                            <ul class="list-unstyled d-flex flex-column gap-1 small text-secondary mb-0" style="font-size: 0.78rem;">
+                                <li><i class="bi bi-cpu text-primary me-1"></i> Ryzen 9 7900</li>
+                                <li><i class="bi bi-gpu-card text-warning me-1"></i> RTX 4070 12GB</li>
+                                <li><i class="bi bi-memory text-info me-1"></i> 64GB DDR5</li>
+                                <li><i class="bi bi-device-ssd text-success me-1"></i> 2TB NVMe SSD</li>
+                                <li><i class="bi bi-plug text-danger me-1"></i> 750W PSU</li>
+                            </ul>
+                        </div>
+                        <div class="col-5 text-center">
+                            <img src="{{ asset('assets/images/hero_gaming_pc.jpg') }}" alt="Creator Workstation" class="img-fluid rounded-3 shadow-sm build-thumb-img">
+                        </div>
+                    </div>
+
+                    <a href="{{ route('computers') }}" class="btn btn-primary btn-sm w-100 rounded-pill fw-bold mt-auto">
+                        View Build &rarr;
                     </a>
                 </div>
             </div>
@@ -548,202 +705,66 @@
 </section>
 
 <!-- =========================================================================
-     Interactive 1-Minute PC Budget Estimator Wizard
+     6. TOP BRANDS STRIP (10 BRAND LOGOS - REFERENCE DESIGN)
      ========================================================================= -->
-<section class="py-5 bg-white">
+<section class="py-5 bg-white border-bottom">
     <div class="container">
-        <div class="estimator-card">
-            <div class="row g-4 align-items-center">
-                <div class="col-lg-6">
-                    <span class="badge bg-primary px-3 py-1 fw-bold mb-2">PC FINDER WIZARD</span>
-                    <h3 class="fw-bold text-white mb-2">Find Your Ideal Computer in 1 Click</h3>
-                    <p class="text-light text-opacity-75 small mb-4">
-                        Select your primary usage and budget bracket to see the recommended hardware setup.
-                    </p>
-
-                    <!-- Step 1: Use Case -->
-                    <div class="mb-4">
-                        <label class="form-label text-light small fw-bold text-uppercase">1. Select Your Use Case:</label>
-                        <div class="d-flex flex-wrap gap-2" id="wizard-usecase-group">
-                            <button type="button" class="estimator-pill-btn active" data-use="gaming"><i class="bi bi-controller"></i> AAA Gaming / Streaming</button>
-                            <button type="button" class="estimator-pill-btn" data-use="editing"><i class="bi bi-film"></i> 4K Video Editing / 3D</button>
-                            <button type="button" class="estimator-pill-btn" data-use="office"><i class="bi bi-briefcase"></i> Office & Business</button>
-                            <button type="button" class="estimator-pill-btn" data-use="student"><i class="bi bi-mortarboard"></i> Student / Coding</button>
-                        </div>
-                    </div>
-
-                    <!-- Step 2: Budget Range -->
-                    <div class="mb-3">
-                        <label class="form-label text-light small fw-bold text-uppercase">2. Select Your Budget Bracket:</label>
-                        <div class="d-flex flex-wrap gap-2" id="wizard-budget-group">
-                            <button type="button" class="estimator-pill-btn" data-budget="budget">₹20,000 - ₹40,000</button>
-                            <button type="button" class="estimator-pill-btn active" data-budget="mid">₹40,000 - ₹75,000</button>
-                            <button type="button" class="estimator-pill-btn" data-budget="high">₹75,000 - ₹1,50,000</button>
-                            <button type="button" class="estimator-pill-btn" data-budget="extreme">₹1,50,000+</button>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Result Preview Box -->
-                <div class="col-lg-6">
-                    <div class="recommendation-result-box" id="wizard-result-box">
-                        <div class="d-flex justify-content-between align-items-center mb-3">
-                            <span class="badge bg-success-subtle text-success fw-bold px-3 py-1">RECOMMENDED CONFIGURATION</span>
-                            <span class="text-cyan fw-bold fs-5" id="rec-price">₹72,990</span>
-                        </div>
-                        <h4 class="text-white fw-bold mb-2" id="rec-title">Hari Om Beast 14th Gen Gaming PC</h4>
-                        <p class="text-light text-opacity-75 small mb-3" id="rec-specs">
-                            Intel Core i5 14400F | B760 WiFi | 16GB DDR5 5600MHz | 1TB Gen4 NVMe | 8GB RTX 4060 | 650W Bronze PSU | RGB Gaming Case
-                        </p>
-                        <div class="d-flex flex-wrap gap-2 pt-3 border-top border-white border-opacity-10">
-                            <button class="btn btn-primary btn-sm px-3 fw-bold flex-grow-1" id="rec-add-btn">
-                                <i class="bi bi-cart-plus me-1"></i> Add This Setup to Enquiry
-                            </button>
-                            <a href="{{ route('pc.builder') }}" class="btn btn-outline-light btn-sm px-3" id="rec-customize-btn">
-                                <i class="bi bi-motherboard me-1"></i> Open in PC Builder
-                            </a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
-
-<!-- =========================================================================
-     Authorized Brands Strip
-     ========================================================================= -->
-<section class="brands-strip py-4 bg-light border-top border-bottom">
-    <div class="container">
-        <div class="d-flex align-items-center justify-content-between flex-wrap gap-3">
-            <span class="text-muted small fw-bold text-uppercase"><i class="bi bi-patch-check-fill text-primary me-1"></i> Authorized Showroom Partners:</span>
-            <div class="d-flex flex-wrap gap-2">
-                <span class="brand-pill-badge" style="border-left: 3px solid #0284c7;"><i class="bi bi-cpu text-primary"></i> Intel</span>
-                <span class="brand-pill-badge" style="border-left: 3px solid #ef4444;"><i class="bi bi-cpu-fill text-danger"></i> AMD</span>
-                <span class="brand-pill-badge" style="border-left: 3px solid #10b981;"><i class="bi bi-gpu-card text-success"></i> NVIDIA</span>
-                <span class="brand-pill-badge" style="border-left: 3px solid #06b6d4;"><i class="bi bi-laptop text-info"></i> ASUS</span>
-                <span class="brand-pill-badge" style="border-left: 3px solid #0284c7;"><i class="bi bi-laptop text-primary"></i> Dell</span>
-                <span class="brand-pill-badge" style="border-left: 3px solid #0f172a;"><i class="bi bi-laptop text-dark"></i> HP</span>
-                <span class="brand-pill-badge" style="border-left: 3px solid #e11d48;"><i class="bi bi-laptop text-danger"></i> Lenovo</span>
-                <span class="brand-pill-badge" style="border-left: 3px solid #f59e0b;"><i class="bi bi-memory text-warning"></i> Corsair</span>
-                <span class="brand-pill-badge" style="border-left: 3px solid #dc2626;"><i class="bi bi-device-ssd text-danger"></i> Kingston</span>
-                <span class="brand-pill-badge" style="border-left: 3px solid #2563eb;"><i class="bi bi-device-ssd text-primary"></i> Samsung</span>
-            </div>
-        </div>
-    </div>
-</section>
-
-<!-- =========================================================================
-     The Hari Om Computer Advantage
-     ========================================================================= -->
-<section class="py-5 bg-white">
-    <div class="container">
-        <div class="text-center max-w-xl mx-auto mb-5">
-            <span class="text-primary text-uppercase fw-bold small">Why Jodhpur Trusts Us</span>
-            <h2 class="fw-bold">The Hari Om Computer Advantage</h2>
+        <div class="d-flex justify-content-between align-items-center mb-4">
+            <h4 class="fw-bold mb-0 text-dark">Top Brands</h4>
+            <a href="{{ route('products') }}" class="text-primary fw-bold text-decoration-none small">
+                View All Brands &rarr;
+            </a>
         </div>
 
-        <div class="row g-4">
-            <div class="col-md-6 col-lg-3">
-                <div class="feature-box">
-                    <div class="feature-icon-circle"><i class="bi bi-patch-check-fill"></i></div>
-                    <div>
-                        <h6 class="fw-bold mb-1">100% Genuine Parts</h6>
-                        <p class="text-muted small mb-0">Sourced directly from Rashi, CompAge & Supertron with direct brand warranty.</p>
-                    </div>
+        <div class="row row-cols-2 row-cols-sm-3 row-cols-md-5 row-cols-lg-10 g-3 align-items-center text-center">
+            <div class="col">
+                <div class="pcmart-brand-box border rounded-3 p-3 bg-light">
+                    <strong class="text-primary fs-5 font-monospace">intel</strong>
                 </div>
             </div>
-            <div class="col-md-6 col-lg-3">
-                <div class="feature-box">
-                    <div class="feature-icon-circle"><i class="bi bi-tools"></i></div>
-                    <div>
-                        <h6 class="fw-bold mb-1">Free Professional Assembly</h6>
-                        <p class="text-muted small mb-0">Clean cable routing, Arctic MX thermal paste & 24-hr stress testing.</p>
-                    </div>
+            <div class="col">
+                <div class="pcmart-brand-box border rounded-3 p-3 bg-light">
+                    <strong class="text-danger fs-5 font-monospace">AMD</strong>
                 </div>
             </div>
-            <div class="col-md-6 col-lg-3">
-                <div class="feature-box">
-                    <div class="feature-icon-circle"><i class="bi bi-receipt-cutoff"></i></div>
-                    <div>
-                        <h6 class="fw-bold mb-1">18% GST Input Credit</h6>
-                        <p class="text-muted small mb-0">Official B2B invoices for businesses, schools, and corporate firms.</p>
-                    </div>
+            <div class="col">
+                <div class="pcmart-brand-box border rounded-3 p-3 bg-light">
+                    <strong class="text-success fs-5 font-monospace">NVIDIA</strong>
                 </div>
             </div>
-            <div class="col-md-6 col-lg-3">
-                <div class="feature-box">
-                    <div class="feature-icon-circle"><i class="bi bi-headset"></i></div>
-                    <div>
-                        <h6 class="fw-bold mb-1">Local Showroom Support</h6>
-                        <p class="text-muted small mb-0">In-house service engineers for instant diagnosis, upgrades, and support.</p>
-                    </div>
+            <div class="col">
+                <div class="pcmart-brand-box border rounded-3 p-3 bg-light">
+                    <strong class="text-info fs-5 font-monospace">ASUS</strong>
                 </div>
             </div>
-        </div>
-    </div>
-</section>
-
-<!-- =========================================================================
-     Customer Social Proof / Testimonials
-     ========================================================================= -->
-<section class="py-5 bg-light">
-    <div class="container">
-        <div class="text-center max-w-xl mx-auto mb-5">
-            <span class="text-primary text-uppercase fw-bold small">Customer Stories</span>
-            <h2 class="fw-bold">What Our Customers in Jodhpur Say</h2>
-        </div>
-
-        <div class="row g-4">
-            <div class="col-md-4">
-                <div class="review-card">
-                    <div class="text-warning mb-2">
-                        <i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i>
-                    </div>
-                    <p class="small text-muted mb-3">
-                        "Assembled an RTX 4070 editing workstation for our design studio. Sunil ji gave the best rates in Jodhpur and delivered the system stress-tested with clean wiring. 100% recommended!"
-                    </p>
-                    <div class="d-flex align-items-center gap-2">
-                        <div class="bg-primary text-white rounded-circle d-flex align-items-center justify-content-center fw-bold" style="width: 38px; height: 38px;">RS</div>
-                        <div>
-                            <div class="fw-bold small">Rajesh Sharma</div>
-                            <div class="text-muted" style="font-size: 0.72rem;">Jodhpur Tech Labs, Shastri Nagar</div>
-                        </div>
-                    </div>
+            <div class="col">
+                <div class="pcmart-brand-box border rounded-3 p-3 bg-light">
+                    <strong class="text-danger fs-5 font-monospace">msi</strong>
                 </div>
             </div>
-            <div class="col-md-4">
-                <div class="review-card">
-                    <div class="text-warning mb-2">
-                        <i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i>
-                    </div>
-                    <p class="small text-muted mb-3">
-                        "Best computer store in Western Rajasthan. Built my gaming PC with Intel Core i5 14th Gen. Got original invoice with GST input tax credit for my business within minutes."
-                    </p>
-                    <div class="d-flex align-items-center gap-2">
-                        <div class="bg-success text-white rounded-circle d-flex align-items-center justify-content-center fw-bold" style="width: 38px; height: 38px;">VS</div>
-                        <div>
-                            <div class="fw-bold small">Vikram Singh Rathore</div>
-                            <div class="text-muted" style="font-size: 0.72rem;">Gaming Enthusiast, Ratanada</div>
-                        </div>
-                    </div>
+            <div class="col">
+                <div class="pcmart-brand-box border rounded-3 p-3 bg-light">
+                    <strong class="text-primary fs-5 font-monospace">GIGABYTE</strong>
                 </div>
             </div>
-            <div class="col-md-4">
-                <div class="review-card">
-                    <div class="text-warning mb-2">
-                        <i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i>
-                    </div>
-                    <p class="small text-muted mb-3">
-                        "Bought 3 Dell laptops for our audit office. Genuine warranty, verified serial numbers, and best quotation price compared to any online portals."
-                    </p>
-                    <div class="d-flex align-items-center gap-2">
-                        <div class="bg-info text-white rounded-circle d-flex align-items-center justify-content-center fw-bold" style="width: 38px; height: 38px;">PG</div>
-                        <div>
-                            <div class="fw-bold small">Pooja Gehlot</div>
-                            <div class="text-muted" style="font-size: 0.72rem;">Chartered Accountant, Paota</div>
-                        </div>
-                    </div>
+            <div class="col">
+                <div class="pcmart-brand-box border rounded-3 p-3 bg-light">
+                    <strong class="text-dark fs-5 font-monospace">ASRock</strong>
+                </div>
+            </div>
+            <div class="col">
+                <div class="pcmart-brand-box border rounded-3 p-3 bg-light">
+                    <strong class="text-warning fs-5 font-monospace">CORSAIR</strong>
+                </div>
+            </div>
+            <div class="col">
+                <div class="pcmart-brand-box border rounded-3 p-3 bg-light">
+                    <strong class="text-primary fs-5 font-monospace">SAMSUNG</strong>
+                </div>
+            </div>
+            <div class="col">
+                <div class="pcmart-brand-box border rounded-3 p-3 bg-light">
+                    <strong class="text-dark fs-5 font-monospace">WD</strong>
                 </div>
             </div>
         </div>
@@ -754,215 +775,137 @@
 @push('scripts')
 <script>
     document.addEventListener("DOMContentLoaded", () => {
-        const grid = document.getElementById("home-featured-products-grid");
-        if (!grid) return;
+        // Tab filtering logic for Best Selling Components
+        const tabs = document.querySelectorAll("#components-filter-tabs button");
+        const cardsGrid = document.getElementById("home-components-grid");
 
-        // Load Server Products or DataStore fallback
-        const serverProducts = @json($allProductsJson ? json_decode($allProductsJson) : []);
-        const products = (serverProducts && serverProducts.length > 0) ? serverProducts : (typeof DataStore !== 'undefined' ? DataStore.getProducts() : []);
+        const sampleComponents = [
+            { id: "PROD-101", name: "Intel Core i5-13600K", sub: "Processor", price: 22999, mrp: 25999, discount: 12, rating: 4.6, reviews: "1.2k" },
+            { id: "PROD-102", name: "AMD Ryzen 7 7800X3D", sub: "Processor", price: 34999, mrp: 42999, discount: 18, rating: 4.8, reviews: "890" },
+            { id: "PROD-103", name: "ASUS GeForce RTX 4070 SUPER 12GB", sub: "Graphics Card", price: 59999, mrp: 66999, discount: 10, rating: 4.7, reviews: "650" },
+            { id: "PROD-104", name: "MSI B760M Mortar WiFi", sub: "Motherboard", price: 16999, mrp: 19999, discount: 15, rating: 4.5, reviews: "430" },
+            { id: "PROD-105", name: "Corsair Vengeance 32GB DDR5 6000MHz", sub: "RAM", price: 8499, mrp: 10999, discount: 20, rating: 4.8, reviews: "920" },
+            { id: "PROD-106", name: "Samsung 1TB 990 PRO NVMe SSD", sub: "SSD", price: 7999, mrp: 9699, discount: 17, rating: 4.9, reviews: "1.1k" },
+            { id: "PROD-107", name: "DeepCool 750W Gold Modular SMPS", sub: "SMPS/PSU", price: 6999, mrp: 8499, discount: 15, rating: 4.7, reviews: "380" },
+            { id: "PROD-108", name: "Antec C8 Curve Panoramic Cabinet", sub: "Cabinet", price: 8999, mrp: 11499, discount: 22, rating: 4.9, reviews: "520" }
+        ];
 
-        function getArtClass(cat, sub) {
-            cat = cat || "";
-            sub = sub || "";
-            if (cat === 'Laptops') return { cls: 'art-laptop', icon: 'bi-laptop' };
-            if (cat === 'Desktop Computers') return { cls: 'art-desktop', icon: 'bi-pc-display' };
-            if (cat.includes('Display') || cat.includes('Monitor')) return { cls: 'art-monitor', icon: 'bi-display' };
-            if (sub.includes('Graphics') || sub.includes('GPU')) return { cls: 'art-gpu', icon: 'bi-gpu-card' };
-            if (sub.includes('Processor') || sub.includes('CPU')) return { cls: 'art-cpu', icon: 'bi-cpu' };
-            if (sub.includes('RAM') || sub.includes('SSD')) return { cls: 'art-ram', icon: 'bi-device-ssd' };
-            return { cls: 'art-default', icon: 'bi-cpu-fill' };
+        function getBoxRenderHtml(item) {
+            if (item.sub === "Processor" && item.name.includes("Intel")) {
+                return `
+                    <div class="hw-box-render hw-box-intel text-center">
+                        <div class="hw-box-badge-tag bg-white text-primary mb-1">INTEL CORE</div>
+                        <i class="bi bi-cpu-fill fs-2 mb-1"></i>
+                        <div class="fw-bold small" style="font-size: 0.65rem;">${item.name.replace('Intel Core ', '')}</div>
+                    </div>`;
+            } else if (item.sub === "Processor") {
+                return `
+                    <div class="hw-box-render hw-box-amd text-center">
+                        <div class="hw-box-badge-tag bg-warning text-dark mb-1">RYZEN</div>
+                        <i class="bi bi-cpu-fill fs-2 text-warning mb-1"></i>
+                        <div class="fw-bold small" style="font-size: 0.65rem;">${item.name.replace('AMD ', '')}</div>
+                    </div>`;
+            } else if (item.sub === "Graphics Card") {
+                return `
+                    <div class="hw-box-render hw-box-gpu text-center">
+                        <div class="hw-box-badge-tag bg-success text-white mb-1">GEFORCE RTX</div>
+                        <i class="bi bi-gpu-card fs-2 text-warning mb-1"></i>
+                        <div class="fw-bold small" style="font-size: 0.65rem;">RTX 40-SERIES</div>
+                    </div>`;
+            } else if (item.sub === "Motherboard") {
+                return `
+                    <div class="hw-box-render hw-box-mb text-center">
+                        <div class="hw-box-badge-tag bg-info text-dark mb-1">MOTHERBOARD</div>
+                        <i class="bi bi-motherboard fs-2 text-info mb-1"></i>
+                        <div class="fw-bold small" style="font-size: 0.65rem;">CHIPSET PRO</div>
+                    </div>`;
+            } else if (item.sub === "RAM") {
+                return `
+                    <div class="hw-box-render hw-box-ram text-center">
+                        <div class="hw-box-ram-lightbar"></div>
+                        <div class="hw-box-badge-tag bg-secondary text-white mb-1 mt-1">DDR5 RGB</div>
+                        <i class="bi bi-memory fs-2 text-success mb-1"></i>
+                        <div class="fw-bold small" style="font-size: 0.65rem;">HIGH SPEED</div>
+                    </div>`;
+            } else if (item.sub === "SSD") {
+                return `
+                    <div class="hw-box-render hw-box-ssd text-center">
+                        <div class="hw-box-badge-tag bg-danger text-white mb-1">NVMe PCIe 4.0</div>
+                        <i class="bi bi-device-ssd fs-2 text-danger mb-1"></i>
+                        <div class="fw-bold small" style="font-size: 0.65rem;">GEN4 SSD</div>
+                    </div>`;
+            } else if (item.sub === "SMPS/PSU") {
+                return `
+                    <div class="hw-box-render bg-dark text-white border text-center">
+                        <div class="hw-box-badge-tag bg-warning text-dark mb-1">80+ GOLD PSU</div>
+                        <i class="bi bi-plug fs-2 text-danger mb-1"></i>
+                        <div class="fw-bold small" style="font-size: 0.65rem;">MODULAR POWER</div>
+                    </div>`;
+            } else {
+                return `
+                    <div class="hw-box-render bg-light text-dark border text-center">
+                        <i class="bi bi-pc fs-2 text-primary mb-1"></i>
+                        <div class="fw-bold small" style="font-size: 0.65rem;">${item.sub}</div>
+                    </div>`;
+            }
         }
 
-        function renderFeatured(category = "ALL") {
-            let list = products.filter(p => p.is_featured || p.isFeatured || p.stock > 0);
-            if (category !== "ALL") {
-                list = list.filter(p => {
-                    const cName = (p.category && p.category.name) ? p.category.name : (p.category || "");
-                    return cName.toLowerCase().includes(category.toLowerCase());
-                });
-            }
-            
+        function renderComponents(filter = "ALL") {
+            let filtered = filter === "ALL" ? sampleComponents.slice(0, 6) : sampleComponents.filter(c => c.sub === filter);
+            if (filtered.length === 0) filtered = sampleComponents.slice(0, 6);
+
             let html = "";
-            const displayList = list.slice(0, 8);
-
-            if (displayList.length === 0) {
-                grid.innerHTML = `
-                    <div class="col-12 text-center py-5">
-                        <i class="bi bi-box-seam fs-1 text-muted d-block mb-2"></i>
-                        <h6 class="fw-bold text-muted">No items found in this department</h6>
-                        <a href="{{ route('products') }}" class="btn btn-sm btn-primary mt-2">Explore Full Catalog</a>
-                    </div>
-                `;
-                return;
-            }
-
-            displayList.forEach(p => {
-                const sPrice = Number(p.selling_price || p.sellingPrice || 0);
-                const mPrice = Number(p.mrp || 0);
-                const discountPct = (mPrice && mPrice > sPrice) ? Math.round(((mPrice - sPrice) / mPrice) * 100) : 0;
-                const savings = (mPrice && mPrice > sPrice) ? (mPrice - sPrice) : 0;
-
-                const catName = (p.category && p.category.name) ? p.category.name : (p.category || "");
-                const subName = (p.subcategory && p.subcategory.name) ? p.subcategory.name : (p.subcategory || "");
-                const brandName = (p.brand && p.brand.name) ? p.brand.name : (p.brand || "Branded");
-
-                const art = getArtClass(catName, subName);
-                const specParts = (p.specs || "").split("|").map(s => s.trim()).filter(s => s.length > 0).slice(0, 3);
-                const pillsHtml = specParts.map(s => `<span class="unimart-spec-tag">${s}</span>`).join("");
-                const detailUrl = `/product-details?id=${p.id}`;
-
+            filtered.forEach(c => {
                 html += `
-                    <div class="col-6 col-md-4 col-lg-3">
-                        <div class="unimart-product-card">
-                            <div class="unimart-card-media ${art.cls}">
-                                <div class="card-badge-top-left">
-                                    ${discountPct > 0 ? `<span class="badge-discount">-${discountPct}%</span>` : ''}
-                                    <span class="badge-brand">${brandName}</span>
-                                </div>
-                                <div class="card-badge-top-right">
-                                    <span class="badge-stock"><span class="pulse-dot-green"></span> In Stock</span>
-                                </div>
-                                <div class="card-media-center">
-                                    <i class="bi ${art.icon} product-art-icon"></i>
-                                </div>
-                                <div class="card-hover-actions">
-                                    <a href="${detailUrl}" class="card-quick-action-btn" title="View Specifications">
-                                        <i class="bi bi-eye"></i>
-                                    </a>
-                                    <button type="button" class="card-quick-action-btn btn-add-enquiry" data-id="${p.id}" data-name="${p.name}" data-price="${sPrice}" title="Add to Enquiry">
-                                        <i class="bi bi-cart-plus"></i>
-                                    </button>
-                                </div>
+                    <div class="col">
+                        <div class="pcmart-product-card card h-100 border rounded-3 position-relative bg-white">
+                            <div class="d-flex justify-content-between align-items-center p-2 position-absolute top-0 start-0 end-0" style="z-index: 2;">
+                                <span class="badge bg-danger fw-bold rounded-1" style="font-size: 0.65rem;">-${c.discount}%</span>
+                                <button class="btn btn-sm btn-link text-muted p-0" title="Add to Wishlist">
+                                    <i class="bi bi-heart fs-6"></i>
+                                </button>
                             </div>
-                            <div class="unimart-card-body">
-                                <div class="card-cat-label">${subName || catName || 'Hardware'}</div>
-                                <a href="${detailUrl}" class="unimart-product-title" title="${p.name}">${p.name}</a>
-                                
-                                <div class="card-rating-strip mb-2">
-                                    <span class="text-warning small">
-                                        <i class="bi bi-star-fill"></i>
-                                        <i class="bi bi-star-fill"></i>
-                                        <i class="bi bi-star-fill"></i>
-                                        <i class="bi bi-star-fill"></i>
-                                        <i class="bi bi-star-fill"></i>
-                                    </span>
-                                    <span class="rating-num ms-1">4.9</span>
-                                    <span class="rating-count text-muted">(24)</span>
+
+                            <div class="product-media-box p-3 text-center d-flex align-items-center justify-content-center" style="height: 145px;">
+                                ${getBoxRenderHtml(c)}
+                            </div>
+
+                            <div class="card-body p-2 d-flex flex-column">
+                                <a href="/product-details?id=${c.id}" class="product-card-title text-decoration-none text-dark fw-bold mb-1" title="${c.name}">
+                                    ${c.name}
+                                </a>
+
+                                <div class="d-flex align-items-center gap-1 mb-2 small text-warning" style="font-size: 0.72rem;">
+                                    <i class="bi bi-star-fill"></i>
+                                    <span class="text-dark fw-bold ms-1">${c.rating}</span>
+                                    <span class="text-muted">(${c.reviews})</span>
                                 </div>
 
-                                <div class="unimart-specs-row mb-3">
-                                    ${pillsHtml}
-                                </div>
+                                <div class="mt-auto">
+                                    <div class="d-flex align-items-baseline gap-1 mb-2">
+                                        <strong class="fs-6 text-dark fw-black">₹${c.price.toLocaleString('en-IN')}</strong>
+                                        <span class="text-muted text-decoration-line-through small" style="font-size: 0.72rem;">₹${c.mrp.toLocaleString('en-IN')}</span>
+                                    </div>
 
-                                <div class="card-footer-pricing pt-2 border-top">
-                                    <div class="d-flex align-items-baseline justify-content-between mb-2">
-                                        <div>
-                                            <div class="unimart-price-current">₹${sPrice.toLocaleString('en-IN', {minimumFractionDigits: 2, maximumFractionDigits: 2})}</div>
-                                            ${mPrice > sPrice ? `<div class="unimart-price-mrp">MRP: ₹${mPrice.toLocaleString('en-IN', {minimumFractionDigits: 2, maximumFractionDigits: 2})}</div>` : ''}
-                                        </div>
-                                        ${savings > 0 ? `<span class="badge-savings">Save ₹${savings.toLocaleString('en-IN')}</span>` : ''}
-                                    </div>
-                                    <div class="d-grid gap-2">
-                                        <button class="btn btn-primary btn-sm btn-add-enquiry py-2 fw-semibold" data-id="${p.id}" data-name="${p.name}" data-price="${sPrice}">
-                                            <i class="bi bi-cart-plus me-1"></i> Add to Quote
-                                        </button>
-                                    </div>
+                                    <button class="btn btn-primary btn-sm w-100 rounded-2 fw-semibold btn-add-enquiry" data-id="${c.id}" data-name="${c.name}" data-price="${c.price}">
+                                        Add to Cart
+                                    </button>
                                 </div>
                             </div>
                         </div>
                     </div>
                 `;
             });
-            grid.innerHTML = html;
+            cardsGrid.innerHTML = html;
         }
 
-        // Tabs click listener
-        document.querySelectorAll("#home-featured-filter-tabs button").forEach(btn => {
+        tabs.forEach(btn => {
             btn.addEventListener("click", () => {
-                document.querySelectorAll("#home-featured-filter-tabs button").forEach(b => {
-                    b.classList.remove("active");
-                });
+                tabs.forEach(b => b.classList.remove("active"));
                 btn.classList.add("active");
-                renderFeatured(btn.getAttribute("data-filter"));
+                renderComponents(btn.getAttribute("data-filter"));
             });
         });
-
-        // 2. PC Finder Budget Wizard Interaction
-        const presetConfigs = {
-            "gaming-budget": { id: "PROD-2001", title: "Hari Om Entry Gaming PC", price: "₹34,990", specs: "Intel Core i3 12th Gen | 16GB RAM | 512GB NVMe SSD | GTX 1650 4GB | 450W PSU" },
-            "gaming-mid": { id: "PROD-2003", title: "Hari Om Beast 14th Gen Gaming PC", price: "₹72,990", specs: "Intel Core i5 14400F | B760 WiFi | 16GB DDR5 5600MHz | 1TB Gen4 NVMe | 8GB RTX 4060 | 650W PSU" },
-            "gaming-high": { id: "PROD-2004", title: "Hari Om Ultra RTX 4070 Super Rig", price: "₹1,24,990", specs: "Intel Core i7 14700F | 32GB DDR5 | 1TB Samsung 990 Pro | 12GB RTX 4070 Super | 750W Gold PSU" },
-            "gaming-extreme": { id: "PROD-2004", title: "Hari Om Titan 4K RTX 4080 Rig", price: "₹1,95,000", specs: "AMD Ryzen 7 7800X3D | 32GB DDR5 6000MHz | 2TB Gen4 SSD | 16GB RTX 4080 Super | 360mm AIO" },
-
-            "editing-budget": { id: "PROD-2002", title: "Hari Om Creator Start 1080p PC", price: "₹39,990", specs: "Intel Core i5 13400 | 16GB DDR4 | 1TB NVMe Gen4 | UHD 730 Graphics | 500W PSU" },
-            "editing-mid": { id: "PROD-2003", title: "Hari Om Studio DaVinci Edition", price: "₹78,490", specs: "Intel Core i5 14500 | 32GB DDR5 | 1TB Gen4 SSD | 8GB RTX 4060 | 650W PSU" },
-            "editing-high": { id: "PROD-2004", title: "Hari Om Creator 4K Video Workstation", price: "₹1,49,990", specs: "Intel Core i7 14700K | Z790 DDR5 | 32GB DDR5 | 2TB Samsung 990 Pro | 12GB RTX 4070 | 850W Gold PSU" },
-            "editing-extreme": { id: "PROD-2004", title: "Hari Om Master 8K Production Rig", price: "₹2,45,000", specs: "Intel Core i9 14900K | 64GB DDR5 | 4TB NVMe SSD | 16GB RTX 4080 Super | Custom Liquid Loop" },
-
-            "office-budget": { id: "PROD-2001", title: "Hari Om Pro Office PC i3", price: "₹21,990", specs: "Intel Core i3 12100 | H610M | 8GB DDR4 | 512GB NVMe SSD | 450W SMPS | Slim Office Case" },
-            "office-mid": { id: "PROD-2002", title: "Hari Om Business Tower i5", price: "₹39,990", specs: "Intel Core i5 13400 | B760M | 16GB DDR5 | 1TB NVMe | 550W PSU | Antec Case" },
-            "office-high": { id: "PROD-2004", title: "Hari Om Executive Workstation", price: "₹65,000", specs: "Intel Core i7 13700 | 32GB DDR5 | 1TB NVMe SSD | 550W Gold PSU | Dual Monitor Ready" },
-            "office-extreme": { id: "PROD-2004", title: "Hari Om Enterprise Dual-Server", price: "₹1,20,000", specs: "Intel Xeon / Core i9 | 64GB ECC RAM | RAID 1 4TB Storage | Redundant PSU" },
-
-            "student-budget": { id: "PROD-1005", title: "Acer Aspire 5 Slim Student Laptop", price: "₹40,990", specs: "Intel Core i5 1335U | 8GB DDR5 | 512GB SSD | 15.6 FHD IPS | WiFi 6E" },
-            "student-mid": { id: "PROD-1001", title: "Dell Inspiron 15 Coding Edition", price: "₹47,990", specs: "Intel Core i5 12th Gen | 16GB RAM | 512GB SSD | 15.6 120Hz FHD | Win 11 + MS Office" },
-            "student-high": { id: "PROD-1004", title: "ASUS TUF Gaming F15 Student Powerhouse", price: "₹54,990", specs: "Intel Core i5 11400H | 16GB DDR4 | 512GB SSD | 4GB RTX 3050 | 144Hz FHD" },
-            "student-extreme": { id: "PROD-1006", title: "ASUS ROG Strix G16 High-End Laptop", price: "₹1,08,990", specs: "Intel Core i7 13650HX | 16GB DDR5 | 1TB Gen4 SSD | 6GB RTX 4050 | 165Hz FHD+" }
-        };
-
-        let selectedUse = "gaming";
-        let selectedBudget = "mid";
-
-        function updateWizard() {
-            const key = `${selectedUse}-${selectedBudget}`;
-            const config = presetConfigs[key] || presetConfigs["gaming-mid"];
-
-            document.getElementById("rec-title").innerText = config.title;
-            document.getElementById("rec-price").innerText = config.price;
-            document.getElementById("rec-specs").innerText = config.specs;
-
-            const addBtn = document.getElementById("rec-add-btn");
-            addBtn.onclick = () => {
-                if (typeof DataStore !== 'undefined' && DataStore.addToEnquiryCart) {
-                    DataStore.addToEnquiryCart(config.id, 1, {
-                        name: config.title,
-                        price: Number(config.price.replace(/[^0-9]/g, '')),
-                        specs: config.specs
-                    });
-                }
-                if (typeof HOC_UTILS !== 'undefined' && HOC_UTILS.showToast) {
-                    HOC_UTILS.showToast(`${config.title} added to your Enquiry Cart!`);
-                } else if (typeof Swal !== 'undefined') {
-                    Swal.fire({
-                        icon: 'success',
-                        title: 'Added to Quote!',
-                        text: `${config.title} has been added to your Enquiry Cart.`,
-                        timer: 2000,
-                        showConfirmButton: false
-                    });
-                }
-            };
-        }
-
-        document.querySelectorAll("#wizard-usecase-group button").forEach(btn => {
-            btn.addEventListener("click", () => {
-                document.querySelectorAll("#wizard-usecase-group button").forEach(b => b.classList.remove("active"));
-                btn.classList.add("active");
-                selectedUse = btn.getAttribute("data-use");
-                updateWizard();
-            });
-        });
-
-        document.querySelectorAll("#wizard-budget-group button").forEach(btn => {
-            btn.addEventListener("click", () => {
-                document.querySelectorAll("#wizard-budget-group button").forEach(b => b.classList.remove("active"));
-                btn.classList.add("active");
-                selectedBudget = btn.getAttribute("data-budget");
-                updateWizard();
-            });
-        });
-
-        updateWizard();
     });
 </script>
 @endpush

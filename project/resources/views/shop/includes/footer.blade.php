@@ -1,5 +1,5 @@
 <!-- Floating WhatsApp Action (Desktop Only, on Mobile it is in the Bottom App Bar) -->
-<a href="https://wa.me/919829012345?text=Hello%20Hari%20Om%20Computer,%20I%20have%20an%20inquiry%20regarding%20computer%20hardware" target="_blank" class="whatsapp-float d-none d-lg-flex" title="Chat on WhatsApp" rel="noopener noreferrer">
+<a href="https://wa.me/919829012345?text=Hello%20Hari%20Om%20PCMart,%20I%20have%20an%20inquiry%20regarding%20custom%20PCs%20and%20hardware" target="_blank" class="whatsapp-float d-none d-lg-flex" title="Chat on WhatsApp" rel="noopener noreferrer">
     <i class="bi bi-whatsapp"></i>
 </a>
 
@@ -29,72 +29,143 @@
         </div>
         <span class="mobile-nav-label">Cart</span>
     </a>
-    <a href="https://wa.me/919829012345?text=Hello%20Hari%20Om%20Computer" target="_blank" class="mobile-nav-link mobile-nav-whatsapp">
+    <a href="https://wa.me/919829012345?text=Hello%20Hari%20Om%20PCMart" target="_blank" class="mobile-nav-link mobile-nav-whatsapp">
         <div class="mobile-nav-icon text-success"><i class="bi bi-whatsapp"></i></div>
         <span class="mobile-nav-label">WhatsApp</span>
     </a>
 </nav>
 
+<!-- =========================================================================
+     PCMart 4-Column Service & Trust Badges Strip (Reference Design)
+     ========================================================================= -->
+<section class="pcmart-trust-strip py-4 bg-white border-top border-bottom">
+    <div class="container">
+        <div class="row g-4 align-items-center">
+            <div class="col-6 col-md-3">
+                <div class="pcmart-trust-item d-flex align-items-center gap-3">
+                    <div class="trust-icon-box bg-primary-subtle text-primary">
+                        <i class="bi bi-truck fs-3"></i>
+                    </div>
+                    <div>
+                        <div class="fw-bold text-dark">Free Shipping</div>
+                        <div class="text-muted small">On orders above ₹999</div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-6 col-md-3">
+                <div class="pcmart-trust-item d-flex align-items-center gap-3">
+                    <div class="trust-icon-box bg-primary-subtle text-primary">
+                        <i class="bi bi-shield-check fs-3"></i>
+                    </div>
+                    <div>
+                        <div class="fw-bold text-dark">Easy Returns</div>
+                        <div class="text-muted small">7 days return policy</div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-6 col-md-3">
+                <div class="pcmart-trust-item d-flex align-items-center gap-3">
+                    <div class="trust-icon-box bg-primary-subtle text-primary">
+                        <i class="bi bi-credit-card fs-3"></i>
+                    </div>
+                    <div>
+                        <div class="fw-bold text-dark">Secure Payment</div>
+                        <div class="text-muted small">100% secure payment</div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-6 col-md-3">
+                <div class="pcmart-trust-item d-flex align-items-center gap-3">
+                    <div class="trust-icon-box bg-primary-subtle text-primary">
+                        <i class="bi bi-headset fs-3"></i>
+                    </div>
+                    <div>
+                        <div class="fw-bold text-dark">Expert Support</div>
+                        <div class="text-muted small">Dedicated customer support</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
 <!-- Main Showroom Footer -->
-<footer class="store-footer">
+<footer class="pcmart-footer bg-dark text-white pt-5 pb-4">
     <div class="container">
         <div class="row g-4 mb-5">
-            <div class="col-lg-5">
-                <div class="footer-logo mb-3">HARI OM COMPUTER</div>
-                <p class="text-light text-opacity-75 small mb-3" style="max-width: 420px; line-height: 1.7;">
-                    Western Rajasthan's premier destination for custom gaming rigs, official branded laptops, enterprise workstations, genuine hardware components, and instant GST quotations.
+            <!-- Brand & Address -->
+            <div class="col-lg-4">
+                <div class="pcmart-brand-logo d-flex align-items-center gap-2 mb-3">
+                    <div class="brand-pc-box">
+                        <i class="bi bi-display-fill"></i>
+                    </div>
+                    <div class="d-flex flex-column">
+                        <div class="brand-pc-title text-white">HARI OM <span class="text-primary">PCMart</span></div>
+                        <div class="text-muted small">Custom PC & Hardware Megastore</div>
+                    </div>
+                </div>
+                <p class="text-light text-opacity-75 small mb-3" style="line-height: 1.7;">
+                    Western Rajasthan's premier destination for custom gaming rigs, official branded laptops, genuine hardware components, and instant GST quotations.
                 </p>
-                <div class="footer-contact-item">
-                    <i class="bi bi-geo-alt-fill text-info"></i>
-                    <span>Plot No. 42, Station Road, Near Sojati Gate, Jodhpur - 342001 (Raj.)</span>
-                </div>
-                <div class="footer-contact-item">
-                    <i class="bi bi-telephone-fill text-info"></i>
-                    <span>+91 98290 12345 / 0291-2654321</span>
-                </div>
-                <div class="footer-contact-item">
-                    <i class="bi bi-envelope-fill text-info"></i>
-                    <span>sales@hariomcomputer.com / info@hariomcomputer.com</span>
-                </div>
-                <div class="footer-contact-item">
-                    <i class="bi bi-file-earmark-text-fill text-info"></i>
-                    <span>GSTIN: <strong>08AABCH1234F1Z9</strong> (Input Tax Credit Eligible)</span>
+                <div class="d-flex flex-column gap-2 small text-light text-opacity-75">
+                    <div><i class="bi bi-geo-alt-fill text-primary me-2"></i> Plot No. 42, Station Road, Near Sojati Gate, Jodhpur - 342001 (Raj.)</div>
+                    <div><i class="bi bi-telephone-fill text-primary me-2"></i> +91 98290 12345 / 0291-2654321</div>
+                    <div><i class="bi bi-envelope-fill text-primary me-2"></i> sales@hariomcomputer.com</div>
+                    <div><i class="bi bi-file-earmark-text text-primary me-2"></i> GSTIN: <strong>08AABCH1234F1Z9</strong> (Input Tax Credit Eligible)</div>
                 </div>
             </div>
 
+            <!-- Hardware Categories -->
             <div class="col-6 col-md-3 col-lg-2 offset-lg-1">
-                <div class="footer-title">Hardware Categories</div>
-                <ul class="footer-links">
-                    <li><a href="{{ route('computers') }}">Custom Gaming Rigs</a></li>
-                    <li><a href="{{ route('laptops') }}">14th Gen Laptops</a></li>
-                    <li><a href="{{ route('components') }}">Genuine GPUs & CPUs</a></li>
-                    <li><a href="{{ route('pc.builder') }}">Interactive PC Builder</a></li>
-                    <li><a href="{{ route('products') }}">Monitors & Displays</a></li>
-                    <li><a href="{{ route('products') }}">Networking & Accessories</a></li>
+                <h6 class="fw-bold text-white mb-3 text-uppercase small" style="letter-spacing: 0.05em;">Hardware</h6>
+                <ul class="list-unstyled d-flex flex-column gap-2 small">
+                    <li><a href="{{ route('components', ['sub' => 'Processor']) }}" class="text-light text-opacity-75 text-decoration-none hover-white">Processors (CPUs)</a></li>
+                    <li><a href="{{ route('components', ['sub' => 'Graphics Card']) }}" class="text-light text-opacity-75 text-decoration-none hover-white">Graphics Cards (GPUs)</a></li>
+                    <li><a href="{{ route('components', ['sub' => 'Motherboard']) }}" class="text-light text-opacity-75 text-decoration-none hover-white">Motherboards</a></li>
+                    <li><a href="{{ route('components', ['sub' => 'RAM']) }}" class="text-light text-opacity-75 text-decoration-none hover-white">RAM Memory (DDR5)</a></li>
+                    <li><a href="{{ route('components', ['sub' => 'SSD']) }}" class="text-light text-opacity-75 text-decoration-none hover-white">Storage (NVMe SSD)</a></li>
+                    <li><a href="{{ route('products', ['cat' => 'Display']) }}" class="text-light text-opacity-75 text-decoration-none hover-white">Gaming Monitors</a></li>
                 </ul>
             </div>
 
+            <!-- Custom PC Builds -->
             <div class="col-6 col-md-3 col-lg-2">
-                <div class="footer-title">Quick Links</div>
-                <ul class="footer-links">
-                    <li><a href="{{ route('about') }}">About Us</a></li>
-                    <li><a href="{{ route('contact') }}">Store Location</a></li>
-                    <li><a href="{{ route('enquiry') }}">Enquiry Cart</a></li>
-                    <li><a href="{{ route('products') }}">All Catalog</a></li>
-                    <li><a href="{{ route('admin.login') }}"><i class="bi bi-shield-lock me-1"></i> Staff ERP Portal</a></li>
+                <h6 class="fw-bold text-white mb-3 text-uppercase small" style="letter-spacing: 0.05em;">PC Builds</h6>
+                <ul class="list-unstyled d-flex flex-column gap-2 small">
+                    <li><a href="{{ route('pc.builder') }}" class="text-light text-opacity-75 text-decoration-none hover-white">Custom PC Configurator</a></li>
+                    <li><a href="{{ route('computers') }}" class="text-light text-opacity-75 text-decoration-none hover-white">Budget Gaming PCs</a></li>
+                    <li><a href="{{ route('computers') }}" class="text-light text-opacity-75 text-decoration-none hover-white">Mid-Range RTX Rigs</a></li>
+                    <li><a href="{{ route('computers') }}" class="text-light text-opacity-75 text-decoration-none hover-white">High-End Gaming Rigs</a></li>
+                    <li><a href="{{ route('computers') }}" class="text-light text-opacity-75 text-decoration-none hover-white">Creator Workstations</a></li>
+                    <li><a href="{{ route('laptops') }}" class="text-light text-opacity-75 text-decoration-none hover-white">Gaming & Work Laptops</a></li>
                 </ul>
             </div>
 
-            <div class="col-6 col-md-3 col-lg-2">
-                <div class="footer-title">Business Hours</div>
-                <p class="small text-light text-opacity-75 mb-2">Monday - Saturday:<br><strong class="text-white">10:00 AM - 8:30 PM</strong></p>
-                <p class="small text-light text-opacity-75 mb-0">Sunday:<br><strong class="text-white">Closed (Online Enquiries Open)</strong></p>
+            <!-- Customer Service -->
+            <div class="col-6 col-md-3 col-lg-3">
+                <h6 class="fw-bold text-white mb-3 text-uppercase small" style="letter-spacing: 0.05em;">Customer Service</h6>
+                <ul class="list-unstyled d-flex flex-column gap-2 small mb-4">
+                    <li><a href="{{ route('enquiry') }}" class="text-light text-opacity-75 text-decoration-none hover-white">Track Quotation / Order</a></li>
+                    <li><a href="{{ route('about') }}" class="text-light text-opacity-75 text-decoration-none hover-white">About Showroom</a></li>
+                    <li><a href="{{ route('contact') }}" class="text-light text-opacity-75 text-decoration-none hover-white">Store Location & Directions</a></li>
+                    <li><a href="{{ route('admin.login') }}" class="text-warning text-decoration-none"><i class="bi bi-shield-lock me-1"></i> Staff ERP Portal</a></li>
+                </ul>
+                <div class="p-3 rounded-3 bg-secondary bg-opacity-25 small">
+                    <div class="fw-bold mb-1"><i class="bi bi-clock me-1 text-primary"></i> Showroom Hours:</div>
+                    <div class="text-light text-opacity-75">Mon - Sat: 10:00 AM - 8:30 PM<br>Sunday: Online Quotations Open</div>
+                </div>
             </div>
         </div>
 
-        <div class="pt-4 border-top border-white border-opacity-10 d-flex flex-wrap justify-content-between align-items-center small text-light text-opacity-75">
-            <p class="mb-0">&copy; {{ date('Y') }} Hari Om Computer. All rights reserved.</p>
-            <p class="mb-0">GSTIN: 08AABCH1234F1Z9 &bull; Jodhpur, Rajasthan</p>
+        <div class="pt-4 border-top border-secondary border-opacity-25 d-flex flex-wrap justify-content-between align-items-center small text-light text-opacity-50">
+            <p class="mb-0">&copy; {{ date('Y') }} Hari Om PCMart (Hari Om Computer). All rights reserved.</p>
+            <div class="d-flex align-items-center gap-3">
+                <span>100% Genuine Warranty</span>
+                <span>&bull;</span>
+                <span>GST Tax Invoice</span>
+                <span>&bull;</span>
+                <span>Jodhpur, Rajasthan</span>
+            </div>
         </div>
     </div>
 </footer>
