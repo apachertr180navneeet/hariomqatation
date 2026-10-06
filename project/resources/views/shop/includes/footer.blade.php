@@ -1,7 +1,39 @@
-<!-- Floating WhatsApp Action -->
-<a href="https://wa.me/919829012345?text=Hello%20Hari%20Om%20Computer,%20I%20have%20an%20inquiry%20regarding%20computer%20hardware" target="_blank" class="whatsapp-float" title="Chat on WhatsApp" rel="noopener noreferrer">
+<!-- Floating WhatsApp Action (Desktop Only, on Mobile it is in the Bottom App Bar) -->
+<a href="https://wa.me/919829012345?text=Hello%20Hari%20Om%20Computer,%20I%20have%20an%20inquiry%20regarding%20computer%20hardware" target="_blank" class="whatsapp-float d-none d-lg-flex" title="Chat on WhatsApp" rel="noopener noreferrer">
     <i class="bi bi-whatsapp"></i>
 </a>
+
+<!-- =========================================================================
+     Sticky Mobile Bottom App Bar (Mobile & Tablet App Feel)
+     ========================================================================= -->
+<nav class="mobile-bottom-nav d-lg-none" aria-label="Mobile Navigation">
+    <a href="{{ route('home') }}" class="mobile-nav-link {{ request()->routeIs('home') ? 'active' : '' }}">
+        <div class="mobile-nav-icon"><i class="bi bi-house-door-fill"></i></div>
+        <span class="mobile-nav-label">Home</span>
+    </a>
+    <a href="{{ route('products') }}" class="mobile-nav-link {{ request()->routeIs('products') ? 'active' : '' }}">
+        <div class="mobile-nav-icon"><i class="bi bi-grid-fill"></i></div>
+        <span class="mobile-nav-label">Catalog</span>
+    </a>
+    <a href="{{ route('pc.builder') }}" class="mobile-nav-link mobile-nav-builder-link {{ request()->routeIs('pc.builder') ? 'active' : '' }}">
+        <div class="mobile-nav-icon position-relative">
+            <i class="bi bi-motherboard-fill"></i>
+            <span class="mobile-badge-hot">HOT</span>
+        </div>
+        <span class="mobile-nav-label">Builder</span>
+    </a>
+    <a href="{{ route('enquiry') }}" class="mobile-nav-link position-relative {{ request()->routeIs('enquiry') ? 'active' : '' }}">
+        <div class="mobile-nav-icon position-relative">
+            <i class="bi bi-cart-fill"></i>
+            <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger enquiry-count-badge" style="display: none; font-size: 0.6rem; padding: 2px 4px;">0</span>
+        </div>
+        <span class="mobile-nav-label">Cart</span>
+    </a>
+    <a href="https://wa.me/919829012345?text=Hello%20Hari%20Om%20Computer" target="_blank" class="mobile-nav-link mobile-nav-whatsapp">
+        <div class="mobile-nav-icon text-success"><i class="bi bi-whatsapp"></i></div>
+        <span class="mobile-nav-label">WhatsApp</span>
+    </a>
+</nav>
 
 <!-- Main Showroom Footer -->
 <footer class="store-footer">

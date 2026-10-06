@@ -15,10 +15,18 @@
 </div>
 
 <!-- Catalog Main -->
-<main class="container my-4">
+<main class="container my-3 my-md-4">
+    <!-- Mobile Filter Toggle Button -->
+    <div class="d-lg-none mb-3">
+        <button class="btn btn-outline-primary w-100 py-2 fw-bold d-flex align-items-center justify-content-center gap-2 shadow-sm rounded-pill" type="button" data-bs-toggle="collapse" data-bs-target="#catalogFilterCollapse" aria-expanded="false" aria-controls="catalogFilterCollapse">
+            <i class="bi bi-funnel-fill"></i>
+            <span>Tap to Filter & Search Hardware</span>
+        </button>
+    </div>
+
     <div class="row g-4">
         <!-- Sidebar Filters -->
-        <div class="col-lg-3">
+        <div class="col-lg-3 collapse d-lg-block" id="catalogFilterCollapse">
             <div class="card border-0 shadow-sm p-3 mb-4 rounded-3 bg-white">
                 <h6 class="fw-bold mb-3 d-flex justify-content-between align-items-center">
                     <span><i class="bi bi-funnel text-primary me-1"></i> Filter Products</span>
@@ -211,7 +219,7 @@
                 const detailUrl = `/product-details?id=${p.id}`;
 
                 html += `
-                    <div class="col-md-6 col-lg-4">
+                    <div class="col-6 col-md-6 col-lg-4">
                         <div class="product-card-v3">
                             <div class="product-visual-art ${art.cls}">
                                 ${discountPct > 0 ? `<span class="product-badge-discount">${discountPct}% OFF</span>` : ''}

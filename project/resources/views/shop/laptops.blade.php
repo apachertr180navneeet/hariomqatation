@@ -27,7 +27,7 @@
                 $specParts = array_slice($specParts, 0, 4);
                 $detailUrl = route('product.details', ['id' => $laptop->id]);
             @endphp
-            <div class="col-md-6 col-lg-4">
+            <div class="col-6 col-md-6 col-lg-4">
                 <div class="product-card-v3">
                     <div class="product-visual-art art-laptop" style="min-height: 200px;">
                         @if($discountPct > 0)

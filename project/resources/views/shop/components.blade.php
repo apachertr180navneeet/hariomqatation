@@ -59,7 +59,7 @@
                 const detailUrl = `/product-details?id=${p.id}`;
 
                 html += `
-                    <div class="col-md-6 col-lg-4">
+                    <div class="col-6 col-md-6 col-lg-4">
                         <div class="product-card-v3">
                             <div class="product-visual-art ${art.cls}">
                                 ${discountPct > 0 ? `<span class="product-badge-discount">${discountPct}% OFF</span>` : ''}

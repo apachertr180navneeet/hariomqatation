@@ -2,12 +2,49 @@
 
 @section('content')
 <!-- =========================================================================
+     Mobile Horizontal Category Scroll Strip (App-Style 1-Tap Browsing for Mobile)
+     ========================================================================= -->
+<div class="mobile-cat-scroll-strip d-lg-none py-2 bg-white border-bottom">
+    <div class="container">
+        <div class="cat-chips-scroll-container">
+            <a href="{{ route('products') }}" class="cat-chip-pill active">
+                <i class="bi bi-grid-fill text-primary"></i> All Items
+            </a>
+            <a href="{{ route('laptops') }}" class="cat-chip-pill">
+                <i class="bi bi-laptop text-primary"></i> Laptops
+            </a>
+            <a href="{{ route('computers') }}" class="cat-chip-pill">
+                <i class="bi bi-pc-display text-info"></i> Desktops
+            </a>
+            <a href="{{ route('pc.builder') }}" class="cat-chip-pill chip-pill-hot">
+                <i class="bi bi-motherboard text-danger"></i> PC Builder <span class="badge bg-danger text-white ms-1" style="font-size: 0.6rem;">HOT</span>
+            </a>
+            <a href="{{ route('components') }}" class="cat-chip-pill">
+                <i class="bi bi-gpu-card text-warning"></i> RTX GPUs
+            </a>
+            <a href="{{ route('components') }}" class="cat-chip-pill">
+                <i class="bi bi-cpu text-success"></i> CPUs
+            </a>
+            <a href="{{ route('components') }}" class="cat-chip-pill">
+                <i class="bi bi-memory text-primary"></i> DDR5 RAM
+            </a>
+            <a href="{{ route('products', ['cat' => 'Display']) }}" class="cat-chip-pill">
+                <i class="bi bi-display text-info"></i> Monitors
+            </a>
+            <a href="{{ route('products', ['cat' => 'Accessories']) }}" class="cat-chip-pill">
+                <i class="bi bi-keyboard text-dark"></i> Accessories
+            </a>
+        </div>
+    </div>
+</div>
+
+<!-- =========================================================================
      Unimart Home Electronics - Hero Section (3-Column Layout)
      ========================================================================= -->
-<section class="unimart-hero-section py-4">
+<section class="unimart-hero-section py-3 py-md-4">
     <div class="container">
         <div class="row g-3 align-items-stretch">
-            <!-- Left Column: Vertical Category Menu (Unimart Sidebar) -->
+            <!-- Left Column: Vertical Category Menu (Unimart Sidebar, Desktop only) -->
             <div class="col-lg-3 d-none d-lg-block">
                 <div class="unimart-category-sidebar">
                     <div class="category-sidebar-header">
@@ -180,38 +217,44 @@
                 </div>
             </div>
 
-            <!-- Right Column: Stacked Dual Promotional Cards (Unimart Style) -->
-            <div class="col-lg-3 col-12 d-flex flex-column gap-3">
-                <!-- Promo Card 1: Laptops -->
-                <div class="unimart-promo-card promo-card-laptops flex-fill position-relative overflow-hidden">
-                    <div class="row align-items-center g-2 h-100">
-                        <div class="col-7">
-                            <span class="badge bg-danger text-white mb-2 font-monospace" style="font-size: 0.68rem;">SAVE UP TO 30%</span>
-                            <h5 class="fw-bold text-white mb-1" style="font-size: 1.05rem;">Gaming & Business Laptops</h5>
-                            <p class="text-light text-opacity-75 small mb-2" style="font-size: 0.74rem;">ASUS, Dell & HP from ₹38,990.</p>
-                            <a href="{{ route('laptops') }}" class="btn btn-sm btn-light fw-bold rounded-pill px-3 py-1" style="font-size: 0.78rem;">
-                                Shop Laptops <i class="bi bi-arrow-right ms-1"></i>
-                            </a>
-                        </div>
-                        <div class="col-5 text-center">
-                            <img src="{{ asset('assets/images/promo_laptop.jpg') }}" alt="Laptops" class="img-fluid rounded-3 promo-img-thumb shadow">
+            <!-- Right Column: Dual Promotional Cards (Responsive Grid) -->
+            <div class="col-lg-3 col-12">
+                <div class="row g-3 h-100">
+                    <!-- Promo Card 1: Laptops -->
+                    <div class="col-12 col-md-6 col-lg-12">
+                        <div class="unimart-promo-card promo-card-laptops h-100 position-relative overflow-hidden">
+                            <div class="row align-items-center g-2 h-100">
+                                <div class="col-7">
+                                    <span class="badge bg-danger text-white mb-2 font-monospace" style="font-size: 0.68rem;">SAVE UP TO 30%</span>
+                                    <h5 class="fw-bold text-white mb-1" style="font-size: 1.05rem;">Gaming & Business Laptops</h5>
+                                    <p class="text-light text-opacity-75 small mb-2" style="font-size: 0.74rem;">ASUS, Dell & HP from ₹38,990.</p>
+                                    <a href="{{ route('laptops') }}" class="btn btn-sm btn-light fw-bold rounded-pill px-3 py-1" style="font-size: 0.78rem;">
+                                        Shop Laptops <i class="bi bi-arrow-right ms-1"></i>
+                                    </a>
+                                </div>
+                                <div class="col-5 text-center">
+                                    <img src="{{ asset('assets/images/promo_laptop.jpg') }}" alt="Laptops" class="img-fluid rounded-3 promo-img-thumb shadow">
+                                </div>
+                            </div>
                         </div>
                     </div>
-                </div>
 
-                <!-- Promo Card 2: PC Configurator -->
-                <div class="unimart-promo-card promo-card-builder flex-fill position-relative overflow-hidden">
-                    <div class="row align-items-center g-2 h-100">
-                        <div class="col-7">
-                            <span class="badge bg-primary text-white mb-2 font-monospace border border-white border-opacity-25" style="font-size: 0.68rem;">INSTANT GST QUOTE</span>
-                            <h5 class="fw-bold text-white mb-1" style="font-size: 1.05rem;">Custom PC Configurator</h5>
-                            <p class="text-light text-opacity-75 small mb-2" style="font-size: 0.74rem;">Real-time socket verification.</p>
-                            <a href="{{ route('pc.builder') }}" class="btn btn-sm btn-primary fw-bold rounded-pill px-3 py-1 border border-white border-opacity-25" style="font-size: 0.78rem;">
-                                Launch Builder <i class="bi bi-sliders ms-1"></i>
-                            </a>
-                        </div>
-                        <div class="col-5 text-center">
-                            <img src="{{ asset('assets/images/promo_builder.jpg') }}" alt="PC Builder" class="img-fluid rounded-3 promo-img-thumb shadow">
+                    <!-- Promo Card 2: PC Configurator -->
+                    <div class="col-12 col-md-6 col-lg-12">
+                        <div class="unimart-promo-card promo-card-builder h-100 position-relative overflow-hidden">
+                            <div class="row align-items-center g-2 h-100">
+                                <div class="col-7">
+                                    <span class="badge bg-primary text-white mb-2 font-monospace border border-white border-opacity-25" style="font-size: 0.68rem;">INSTANT GST QUOTE</span>
+                                    <h5 class="fw-bold text-white mb-1" style="font-size: 1.05rem;">Custom PC Configurator</h5>
+                                    <p class="text-light text-opacity-75 small mb-2" style="font-size: 0.74rem;">Real-time socket verification.</p>
+                                    <a href="{{ route('pc.builder') }}" class="btn btn-sm btn-primary fw-bold rounded-pill px-3 py-1 border border-white border-opacity-25" style="font-size: 0.78rem;">
+                                        Launch Builder <i class="bi bi-sliders ms-1"></i>
+                                    </a>
+                                </div>
+                                <div class="col-5 text-center">
+                                    <img src="{{ asset('assets/images/promo_builder.jpg') }}" alt="PC Builder" class="img-fluid rounded-3 promo-img-thumb shadow">
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -640,7 +683,7 @@
                 const detailUrl = `/product-details?id=${p.id}`;
 
                 html += `
-                    <div class="col-sm-6 col-md-6 col-lg-3">
+                    <div class="col-6 col-md-4 col-lg-3">
                         <div class="unimart-product-card">
                             <div class="unimart-card-media ${art.cls}">
                                 <div class="card-badge-top-left">
