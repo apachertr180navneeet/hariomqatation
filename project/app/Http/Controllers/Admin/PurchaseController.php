@@ -219,11 +219,20 @@ class PurchaseController extends Controller
     /**
      * Display the specified purchase bill receipt.
      */
-    public function show($id): View
+    public function show(Request $request, $id = null): View
     {
-        $purchase = is_numeric($id)
-            ? Purchase::with(['supplier', 'items.product', 'creator'])->findOrFail($id)
-            : Purchase::with(['supplier', 'items.product', 'creator'])->where('purchase_no', $id)->firstOrFail();
+        $targetId = $id ?: $request->query('id');
+        $purchase = null;
+
+        if ($targetId) {
+            $purchase = is_numeric($targetId)
+                ? Purchase::with(['supplier', 'items.product', 'creator'])->find($targetId)
+                : Purchase::with(['supplier', 'items.product', 'creator'])->where('purchase_no', $targetId)->first();
+        }
+
+        if (!$purchase) {
+            $purchase = Purchase::with(['supplier', 'items.product', 'creator'])->latest()->firstOrFail();
+        }
 
         return view('admin.purchases.show', [
             'pageTitle' => "Purchase Bill {$purchase->purchase_no} | Hari Om Computer",

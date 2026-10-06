@@ -52,6 +52,14 @@ class Quotation extends Model
     }
 
     /**
+     * Associated tax invoice if converted.
+     */
+    public function invoice(): \Illuminate\Database\Eloquent\Relations\HasOne
+    {
+        return $this->hasOne(Invoice::class);
+    }
+
+    /**
      * User who generated this quotation.
      */
     public function creator(): BelongsTo

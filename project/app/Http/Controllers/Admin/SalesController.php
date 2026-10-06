@@ -69,11 +69,18 @@ class SalesController extends Controller
      */
     public function invoice(Request $request, $id = null): View
     {
-        $invoiceId = $id ?: $request->query('id', 1);
+        $invoiceId = $id ?: $request->query('id');
+        $invoice = null;
 
-        $invoice = is_numeric($invoiceId)
-            ? Invoice::with(['items.product', 'customer', 'creator', 'quotation'])->findOrFail($invoiceId)
-            : Invoice::with(['items.product', 'customer', 'creator', 'quotation'])->where('invoice_no', $invoiceId)->firstOrFail();
+        if ($invoiceId) {
+            $invoice = is_numeric($invoiceId)
+                ? Invoice::with(['items.product', 'customer', 'creator', 'quotation'])->find($invoiceId)
+                : Invoice::with(['items.product', 'customer', 'creator', 'quotation'])->where('invoice_no', $invoiceId)->first();
+        }
+
+        if (!$invoice) {
+            $invoice = Invoice::with(['items.product', 'customer', 'creator', 'quotation'])->latest()->firstOrFail();
+        }
 
         return view('admin.sales.invoice', [
             'pageTitle' => "GST Tax Invoice {$invoice->invoice_no} | Hari Om Computer",

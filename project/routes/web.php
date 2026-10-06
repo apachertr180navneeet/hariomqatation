@@ -27,12 +27,27 @@ Route::controller(ShopController::class)->group(function () {
     Route::get('/components', 'components')->name('components');
     Route::get('/products', 'products')->name('products');
     Route::get('/product-details', 'productDetails')->name('product.details');
+    Route::get('/product-details/{id}', 'productDetails');
     Route::get('/pc-builder', 'pcBuilder')->name('pc.builder');
     Route::get('/enquiry', 'enquiry')->name('enquiry');
     Route::post('/enquiry', 'submitEnquiry')->name('enquiry.submit');
     Route::get('/quotation-success', 'quotationSuccess')->name('quotation.success');
+    Route::get('/quotation-success/{id}', 'quotationSuccess');
     Route::get('/about', 'about')->name('about');
     Route::get('/contact', 'contact')->name('contact');
+
+    // Legacy Prototype compatibility aliases (.php extension support)
+    Route::get('/index.php', 'index');
+    Route::get('/computers.php', 'computers');
+    Route::get('/laptops.php', 'laptops');
+    Route::get('/components.php', 'components');
+    Route::get('/products.php', 'products');
+    Route::get('/product-details.php', 'productDetails');
+    Route::get('/pc-builder.php', 'pcBuilder');
+    Route::get('/enquiry.php', 'enquiry');
+    Route::get('/quotation-success.php', 'quotationSuccess');
+    Route::get('/about.php', 'about');
+    Route::get('/contact.php', 'contact');
 });
 
 /*

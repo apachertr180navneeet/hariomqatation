@@ -185,11 +185,20 @@ class QuotationController extends Controller
     /**
      * Display a single detailed quotation.
      */
-    public function show($id): View
+    public function show(Request $request, $id = null): View
     {
-        $quotation = is_numeric($id) 
-            ? Quotation::with(['items.product', 'creator'])->findOrFail($id)
-            : Quotation::with(['items.product', 'creator'])->where('quotation_no', $id)->firstOrFail();
+        $targetId = $id ?: $request->query('id');
+        $quotation = null;
+
+        if ($targetId) {
+            $quotation = is_numeric($targetId) 
+                ? Quotation::with(['items.product', 'creator'])->find($targetId)
+                : Quotation::with(['items.product', 'creator'])->where('quotation_no', $targetId)->first();
+        }
+
+        if (!$quotation) {
+            $quotation = Quotation::with(['items.product', 'creator'])->latest()->firstOrFail();
+        }
 
         return view('admin.quotations.view', [
             'pageTitle' => "Quotation {$quotation->quotation_no} | Hari Om Computer ERP",
@@ -201,11 +210,20 @@ class QuotationController extends Controller
     /**
      * Printable A4 letterhead quotation preview.
      */
-    public function print($id): View
+    public function print(Request $request, $id = null): View
     {
-        $quotation = is_numeric($id) 
-            ? Quotation::with(['items.product', 'creator'])->findOrFail($id)
-            : Quotation::with(['items.product', 'creator'])->where('quotation_no', $id)->firstOrFail();
+        $targetId = $id ?: $request->query('id');
+        $quotation = null;
+
+        if ($targetId) {
+            $quotation = is_numeric($targetId) 
+                ? Quotation::with(['items.product', 'creator'])->find($targetId)
+                : Quotation::with(['items.product', 'creator'])->where('quotation_no', $targetId)->first();
+        }
+
+        if (!$quotation) {
+            $quotation = Quotation::with(['items.product', 'creator'])->latest()->firstOrFail();
+        }
 
         return view('admin.quotations.print', [
             'pageTitle' => "Print {$quotation->quotation_no} | Hari Om Computer",

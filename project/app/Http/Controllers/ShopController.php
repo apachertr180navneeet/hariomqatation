@@ -178,27 +178,33 @@ class ShopController extends Controller
     /**
      * Detailed product specifications and enquiry view.
      */
-    public function productDetails(Request $request): View
+    public function productDetails(Request $request, $id = null): View
     {
-        $id = $request->query('id', 1);
+        $targetId = $id ?: $request->query('id');
+        $product = null;
 
-        $product = Product::with(['category', 'brand', 'subcategory'])
-            ->where('id', $id)
-            ->orWhere('sku', $id)
-            ->first();
+        if ($targetId) {
+            $product = is_numeric($targetId)
+                ? Product::with(['category', 'brand', 'subcategory'])->find($targetId)
+                : Product::with(['category', 'brand', 'subcategory'])->where('sku', $targetId)->orWhere('slug', $targetId)->first();
+        }
 
         if (!$product) {
-            $product = Product::active()->first();
+            $product = Product::active()->with(['category', 'brand', 'subcategory'])->first();
+        }
+
+        if (!$product) {
+            $product = Product::with(['category', 'brand', 'subcategory'])->latest()->firstOrFail();
         }
 
         $relatedProducts = Product::active()
-            ->where('category_id', $product?->category_id)
-            ->where('id', '!=', $product?->id)
+            ->where('category_id', $product->category_id)
+            ->where('id', '!=', $product->id)
             ->take(4)
             ->get();
 
         return view('shop.product-details', [
-            'pageTitle' => ($product?->name ?? 'Product Details') . ' | Hari Om Computer',
+            'pageTitle' => ($product->name ?? 'Product Details') . ' | Hari Om Computer',
             'currentPage' => 'products',
             'product' => $product,
             'relatedProducts' => $relatedProducts,
@@ -392,19 +398,26 @@ class ShopController extends Controller
     /**
      * Quotation Submission Success page.
      */
-    public function quotationSuccess(Request $request): View
+    public function quotationSuccess(Request $request, $id = null): View
     {
-        $quoteNo = $request->query('quote');
+        $target = $id ?: $request->query('quote') ?: $request->query('id');
         $quotation = null;
-        if ($quoteNo) {
-            $quotation = Quotation::with('items')->where('quotation_no', $quoteNo)->first();
+
+        if ($target) {
+            $quotation = is_numeric($target)
+                ? Quotation::with('items')->find($target)
+                : Quotation::with('items')->where('quotation_no', $target)->first();
+        }
+
+        if (!$quotation) {
+            $quotation = Quotation::with('items')->latest()->first();
         }
 
         return view('shop.quotation-success', [
             'pageTitle' => 'Quotation Request Received | Hari Om Computer',
             'currentPage' => 'enquiry',
             'quotation' => $quotation,
-            'quotationNo' => $quoteNo,
+            'quotationNo' => $quotation?->quotation_no ?? $target ?? 'HOC/QTN/PENDING',
         ]);
     }
 
