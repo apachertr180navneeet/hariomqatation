@@ -8,7 +8,7 @@
             <h4 class="fw-bold mb-0">Product Enquiry & Quotation Request</h4>
             <small class="text-muted">Review selected products and submit to receive an official GST quotation from Hari Om Computer.</small>
         </div>
-        <button class="btn btn-outline-danger btn-sm" onclick="if(confirm('Clear all enquiry items?')) { DataStore.clearEnquiryCart(); }">
+        <button class="btn btn-outline-danger btn-sm" id="btn-clear-enquiry-cart" type="button">
             <i class="bi bi-trash me-1"></i> Clear Cart
         </button>
     </div>
@@ -128,6 +128,55 @@
     document.addEventListener("DOMContentLoaded", () => {
         if (typeof StoreApp !== 'undefined') {
             StoreApp.renderEnquiryPage();
+        }
+
+        const clearBtn = document.getElementById("btn-clear-enquiry-cart");
+        if (clearBtn) {
+            clearBtn.addEventListener("click", () => {
+                const cart = DataStore.getEnquiryCart();
+                if (!cart || cart.length === 0) {
+                    if (typeof Swal !== 'undefined') {
+                        Swal.fire({
+                            icon: 'info',
+                            title: 'Cart is empty',
+                            text: 'There are no items in your enquiry cart to clear.',
+                            timer: 2000,
+                            showConfirmButton: false
+                        });
+                    } else {
+                        HOC_UTILS.showToast('Enquiry cart is already empty.', 'info');
+                    }
+                    return;
+                }
+
+                if (typeof Swal !== 'undefined') {
+                    Swal.fire({
+                        title: 'Clear Enquiry Cart?',
+                        text: 'Are you sure you want to remove all items from your enquiry cart?',
+                        icon: 'warning',
+                        showCancelButton: true,
+                        confirmButtonColor: '#dc2626',
+                        cancelButtonColor: '#64748b',
+                        confirmButtonText: '<i class="bi bi-trash3 me-1"></i> Yes, Clear Cart',
+                        cancelButtonText: 'Cancel',
+                        reverseButtons: true,
+                        focusCancel: true
+                    }).then((result) => {
+                        if (result.isConfirmed) {
+                            DataStore.clearEnquiryCart();
+                            Swal.fire({
+                                icon: 'success',
+                                title: 'Cart Cleared',
+                                text: 'All items removed from enquiry cart.',
+                                timer: 1500,
+                                showConfirmButton: false
+                            });
+                        }
+                    });
+                } else if (confirm('Clear all enquiry items?')) {
+                    DataStore.clearEnquiryCart();
+                }
+            });
         }
     });
 </script>

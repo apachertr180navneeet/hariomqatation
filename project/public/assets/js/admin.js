@@ -7,6 +7,43 @@ const AdminApp = {
   init() {
     this.bindSidebar();
     this.updateNotificationBadges();
+    this.bindConfirmations();
+  },
+
+  bindConfirmations() {
+    // Intercept form submissions for any form with .delete-form or [data-confirm]
+    document.addEventListener("submit", (e) => {
+      const form = e.target;
+      if (form && form.matches && (form.matches(".delete-form") || form.hasAttribute("data-confirm")) && !form.dataset.confirmed) {
+        e.preventDefault();
+        const text = form.getAttribute("data-confirm") || form.getAttribute("data-confirm-text") || "Are you sure you want to perform this action?";
+        const title = form.getAttribute("data-confirm-title") || "Are you sure?";
+        const btnText = form.getAttribute("data-confirm-btn") || "Yes, delete it!";
+
+        if (typeof Swal !== "undefined") {
+          Swal.fire({
+            title: title,
+            text: text,
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#dc2626",
+            cancelButtonColor: "#64748b",
+            confirmButtonText: `<i class="bi bi-trash3 me-1"></i> ${btnText}`,
+            cancelButtonText: "Cancel",
+            reverseButtons: true,
+            focusCancel: true
+          }).then((result) => {
+            if (result.isConfirmed) {
+              form.dataset.confirmed = "true";
+              form.submit();
+            }
+          });
+        } else if (confirm(text)) {
+          form.dataset.confirmed = "true";
+          form.submit();
+        }
+      }
+    });
   },
 
   bindSidebar() {
@@ -386,14 +423,48 @@ const AdminApp = {
       if (convertBtn) {
         e.preventDefault();
         const qId = convertBtn.getAttribute("data-id");
-        if (confirm(`Do you want to convert Quotation ${qId} into a final Sales Invoice? This will decrement product stock and record payment.`)) {
+        const msg = `Do you want to convert Quotation ${qId} into a final Sales Invoice? This will decrement product stock and record payment.`;
+        
+        const executeConvert = () => {
           const sale = DataStore.convertQuotationToSale(qId, "Bank Transfer");
           if (sale) {
-            HOC_UTILS.showToast(`Invoice ${sale.invoiceNo} successfully generated from quotation!`);
-            setTimeout(() => {
-              window.location.href = "/admin/sales";
-            }, 800);
+            if (typeof Swal !== "undefined") {
+              Swal.fire({
+                icon: "success",
+                title: "Invoice Generated!",
+                text: `Invoice ${sale.invoiceNo} successfully generated from quotation!`,
+                timer: 1500,
+                showConfirmButton: false
+              }).then(() => {
+                window.location.href = "/admin/sales";
+              });
+            } else {
+              HOC_UTILS.showToast(`Invoice ${sale.invoiceNo} successfully generated from quotation!`);
+              setTimeout(() => {
+                window.location.href = "/admin/sales";
+              }, 800);
+            }
           }
+        };
+
+        if (typeof Swal !== "undefined") {
+          Swal.fire({
+            title: "Convert to Sales Invoice?",
+            text: msg,
+            icon: "question",
+            showCancelButton: true,
+            confirmButtonColor: "#0284c7",
+            cancelButtonColor: "#64748b",
+            confirmButtonText: "Convert & Generate Invoice",
+            cancelButtonText: "Cancel",
+            reverseButtons: true
+          }).then((result) => {
+            if (result.isConfirmed) {
+              executeConvert();
+            }
+          });
+        } else if (confirm(msg)) {
+          executeConvert();
         }
       }
     });
@@ -480,3 +551,34 @@ const AdminApp = {
 document.addEventListener("DOMContentLoaded", () => {
   AdminApp.init();
 });
+
+// Global SweetAlert Delete Helper
+window.confirmDelete = function(event, message = "Are you sure you want to delete this item?", title = "Are you sure?") {
+  if (event) event.preventDefault();
+  const form = event ? event.target.closest("form") : null;
+  if (!form) return false;
+
+  if (typeof Swal !== "undefined") {
+    Swal.fire({
+      title: title,
+      text: message,
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#dc2626",
+      cancelButtonColor: "#64748b",
+      confirmButtonText: '<i class="bi bi-trash3 me-1"></i> Yes, delete it!',
+      cancelButtonText: "Cancel",
+      reverseButtons: true,
+      focusCancel: true
+    }).then((result) => {
+      if (result.isConfirmed) {
+        form.dataset.confirmed = "true";
+        form.submit();
+      }
+    });
+  } else if (confirm(message)) {
+    form.dataset.confirmed = "true";
+    form.submit();
+  }
+  return false;
+};

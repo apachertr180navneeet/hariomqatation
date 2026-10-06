@@ -210,12 +210,42 @@
 
         // Convert to Sale action
         document.getElementById("btn-convert-to-sale").onclick = () => {
-            if (confirm(`Convert Quotation ${q.id} to Sales Invoice? Stock will be decremented.`)) {
+            const convertAction = () => {
                 const sale = DataStore.convertQuotationToSale(q.id, "Bank Transfer");
                 if (sale) {
-                    HOC_UTILS.showToast(`Invoice ${sale.invoiceNo} successfully created!`);
-                    setTimeout(() => window.location.href = "{{ route('admin.sales') }}", 700);
+                    if (typeof Swal !== 'undefined') {
+                        Swal.fire({
+                            icon: 'success',
+                            title: 'Invoice Created!',
+                            text: `Invoice ${sale.invoiceNo} successfully created!`,
+                            timer: 1500,
+                            showConfirmButton: false
+                        }).then(() => {
+                            window.location.href = "{{ route('admin.sales') }}";
+                        });
+                    } else {
+                        HOC_UTILS.showToast(`Invoice ${sale.invoiceNo} successfully created!`);
+                        setTimeout(() => window.location.href = "{{ route('admin.sales') }}", 700);
+                    }
                 }
+            };
+
+            if (typeof Swal !== 'undefined') {
+                Swal.fire({
+                    title: 'Convert to Sales Invoice?',
+                    text: `Convert Quotation ${q.id} to Sales Invoice? Stock will be decremented.`,
+                    icon: 'question',
+                    showCancelButton: true,
+                    confirmButtonColor: '#0284c7',
+                    cancelButtonColor: '#64748b',
+                    confirmButtonText: 'Yes, Convert',
+                    cancelButtonText: 'Cancel',
+                    reverseButtons: true
+                }).then((res) => {
+                    if (res.isConfirmed) convertAction();
+                });
+            } else if (confirm(`Convert Quotation ${q.id} to Sales Invoice? Stock will be decremented.`)) {
+                convertAction();
             }
         };
 

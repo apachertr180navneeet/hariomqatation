@@ -160,7 +160,30 @@ const StoreApp = {
     tableBody.querySelectorAll(".btn-cart-remove").forEach(btn => {
       btn.onclick = () => {
         const id = btn.getAttribute("data-id");
-        DataStore.removeFromEnquiryCart(id);
+        const item = DataStore.getEnquiryCart().find(i => i.id === id);
+        const name = item ? item.name : 'this item';
+
+        if (typeof Swal !== 'undefined') {
+          Swal.fire({
+            title: 'Remove Product?',
+            text: `Remove "${name}" from your enquiry list?`,
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#dc2626',
+            cancelButtonColor: '#64748b',
+            confirmButtonText: 'Yes, Remove',
+            cancelButtonText: 'Cancel',
+            reverseButtons: true,
+            focusCancel: true
+          }).then((res) => {
+            if (res.isConfirmed) {
+              DataStore.removeFromEnquiryCart(id);
+              HOC_UTILS.showToast('Item removed from enquiry cart.');
+            }
+          });
+        } else {
+          DataStore.removeFromEnquiryCart(id);
+        }
       };
     });
 

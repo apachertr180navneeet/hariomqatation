@@ -1525,7 +1525,45 @@ const HOC_UTILS = {
     return (res.trim() + " Rupees Only").replace(/\s+/g, ' ');
   },
 
+  confirm(message, title = 'Are you sure?', confirmBtn = 'Yes, Proceed') {
+    if (typeof Swal !== 'undefined') {
+      return Swal.fire({
+        title: title,
+        text: message,
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#dc2626',
+        cancelButtonColor: '#64748b',
+        confirmButtonText: confirmBtn,
+        cancelButtonText: 'Cancel',
+        reverseButtons: true,
+        focusCancel: true
+      });
+    }
+    return Promise.resolve({ isConfirmed: window.confirm(message) });
+  },
+
   showToast(message, type = 'success') {
+    if (typeof Swal !== 'undefined') {
+      const iconType = type === 'danger' ? 'error' : type === 'warning' ? 'warning' : type === 'info' ? 'info' : 'success';
+      const Toast = Swal.mixin({
+        toast: true,
+        position: 'top-end',
+        showConfirmButton: false,
+        timer: 3500,
+        timerProgressBar: true,
+        didOpen: (toast) => {
+          toast.onmouseenter = Swal.stopTimer;
+          toast.onmouseleave = Swal.resumeTimer;
+        }
+      });
+      Toast.fire({
+        icon: iconType,
+        title: message
+      });
+      return;
+    }
+
     let container = document.getElementById('hoc-toast-container');
     if (!container) {
       container = document.createElement('div');

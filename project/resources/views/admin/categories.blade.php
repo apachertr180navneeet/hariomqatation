@@ -197,7 +197,7 @@
                                             title="Edit Subcategory &quot;{{ $sub->name }}&quot;">
                                         <i class="bi bi-pencil"></i>
                                     </button>
-                                    <form method="POST" action="{{ route('admin.categories.subcategories.destroy', $sub->id) }}" class="d-inline m-0 p-0" onsubmit="return confirm('Delete subcategory &quot;{{ $sub->name }}&quot;?');">
+                                    <form method="POST" action="{{ route('admin.categories.subcategories.destroy', $sub->id) }}" class="d-inline m-0 p-0 delete-form" data-confirm-title="Delete Subcategory?" data-confirm="Are you sure you want to delete subcategory &quot;{{ $sub->name }}&quot;?">
                                         @csrf
                                         @method('DELETE')
                                         <button type="submit" class="subcat-action-btn subcat-del-btn" title="Delete Subcategory &quot;{{ $sub->name }}&quot;">
@@ -228,7 +228,7 @@
                     </div>
 
                     @if($cat->products_count === 0)
-                        <form method="POST" action="{{ route('admin.categories.destroy', $cat->id) }}" onsubmit="return confirm('Are you sure you want to delete category &quot;{{ $cat->name }}&quot;?');">
+                        <form method="POST" action="{{ route('admin.categories.destroy', $cat->id) }}" class="delete-form d-inline" data-confirm-title="Delete Category?" data-confirm="Are you sure you want to delete category &quot;{{ $cat->name }}&quot;?">
                             @csrf
                             @method('DELETE')
                             <button type="submit" class="btn btn-sm btn-outline-danger px-2.5 py-1.5 rounded-3" title="Delete Category">
@@ -303,7 +303,7 @@
                                                     title="Edit {{ $sub->name }}">
                                                 <i class="bi bi-pencil"></i>
                                             </button>
-                                            <form method="POST" action="{{ route('admin.categories.subcategories.destroy', $sub->id) }}" class="d-inline m-0 p-0" onsubmit="return confirm('Delete subcategory &quot;{{ $sub->name }}&quot;?');">
+                                            <form method="POST" action="{{ route('admin.categories.subcategories.destroy', $sub->id) }}" class="d-inline m-0 p-0 delete-form" data-confirm-title="Delete Subcategory?" data-confirm="Are you sure you want to delete subcategory &quot;{{ $sub->name }}&quot;?">
                                                 @csrf
                                                 @method('DELETE')
                                                 <button type="submit" class="subcat-action-btn subcat-del-btn" title="Delete {{ $sub->name }}">
@@ -348,7 +348,7 @@
                                     <i class="bi bi-plus-lg"></i>
                                 </button>
                                 @if($cat->products_count === 0)
-                                    <form method="POST" action="{{ route('admin.categories.destroy', $cat->id) }}" class="d-inline" onsubmit="return confirm('Delete category {{ $cat->name }}?');">
+                                    <form method="POST" action="{{ route('admin.categories.destroy', $cat->id) }}" class="d-inline delete-form" data-confirm-title="Delete Category?" data-confirm="Are you sure you want to delete category &quot;{{ $cat->name }}&quot;?">
                                         @csrf
                                         @method('DELETE')
                                         <button type="submit" class="btn btn-outline-danger" title="Delete">

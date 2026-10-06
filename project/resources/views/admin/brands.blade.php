@@ -56,7 +56,7 @@
                                 <i class="bi bi-pencil"></i>
                             </button>
                             @if($brand->products_count === 0)
-                                <form method="POST" action="{{ route('admin.brands.destroy', $brand->id) }}" class="d-inline" onsubmit="return confirm('Delete brand {{ $brand->name }}?');">
+                                <form method="POST" action="{{ route('admin.brands.destroy', $brand->id) }}" class="d-inline delete-form" data-confirm-title="Delete Brand?" data-confirm="Are you sure you want to delete brand &quot;{{ $brand->name }}&quot;?">
                                     @csrf
                                     @method('DELETE')
                                     <button type="submit" class="btn btn-sm btn-outline-danger" title="Delete Brand">
