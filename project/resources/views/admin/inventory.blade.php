@@ -1,19 +1,34 @@
 @extends('admin.includes.app')
 
 @section('content')
-<div class="page-header">
+<!-- Page Header -->
+<div class="page-header d-flex flex-wrap align-items-center justify-content-between gap-3 mb-4">
     <div>
-        <h1 class="page-title">Stock Ledger & Inventory Management</h1>
-        <div class="page-breadcrumb">
-            <a href="{{ route('admin.dashboard') }}">Dashboard</a> &bull; <span>Physical Stock vs Reorder Level</span>
+        <div class="d-flex align-items-center gap-2 mb-1">
+            <h1 class="page-title fs-2 fw-bold text-slate-900 m-0">Stock Ledger & Inventory</h1>
+            <span class="badge bg-primary-subtle text-primary border border-primary-subtle rounded-pill px-2.5 py-1 fw-bold fs-7">
+                {{ $totalSkus }} Managed SKUs
+            </span>
+        </div>
+        <div class="page-breadcrumb text-muted small">
+            <a href="{{ route('admin.dashboard') }}" class="text-decoration-none text-muted"><i class="bi bi-house me-1"></i>Dashboard</a> 
+            <span class="mx-1">&bull;</span>
+            <span class="text-secondary">Catalog & Inventory</span>
+            <span class="mx-1">&bull;</span>
+            <span class="text-dark fw-semibold">Physical Stock vs Reorder Level</span>
         </div>
     </div>
-    <div class="d-flex gap-2">
-        <button type="button" class="btn btn-primary fw-bold" data-bs-toggle="modal" data-bs-target="#generalInwardModal">
-            <i class="bi bi-plus-circle me-1"></i> Stock In / Inward
+    
+    <div class="d-flex align-items-center gap-2">
+        <button type="button" class="btn btn-outline-secondary fw-semibold px-3 py-2 rounded-3 d-flex align-items-center gap-2" 
+                data-bs-toggle="modal" data-bs-target="#generalAdjustModal">
+            <i class="bi bi-sliders"></i>
+            <span>Physical Audit</span>
         </button>
-        <button type="button" class="btn btn-outline-secondary fw-semibold" data-bs-toggle="modal" data-bs-target="#generalAdjustModal">
-            <i class="bi bi-sliders me-1"></i> Physical Count Audit
+        <button type="button" class="btn btn-primary fw-bold px-3 py-2 shadow-sm rounded-3 d-flex align-items-center gap-2" 
+                data-bs-toggle="modal" data-bs-target="#generalInwardModal">
+            <i class="bi bi-box-arrow-in-down fs-6"></i>
+            <span>Stock Inward</span>
         </button>
     </div>
 </div>
@@ -21,73 +36,81 @@
 <!-- KPI Metrics Cards Row -->
 <div class="row g-3 mb-4">
     <div class="col-sm-6 col-xl-3">
-        <div class="admin-card p-3 shadow-sm border-start border-primary border-4 h-100">
-            <div class="d-flex justify-content-between align-items-center">
+        <div class="catalog-kpi-card kpi-blue">
+            <div class="d-flex align-items-center justify-content-between">
                 <div>
-                    <span class="text-muted small fw-bold text-uppercase">Total Catalog SKUs</span>
-                    <h3 class="fw-bold mb-0 text-slate-900 mt-1">{{ $totalSkus }}</h3>
+                    <div class="catalog-kpi-label">Total Catalog SKUs</div>
+                    <div class="catalog-kpi-val">{{ $totalSkus }}</div>
+                    <div class="catalog-kpi-sub"><i class="bi bi-box-seam text-primary"></i> Distinct hardware lines</div>
                 </div>
-                <div class="bg-primary-subtle text-primary p-3 rounded-circle fs-4">
-                    <i class="bi bi-box-seam"></i>
+                <div class="catalog-kpi-icon icon-blue">
+                    <i class="bi bi-box-seam-fill"></i>
                 </div>
             </div>
         </div>
     </div>
+
     <div class="col-sm-6 col-xl-3">
-        <div class="admin-card p-3 shadow-sm border-start border-success border-4 h-100">
-            <div class="d-flex justify-content-between align-items-center">
+        <div class="catalog-kpi-card kpi-emerald">
+            <div class="d-flex align-items-center justify-content-between">
                 <div>
-                    <span class="text-muted small fw-bold text-uppercase">Total Stock Units</span>
-                    <h3 class="fw-bold mb-0 text-success mt-1">{{ number_format($totalUnits) }}</h3>
+                    <div class="catalog-kpi-label">Total Stock Units</div>
+                    <div class="catalog-kpi-val text-success">{{ number_format($totalUnits) }}</div>
+                    <div class="catalog-kpi-sub"><i class="bi bi-boxes text-success"></i> Physical warehouse pieces</div>
                 </div>
-                <div class="bg-success-subtle text-success p-3 rounded-circle fs-4">
+                <div class="catalog-kpi-icon icon-emerald">
                     <i class="bi bi-boxes"></i>
                 </div>
             </div>
         </div>
     </div>
+
     <div class="col-sm-6 col-xl-3">
-        <div class="admin-card p-3 shadow-sm border-start border-info border-4 h-100">
-            <div class="d-flex justify-content-between align-items-center">
+        <div class="catalog-kpi-card kpi-indigo">
+            <div class="d-flex align-items-center justify-content-between">
                 <div>
-                    <span class="text-muted small fw-bold text-uppercase">Inventory Valuation</span>
-                    <h4 class="fw-bold mb-0 text-slate-900 mt-1">₹{{ number_format($totalInventoryValue, 2) }}</h4>
-                    <small class="text-muted" style="font-size: 0.72rem;">At Purchase Cost</small>
+                    <div class="catalog-kpi-label">Inventory Valuation</div>
+                    <div class="catalog-kpi-val text-indigo fs-4 mt-2">₹{{ number_format($totalInventoryValue, 2) }}</div>
+                    <div class="catalog-kpi-sub"><i class="bi bi-cash-stack text-indigo"></i> Valued at cost price</div>
                 </div>
-                <div class="bg-info-subtle text-info p-3 rounded-circle fs-4">
+                <div class="catalog-kpi-icon icon-indigo">
                     <i class="bi bi-currency-rupee"></i>
                 </div>
             </div>
         </div>
     </div>
+
     <div class="col-sm-6 col-xl-3">
-        <div class="admin-card p-3 shadow-sm border-start {{ $lowStockCount > 0 ? 'border-warning' : 'border-secondary' }} border-4 h-100">
-            <div class="d-flex justify-content-between align-items-center">
+        <div class="catalog-kpi-card {{ $lowStockCount > 0 ? 'kpi-amber' : 'kpi-emerald' }}">
+            <div class="d-flex align-items-center justify-content-between">
                 <div>
-                    <span class="text-muted small fw-bold text-uppercase">Low Stock Reorder Alerts</span>
-                    <h3 class="fw-bold mb-0 text-warning mt-1">{{ $lowStockCount }}</h3>
-                    <small class="text-danger" style="font-size: 0.72rem;">{{ $outOfStockCount }} Out of Stock</small>
+                    <div class="catalog-kpi-label">Reorder Level Alerts</div>
+                    <div class="catalog-kpi-val {{ $lowStockCount > 0 ? 'text-warning' : 'text-success' }}">{{ $lowStockCount }}</div>
+                    <div class="catalog-kpi-sub text-danger">
+                        <i class="bi bi-exclamation-triangle-fill me-1"></i>{{ $outOfStockCount }} completely out of stock
+                    </div>
                 </div>
-                <div class="bg-warning-subtle text-warning p-3 rounded-circle fs-4">
-                    <i class="bi bi-exclamation-triangle"></i>
+                <div class="catalog-kpi-icon {{ $lowStockCount > 0 ? 'icon-amber' : 'icon-emerald' }}">
+                    <i class="bi bi-exclamation-triangle-fill"></i>
                 </div>
             </div>
         </div>
     </div>
 </div>
 
-<!-- Filters & Search Bar -->
-<div class="admin-card mb-4 shadow-sm">
-    <div class="p-3 border-bottom bg-light bg-opacity-25">
-        <form method="GET" action="{{ route('admin.inventory') }}" class="row g-3 align-items-center">
+<!-- Modern Filters & Search Bar -->
+<div class="catalog-filter-card">
+    <form method="GET" action="{{ route('admin.inventory') }}">
+        <div class="row g-3 align-items-center mb-3">
             <div class="col-md-5">
-                <div class="input-group input-group-sm">
-                    <span class="input-group-text bg-white"><i class="bi bi-search"></i></span>
-                    <input type="text" name="search" value="{{ $currentSearch }}" class="form-control" placeholder="Search by SKU, Product Name, Brand...">
+                <div class="catalog-search-wrap">
+                    <i class="bi bi-search search-icon"></i>
+                    <input type="text" name="search" value="{{ $currentSearch }}" class="catalog-search-input" 
+                           placeholder="Search by SKU, Product Name, Brand...">
                 </div>
             </div>
             <div class="col-md-3">
-                <select name="category_id" class="form-select form-select-sm" onchange="this.form.submit()">
+                <select name="category_id" class="form-select catalog-select" onchange="this.form.submit()">
                     <option value="ALL">All Categories</option>
                     @foreach($categories as $cat)
                         <option value="{{ $cat->id }}" {{ (string)$currentCategory === (string)$cat->id ? 'selected' : '' }}>
@@ -97,30 +120,60 @@
                 </select>
             </div>
             <div class="col-md-2">
-                <select name="status" class="form-select form-select-sm" onchange="this.form.submit()">
+                <select name="status" class="form-select catalog-select" onchange="this.form.submit()">
                     <option value="ALL" {{ $currentStatus === 'ALL' ? 'selected' : '' }}>All Stock Levels</option>
                     <option value="low_stock" {{ $currentStatus === 'low_stock' ? 'selected' : '' }}>⚠️ Low Stock (&le; Min)</option>
                     <option value="out_of_stock" {{ $currentStatus === 'out_of_stock' ? 'selected' : '' }}>❌ Out of Stock (0)</option>
                 </select>
             </div>
-            <div class="col-md-2 d-flex gap-1">
-                <button type="submit" class="btn btn-sm btn-primary flex-grow-1">Filter</button>
-                <a href="{{ route('admin.inventory') }}" class="btn btn-sm btn-outline-secondary" title="Reset Filters"><i class="bi bi-arrow-clockwise"></i></a>
+            <div class="col-md-2 d-flex gap-2">
+                <button type="submit" class="btn btn-primary fw-bold flex-grow-1 rounded-3">
+                    <i class="bi bi-funnel me-1"></i> Filter
+                </button>
+                <a href="{{ route('admin.inventory') }}" class="btn btn-outline-secondary rounded-3" title="Reset Filters">
+                    <i class="bi bi-arrow-clockwise"></i>
+                </a>
             </div>
-        </form>
-    </div>
+        </div>
 
+        <!-- Quick Status Filter Pills -->
+        <div class="d-flex align-items-center justify-content-between flex-wrap gap-2 pt-2 border-top">
+            <div class="filter-pills-bar">
+                <span class="text-muted small fw-bold me-1 text-uppercase">Status Filter:</span>
+                <a href="{{ route('admin.inventory', array_merge(request()->except('status', 'page'), ['status' => 'ALL'])) }}" 
+                   class="filter-pill {{ $currentStatus === 'ALL' ? 'active' : '' }}">
+                    <i class="bi bi-grid-3x3-gap"></i> All Items ({{ $totalSkus }})
+                </a>
+                <a href="{{ route('admin.inventory', array_merge(request()->except('page'), ['status' => 'low_stock'])) }}" 
+                   class="filter-pill {{ $currentStatus === 'low_stock' ? 'active-warning' : '' }}">
+                    <i class="bi bi-exclamation-triangle-fill text-warning"></i> Low Stock Reorder ({{ $lowStockCount }})
+                </a>
+                <a href="{{ route('admin.inventory', array_merge(request()->except('page'), ['status' => 'out_of_stock'])) }}" 
+                   class="filter-pill {{ $currentStatus === 'out_of_stock' ? 'active-danger' : '' }}">
+                    <i class="bi bi-x-circle-fill text-danger"></i> Out of Stock ({{ $outOfStockCount }})
+                </a>
+            </div>
+
+            <div class="text-muted small">
+                Showing <strong>{{ $products->firstItem() ?? 0 }}-{{ $products->lastItem() ?? 0 }}</strong> of <strong>{{ $products->total() }}</strong> stock ledger records
+            </div>
+        </div>
+    </form>
+</div>
+
+<!-- Modern Inventory Stock Table -->
+<div class="catalog-card shadow-sm">
     <div class="table-responsive">
-        <table class="table table-hoc align-middle mb-0">
+        <table class="table-catalog align-middle mb-0">
             <thead>
                 <tr>
-                    <th>Product & SKU</th>
+                    <th style="min-width: 280px;">Hardware SKU & Product</th>
                     <th>Category</th>
-                    <th>Cost (₹)</th>
+                    <th class="text-end">Cost Price (₹)</th>
                     <th class="text-center">Current Stock</th>
                     <th class="text-center">Min Alert</th>
                     <th>Inventory Status</th>
-                    <th class="text-end">Quick Action</th>
+                    <th class="text-end" style="min-width: 140px;">Stock Operations</th>
                 </tr>
             </thead>
             <tbody>
@@ -132,56 +185,72 @@
                     <tr>
                         <td>
                             <div class="d-flex align-items-center gap-3">
-                                <div class="bg-light rounded p-2 text-center" style="width: 40px; height: 40px; display: flex; align-items: center; justify-content: center;">
-                                    <i class="bi {{ $p->category->icon ?? 'bi-box' }} text-primary fs-5"></i>
+                                <div class="catalog-avatar-box">
+                                    <i class="bi {{ $p->category->icon ?? 'bi-box' }}"></i>
                                 </div>
                                 <div>
-                                    <a href="{{ route('admin.products.view', ['id' => $p->id]) }}" class="fw-bold text-slate-900 text-decoration-none d-block">
+                                    <a href="{{ route('admin.products.view', ['id' => $p->id]) }}" class="catalog-item-name">
                                         {{ $p->name }}
                                     </a>
-                                    <small class="text-muted">
-                                        SKU: <code class="text-primary">{{ $p->sku }}</code> &bull; Brand: <strong>{{ $p->brand->name ?? 'Generic' }}</strong>
-                                    </small>
+                                    <div class="d-flex align-items-center gap-2 mt-1">
+                                        <span class="catalog-sku-code">{{ $p->sku }}</span>
+                                        <span class="badge bg-light text-secondary border font-monospace px-1.5 py-0.5" style="font-size: 0.7rem;">
+                                            {{ $p->brand->name ?? 'Generic' }}
+                                        </span>
+                                    </div>
                                 </div>
                             </div>
                         </td>
-                        <td><span class="badge bg-light text-dark border">{{ $p->category->name ?? '-' }}</span></td>
-                        <td class="text-slate-800 fw-semibold">₹{{ number_format($p->purchase_price, 2) }}</td>
-                        <td class="text-center">
-                            <span class="fw-bold fs-6 {{ $isOut ? 'text-danger' : ($isLow ? 'text-warning text-dark' : 'text-success') }}">
-                                {{ $p->stock }}
+                        <td>
+                            <span class="badge bg-light text-slate-800 border px-2.5 py-1 fw-semibold">
+                                {{ $p->category->name ?? '-' }}
                             </span>
-                            <small class="text-muted d-block" style="font-size: 0.72rem;">Units</small>
                         </td>
-                        <td class="text-center text-muted fw-semibold">{{ $p->min_stock }}</td>
+                        <td class="text-end">
+                            <span class="text-slate-800 fw-semibold">₹{{ number_format($p->purchase_price, 2) }}</span>
+                        </td>
+                        <td class="text-center">
+                            <div class="fw-bold fs-6 {{ $isOut ? 'text-danger' : ($isLow ? 'text-warning' : 'text-success') }}">
+                                {{ $p->stock }}
+                            </div>
+                            <small class="text-muted" style="font-size: 0.7rem;">Units on Hand</small>
+                        </td>
+                        <td class="text-center">
+                            <span class="badge bg-light text-muted border font-monospace px-2 py-1">
+                                {{ $p->min_stock }}
+                            </span>
+                        </td>
                         <td>
                             @if($isOut)
-                                <span class="badge bg-danger">
-                                    <i class="bi bi-x-circle me-1"></i> Out of Stock
+                                <span class="stock-status-pill out">
+                                    <span class="stock-dot"></span>
+                                    <span>Out of Stock</span>
                                 </span>
                             @elseif($isLow)
-                                <span class="badge bg-warning text-dark">
-                                    <i class="bi bi-exclamation-triangle-fill me-1"></i> Low Stock
+                                <span class="stock-status-pill low" title="Minimum alert threshold: {{ $p->min_stock }}">
+                                    <span class="stock-dot"></span>
+                                    <span>Reorder Alert</span>
                                 </span>
                             @else
-                                <span class="badge bg-success">
-                                    <i class="bi bi-check-circle me-1"></i> Healthy
+                                <span class="stock-status-pill healthy">
+                                    <span class="stock-dot"></span>
+                                    <span>Healthy Stock</span>
                                 </span>
                             @endif
                         </td>
                         <td class="text-end">
-                            <div class="btn-group btn-group-sm">
-                                <button type="button" class="btn btn-outline-success" 
+                            <div class="d-inline-flex align-items-center gap-1">
+                                <button type="button" class="catalog-action-btn btn-stock" 
                                         onclick="triggerInward({{ $p->id }}, '{{ addslashes($p->name) }}', {{ $p->purchase_price }})"
                                         title="Stock Inward (+Units)">
-                                    <i class="bi bi-plus-lg"></i> Inward
+                                    <i class="bi bi-plus-lg"></i>
                                 </button>
-                                <button type="button" class="btn btn-outline-warning text-dark" 
+                                <button type="button" class="catalog-action-btn btn-edit" 
                                         onclick="triggerAdjust({{ $p->id }}, '{{ addslashes($p->name) }}', {{ $p->stock }})"
                                         title="Physical Count Adjust">
                                     <i class="bi bi-sliders"></i>
                                 </button>
-                                <a href="{{ route('admin.products.view', ['id' => $p->id]) }}" class="btn btn-outline-secondary" title="View Full Ledger">
+                                <a href="{{ route('admin.inventory.movements', $p->id) }}" class="catalog-action-btn btn-view" title="Stock Movement Ledger">
                                     <i class="bi bi-clock-history"></i>
                                 </a>
                             </div>
@@ -189,9 +258,12 @@
                     </tr>
                 @empty
                     <tr>
-                        <td colspan="7" class="text-center py-5 text-muted">
-                            <i class="bi bi-boxes display-5 d-block mb-2"></i>
-                            No products match the selected filters.
+                        <td colspan="7" class="text-center py-5">
+                            <div class="py-4">
+                                <i class="bi bi-boxes display-5 text-muted mb-3 d-block opacity-50"></i>
+                                <h5 class="fw-bold text-slate-900 mb-1">No Inventory Records Found</h5>
+                                <p class="text-muted small mb-0">No items match your active filters.</p>
+                            </div>
                         </td>
                     </tr>
                 @endforelse
@@ -200,8 +272,10 @@
     </div>
 
     @if($products->hasPages())
-        <div class="p-3 border-top d-flex justify-content-between align-items-center">
-            <small class="text-muted">Showing {{ $products->firstItem() }} to {{ $products->lastItem() }} of {{ $products->total() }} stock items</small>
+        <div class="p-3 px-4 border-top d-flex flex-wrap justify-content-between align-items-center gap-3 bg-light bg-opacity-50">
+            <div class="text-muted small">
+                Showing <strong>{{ $products->firstItem() }}</strong> to <strong>{{ $products->lastItem() }}</strong> of <strong>{{ $products->total() }}</strong> total stock ledger items
+            </div>
             <div>
                 {{ $products->links('pagination::bootstrap-5') }}
             </div>
@@ -209,42 +283,52 @@
     @endif
 </div>
 
-<!-- Modal: Quick Inward for specific or selected product -->
+<!-- Modal: Quick Inward for specific product -->
 <div class="modal fade" id="inwardModal" tabindex="-1" aria-labelledby="inwardModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content border-0 shadow-lg rounded-4 overflow-hidden">
             <form method="POST" action="{{ route('admin.inventory.inward') }}">
                 @csrf
                 <input type="hidden" name="product_id" id="modal_inward_prod_id" value="">
-                <div class="modal-header">
-                    <h5 class="modal-title fw-bold" id="inwardModalLabel"><i class="bi bi-box-arrow-in-down text-success me-2"></i>Inward Stock Receipt</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                <div class="modal-header bg-success text-white p-3 px-4">
+                    <div class="d-flex align-items-center gap-2">
+                        <div class="rounded-3 bg-white bg-opacity-25 p-2 text-white d-flex align-items-center justify-content-center" style="width: 36px; height: 36px;">
+                            <i class="bi bi-box-arrow-in-down fs-5"></i>
+                        </div>
+                        <div>
+                            <h5 class="modal-title fw-bold mb-0 text-white" id="inwardModalLabel">Inward Stock Receipt</h5>
+                            <small class="text-white-50">Add received goods to inventory</small>
+                        </div>
+                    </div>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
-                <div class="modal-body">
-                    <div class="p-3 bg-light rounded mb-3">
-                        <small class="text-muted d-block">Target Product:</small>
-                        <strong class="text-dark fs-6" id="modal_inward_prod_name"></strong>
+                <div class="modal-body p-4">
+                    <div class="p-3 bg-light rounded-3 mb-3 border">
+                        <small class="text-muted d-block fw-semibold text-uppercase" style="font-size: 0.7rem;">Target Hardware Item:</small>
+                        <strong class="text-slate-900 fs-6" id="modal_inward_prod_name"></strong>
                     </div>
                     <div class="mb-3">
-                        <label class="form-label small fw-bold">Quantity to Inward *</label>
-                        <input type="number" name="quantity" class="form-control" min="1" required value="5">
+                        <label class="form-label small fw-bold text-slate-800">Quantity to Inward <span class="text-danger">*</span></label>
+                        <input type="number" name="quantity" class="form-control rounded-3 py-2" min="1" required value="5">
                     </div>
                     <div class="mb-3">
-                        <label class="form-label small fw-bold">Supplier Invoice / PO Reference</label>
-                        <input type="text" name="reference_no" class="form-control" placeholder="e.g. RPTECH/JAI/44892">
+                        <label class="form-label small fw-bold text-slate-800">Supplier Invoice / PO Reference</label>
+                        <input type="text" name="reference_no" class="form-control rounded-3 py-2" placeholder="e.g. RPTECH/JAI/44892">
                     </div>
                     <div class="mb-3">
-                        <label class="form-label small fw-bold">Unit Purchase Cost (₹)</label>
-                        <input type="number" step="0.01" name="unit_cost" id="modal_inward_unit_cost" class="form-control">
+                        <label class="form-label small fw-bold text-slate-800">Unit Purchase Cost (₹)</label>
+                        <input type="number" step="0.01" name="unit_cost" id="modal_inward_unit_cost" class="form-control rounded-3 py-2">
                     </div>
-                    <div class="mb-3">
-                        <label class="form-label small fw-bold">Notes</label>
-                        <input type="text" name="notes" class="form-control" placeholder="Supplier inwards delivery batch...">
+                    <div class="mb-2">
+                        <label class="form-label small fw-bold text-slate-800">Notes & Delivery Details</label>
+                        <input type="text" name="notes" class="form-control rounded-3 py-2" placeholder="Supplier inwards delivery batch...">
                     </div>
                 </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Cancel</button>
-                    <button type="submit" class="btn btn-success fw-bold"><i class="bi bi-check-lg me-1"></i>Confirm Inward</button>
+                <div class="modal-footer bg-light px-4 py-3 border-top">
+                    <button type="button" class="btn btn-outline-secondary rounded-3 px-3 fw-semibold" data-bs-dismiss="modal">Cancel</button>
+                    <button type="submit" class="btn btn-success rounded-3 px-4 fw-bold shadow-sm">
+                        <i class="bi bi-check-lg me-1"></i> Confirm Inward
+                    </button>
                 </div>
             </form>
         </div>
@@ -253,33 +337,43 @@
 
 <!-- Modal: Quick Adjust for specific product -->
 <div class="modal fade" id="adjustModal" tabindex="-1" aria-labelledby="adjustModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content border-0 shadow-lg rounded-4 overflow-hidden">
             <form method="POST" action="{{ route('admin.inventory.adjust') }}">
                 @csrf
                 <input type="hidden" name="product_id" id="modal_adjust_prod_id" value="">
-                <div class="modal-header">
-                    <h5 class="modal-title fw-bold" id="adjustModalLabel"><i class="bi bi-sliders text-warning me-2"></i>Physical Count Adjustment</h5>
+                <div class="modal-header bg-warning text-dark p-3 px-4">
+                    <div class="d-flex align-items-center gap-2">
+                        <div class="rounded-3 bg-dark bg-opacity-10 p-2 text-dark d-flex align-items-center justify-content-center" style="width: 36px; height: 36px;">
+                            <i class="bi bi-sliders fs-5"></i>
+                        </div>
+                        <div>
+                            <h5 class="modal-title fw-bold mb-0 text-dark" id="adjustModalLabel">Physical Count Audit</h5>
+                            <small class="text-dark text-opacity-75">Adjust inventory based on shelf count</small>
+                        </div>
+                    </div>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
-                <div class="modal-body">
-                    <div class="p-3 bg-light rounded mb-3">
-                        <small class="text-muted d-block">Target Product:</small>
-                        <strong class="text-dark fs-6" id="modal_adjust_prod_name"></strong>
+                <div class="modal-body p-4">
+                    <div class="p-3 bg-light rounded-3 mb-3 border">
+                        <small class="text-muted d-block fw-semibold text-uppercase" style="font-size: 0.7rem;">Target Hardware Item:</small>
+                        <strong class="text-slate-900 fs-6 d-block" id="modal_adjust_prod_name"></strong>
                         <div class="small text-muted mt-1">Current Ledger: <strong id="modal_adjust_curr_stock" class="text-primary"></strong> units</div>
                     </div>
                     <div class="mb-3">
-                        <label class="form-label small fw-bold">Actual Physical Shelf Count *</label>
-                        <input type="number" name="new_stock" id="modal_adjust_new_stock" class="form-control" min="0" required>
+                        <label class="form-label small fw-bold text-slate-800">Actual Physical Shelf Count <span class="text-danger">*</span></label>
+                        <input type="number" name="new_stock" id="modal_adjust_new_stock" class="form-control rounded-3 py-2" min="0" required>
                     </div>
-                    <div class="mb-3">
-                        <label class="form-label small fw-bold">Reason for Adjustment *</label>
-                        <input type="text" name="reason" class="form-control" required placeholder="e.g. Month-end physical audit / damaged unit write-off">
+                    <div class="mb-2">
+                        <label class="form-label small fw-bold text-slate-800">Reason for Adjustment <span class="text-danger">*</span></label>
+                        <input type="text" name="reason" class="form-control rounded-3 py-2" required placeholder="e.g. Month-end physical audit / damaged unit write-off">
                     </div>
                 </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Cancel</button>
-                    <button type="submit" class="btn btn-warning fw-bold"><i class="bi bi-check-lg me-1"></i>Save Adjustment</button>
+                <div class="modal-footer bg-light px-4 py-3 border-top">
+                    <button type="button" class="btn btn-outline-secondary rounded-3 px-3 fw-semibold" data-bs-dismiss="modal">Cancel</button>
+                    <button type="submit" class="btn btn-warning rounded-3 px-4 fw-bold shadow-sm">
+                        <i class="bi bi-check-lg me-1"></i> Save Adjustment
+                    </button>
                 </div>
             </form>
         </div>
@@ -288,18 +382,26 @@
 
 <!-- General Inward Modal (with product selector dropdown) -->
 <div class="modal fade" id="generalInwardModal" tabindex="-1" aria-labelledby="generalInwardModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content border-0 shadow-lg rounded-4 overflow-hidden">
             <form method="POST" action="{{ route('admin.inventory.inward') }}">
                 @csrf
-                <div class="modal-header">
-                    <h5 class="modal-title fw-bold" id="generalInwardModalLabel"><i class="bi bi-box-arrow-in-down text-primary me-2"></i>Stock Inward / Vendor Receiving</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                <div class="modal-header bg-primary text-white p-3 px-4">
+                    <div class="d-flex align-items-center gap-2">
+                        <div class="rounded-3 bg-white bg-opacity-25 p-2 text-white d-flex align-items-center justify-content-center" style="width: 36px; height: 36px;">
+                            <i class="bi bi-box-arrow-in-down fs-5"></i>
+                        </div>
+                        <div>
+                            <h5 class="modal-title fw-bold mb-0 text-white" id="generalInwardModalLabel">Stock Inward / Vendor Receiving</h5>
+                            <small class="text-white-50">Receive incoming stock deliveries</small>
+                        </div>
+                    </div>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
-                <div class="modal-body">
+                <div class="modal-body p-4">
                     <div class="mb-3">
-                        <label class="form-label small fw-bold">Select Hardware SKU *</label>
-                        <select name="product_id" class="form-select" required>
+                        <label class="form-label small fw-bold text-slate-800">Select Hardware SKU <span class="text-danger">*</span></label>
+                        <select name="product_id" class="form-select rounded-3 py-2" required>
                             <option value="">-- Choose Product --</option>
                             @foreach($allProducts as $ap)
                                 <option value="{{ $ap->id }}">{{ $ap->name }} (SKU: {{ $ap->sku }} | Current: {{ $ap->stock }})</option>
@@ -307,25 +409,27 @@
                         </select>
                     </div>
                     <div class="mb-3">
-                        <label class="form-label small fw-bold">Inward Quantity to Add *</label>
-                        <input type="number" name="quantity" class="form-control" min="1" required value="5">
+                        <label class="form-label small fw-bold text-slate-800">Inward Quantity to Add <span class="text-danger">*</span></label>
+                        <input type="number" name="quantity" class="form-control rounded-3 py-2" min="1" required value="5">
                     </div>
                     <div class="mb-3">
-                        <label class="form-label small fw-bold">Supplier Invoice Number</label>
-                        <input type="text" name="reference_no" class="form-control" placeholder="e.g. INV-VENDOR-2026-9901">
+                        <label class="form-label small fw-bold text-slate-800">Supplier Invoice Number</label>
+                        <input type="text" name="reference_no" class="form-control rounded-3 py-2" placeholder="e.g. INV-VENDOR-2026-9901">
                     </div>
                     <div class="mb-3">
-                        <label class="form-label small fw-bold">Unit Cost (₹)</label>
-                        <input type="number" step="0.01" name="unit_cost" class="form-control" placeholder="Leave empty to retain existing cost">
+                        <label class="form-label small fw-bold text-slate-800">Unit Cost (₹)</label>
+                        <input type="number" step="0.01" name="unit_cost" class="form-control rounded-3 py-2" placeholder="Leave empty to retain existing cost">
                     </div>
-                    <div class="mb-3">
-                        <label class="form-label small fw-bold">Notes / Batch Remarks</label>
-                        <input type="text" name="notes" class="form-control" placeholder="Vendor receiving notes...">
+                    <div class="mb-2">
+                        <label class="form-label small fw-bold text-slate-800">Notes / Batch Remarks</label>
+                        <input type="text" name="notes" class="form-control rounded-3 py-2" placeholder="Vendor receiving notes...">
                     </div>
                 </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Cancel</button>
-                    <button type="submit" class="btn btn-primary fw-bold"><i class="bi bi-check-lg me-1"></i>Record Inward</button>
+                <div class="modal-footer bg-light px-4 py-3 border-top">
+                    <button type="button" class="btn btn-outline-secondary rounded-3 px-3 fw-semibold" data-bs-dismiss="modal">Cancel</button>
+                    <button type="submit" class="btn btn-primary rounded-3 px-4 fw-bold shadow-sm">
+                        <i class="bi bi-check-lg me-1"></i> Record Inward
+                    </button>
                 </div>
             </form>
         </div>
@@ -334,18 +438,26 @@
 
 <!-- General Adjust Modal (with product selector dropdown) -->
 <div class="modal fade" id="generalAdjustModal" tabindex="-1" aria-labelledby="generalAdjustModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content border-0 shadow-lg rounded-4 overflow-hidden">
             <form method="POST" action="{{ route('admin.inventory.adjust') }}">
                 @csrf
-                <div class="modal-header">
-                    <h5 class="modal-title fw-bold" id="generalAdjustModalLabel"><i class="bi bi-sliders text-warning me-2"></i>Physical Count Audit Adjustment</h5>
+                <div class="modal-header bg-warning text-dark p-3 px-4">
+                    <div class="d-flex align-items-center gap-2">
+                        <div class="rounded-3 bg-dark bg-opacity-10 p-2 text-dark d-flex align-items-center justify-content-center" style="width: 36px; height: 36px;">
+                            <i class="bi bi-sliders fs-5"></i>
+                        </div>
+                        <div>
+                            <h5 class="modal-title fw-bold mb-0 text-dark" id="generalAdjustModalLabel">Physical Count Audit Adjustment</h5>
+                            <small class="text-dark text-opacity-75">Reconcile differences between shelf and software</small>
+                        </div>
+                    </div>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
-                <div class="modal-body">
+                <div class="modal-body p-4">
                     <div class="mb-3">
-                        <label class="form-label small fw-bold">Select Hardware SKU *</label>
-                        <select name="product_id" class="form-select" required>
+                        <label class="form-label small fw-bold text-slate-800">Select Hardware SKU <span class="text-danger">*</span></label>
+                        <select name="product_id" class="form-select rounded-3 py-2" required>
                             <option value="">-- Choose Product --</option>
                             @foreach($allProducts as $ap)
                                 <option value="{{ $ap->id }}">{{ $ap->name }} (Current: {{ $ap->stock }} units)</option>
@@ -353,17 +465,19 @@
                         </select>
                     </div>
                     <div class="mb-3">
-                        <label class="form-label small fw-bold">Correct Physical Shelf Count *</label>
-                        <input type="number" name="new_stock" class="form-control" min="0" required placeholder="Enter verified shelf count">
+                        <label class="form-label small fw-bold text-slate-800">Correct Physical Shelf Count <span class="text-danger">*</span></label>
+                        <input type="number" name="new_stock" class="form-control rounded-3 py-2" min="0" required placeholder="Enter verified shelf count">
                     </div>
-                    <div class="mb-3">
-                        <label class="form-label small fw-bold">Reason for Adjustment *</label>
-                        <input type="text" name="reason" class="form-control" required placeholder="e.g. Audit reconciliation, damaged write-off">
+                    <div class="mb-2">
+                        <label class="form-label small fw-bold text-slate-800">Reason for Adjustment <span class="text-danger">*</span></label>
+                        <input type="text" name="reason" class="form-control rounded-3 py-2" required placeholder="e.g. Audit reconciliation, damaged write-off">
                     </div>
                 </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Cancel</button>
-                    <button type="submit" class="btn btn-warning fw-bold"><i class="bi bi-check-lg me-1"></i>Save Physical Count</button>
+                <div class="modal-footer bg-light px-4 py-3 border-top">
+                    <button type="button" class="btn btn-outline-secondary rounded-3 px-3 fw-semibold" data-bs-dismiss="modal">Cancel</button>
+                    <button type="submit" class="btn btn-warning rounded-3 px-4 fw-bold shadow-sm">
+                        <i class="bi bi-check-lg me-1"></i> Save Physical Count
+                    </button>
                 </div>
             </form>
         </div>

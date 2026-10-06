@@ -37,81 +37,89 @@
 @endphp
 <div class="row g-3 mb-4">
     <div class="col-sm-6 col-xl-3">
-        <div class="cat-kpi-card">
-            <div class="cat-kpi-icon bg-primary-subtle text-primary">
-                <i class="bi bi-tags-fill"></i>
-            </div>
-            <div>
-                <div class="text-muted small fw-semibold text-uppercase cat-kpi-label">Master Categories</div>
-                <div class="fs-4 fw-extrabold text-slate-900 leading-tight">{{ $totalCategories }}</div>
-                <small class="text-muted cat-kpi-subtext">Main hardware groups</small>
-            </div>
-        </div>
-    </div>
-
-    <div class="col-sm-6 col-xl-3">
-        <div class="cat-kpi-card">
-            <div class="cat-kpi-icon bg-info-subtle text-info-emphasis">
-                <i class="bi bi-diagram-3-fill"></i>
-            </div>
-            <div>
-                <div class="text-muted small fw-semibold text-uppercase cat-kpi-label">Subcategories</div>
-                <div class="fs-4 fw-extrabold text-slate-900 leading-tight">{{ $totalSubcategories }}</div>
-                <small class="text-muted cat-kpi-subtext">Classified segments</small>
+        <div class="catalog-kpi-card kpi-blue">
+            <div class="d-flex align-items-center justify-content-between">
+                <div>
+                    <div class="catalog-kpi-label">Master Categories</div>
+                    <div class="catalog-kpi-val">{{ $totalCategories }}</div>
+                    <div class="catalog-kpi-sub"><i class="bi bi-tags-fill text-primary"></i> Main hardware taxonomy</div>
+                </div>
+                <div class="catalog-kpi-icon icon-blue">
+                    <i class="bi bi-tags-fill"></i>
+                </div>
             </div>
         </div>
     </div>
 
     <div class="col-sm-6 col-xl-3">
-        <div class="cat-kpi-card">
-            <div class="cat-kpi-icon bg-success-subtle text-success">
-                <i class="bi bi-boxes"></i>
-            </div>
-            <div>
-                <div class="text-muted small fw-semibold text-uppercase cat-kpi-label">Linked Inventory</div>
-                <div class="fs-4 fw-extrabold text-slate-900 leading-tight">{{ $totalProducts }}</div>
-                <small class="text-muted cat-kpi-subtext">Products classified</small>
+        <div class="catalog-kpi-card kpi-indigo">
+            <div class="d-flex align-items-center justify-content-between">
+                <div>
+                    <div class="catalog-kpi-label">Subcategories</div>
+                    <div class="catalog-kpi-val text-indigo">{{ $totalSubcategories }}</div>
+                    <div class="catalog-kpi-sub"><i class="bi bi-diagram-3-fill text-indigo"></i> Classified sub-segments</div>
+                </div>
+                <div class="catalog-kpi-icon icon-indigo">
+                    <i class="bi bi-diagram-3-fill"></i>
+                </div>
             </div>
         </div>
     </div>
 
     <div class="col-sm-6 col-xl-3">
-        <div class="cat-kpi-card">
-            <div class="cat-kpi-icon bg-warning-subtle text-warning-emphasis">
-                <i class="bi bi-shield-check"></i>
+        <div class="catalog-kpi-card kpi-emerald">
+            <div class="d-flex align-items-center justify-content-between">
+                <div>
+                    <div class="catalog-kpi-label">Linked Inventory</div>
+                    <div class="catalog-kpi-val text-success">{{ $totalProducts }}</div>
+                    <div class="catalog-kpi-sub"><i class="bi bi-boxes text-success"></i> Products classified</div>
+                </div>
+                <div class="catalog-kpi-icon icon-emerald">
+                    <i class="bi bi-boxes"></i>
+                </div>
             </div>
-            <div>
-                <div class="text-muted small fw-semibold text-uppercase cat-kpi-label">Active Taxonomy</div>
-                <div class="fs-4 fw-extrabold text-slate-900 leading-tight">{{ $activeCount }} / {{ $totalCategories }}</div>
-                <small class="text-success fw-semibold cat-kpi-subtext"><i class="bi bi-check-circle-fill me-1"></i>Catalog Ready</small>
+        </div>
+    </div>
+
+    <div class="col-sm-6 col-xl-3">
+        <div class="catalog-kpi-card kpi-amber">
+            <div class="d-flex align-items-center justify-content-between">
+                <div>
+                    <div class="catalog-kpi-label">Active Taxonomy</div>
+                    <div class="catalog-kpi-val text-warning">{{ $activeCount }} / {{ $totalCategories }}</div>
+                    <div class="catalog-kpi-sub"><i class="bi bi-check-circle-fill text-success"></i> Catalog ready</div>
+                </div>
+                <div class="catalog-kpi-icon icon-amber">
+                    <i class="bi bi-shield-check"></i>
+                </div>
             </div>
         </div>
     </div>
 </div>
 
 <!-- Modern Filter & View Switcher Bar -->
-<div class="admin-card p-3 mb-4 shadow-sm">
+<div class="catalog-filter-card">
     <div class="d-flex flex-wrap align-items-center justify-content-between gap-3">
         <!-- Live Instant Search -->
-        <div class="position-relative cat-search-box">
-            <i class="bi bi-search position-absolute top-50 start-0 translate-middle-y ms-3 text-muted"></i>
-            <input type="text" id="categorySearchInput" class="form-control ps-5 rounded-pill border-slate-200" 
+        <div class="catalog-search-wrap flex-grow-1" style="max-width: 380px;">
+            <i class="bi bi-search search-icon"></i>
+            <input type="text" id="categorySearchInput" class="catalog-search-input" 
                    placeholder="Search category, subcategory, icon...">
         </div>
 
         <!-- Filter Pill Chips -->
-        <div class="d-flex align-items-center gap-2 flex-wrap">
-            <button type="button" class="filter-tab-btn active" data-filter="all">All ({{ $totalCategories }})</button>
-            <button type="button" class="filter-tab-btn" data-filter="has-sub">With Subcategories</button>
-            <button type="button" class="filter-tab-btn" data-filter="no-sub">No Subcategories</button>
+        <div class="filter-pills-bar">
+            <button type="button" class="filter-pill active" data-filter="all">All ({{ $totalCategories }})</button>
+            <button type="button" class="filter-pill" data-filter="has-sub">With Subcategories</button>
+            <button type="button" class="filter-pill" data-filter="no-sub">No Subcategories</button>
         </div>
 
         <!-- View Switcher Toggle -->
         <div class="d-flex align-items-center gap-1 bg-light p-1 rounded-3 border">
-            <button type="button" class="btn btn-sm btn-white shadow-xs fw-bold px-2 py-1 active" id="btn-view-grid" title="Grid Cards View">
+            <button type="button" class="btn btn-sm btn-white shadow-xs fw-bold px-2.5 py-1 active" id="btn-view-grid" title="Grid Cards View">
                 <i class="bi bi-grid-fill me-1"></i> Grid
             </button>
-            <button type="button" class="btn btn-sm text-muted fw-bold px-2 py-1" id="btn-view-table" title="Table View">
+            <button type="button" class="btn btn-sm text-muted fw-bold px-2.5 py-1" id="btn-view-table" title="Table View">
                 <i class="bi bi-list-ul me-1"></i> Table
             </button>
         </div>
@@ -258,9 +266,9 @@
 </div>
 
 <!-- Category Table List View (Hidden by default, toggleable) -->
-<div class="admin-card d-none shadow-sm" id="categories-table-view">
+<div class="catalog-card d-none shadow-sm" id="categories-table-view">
     <div class="table-responsive">
-        <table class="table table-hoc align-middle mb-0">
+        <table class="table-catalog align-middle mb-0">
             <thead>
                 <tr>
                     <th class="col-cat-main">Category</th>
