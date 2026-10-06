@@ -5,6 +5,7 @@ use App\Http\Controllers\Admin\BrandController;
 use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\InventoryController;
 use App\Http\Controllers\Admin\ProductController;
+use App\Http\Controllers\Admin\QuotationController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\ShopController;
 use Illuminate\Support\Facades\Route;
@@ -120,18 +121,31 @@ Route::middleware('auth')->prefix('admin')->name('admin.')->group(function () {
         Route::get('/inventory.php', 'index');
     });
 
+    // Quotation Management (Full Database CRUD)
+    Route::controller(QuotationController::class)->group(function () {
+        Route::get('/quotations', 'index')->name('quotations');
+        Route::get('/quotations/create', 'create')->name('quotations.create');
+        Route::post('/quotations', 'store')->name('quotations.store');
+        Route::get('/quotations/view', 'show')->name('quotations.view');
+        Route::get('/quotations/print', 'print')->name('quotations.print');
+        Route::get('/quotations/{id}', 'show')->name('quotations.show');
+        Route::get('/quotations/{id}/print', 'print')->name('quotations.print.id');
+        Route::patch('/quotations/{id}/status', 'updateStatus')->name('quotations.status');
+        Route::delete('/quotations/{id}', 'destroy')->name('quotations.destroy');
+
+        // Legacy compatibility
+        Route::get('/quotations.php', 'index');
+        Route::get('/quotation-create.php', 'create');
+        Route::get('/quotation-view.php', 'show');
+        Route::get('/quotation-print.php', 'print');
+    });
+
     // ==========================================
     // General ERP Modules
     // ==========================================
     Route::controller(AdminController::class)->group(function () {
         Route::get('/', 'dashboard');
         Route::get('/dashboard', 'dashboard')->name('dashboard');
-
-        // Quotation Management
-        Route::get('/quotations', 'quotations')->name('quotations');
-        Route::get('/quotations/create', 'quotationCreate')->name('quotations.create');
-        Route::get('/quotations/view', 'quotationView')->name('quotations.view');
-        Route::get('/quotations/print', 'quotationPrint')->name('quotations.print');
 
         // Custom PC Builder ERP
         Route::get('/pc-builder', 'pcBuilder')->name('pc.builder');
@@ -151,10 +165,6 @@ Route::middleware('auth')->prefix('admin')->name('admin.')->group(function () {
 
         // Legacy Prototype compatibility aliases (.php extension support)
         Route::get('/dashboard.php', 'dashboard');
-        Route::get('/quotations.php', 'quotations');
-        Route::get('/quotation-create.php', 'quotationCreate');
-        Route::get('/quotation-view.php', 'quotationView');
-        Route::get('/quotation-print.php', 'quotationPrint');
         Route::get('/pc-builder.php', 'pcBuilder');
         Route::get('/sales.php', 'sales');
         Route::get('/invoice-view.php', 'invoiceView');

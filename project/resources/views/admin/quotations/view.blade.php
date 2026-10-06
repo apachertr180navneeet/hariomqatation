@@ -2,27 +2,39 @@
 
 @section('content')
 <!-- Page Actions Bar -->
-<div class="page-header">
+<div class="page-header d-flex flex-wrap align-items-center justify-content-between gap-3 mb-4">
     <div>
         <div class="d-flex align-items-center gap-2">
-            <h1 class="page-title" id="view-quote-id">HOC/QTN/2026/0001</h1>
-            <span class="badge" id="view-quote-status-badge">Status</span>
+            <h1 class="page-title fs-2 fw-bold text-slate-900 m-0">{{ $quotation->quotation_no }}</h1>
+            @php
+                $statusBadge = match($quotation->status) {
+                    'Approved' => 'badge-soft-success',
+                    'Converted' => 'badge-soft-primary',
+                    'Sent', 'Pending' => 'badge-soft-warning',
+                    'Rejected' => 'badge-soft-danger',
+                    default => 'badge-soft-secondary',
+                };
+            @endphp
+            <span class="badge {{ $statusBadge }} fs-7 px-2.5 py-1">{{ $quotation->status }}</span>
         </div>
-        <div class="page-breadcrumb">
-            Generated on <span id="view-quote-date">Date</span> &bull; Valid until <span id="view-quote-validity">Date</span>
+        <div class="page-breadcrumb text-muted small mt-1">
+            <a href="{{ route('admin.dashboard') }}" class="text-decoration-none text-muted">Dashboard</a> &bull;
+            <a href="{{ route('admin.quotations') }}" class="text-decoration-none text-muted">Quotations</a> &bull;
+            Generated on <strong>{{ $quotation->quotation_date ? $quotation->quotation_date->format('d M, Y') : 'N/A' }}</strong> &bull;
+            Valid until <strong>{{ $quotation->valid_until ? $quotation->valid_until->format('d M, Y') : 'N/A' }}</strong>
         </div>
     </div>
 
     <div class="d-flex flex-wrap gap-2">
-        <button type="button" class="btn btn-success fw-bold shadow-sm" id="btn-convert-to-sale">
-            <i class="bi bi-receipt-cutoff me-1"></i> Convert to Sales Invoice
-        </button>
-        <a href="#" target="_blank" class="btn btn-outline-primary fw-bold" id="btn-open-print-preview">
+        <a href="{{ route('admin.quotations.print', ['id' => $quotation->id]) }}" target="_blank" class="btn btn-outline-primary fw-semibold rounded-3">
             <i class="bi bi-printer me-1"></i> Print / Generate PDF
         </a>
-        <button type="button" class="btn btn-outline-success btn-sm" id="btn-send-quote-wa">
+        <button type="button" class="btn btn-outline-success fw-semibold rounded-3" id="btn-send-quote-wa">
             <i class="bi bi-whatsapp me-1"></i> Send on WhatsApp
         </button>
+        <a href="{{ route('admin.quotations') }}" class="btn btn-outline-secondary fw-semibold rounded-3">
+            <i class="bi bi-arrow-left me-1"></i> Back to List
+        </a>
     </div>
 </div>
 
@@ -35,20 +47,31 @@
             <div class="row border-bottom pb-4 mb-4 g-3">
                 <div class="col-sm-6">
                     <div class="fw-bold text-primary text-uppercase small mb-1">Issued By:</div>
-                    <h5 class="fw-bold mb-1">HARI OM COMPUTER</h5>
-                    <p class="text-muted small mb-0">
-                        Plot No. 42, Near Sojati Gate, Station Road, Jodhpur<br>
-                        GSTIN: <strong>08AABCH1234F1Z9</strong> &bull; Phone: +91 98290 12345
+                    <h5 class="fw-bold mb-1 text-slate-900">HARI OM COMPUTER</h5>
+                    <p class="text-muted small mb-0 lh-base">
+                        Plot No. 42, Near Sojati Gate, Station Road, Jodhpur - 342001 (Raj.)<br>
+                        GSTIN: <strong>08AABCH1234F1Z9</strong><br>
+                        Phone: +91 98290 12345 / 0291-2654321<br>
+                        Email: sales@hariomcomputer.com
                     </p>
                 </div>
                 <div class="col-sm-6 text-sm-end">
                     <div class="fw-bold text-primary text-uppercase small mb-1">Quotation For:</div>
-                    <h5 class="fw-bold mb-1" id="view-cust-name">Customer Name</h5>
-                    <p class="text-muted small mb-0">
-                        <span id="view-cust-company">Company</span><br>
-                        <span id="view-cust-address">Address</span><br>
-                        Mobile: <strong id="view-cust-mobile">+91 98290 XXXXX</strong><br>
-                        GSTIN: <span id="view-cust-gstin">-</span>
+                    <h5 class="fw-bold mb-1 text-slate-900">{{ $quotation->customer_name }}</h5>
+                    <p class="text-muted small mb-0 lh-base">
+                        @if($quotation->customer_company)
+                            <strong>{{ $quotation->customer_company }}</strong><br>
+                        @endif
+                        @if($quotation->customer_address)
+                            {{ $quotation->customer_address }}<br>
+                        @endif
+                        Mobile: <strong>{{ $quotation->customer_phone }}</strong><br>
+                        @if($quotation->customer_email)
+                            Email: {{ $quotation->customer_email }}<br>
+                        @endif
+                        @if($quotation->customer_gstin)
+                            GSTIN: <strong>{{ $quotation->customer_gstin }}</strong>
+                        @endif
                     </p>
                 </div>
             </div>
@@ -59,201 +82,171 @@
                     <thead class="table-light small">
                         <tr>
                             <th class="text-center" style="width: 40px;">#</th>
-                            <th>Product & Description</th>
+                            <th>Product Description</th>
                             <th class="text-center" style="width: 70px;">Qty</th>
-                            <th class="text-end" style="width: 120px;">Rate (₹)</th>
-                            <th class="text-end" style="width: 100px;">Disc (₹)</th>
+                            <th class="text-end" style="width: 130px;">Rate (₹)</th>
+                            <th class="text-end" style="width: 110px;">Disc (₹)</th>
                             <th class="text-center" style="width: 80px;">GST %</th>
-                            <th class="text-end" style="width: 130px;">Amount (₹)</th>
+                            <th class="text-end" style="width: 140px;">Amount (₹)</th>
                         </tr>
                     </thead>
-                    <tbody id="view-items-tbody">
-                        <!-- Populated via JS -->
+                    <tbody>
+                        @foreach($quotation->items as $idx => $item)
+                            <tr>
+                                <td class="text-center text-muted fw-bold">{{ $idx + 1 }}</td>
+                                <td>
+                                    <strong class="text-slate-900">{{ $item->item_name }}</strong>
+                                    @if($item->sku)
+                                        <br><small class="text-muted">SKU: <code>{{ $item->sku }}</code></small>
+                                    @endif
+                                </td>
+                                <td class="text-center fw-semibold">{{ $item->quantity }}</td>
+                                <td class="text-end text-muted">₹{{ number_format($item->unit_rate, 2) }}</td>
+                                <td class="text-end text-danger">
+                                    {{ $item->discount > 0 ? '₹' . number_format($item->discount, 2) : '-' }}
+                                </td>
+                                <td class="text-center"><span class="badge bg-light text-dark border">{{ $item->gst_rate }}%</span></td>
+                                <td class="text-end fw-bold text-slate-800">₹{{ number_format($item->total_amount, 2) }}</td>
+                            </tr>
+                        @endforeach
                     </tbody>
                 </table>
             </div>
 
             <!-- Calculation Breakup -->
             <div class="row justify-content-end mb-4">
-                <div class="col-md-6">
-                    <div class="bg-light p-3 rounded border">
+                <div class="col-md-7 col-lg-6">
+                    <div class="bg-light bg-opacity-50 p-3 rounded-3 border">
                         <div class="d-flex justify-content-between small text-muted mb-2">
                             <span>Taxable Subtotal:</span>
-                            <strong id="view-calc-subtotal" class="text-dark">₹0</strong>
+                            <strong class="text-dark">₹{{ number_format($quotation->taxable_amount, 2) }}</strong>
                         </div>
                         <div class="d-flex justify-content-between small text-muted mb-2">
-                            <span>Discount:</span>
-                            <strong id="view-calc-discount" class="text-danger">₹0</strong>
+                            <span>Discounts:</span>
+                            <strong class="text-danger">- ₹{{ number_format($quotation->discount_total, 2) }}</strong>
                         </div>
                         <div class="d-flex justify-content-between small text-muted mb-2">
-                            <span>GST (18% Total):</span>
-                            <strong id="view-calc-gst" class="text-dark">₹0</strong>
+                            <span>GST (18% CGST + SGST):</span>
+                            <strong class="text-dark">₹{{ number_format($quotation->gst_total, 2) }}</strong>
                         </div>
+                        @if($quotation->round_off != 0)
+                            <div class="d-flex justify-content-between small text-muted mb-2">
+                                <span>Round Off:</span>
+                                <span>₹{{ number_format($quotation->round_off, 2) }}</span>
+                            </div>
+                        @endif
                         <div class="d-flex justify-content-between align-items-baseline border-top pt-2 mt-2">
-                            <span class="fw-bold">Grand Total (INR):</span>
-                            <span class="fs-4 fw-extrabold text-primary" id="view-calc-grandtotal">₹0</span>
-                        </div>
-                        <div class="mt-2 pt-2 border-top small text-muted">
-                            <strong>Amount in Words:</strong><br>
-                            <span id="view-amount-words" class="fst-italic text-dark">-</span>
+                            <span class="fw-bold text-slate-900">Grand Total (INR):</span>
+                            <span class="fs-4 fw-extrabold text-primary">₹{{ number_format($quotation->grand_total, 2) }}</span>
                         </div>
                     </div>
                 </div>
             </div>
 
             <!-- Terms & Notes -->
-            <div class="p-3 bg-light rounded border text-muted small">
-                <div class="fw-bold text-dark mb-1">Terms & Conditions:</div>
-                <p class="mb-1">1. Quotation is valid for 15 days from issue date.</p>
-                <p class="mb-1">2. Standard manufacturer warranty applies on all genuine hardware.</p>
-                <p class="mb-0" id="view-quote-notes">Notes: None</p>
+            <div class="border-top pt-3">
+                <div class="row g-3">
+                    @if($quotation->notes)
+                        <div class="col-md-6">
+                            <div class="small fw-bold text-uppercase text-muted mb-1">Customer / Internal Notes:</div>
+                            <div class="p-2 bg-light rounded small border">{{ $quotation->notes }}</div>
+                        </div>
+                    @endif
+                    <div class="col-md-6">
+                        <div class="small fw-bold text-uppercase text-muted mb-1">Standard Terms:</div>
+                        <div class="small text-muted">
+                            1. Valid until {{ $quotation->valid_until ? $quotation->valid_until->format('d M, Y') : '15 days' }}.<br>
+                            2. 18% GST invoice provided upon order confirmation.<br>
+                            3. Authorized brand warranty on all hardware components.
+                        </div>
+                    </div>
+                </div>
             </div>
 
         </div>
     </div>
 
-    <!-- Right: Status Control & Audit Log -->
+    <!-- Right: Operational Controls Sidebar -->
     <div class="col-lg-4">
-        <div class="admin-card p-4 mb-4">
-            <h6 class="fw-bold mb-3 border-bottom pb-2">Status & Sales Management</h6>
+        
+        <!-- Workflow Status Card -->
+        <div class="admin-card mb-4 p-4">
+            <h6 class="fw-bold mb-3 text-slate-900"><i class="bi bi-toggles text-primary me-2"></i> Quotation Lifecycle</h6>
             
-            <div class="mb-3">
-                <label class="form-label small fw-bold">Update Quotation Status</label>
-                <select id="view-change-status-select" class="form-select">
-                    <option value="Draft">Draft</option>
-                    <option value="Sent">Sent to Customer</option>
-                    <option value="Pending">Pending Customer Decision</option>
-                    <option value="Approved">Approved (Ready to Convert)</option>
-                    <option value="Rejected">Rejected</option>
-                    <option value="Expired">Expired</option>
-                </select>
-            </div>
+            <form method="POST" action="{{ route('admin.quotations.status', $quotation->id) }}" class="mb-3">
+                @csrf
+                @method('PATCH')
+                <label class="form-label small text-muted fw-semibold">Current Lifecycle Status:</label>
+                <div class="input-group">
+                    <select name="status" class="form-select form-select-sm">
+                        @foreach(['Draft', 'Sent', 'Pending', 'Approved', 'Converted', 'Rejected'] as $st)
+                            <option value="{{ $st }}" {{ $quotation->status === $st ? 'selected' : '' }}>{{ $st }}</option>
+                        @endforeach
+                    </select>
+                    <button type="submit" class="btn btn-sm btn-primary">Update</button>
+                </div>
+            </form>
 
-            <div class="d-grid gap-2 mb-3">
-                <button class="btn btn-primary fw-bold" id="btn-save-status-change">
-                    <i class="bi bi-check2-circle me-1"></i> Update Status
-                </button>
-            </div>
-
-            <div class="p-3 bg-light rounded border small">
-                <strong><i class="bi bi-info-circle text-primary me-1"></i> Commercial Tip:</strong>
-                <p class="text-muted mb-0 mt-1">Once the customer accepts the pricing, click <strong>"Convert to Sales Invoice"</strong>. This will automatically decrement physical inventory and log a paid invoice entry.</p>
+            <div class="d-grid gap-2">
+                <form method="POST" action="{{ route('admin.quotations.destroy', $quotation->id) }}" class="delete-form"
+                      data-confirm-title="Delete Quotation?"
+                      data-confirm="Are you sure you want to permanently delete quotation {{ $quotation->quotation_no }}?">
+                    @csrf
+                    @method('DELETE')
+                    <button type="submit" class="btn btn-outline-danger btn-sm w-100">
+                        <i class="bi bi-trash3 me-1"></i> Delete Quotation
+                    </button>
+                </form>
             </div>
         </div>
+
+        <!-- Meta Information Card -->
+        <div class="admin-card p-4">
+            <h6 class="fw-bold mb-3 text-slate-900"><i class="bi bi-info-circle text-primary me-2"></i> Metadata</h6>
+            <div class="small mb-2 d-flex justify-content-between">
+                <span class="text-muted">Quotation ID:</span>
+                <span class="fw-bold">{{ $quotation->quotation_no }}</span>
+            </div>
+            <div class="small mb-2 d-flex justify-content-between">
+                <span class="text-muted">Created Date:</span>
+                <span>{{ $quotation->created_at->format('d M, Y h:i A') }}</span>
+            </div>
+            <div class="small mb-2 d-flex justify-content-between">
+                <span class="text-muted">Created By:</span>
+                <span>{{ $quotation->creator->name ?? 'Admin Staff' }}</span>
+            </div>
+            <div class="small d-flex justify-content-between">
+                <span class="text-muted">Total Line Items:</span>
+                <span>{{ $quotation->items->count() }} Items</span>
+            </div>
+        </div>
+
     </div>
 </div>
 @endsection
 
 @push('scripts')
 <script>
-    document.addEventListener("DOMContentLoaded", () => {
-        const urlParams = new URLSearchParams(window.location.search);
-        const quoteId = urlParams.get("id") || "{{ $quotationId ?? 'HOC/QTN/2026/0001' }}";
-        const q = DataStore.getQuotationById(quoteId) || DataStore.getQuotations()[0];
+document.addEventListener("DOMContentLoaded", function () {
+    // WhatsApp sharing button
+    const waBtn = document.getElementById("btn-send-quote-wa");
+    if (waBtn) {
+        waBtn.addEventListener("click", function () {
+            const quoteNo = @json($quotation->quotation_no);
+            const custName = @json($quotation->customer_name);
+            const total = "₹" + parseFloat(@json($quotation->grand_total)).toLocaleString('en-IN');
+            const valid = @json($quotation->valid_until ? $quotation->valid_until->format('d M, Y') : '15 days');
 
-        if (!q) return;
+            const text = `*HARI OM COMPUTER - COMMERCIAL QUOTATION*\nQuotation No: *${quoteNo}*\nCustomer: ${custName}\nGrand Total: *${total}* (Incl. 18% GST)\nValidity: Until ${valid}\n\nThank you for choosing Hari Om Computer, Jodhpur!`;
+            
+            const mobile = @json($quotation->customer_phone);
+            const cleanPhone = mobile.replace(/[^0-9]/g, '');
+            const targetPhone = cleanPhone.length === 10 ? '91' + cleanPhone : cleanPhone;
 
-        document.getElementById("view-quote-id").innerText = q.id;
-        document.getElementById("view-quote-date").innerText = q.date;
-        document.getElementById("view-quote-validity").innerText = q.validUntil;
-        document.getElementById("view-cust-name").innerText = q.customerName;
-        document.getElementById("view-cust-company").innerText = q.company || "Retail Buyer";
-        document.getElementById("view-cust-address").innerText = q.address || "Jodhpur, Rajasthan";
-        document.getElementById("view-cust-mobile").innerText = q.mobile;
-        document.getElementById("view-cust-gstin").innerText = q.gstin || "Unregistered / Consumer";
-        document.getElementById("view-quote-notes").innerText = `Notes: ${q.notes || 'Standard terms apply.'}`;
-
-        const badge = document.getElementById("view-quote-status-badge");
-        badge.innerText = q.status;
-        badge.className = `badge ${q.status === 'Approved' ? 'bg-success' : q.status === 'Sent' ? 'bg-primary' : 'bg-warning text-dark'}`;
-
-        document.getElementById("view-change-status-select").value = q.status;
-
-        // Render items
-        let html = "";
-        (q.items || []).forEach((item, idx) => {
-            html += `
-                <tr>
-                    <td class="text-center">${idx + 1}</td>
-                    <td>
-                        <strong>${item.name}</strong><br>
-                        <small class="text-muted">SKU: ${item.sku}</small>
-                    </td>
-                    <td class="text-center">${item.qty}</td>
-                    <td class="text-end">${HOC_UTILS.formatINR(item.rate)}</td>
-                    <td class="text-end text-danger">${HOC_UTILS.formatINR(item.discount || 0)}</td>
-                    <td class="text-center">${item.gstRate || 18}%</td>
-                    <td class="text-end fw-bold">${HOC_UTILS.formatINR(item.amount)}</td>
-                </tr>
-            `;
+            const url = `https://wa.me/${targetPhone}?text=${encodeURIComponent(text)}`;
+            window.open(url, '_blank');
         });
-        document.getElementById("view-items-tbody").innerHTML = html;
-
-        // Render totals
-        document.getElementById("view-calc-subtotal").innerText = HOC_UTILS.formatINR(q.subtotal);
-        document.getElementById("view-calc-discount").innerText = HOC_UTILS.formatINR(q.discountTotal);
-        document.getElementById("view-calc-gst").innerText = HOC_UTILS.formatINR(q.gstTotal);
-        document.getElementById("view-calc-grandtotal").innerText = HOC_UTILS.formatINR(q.grandTotal);
-        document.getElementById("view-amount-words").innerText = HOC_UTILS.numberToWordsINR(q.grandTotal);
-
-        // Print Preview Link
-        document.getElementById("btn-open-print-preview").href = `/admin/quotations/print?id=${encodeURIComponent(q.id)}`;
-
-        // Save Status button
-        document.getElementById("btn-save-status-change").onclick = () => {
-            const newStatus = document.getElementById("view-change-status-select").value;
-            q.status = newStatus;
-            DataStore.saveQuotation(q);
-            HOC_UTILS.showToast(`Quotation ${q.id} updated to ${newStatus}`);
-            setTimeout(() => window.location.reload(), 500);
-        };
-
-        // Convert to Sale action
-        document.getElementById("btn-convert-to-sale").onclick = () => {
-            const convertAction = () => {
-                const sale = DataStore.convertQuotationToSale(q.id, "Bank Transfer");
-                if (sale) {
-                    if (typeof Swal !== 'undefined') {
-                        Swal.fire({
-                            icon: 'success',
-                            title: 'Invoice Created!',
-                            text: `Invoice ${sale.invoiceNo} successfully created!`,
-                            timer: 1500,
-                            showConfirmButton: false
-                        }).then(() => {
-                            window.location.href = "{{ route('admin.sales') }}";
-                        });
-                    } else {
-                        HOC_UTILS.showToast(`Invoice ${sale.invoiceNo} successfully created!`);
-                        setTimeout(() => window.location.href = "{{ route('admin.sales') }}", 700);
-                    }
-                }
-            };
-
-            if (typeof Swal !== 'undefined') {
-                Swal.fire({
-                    title: 'Convert to Sales Invoice?',
-                    text: `Convert Quotation ${q.id} to Sales Invoice? Stock will be decremented.`,
-                    icon: 'question',
-                    showCancelButton: true,
-                    confirmButtonColor: '#0284c7',
-                    cancelButtonColor: '#64748b',
-                    confirmButtonText: 'Yes, Convert',
-                    cancelButtonText: 'Cancel',
-                    reverseButtons: true
-                }).then((res) => {
-                    if (res.isConfirmed) convertAction();
-                });
-            } else if (confirm(`Convert Quotation ${q.id} to Sales Invoice? Stock will be decremented.`)) {
-                convertAction();
-            }
-        };
-
-        // WhatsApp share
-        document.getElementById("btn-send-quote-wa").onclick = () => {
-            const waMsg = `*HARI OM COMPUTER - QUOTATION*\nQuotation No: *${q.id}*\nCustomer: ${q.customerName}\nGrand Total: *${HOC_UTILS.formatINR(q.grandTotal)}*\nValid Until: ${q.validUntil}\n\nPlease check the attached quotation sheet. Thank you!`;
-            window.open(`https://wa.me/?text=${encodeURIComponent(waMsg)}`, "_blank");
-        };
-    });
+    }
+});
 </script>
 @endpush
