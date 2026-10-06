@@ -237,8 +237,13 @@
     </div>
 
     @if($customers->hasPages())
-        <div class="p-3 border-top d-flex justify-content-end">
-            {{ $customers->links() }}
+        <div class="p-3 px-4 border-top d-flex flex-wrap justify-content-between align-items-center gap-3 bg-light bg-opacity-50">
+            <div class="text-muted small">
+                Showing <strong>{{ $customers->firstItem() ?? 0 }}-{{ $customers->lastItem() ?? 0 }}</strong> of <strong>{{ $customers->total() }}</strong> clients
+            </div>
+            <div>
+                {{ $customers->links('pagination::bootstrap-5') }}
+            </div>
         </div>
     @endif
 </div>

@@ -348,31 +348,233 @@ h1, h2, h3, h4, h5, h6, .page-title, .admin-card-title, .kpi-value, .sidebar-bra
   color: #0f172a;
   margin: 0;
 }
-.table-hoc {
+/* ==========================================================================
+   Executive Modern ERP Table Design System (Full Project Tables)
+   ========================================================================== */
+
+/* Modern Table Responsive Container */
+.table-responsive {
+  border-radius: 14px;
+  border: 1px solid #e2e8f0;
+  background: #ffffff;
+  box-shadow: 0 4px 20px -2px rgba(15, 23, 42, 0.05), 0 1px 3px rgba(15, 23, 42, 0.03);
+  overflow-x: auto;
+  overflow-y: hidden;
+  margin-bottom: 1.25rem;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+  scrollbar-width: thin;
+  scrollbar-color: #cbd5e1 #f8fafc;
+}
+.table-responsive:hover {
+  border-color: #cbd5e1;
+  box-shadow: 0 8px 24px -4px rgba(15, 23, 42, 0.07);
+}
+.table-responsive::-webkit-scrollbar {
+  height: 6px;
+}
+.table-responsive::-webkit-scrollbar-track {
+  background: #f8fafc;
+  border-radius: 9999px;
+}
+.table-responsive::-webkit-scrollbar-thumb {
+  background: #cbd5e1;
+  border-radius: 9999px;
+}
+.table-responsive::-webkit-scrollbar-thumb:hover {
+  background: #94a3b8;
+}
+
+/* Seamless Integration Inside Cards (Eliminates Nested Ugly Borders) */
+.catalog-card .table-responsive,
+.admin-card .table-responsive,
+.card .table-responsive {
+  border: none !important;
+  box-shadow: none !important;
+  border-radius: 0 !important;
+  margin-bottom: 0 !important;
+  background: transparent !important;
+}
+
+/* Master Table Reset & Base */
+.table,
+.table-catalog,
+.catalog-table,
+.table-hoc,
+.admin-table,
+.reports-table {
+  width: 100%;
   margin: 0;
+  border-collapse: separate;
+  border-spacing: 0;
+  font-family: var(--admin-font-body);
+  color: #1e293b;
+  background: #ffffff;
 }
-.table-hoc th {
-  background-color: #f8fafc;
-  font-size: 0.75rem;
-  font-weight: 700;
-  color: #475569;
+
+/* Table Header Styling */
+.table thead th,
+.table-catalog thead th,
+.catalog-table thead th,
+.table-hoc thead th,
+.admin-table thead th,
+.reports-table thead th,
+.table thead.table-light th {
+  background: #f8fafc !important;
+  color: #475569 !important;
+  font-family: var(--admin-font-heading);
+  font-size: 0.735rem;
+  font-weight: 800;
   text-transform: uppercase;
-  letter-spacing: 0.06em;
-  padding: 14px 20px;
-  border-bottom: 1px solid var(--admin-border);
-}
-.table-hoc td {
-  padding: 15px 20px;
-  font-size: 0.88rem;
+  letter-spacing: 0.065em;
+  padding: 14px 18px;
+  border-top: none !important;
+  border-bottom: 2px solid #e2e8f0 !important;
+  border-left: none !important;
+  border-right: none !important;
+  white-space: nowrap;
   vertical-align: middle;
-  border-bottom: 1px solid #f1f5f9;
+  line-height: 1.4;
+}
+
+/* Dark Header Option */
+.table thead.table-dark th,
+.table-catalog thead.table-dark th {
+  background: #0f172a !important;
+  color: #ffffff !important;
+  border-bottom: 2px solid #1e293b !important;
+}
+
+/* Table Body Cells */
+.table tbody td,
+.table-catalog tbody td,
+.catalog-table tbody td,
+.table-hoc tbody td,
+.admin-table tbody td,
+.reports-table tbody td {
+  padding: 14px 18px;
+  font-size: 0.885rem;
   color: #334155;
+  vertical-align: middle;
+  border-bottom: 1px solid #f1f5f9 !important;
+  border-top: none !important;
+  border-left: none !important;
+  border-right: none !important;
+  background: #ffffff;
+  transition: background-color 0.15s ease, box-shadow 0.15s ease;
+  line-height: 1.45;
 }
-.table-hoc tr:last-child td {
-  border-bottom: none;
+
+/* Row Hover Elevation & Indicator */
+.table tbody tr:hover td,
+.table-catalog tbody tr:hover td,
+.catalog-table tbody tr:hover td,
+.table-hoc tbody tr:hover td,
+.admin-table tbody tr:hover td,
+.reports-table tbody tr:hover td {
+  background-color: #f8fafc !important;
 }
-.table-hoc tbody tr:hover {
-  background-color: #f8fafc;
+
+.table tbody tr:hover td:first-child,
+.table-catalog tbody tr:hover td:first-child,
+.catalog-table tbody tr:hover td:first-child,
+.table-hoc tbody tr:hover td:first-child,
+.admin-table tbody tr:hover td:first-child,
+.reports-table tbody tr:hover td:first-child {
+  box-shadow: inset 4px 0 0 #0284c7;
+}
+
+.table tbody tr:last-child td,
+.table-catalog tbody tr:last-child td,
+.catalog-table tbody tr:last-child td,
+.table-hoc tbody tr:last-child td,
+.admin-table tbody tr:last-child td,
+.reports-table tbody tr:last-child td {
+  border-bottom: none !important;
+}
+
+/* Modernized Table-Bordered Override */
+.table.table-bordered,
+.table-bordered {
+  border: 1px solid #e2e8f0 !important;
+  border-radius: 12px;
+  overflow: hidden;
+  border-collapse: separate !important;
+  border-spacing: 0 !important;
+}
+.table-bordered th {
+  background-color: #f8fafc !important;
+  color: #475569 !important;
+  border-bottom: 2px solid #e2e8f0 !important;
+  border-top: none !important;
+  border-left: none !important;
+  border-right: 1px solid #e2e8f0 !important;
+}
+.table-bordered th:last-child {
+  border-right: none !important;
+}
+.table-bordered td {
+  border-bottom: 1px solid #f1f5f9 !important;
+  border-top: none !important;
+  border-left: none !important;
+  border-right: 1px solid #f1f5f9 !important;
+}
+.table-bordered td:last-child {
+  border-right: none !important;
+}
+.table-bordered tr:last-child td {
+  border-bottom: none !important;
+}
+
+/* Technical Specification Table Override (e.g. Product Details) */
+.table-sm.table-bordered th,
+.table-spec th {
+  background-color: #f8fafc !important;
+  color: #475569 !important;
+  font-weight: 700;
+  font-size: 0.81rem;
+  letter-spacing: 0.02em;
+  padding: 10px 14px;
+}
+.table-sm.table-bordered td,
+.table-spec td {
+  background-color: #ffffff;
+  color: #1e293b;
+  font-size: 0.85rem;
+  padding: 10px 14px;
+}
+
+/* Tabular Numbers & Monospace Currency Alignment */
+.table .text-end,
+.table-catalog .text-end,
+.catalog-table .text-end,
+.table-hoc .text-end,
+.reports-table .text-end,
+.tabular-num {
+  font-family: 'JetBrains Mono', 'SF Mono', monospace;
+  font-variant-numeric: tabular-nums;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+}
+
+/* Form Controls Inside Table Rows */
+.table .form-control-sm,
+.table .form-select-sm,
+.table-catalog .form-control,
+.catalog-table .form-control,
+.table-hoc .form-control {
+  border-radius: 8px;
+  border: 1px solid #cbd5e1;
+  font-size: 0.84rem;
+  padding: 6px 10px;
+  background: #ffffff;
+  transition: border-color 0.15s ease, box-shadow 0.15s ease;
+}
+.table .form-control-sm:focus,
+.table-catalog .form-control:focus,
+.catalog-table .form-control:focus,
+.table-hoc .form-control:focus {
+  border-color: #0284c7;
+  box-shadow: 0 0 0 3px rgba(2, 132, 199, 0.14);
 }
 
 /* Badges */
@@ -381,6 +583,145 @@ h1, h2, h3, h4, h5, h6, .page-title, .admin-card-title, .kpi-value, .sidebar-bra
 .badge-soft-warning { background: #fef9c3; color: #854d0e; font-weight: 700; }
 .badge-soft-danger { background: #fee2e2; color: #b91c1c; font-weight: 700; }
 .badge-soft-secondary { background: #f1f5f9; color: #475569; font-weight: 700; }
+
+/* ==========================================================================
+   Executive Modern ERP Pagination Design System
+   ========================================================================== */
+
+/* Pagination Container */
+.pagination {
+  display: inline-flex !important;
+  align-items: center !important;
+  gap: 6px !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  list-style: none !important;
+}
+
+/* Page Item Wrapper */
+.page-item {
+  margin: 0 !important;
+  list-style: none !important;
+}
+
+/* Page Link Buttons */
+.page-link {
+  min-width: 38px !important;
+  height: 38px !important;
+  padding: 0 12px !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  border-radius: 10px !important;
+  border: 1px solid #e2e8f0 !important;
+  background: #ffffff !important;
+  color: #334155 !important;
+  font-family: var(--admin-font-body) !important;
+  font-size: 0.86rem !important;
+  font-weight: 700 !important;
+  text-decoration: none !important;
+  box-shadow: 0 1px 2px rgba(15, 23, 42, 0.04) !important;
+  transition: all 0.18s cubic-bezier(0.4, 0, 0.2, 1) !important;
+  cursor: pointer !important;
+}
+
+/* Interactive Hover State */
+.page-item:not(.active):not(.disabled) .page-link:hover,
+.page-link:hover:not(.active):not(.disabled) {
+  background: #f8fafc !important;
+  color: #0284c7 !important;
+  border-color: #cbd5e1 !important;
+  transform: translateY(-2px) !important;
+  box-shadow: 0 4px 10px rgba(15, 23, 42, 0.08) !important;
+}
+
+/* Active Page State */
+.page-item.active .page-link,
+.page-link.active,
+.page-item.active > span.page-link {
+  background: linear-gradient(135deg, #0284c7 0%, #0369a1 100%) !important;
+  border-color: #0284c7 !important;
+  color: #ffffff !important;
+  box-shadow: 0 4px 14px rgba(2, 132, 199, 0.35) !important;
+  transform: translateY(-1px) !important;
+  z-index: 2 !important;
+}
+
+/* Disabled Page State */
+.page-item.disabled .page-link,
+.page-link.disabled,
+.page-item.disabled > span.page-link {
+  background: #f8fafc !important;
+  color: #94a3b8 !important;
+  border-color: #f1f5f9 !important;
+  opacity: 0.65 !important;
+  pointer-events: none !important;
+  box-shadow: none !important;
+  cursor: not-allowed !important;
+}
+
+/* Focus State */
+.page-link:focus {
+  outline: none !important;
+  box-shadow: 0 0 0 3px rgba(2, 132, 199, 0.2) !important;
+}
+
+/* SVG Arrow Safeguards: Prevents Massive Blown-up Chevron Arrows */
+nav[role="navigation"] svg,
+.pagination svg,
+.page-link svg {
+  width: 14px !important;
+  height: 14px !important;
+  max-width: 14px !important;
+  max-height: 14px !important;
+  display: inline-block !important;
+  vertical-align: middle !important;
+}
+
+/* Tailwind Pagination Nav Fallback Override (If Rendered Without Bootstrap 5) */
+nav[role="navigation"] {
+  display: flex !important;
+  align-items: center !important;
+  gap: 8px !important;
+}
+nav[role="navigation"] > div:first-child {
+  display: none !important;
+}
+nav[role="navigation"] > div:last-child {
+  display: flex !important;
+  align-items: center !important;
+  gap: 12px !important;
+}
+nav[role="navigation"] span.relative,
+nav[role="navigation"] a.relative {
+  min-width: 38px !important;
+  height: 38px !important;
+  border-radius: 10px !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  padding: 0 12px !important;
+  font-size: 0.85rem !important;
+  font-weight: 700 !important;
+  border: 1px solid #e2e8f0 !important;
+  background: #ffffff !important;
+  color: #334155 !important;
+  text-decoration: none !important;
+  box-shadow: 0 1px 2px rgba(15, 23, 42, 0.04) !important;
+}
+nav[role="navigation"] span[aria-current="page"] span {
+  background: linear-gradient(135deg, #0284c7 0%, #0369a1 100%) !important;
+  color: #ffffff !important;
+  border-color: #0284c7 !important;
+  border-radius: 10px !important;
+  box-shadow: 0 4px 12px rgba(2, 132, 199, 0.35) !important;
+}
+nav[role="navigation"] p.text-sm,
+nav p.text-muted,
+nav p.small,
+nav .flex-sm-fill > div:first-child p {
+  display: none !important;
+}
 
 /* Backdrop Overlay for Mobile Sidebar */
 .sidebar-backdrop {
@@ -1207,22 +1548,24 @@ h1, h2, h3, h4, h5, h6, .page-title, .admin-card-title, .kpi-value, .sidebar-bra
 
 /* Action Icon Buttons */
 .catalog-action-btn {
-  width: 32px;
-  height: 32px;
-  border-radius: 8px;
+  width: 34px;
+  height: 34px;
+  border-radius: 9px;
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  font-size: 0.85rem;
+  font-size: 0.88rem;
   border: 1px solid #e2e8f0;
   background: #ffffff;
   color: #475569;
   text-decoration: none;
-  transition: all 0.18s ease;
+  transition: all 0.18s cubic-bezier(0.4, 0, 0.2, 1);
   cursor: pointer;
+  box-shadow: 0 1px 2px rgba(15, 23, 42, 0.04);
 }
 .catalog-action-btn:hover {
-  transform: translateY(-1px);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px -2px rgba(15, 23, 42, 0.1);
 }
 .catalog-action-btn.btn-view:hover {
   background: #e0f2fe;
@@ -1234,15 +1577,26 @@ h1, h2, h3, h4, h5, h6, .page-title, .admin-card-title, .kpi-value, .sidebar-bra
   color: #2563eb;
   border-color: #bfdbfe;
 }
+.catalog-action-btn.btn-print:hover {
+  background: #ede9fe;
+  color: #7c3aed;
+  border-color: #ddd6fe;
+}
 .catalog-action-btn.btn-stock:hover {
   background: #ecfdf5;
   color: #059669;
   border-color: #a7f3d0;
 }
-.catalog-action-btn.btn-danger:hover {
+.catalog-action-btn.btn-danger:hover,
+.catalog-action-btn.btn-delete:hover {
   background: #fee2e2;
   color: #dc2626;
   border-color: #fca5a5;
+}
+.catalog-action-btn.btn-success:hover {
+  background: #dcfce7;
+  color: #16a34a;
+  border-color: #bbf7d0;
 }
 
 /* Hardware Brands Modern Grid Card */

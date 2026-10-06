@@ -235,8 +235,8 @@
                             @endif
                         </td>
                         <td class="text-end pe-4">
-                            <div class="d-flex align-items-center justify-content-end gap-1">
-                                <button type="button" class="btn btn-sm btn-light border text-primary edit-supplier-btn" 
+                            <div class="d-inline-flex align-items-center gap-1">
+                                <button type="button" class="catalog-action-btn btn-edit edit-supplier-btn" 
                                         title="Edit Distributor"
                                         data-id="{{ $supplier->id }}"
                                         data-company="{{ $supplier->company }}"
@@ -250,14 +250,15 @@
                                         data-payment_terms="{{ $supplier->payment_terms }}"
                                         data-bank_details="{{ $supplier->bank_details }}"
                                         data-status="{{ $supplier->status }}">
-                                    <i class="bi bi-pencil-square"></i>
+                                    <i class="bi bi-pencil"></i>
                                 </button>
                                 
-                                <form action="{{ route('admin.suppliers.destroy', $supplier->id) }}" method="POST" class="d-inline"
-                                      onsubmit="return confirm('Are you sure you want to delete distributor {{ $supplier->company }}?');">
+                                <form action="{{ route('admin.suppliers.destroy', $supplier->id) }}" method="POST" class="d-inline m-0 delete-form"
+                                      data-confirm-title="Delete Distributor?"
+                                      data-confirm="Are you sure you want to delete distributor &quot;{{ $supplier->company }}&quot;?">
                                     @csrf
                                     @method('DELETE')
-                                    <button type="submit" class="btn btn-sm btn-light border text-danger" title="Delete Distributor">
+                                    <button type="submit" class="catalog-action-btn btn-danger" title="Delete Distributor">
                                         <i class="bi bi-trash3"></i>
                                     </button>
                                 </form>
@@ -283,12 +284,12 @@
     </div>
 
     @if($suppliers->hasPages())
-        <div class="p-3 border-top d-flex align-items-center justify-content-between">
+        <div class="p-3 px-4 border-top d-flex flex-wrap justify-content-between align-items-center gap-3 bg-light bg-opacity-50">
             <div class="text-muted small">
-                Showing {{ $suppliers->firstItem() }} to {{ $suppliers->lastItem() }} of {{ $suppliers->total() }} vendors
+                Showing <strong>{{ $suppliers->firstItem() ?? 0 }}-{{ $suppliers->lastItem() ?? 0 }}</strong> of <strong>{{ $suppliers->total() }}</strong> vendors
             </div>
             <div>
-                {{ $suppliers->links() }}
+                {{ $suppliers->links('pagination::bootstrap-5') }}
             </div>
         </div>
     @endif

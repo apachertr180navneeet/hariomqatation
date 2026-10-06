@@ -225,13 +225,13 @@
                             @endif
                         </td>
                         <td class="text-end pe-4">
-                            <div class="d-flex align-items-center justify-content-end gap-1">
+                            <div class="d-inline-flex align-items-center gap-1">
                                 <a href="{{ route('admin.purchases.show', $purchase->id) }}" 
-                                   class="btn btn-sm btn-light border text-primary" title="View Inward Bill Receipt">
+                                   class="catalog-action-btn btn-view" title="View Inward Bill Receipt">
                                     <i class="bi bi-eye"></i>
                                 </a>
                                 <a href="{{ route('admin.purchases.show', $purchase->id) }}" target="_blank"
-                                   class="btn btn-sm btn-light border text-dark" title="Print Goods Receipt">
+                                   class="catalog-action-btn btn-print" title="Print Goods Receipt">
                                     <i class="bi bi-printer"></i>
                                 </a>
                             </div>
@@ -256,12 +256,12 @@
     </div>
 
     @if($purchases->hasPages())
-        <div class="p-3 border-top d-flex align-items-center justify-content-between">
+        <div class="p-3 px-4 border-top d-flex flex-wrap justify-content-between align-items-center gap-3 bg-light bg-opacity-50">
             <div class="text-muted small">
-                Showing {{ $purchases->firstItem() }} to {{ $purchases->lastItem() }} of {{ $purchases->total() }} bills
+                Showing <strong>{{ $purchases->firstItem() ?? 0 }}-{{ $purchases->lastItem() ?? 0 }}</strong> of <strong>{{ $purchases->total() }}</strong> bills
             </div>
             <div>
-                {{ $purchases->links() }}
+                {{ $purchases->links('pagination::bootstrap-5') }}
             </div>
         </div>
     @endif

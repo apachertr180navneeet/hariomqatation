@@ -55,24 +55,57 @@
     <div class="p-4 tab-content">
         <!-- Sales Report Tab -->
         <div class="tab-pane fade show active" id="sales-rep">
-            <h6 class="fw-bold mb-3">Daily Sales Breakdown (August 2026)</h6>
+            <div class="d-flex align-items-center justify-content-between mb-3">
+                <h6 class="fw-bold text-slate-900 m-0"><i class="bi bi-calendar3 me-2 text-primary"></i>Daily Sales Breakdown (August 2026)</h6>
+                <span class="badge bg-light text-slate-700 border px-3 py-1.5 font-monospace">Consolidated Net</span>
+            </div>
             <div class="table-responsive">
-                <table class="table table-bordered small align-middle">
-                    <thead class="table-light">
+                <table class="table table-catalog align-middle mb-0">
+                    <thead>
                         <tr>
-                            <th>Date</th>
-                            <th>Invoices Issued</th>
-                            <th>Gross Revenue (₹)</th>
-                            <th>Taxable Base (₹)</th>
-                            <th>GST Collected (₹)</th>
+                            <th class="ps-4">Date</th>
+                            <th class="text-center">Invoices Issued</th>
+                            <th class="text-end">Gross Revenue (₹)</th>
+                            <th class="text-end">Taxable Base (₹)</th>
+                            <th class="text-end pe-4">GST Collected (₹)</th>
                         </tr>
                     </thead>
                     <tbody>
-                        <tr><td>14-Aug-2026</td><td>4</td><td>₹1,52,980</td><td>₹1,29,644</td><td>₹23,336</td></tr>
-                        <tr><td>13-Aug-2026</td><td>5</td><td>₹1,85,000</td><td>₹1,56,780</td><td>₹28,220</td></tr>
-                        <tr><td>12-Aug-2026</td><td>3</td><td>₹1,12,400</td><td>₹95,254</td><td>₹17,146</td></tr>
-                        <tr><td>11-Aug-2026</td><td>6</td><td>₹2,45,000</td><td>₹2,07,627</td><td>₹37,373</td></tr>
-                        <tr><td>10-Aug-2026</td><td>4</td><td>₹1,49,620</td><td>₹1,26,796</td><td>₹22,824</td></tr>
+                        <tr>
+                            <td class="ps-4 fw-semibold text-slate-800">14-Aug-2026</td>
+                            <td class="text-center"><span class="badge bg-light text-slate-800 border rounded-pill px-2.5 py-1">4 Bills</span></td>
+                            <td class="text-end fw-bold text-slate-900">₹1,52,980.00</td>
+                            <td class="text-end text-slate-700">₹1,29,644.00</td>
+                            <td class="text-end pe-4 fw-semibold text-primary">₹23,336.00</td>
+                        </tr>
+                        <tr>
+                            <td class="ps-4 fw-semibold text-slate-800">13-Aug-2026</td>
+                            <td class="text-center"><span class="badge bg-light text-slate-800 border rounded-pill px-2.5 py-1">5 Bills</span></td>
+                            <td class="text-end fw-bold text-slate-900">₹1,85,000.00</td>
+                            <td class="text-end text-slate-700">₹1,56,780.00</td>
+                            <td class="text-end pe-4 fw-semibold text-primary">₹28,220.00</td>
+                        </tr>
+                        <tr>
+                            <td class="ps-4 fw-semibold text-slate-800">12-Aug-2026</td>
+                            <td class="text-center"><span class="badge bg-light text-slate-800 border rounded-pill px-2.5 py-1">3 Bills</span></td>
+                            <td class="text-end fw-bold text-slate-900">₹1,12,400.00</td>
+                            <td class="text-end text-slate-700">₹95,254.00</td>
+                            <td class="text-end pe-4 fw-semibold text-primary">₹17,146.00</td>
+                        </tr>
+                        <tr>
+                            <td class="ps-4 fw-semibold text-slate-800">11-Aug-2026</td>
+                            <td class="text-center"><span class="badge bg-light text-slate-800 border rounded-pill px-2.5 py-1">6 Bills</span></td>
+                            <td class="text-end fw-bold text-slate-900">₹2,45,000.00</td>
+                            <td class="text-end text-slate-700">₹2,07,627.00</td>
+                            <td class="text-end pe-4 fw-semibold text-primary">₹37,373.00</td>
+                        </tr>
+                        <tr>
+                            <td class="ps-4 fw-semibold text-slate-800">10-Aug-2026</td>
+                            <td class="text-center"><span class="badge bg-light text-slate-800 border rounded-pill px-2.5 py-1">4 Bills</span></td>
+                            <td class="text-end fw-bold text-slate-900">₹1,49,620.00</td>
+                            <td class="text-end text-slate-700">₹1,26,796.00</td>
+                            <td class="text-end pe-4 fw-semibold text-primary">₹22,824.00</td>
+                        </tr>
                     </tbody>
                 </table>
             </div>
@@ -80,41 +113,45 @@
 
         <!-- GST Statement Tab -->
         <div class="tab-pane fade" id="gst-rep">
-            <h6 class="fw-bold mb-3">GST Return Data (Eligible for Input Tax Credit)</h6>
-            <div class="alert alert-light border small">
-                <strong>Hari Om Computer GSTIN:</strong> <code>08AABCH1234F1Z9</code> | State Code: 08 (Rajasthan)
+            <div class="alert alert-light border rounded-3 p-3 mb-3 d-flex flex-wrap align-items-center justify-content-between gap-2">
+                <div>
+                    <span class="fw-bold text-slate-900"><i class="bi bi-shield-check text-primary me-1"></i> Hari Om Computer GSTIN:</span> 
+                    <code class="fs-6 text-primary ms-1">08AABCH1234F1Z9</code> 
+                    <span class="text-muted ms-2">&bull; State Code: 08 (Rajasthan)</span>
+                </div>
+                <span class="badge bg-success-subtle text-success border border-success-subtle px-3 py-1.5 fw-bold">GSTR-1 Ready</span>
             </div>
             <div class="table-responsive">
-                <table class="table table-bordered small align-middle">
-                    <thead class="table-light">
+                <table class="table table-catalog align-middle mb-0">
+                    <thead>
                         <tr>
-                            <th>Customer GSTIN</th>
+                            <th class="ps-4">Customer GSTIN</th>
                             <th>Customer / Firm</th>
                             <th>Invoice No</th>
-                            <th>Taxable Value</th>
-                            <th>CGST (9%)</th>
-                            <th>SGST (9%)</th>
-                            <th>Total GST</th>
+                            <th class="text-end">Taxable Value</th>
+                            <th class="text-end">CGST (9%)</th>
+                            <th class="text-end">SGST (9%)</th>
+                            <th class="text-end pe-4">Total GST</th>
                         </tr>
                     </thead>
                     <tbody>
                         <tr>
-                            <td><code>08AABCR1234F1Z3</code></td>
-                            <td>Rathore Infotech Pvt Ltd</td>
-                            <td>HOC/INV/2026/0001</td>
-                            <td>₹1,29,644</td>
-                            <td>₹11,668</td>
-                            <td>₹11,668</td>
-                            <td>₹23,336</td>
+                            <td class="ps-4"><span class="badge bg-light text-slate-700 border font-monospace px-2.5 py-1">08AABCR1234F1Z3</span></td>
+                            <td><strong class="text-slate-900">Rathore Infotech Pvt Ltd</strong></td>
+                            <td><span class="badge bg-light text-dark border font-monospace">HOC/INV/2026/0001</span></td>
+                            <td class="text-end fw-semibold text-slate-900">₹1,29,644.00</td>
+                            <td class="text-end text-slate-700">₹11,668.00</td>
+                            <td class="text-end text-slate-700">₹11,668.00</td>
+                            <td class="text-end pe-4 fw-bold text-primary fs-6">₹23,336.00</td>
                         </tr>
                         <tr>
-                            <td><code>08AAGSM4433E1ZK</code></td>
-                            <td>Mehta Diagnostic & Imaging</td>
-                            <td>HOC/INV/2026/0002</td>
-                            <td>₹1,56,780</td>
-                            <td>₹14,110</td>
-                            <td>₹14,110</td>
-                            <td>₹28,220</td>
+                            <td class="ps-4"><span class="badge bg-light text-slate-700 border font-monospace px-2.5 py-1">08AAGSM4433E1ZK</span></td>
+                            <td><strong class="text-slate-900">Mehta Diagnostic & Imaging</strong></td>
+                            <td><span class="badge bg-light text-dark border font-monospace">HOC/INV/2026/0002</span></td>
+                            <td class="text-end fw-semibold text-slate-900">₹1,56,780.00</td>
+                            <td class="text-end text-slate-700">₹14,110.00</td>
+                            <td class="text-end text-slate-700">₹14,110.00</td>
+                            <td class="text-end pe-4 fw-bold text-primary fs-6">₹28,220.00</td>
                         </tr>
                     </tbody>
                 </table>
@@ -123,23 +160,70 @@
 
         <!-- Profitability Tab -->
         <div class="tab-pane fade" id="profit-rep">
-            <h6 class="fw-bold mb-3">Gross Margin by Category</h6>
+            <div class="d-flex align-items-center justify-content-between mb-3">
+                <h6 class="fw-bold text-slate-900 m-0"><i class="bi bi-pie-chart text-primary me-2"></i>Gross Margin by Hardware Category</h6>
+                <span class="badge bg-emerald-subtle text-emerald border px-3 py-1.5 fw-bold" style="background: #dcfce7; color: #15803d;">Net Positive Margins</span>
+            </div>
             <div class="table-responsive">
-                <table class="table table-bordered small align-middle">
-                    <thead class="table-light">
+                <table class="table table-catalog align-middle mb-0">
+                    <thead>
                         <tr>
-                            <th>Category</th>
-                            <th>Purchase Cost</th>
-                            <th>Sales Revenue</th>
-                            <th>Gross Profit Margin</th>
-                            <th>Margin %</th>
+                            <th class="ps-4">Hardware Category</th>
+                            <th class="text-end">Purchase Cost</th>
+                            <th class="text-end">Sales Revenue</th>
+                            <th class="text-end">Gross Profit Margin</th>
+                            <th class="text-center pe-4">Margin %</th>
                         </tr>
                     </thead>
                     <tbody>
-                        <tr><td>Desktop Gaming PCs & Workstations</td><td>₹1,85,000</td><td>₹2,22,980</td><td class="text-success fw-bold">₹37,980</td><td>17.0%</td></tr>
-                        <tr><td>Laptops & Notebooks</td><td>₹3,15,000</td><td>₹3,56,490</td><td class="text-success fw-bold">₹41,490</td><td>11.6%</td></tr>
-                        <tr><td>Components (CPUs / GPUs / RAM)</td><td>₹1,42,000</td><td>₹1,68,900</td><td class="text-success fw-bold">₹26,900</td><td>15.9%</td></tr>
-                        <tr><td>Accessories & Networking</td><td>₹45,000</td><td>₹62,500</td><td class="text-success fw-bold">₹17,500</td><td>28.0%</td></tr>
+                        <tr>
+                            <td class="ps-4">
+                                <div class="d-flex align-items-center gap-2">
+                                    <div class="catalog-avatar-box" style="width: 32px; height: 32px;"><i class="bi bi-display"></i></div>
+                                    <strong class="text-slate-900">Desktop Gaming PCs & Workstations</strong>
+                                </div>
+                            </td>
+                            <td class="text-end text-slate-700">₹1,85,000.00</td>
+                            <td class="text-end fw-bold text-slate-900">₹2,22,980.00</td>
+                            <td class="text-end text-success fw-bold fs-6">₹37,980.00</td>
+                            <td class="text-center pe-4"><span class="stock-status-pill healthy"><span class="stock-dot"></span><span>17.0%</span></span></td>
+                        </tr>
+                        <tr>
+                            <td class="ps-4">
+                                <div class="d-flex align-items-center gap-2">
+                                    <div class="catalog-avatar-box" style="width: 32px; height: 32px;"><i class="bi bi-laptop"></i></div>
+                                    <strong class="text-slate-900">Laptops & Notebooks</strong>
+                                </div>
+                            </td>
+                            <td class="text-end text-slate-700">₹3,15,000.00</td>
+                            <td class="text-end fw-bold text-slate-900">₹3,56,490.00</td>
+                            <td class="text-end text-success fw-bold fs-6">₹41,490.00</td>
+                            <td class="text-center pe-4"><span class="stock-status-pill healthy"><span class="stock-dot"></span><span>11.6%</span></span></td>
+                        </tr>
+                        <tr>
+                            <td class="ps-4">
+                                <div class="d-flex align-items-center gap-2">
+                                    <div class="catalog-avatar-box" style="width: 32px; height: 32px;"><i class="bi bi-cpu"></i></div>
+                                    <strong class="text-slate-900">Components (CPUs / GPUs / RAM)</strong>
+                                </div>
+                            </td>
+                            <td class="text-end text-slate-700">₹1,42,000.00</td>
+                            <td class="text-end fw-bold text-slate-900">₹1,68,900.00</td>
+                            <td class="text-end text-success fw-bold fs-6">₹26,900.00</td>
+                            <td class="text-center pe-4"><span class="stock-status-pill healthy"><span class="stock-dot"></span><span>15.9%</span></span></td>
+                        </tr>
+                        <tr>
+                            <td class="ps-4">
+                                <div class="d-flex align-items-center gap-2">
+                                    <div class="catalog-avatar-box" style="width: 32px; height: 32px;"><i class="bi bi-keyboard"></i></div>
+                                    <strong class="text-slate-900">Accessories & Networking</strong>
+                                </div>
+                            </td>
+                            <td class="text-end text-slate-700">₹45,000.00</td>
+                            <td class="text-end fw-bold text-slate-900">₹62,500.00</td>
+                            <td class="text-end text-success fw-bold fs-6">₹17,500.00</td>
+                            <td class="text-center pe-4"><span class="stock-status-pill healthy"><span class="stock-dot"></span><span>28.0%</span></span></td>
+                        </tr>
                     </tbody>
                 </table>
             </div>

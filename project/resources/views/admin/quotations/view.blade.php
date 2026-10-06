@@ -85,16 +85,16 @@
 
             <!-- Items Table -->
             <div class="table-responsive mb-4">
-                <table class="table table-bordered align-middle mb-0">
-                    <thead class="table-light small">
+                <table class="table table-catalog align-middle mb-0">
+                    <thead>
                         <tr>
-                            <th class="text-center" style="width: 40px;">#</th>
+                            <th class="text-center ps-3" style="width: 40px;">#</th>
                             <th>Product Description</th>
                             <th class="text-center" style="width: 70px;">Qty</th>
                             <th class="text-end" style="width: 130px;">Rate (₹)</th>
                             <th class="text-end" style="width: 110px;">Disc (₹)</th>
                             <th class="text-center" style="width: 80px;">GST %</th>
-                            <th class="text-end" style="width: 140px;">Amount (₹)</th>
+                            <th class="text-end pe-3" style="width: 140px;">Amount (₹)</th>
                         </tr>
                     </thead>
                     <tbody>

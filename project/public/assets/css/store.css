@@ -1114,17 +1114,213 @@ main {
 }
 
 /* SweetAlert Toast Custom Styling */
-.swal2-toast {
-  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05) !important;
-  border-radius: 12px !important;
-  border: 1px solid #e2e8f0 !important;
-  padding: 0.85rem 1.25rem !important;
+/* ==========================================================================
+   Storefront Modern Table Design System (Cart, Enquiry, Quotation Summary)
+   ========================================================================== */
+
+.table-responsive {
+  border-radius: var(--hoc-radius-md);
+  border: 1px solid var(--hoc-border-color);
+  background: #ffffff;
+  box-shadow: var(--hoc-shadow-subtle);
+  overflow-x: auto;
+  scrollbar-width: thin;
+  scrollbar-color: #cbd5e1 #f8fafc;
 }
 
-.swal2-toast .swal2-title {
-  font-size: 0.925rem !important;
-  font-weight: 600 !important;
-  color: #1e293b !important;
+.card .table-responsive {
+  border: none !important;
+  box-shadow: none !important;
+  border-radius: 0 !important;
+}
+
+.table {
+  width: 100%;
+  margin: 0;
+  border-collapse: separate;
+  border-spacing: 0;
+  font-family: var(--hoc-font-body);
+  color: #1e293b;
+}
+
+.table thead th,
+.table thead.table-light th {
+  background: #f8fafc !important;
+  color: #475569 !important;
+  font-family: var(--hoc-font-heading);
+  font-size: 0.74rem;
+  font-weight: 750;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  padding: 14px 18px;
+  border-top: none !important;
+  border-bottom: 2px solid #e2e8f0 !important;
+  border-left: none !important;
+  border-right: none !important;
+  white-space: nowrap;
+  vertical-align: middle;
+}
+
+.table tbody td {
+  padding: 14px 18px;
+  font-size: 0.9rem;
+  color: #334155;
+  vertical-align: middle;
+  border-bottom: 1px solid #f1f5f9 !important;
+  border-top: none !important;
+  border-left: none !important;
+  border-right: none !important;
+  background: #ffffff;
+  transition: background-color 0.15s ease;
+}
+
+.table tbody tr:hover td {
+  background-color: #f8fafc !important;
+}
+
+.table tbody tr:hover td:first-child {
+  box-shadow: inset 4px 0 0 var(--hoc-primary);
+}
+
+.table tbody tr:last-child td {
+  border-bottom: none !important;
+}
+
+.table .text-end {
+  font-family: 'JetBrains Mono', 'SF Mono', monospace;
+  font-variant-numeric: tabular-nums;
+  font-weight: 600;
+}
+
+/* Cart Quantity Stepper Inside Table */
+.btn-cart-qty-dec,
+.btn-cart-qty-inc {
+  width: 30px;
+  height: 30px;
+  padding: 0;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  border-color: #cbd5e1;
+  color: #475569;
+  background: #f8fafc;
+  transition: all 0.15s ease;
+}
+.btn-cart-qty-dec:hover,
+.btn-cart-qty-inc:hover {
+  background: var(--hoc-primary);
+  color: #ffffff;
+  border-color: var(--hoc-primary);
+}
+
+/* Cart Item Remove Micro-Button */
+.btn-cart-remove {
+  width: 34px;
+  height: 34px;
+  border-radius: 8px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid #fee2e2;
+  background: #fff5f5;
+  color: #ef4444;
+  transition: all 0.18s ease;
+}
+.btn-cart-remove:hover {
+  background: #ef4444;
+  color: #ffffff;
+  border-color: #ef4444;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px -2px rgba(239, 68, 68, 0.25);
+}
+
+/* ==========================================================================
+   Storefront Modern Pagination Design System
+   ========================================================================== */
+
+.pagination {
+  display: inline-flex !important;
+  align-items: center !important;
+  gap: 6px !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  list-style: none !important;
+}
+
+.page-item {
+  margin: 0 !important;
+  list-style: none !important;
+}
+
+.page-link {
+  min-width: 38px !important;
+  height: 38px !important;
+  padding: 0 12px !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  border-radius: 10px !important;
+  border: 1px solid var(--hoc-border-color) !important;
+  background: #ffffff !important;
+  color: #334155 !important;
+  font-family: var(--hoc-font-body) !important;
+  font-size: 0.86rem !important;
+  font-weight: 700 !important;
+  text-decoration: none !important;
+  box-shadow: 0 1px 2px rgba(15, 23, 42, 0.04) !important;
+  transition: all 0.18s cubic-bezier(0.4, 0, 0.2, 1) !important;
+  cursor: pointer !important;
+}
+
+.page-item:not(.active):not(.disabled) .page-link:hover,
+.page-link:hover:not(.active):not(.disabled) {
+  background: #f8fafc !important;
+  color: var(--hoc-primary) !important;
+  border-color: #cbd5e1 !important;
+  transform: translateY(-2px) !important;
+  box-shadow: 0 4px 10px rgba(15, 23, 42, 0.08) !important;
+}
+
+.page-item.active .page-link,
+.page-link.active,
+.page-item.active > span.page-link {
+  background: linear-gradient(135deg, var(--hoc-primary) 0%, var(--hoc-primary-dark) 100%) !important;
+  border-color: var(--hoc-primary) !important;
+  color: #ffffff !important;
+  box-shadow: 0 4px 14px rgba(2, 132, 199, 0.35) !important;
+  transform: translateY(-1px) !important;
+  z-index: 2 !important;
+}
+
+.page-item.disabled .page-link,
+.page-link.disabled,
+.page-item.disabled > span.page-link {
+  background: #f8fafc !important;
+  color: #94a3b8 !important;
+  border-color: #f1f5f9 !important;
+  opacity: 0.65 !important;
+  pointer-events: none !important;
+  box-shadow: none !important;
+  cursor: not-allowed !important;
+}
+
+nav[role="navigation"] svg,
+.pagination svg,
+.page-link svg {
+  width: 14px !important;
+  height: 14px !important;
+  max-width: 14px !important;
+  max-height: 14px !important;
+  display: inline-block !important;
+  vertical-align: middle !important;
+}
+
+nav[role="navigation"] p.text-sm,
+nav p.text-muted,
+nav p.small,
+nav .flex-sm-fill > div:first-child p {
+  display: none !important;
 }
 
 

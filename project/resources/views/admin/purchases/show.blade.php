@@ -100,16 +100,16 @@
 
     <!-- Items Table -->
     <div class="table-responsive my-4">
-        <table class="table table-bordered align-middle mb-0">
-            <thead class="table-light">
+        <table class="table table-catalog align-middle mb-0">
+            <thead>
                 <tr>
-                    <th style="width: 5%;" class="text-center">#</th>
-                    <th style="width: 40%;">Item Description / Product</th>
+                    <th style="width: 5%;" class="text-center ps-3">#</th>
+                    <th style="width: 38%;">Item Description / Product</th>
                     <th style="width: 15%;">SKU</th>
                     <th style="width: 10%;" class="text-center">HSN</th>
                     <th style="width: 10%;" class="text-center">Qty Recd</th>
-                    <th style="width: 10%;" class="text-end">Unit Cost (₹)</th>
-                    <th style="width: 10%;" class="text-end">Total (₹)</th>
+                    <th style="width: 11%;" class="text-end">Unit Cost (₹)</th>
+                    <th style="width: 11%;" class="text-end pe-3">Total (₹)</th>
                 </tr>
             </thead>
             <tbody>

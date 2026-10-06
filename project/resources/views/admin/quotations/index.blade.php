@@ -76,102 +76,109 @@
 </div>
 
 <!-- Filters & Search Bar -->
-<div class="admin-card mb-4">
-    <div class="p-3 border-bottom bg-light bg-opacity-50">
-        <form method="GET" action="{{ route('admin.quotations') }}" class="row g-2 align-items-center">
-            <div class="col-md-5">
-                <div class="input-group input-group-sm">
-                    <span class="input-group-text bg-white"><i class="bi bi-search text-muted"></i></span>
-                    <input type="text" name="search" class="form-control bg-white" 
-                           placeholder="Search Quotation No, Customer, Phone, Firm..." 
-                           value="{{ $search }}">
-                </div>
-            </div>
-            <div class="col-md-4">
-                <select name="status" class="form-select form-select-sm bg-white" onchange="this.form.submit()">
-                    <option value="ALL" {{ $currentStatus === 'ALL' ? 'selected' : '' }}>All Statuses (Draft, Sent, Pending, Approved)</option>
-                    <option value="Draft" {{ $currentStatus === 'Draft' ? 'selected' : '' }}>Draft</option>
-                    <option value="Sent" {{ $currentStatus === 'Sent' ? 'selected' : '' }}>Sent</option>
-                    <option value="Pending" {{ $currentStatus === 'Pending' ? 'selected' : '' }}>Pending</option>
-                    <option value="Approved" {{ $currentStatus === 'Approved' ? 'selected' : '' }}>Approved</option>
-                    <option value="Converted" {{ $currentStatus === 'Converted' ? 'selected' : '' }}>Converted to Sale</option>
-                    <option value="Rejected" {{ $currentStatus === 'Rejected' ? 'selected' : '' }}>Rejected</option>
-                </select>
-            </div>
-            <div class="col-md-3 text-md-end">
-                <button type="submit" class="btn btn-sm btn-primary fw-semibold px-3">Filter</button>
-                @if($search || $currentStatus !== 'ALL')
-                    <a href="{{ route('admin.quotations') }}" class="btn btn-sm btn-outline-secondary ms-1">Reset</a>
-                @endif
-            </div>
-        </form>
-    </div>
+<div class="catalog-filter-card mb-4">
+    <form method="GET" action="{{ route('admin.quotations') }}" class="d-flex flex-wrap align-items-center justify-content-between gap-3 m-0">
+        <div class="catalog-search-wrap flex-grow-1" style="max-width: 440px;">
+            <i class="bi bi-search search-icon"></i>
+            <input type="text" name="search" class="catalog-search-input" 
+                   placeholder="Search Quotation No, Customer, Phone, Firm..." 
+                   value="{{ $search }}">
+        </div>
 
-    <!-- Table -->
+        <div class="filter-pills-bar">
+            <a href="{{ route('admin.quotations', array_merge(request()->except('status'), ['status' => 'ALL'])) }}" 
+               class="filter-pill {{ ($currentStatus === 'ALL' || !$currentStatus) ? 'active' : '' }}">
+                All ({{ $metrics['total'] }})
+            </a>
+            <a href="{{ route('admin.quotations', array_merge(request()->except('status'), ['status' => 'Approved'])) }}" 
+               class="filter-pill {{ $currentStatus === 'Approved' ? 'active' : '' }}">
+                Approved ({{ $metrics['approved'] }})
+            </a>
+            <a href="{{ route('admin.quotations', array_merge(request()->except('status'), ['status' => 'Pending'])) }}" 
+               class="filter-pill {{ $currentStatus === 'Pending' ? 'active' : '' }}">
+                Pending ({{ $metrics['pending'] }})
+            </a>
+            <a href="{{ route('admin.quotations', array_merge(request()->except('status'), ['status' => 'Draft'])) }}" 
+               class="filter-pill {{ $currentStatus === 'Draft' ? 'active' : '' }}">
+                Draft
+            </a>
+        </div>
+    </form>
+</div>
+
+<!-- Quotations Directory Table Card -->
+<div class="catalog-card shadow-sm p-0 overflow-hidden mb-4">
     <div class="table-responsive">
-        <table class="table table-hoc align-middle mb-0">
-            <thead class="table-light">
+        <table class="table table-catalog align-middle mb-0">
+            <thead>
                 <tr>
-                    <th>Quotation No</th>
+                    <th class="ps-4">Quotation No</th>
                     <th>Customer & Firm</th>
                     <th>Issue Date</th>
                     <th>Valid Until</th>
                     <th class="text-center">Items</th>
                     <th class="text-end">Grand Total</th>
-                    <th>Status</th>
-                    <th class="text-end">Actions</th>
+                    <th class="text-center">Status</th>
+                    <th class="text-end pe-4">Actions</th>
                 </tr>
             </thead>
             <tbody>
                 @forelse($quotations as $quote)
                     @php
-                        $statusBadge = match($quote->status) {
-                            'Approved' => 'badge-soft-success',
-                            'Converted' => 'badge-soft-primary',
-                            'Sent', 'Pending' => 'badge-soft-warning',
-                            'Rejected' => 'badge-soft-danger',
-                            default => 'badge-soft-secondary',
+                        $statusPill = match($quote->status) {
+                            'Approved', 'Converted' => 'healthy',
+                            'Sent', 'Pending' => 'low',
+                            'Rejected' => 'out',
+                            default => 'low',
                         };
                     @endphp
                     <tr>
-                        <td>
-                            <a href="{{ route('admin.quotations.view', ['id' => $quote->id]) }}" class="fw-bold text-primary text-decoration-none">
+                        <td class="ps-4">
+                            <a href="{{ route('admin.quotations.view', ['id' => $quote->id]) }}" class="fw-bold text-primary font-monospace text-decoration-none">
                                 {{ $quote->quotation_no }}
                             </a>
                         </td>
                         <td>
-                            <strong class="d-block text-slate-900">{{ $quote->customer_name }}</strong>
-                            <small class="text-muted">
-                                @if($quote->customer_company)
-                                    {{ $quote->customer_company }} &bull;
-                                @endif
-                                <i class="bi bi-telephone text-slate-400"></i> {{ $quote->customer_phone }}
-                            </small>
+                            <div class="d-flex align-items-center gap-2.5">
+                                <div class="catalog-avatar-box" style="width: 36px; height: 36px; font-size: 0.9rem;">
+                                    <i class="bi bi-person"></i>
+                                </div>
+                                <div>
+                                    <strong class="d-block text-slate-900">{{ $quote->customer_name }}</strong>
+                                    <small class="text-muted">
+                                        @if($quote->customer_company)
+                                            <span class="text-slate-700 fw-medium">{{ $quote->customer_company }}</span> &bull;
+                                        @endif
+                                        <i class="bi bi-telephone text-slate-400"></i> {{ $quote->customer_phone }}
+                                    </small>
+                                </div>
+                            </div>
                         </td>
-                        <td class="text-muted small">
-                            {{ $quote->quotation_date ? $quote->quotation_date->format('d M, Y') : 'N/A' }}
+                        <td>
+                            <span class="text-slate-700 small">{{ $quote->quotation_date ? $quote->quotation_date->format('d M, Y') : 'N/A' }}</span>
                         </td>
-                        <td class="small">
+                        <td>
                             @if($quote->valid_until && $quote->valid_until->isPast() && !in_array($quote->status, ['Approved', 'Converted']))
-                                <span class="text-danger fw-semibold" title="Expired proposal">
+                                <span class="text-danger fw-semibold small" title="Expired proposal">
                                     {{ $quote->valid_until->format('d M, Y') }} <i class="bi bi-exclamation-circle-fill"></i>
                                 </span>
                             @else
-                                <span class="text-muted">{{ $quote->valid_until ? $quote->valid_until->format('d M, Y') : 'N/A' }}</span>
+                                <span class="text-muted small">{{ $quote->valid_until ? $quote->valid_until->format('d M, Y') : 'N/A' }}</span>
                             @endif
                         </td>
                         <td class="text-center">
-                            <span class="badge bg-light text-dark border rounded-pill px-2.5 py-1">
+                            <span class="badge bg-light text-slate-700 border rounded-pill px-2.5 py-1 fw-semibold">
                                 {{ $quote->items_count }} {{ Str::plural('item', $quote->items_count) }}
                             </span>
                         </td>
                         <td class="text-end fw-bold fs-6 text-slate-900">
                             ₹{{ number_format($quote->grand_total, 2) }}
                         </td>
-                        <td>
+                        <td class="text-center">
                             <div class="dropdown d-inline-block">
-                                <button class="badge {{ $statusBadge }} dropdown-toggle border-0" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                    {{ $quote->status }}
+                                <button class="stock-status-pill {{ $statusPill }} dropdown-toggle border-0" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                    <span class="stock-dot"></span>
+                                    <span>{{ $quote->status }}</span>
                                 </button>
                                 <ul class="dropdown-menu dropdown-menu-end shadow-sm">
                                     <li><h6 class="dropdown-header">Change Status</h6></li>
@@ -190,21 +197,21 @@
                                 </ul>
                             </div>
                         </td>
-                        <td class="text-end">
-                            <div class="btn-group btn-group-sm">
-                                <a href="{{ route('admin.quotations.view', ['id' => $quote->id]) }}" class="btn btn-outline-secondary" title="View Details">
+                        <td class="text-end pe-4">
+                            <div class="d-inline-flex align-items-center gap-1">
+                                <a href="{{ route('admin.quotations.view', ['id' => $quote->id]) }}" class="catalog-action-btn btn-view" title="Inspect Quotation">
                                     <i class="bi bi-eye"></i>
                                 </a>
-                                <a href="{{ route('admin.quotations.print', ['id' => $quote->id]) }}" target="_blank" class="btn btn-outline-primary" title="Print Letterhead">
+                                <a href="{{ route('admin.quotations.print', ['id' => $quote->id]) }}" target="_blank" class="catalog-action-btn btn-print" title="Print Executive Letterhead">
                                     <i class="bi bi-printer"></i>
                                 </a>
-                                <form method="POST" action="{{ route('admin.quotations.destroy', $quote->id) }}" class="d-inline delete-form" 
+                                <form method="POST" action="{{ route('admin.quotations.destroy', $quote->id) }}" class="d-inline delete-form m-0" 
                                       data-confirm-title="Delete Quotation?" 
                                       data-confirm="Are you sure you want to delete quotation &quot;{{ $quote->quotation_no }}&quot;? This cannot be undone.">
                                     @csrf
                                     @method('DELETE')
-                                    <button type="submit" class="btn btn-outline-danger" title="Delete">
-                                        <i class="bi bi-trash"></i>
+                                    <button type="submit" class="catalog-action-btn btn-danger" title="Delete">
+                                        <i class="bi bi-trash3"></i>
                                     </button>
                                 </form>
                             </div>
@@ -213,12 +220,14 @@
                 @empty
                     <tr>
                         <td colspan="8" class="text-center py-5">
-                            <div class="mb-3"><i class="bi bi-file-earmark-x display-4 text-muted"></i></div>
-                            <h5 class="fw-bold text-dark">No Quotations Found</h5>
-                            <p class="text-muted small">No quotations match the active search or status criteria.</p>
-                            <a href="{{ route('admin.quotations.create') }}" class="btn btn-primary btn-sm mt-2">
-                                <i class="bi bi-plus-lg me-1"></i> Create First Quotation
-                            </a>
+                            <div class="py-4">
+                                <i class="bi bi-file-earmark-x display-5 text-muted mb-3 d-block opacity-50"></i>
+                                <h5 class="fw-bold text-slate-900 mb-1">No Quotations Found</h5>
+                                <p class="text-muted small mb-3">No commercial quotations match the active filter criteria.</p>
+                                <a href="{{ route('admin.quotations.create') }}" class="btn btn-primary fw-bold px-3 py-2 rounded-3">
+                                    <i class="bi bi-plus-lg me-1"></i> Create First Quotation
+                                </a>
+                            </div>
                         </td>
                     </tr>
                 @endforelse
@@ -227,8 +236,13 @@
     </div>
 
     @if($quotations->hasPages())
-        <div class="p-3 border-top d-flex justify-content-end">
-            {{ $quotations->links() }}
+        <div class="p-3 px-4 border-top d-flex flex-wrap justify-content-between align-items-center gap-3 bg-light bg-opacity-50">
+            <div class="text-muted small">
+                Showing <strong>{{ $quotations->firstItem() ?? 0 }}-{{ $quotations->lastItem() ?? 0 }}</strong> of <strong>{{ $quotations->total() }}</strong> proposals
+            </div>
+            <div>
+                {{ $quotations->links('pagination::bootstrap-5') }}
+            </div>
         </div>
     @endif
 </div>

@@ -225,8 +225,13 @@
     </div>
 
     @if($invoices->hasPages())
-        <div class="p-3 border-top d-flex justify-content-end">
-            {{ $invoices->links() }}
+        <div class="p-3 px-4 border-top d-flex flex-wrap justify-content-between align-items-center gap-3 bg-light bg-opacity-50">
+            <div class="text-muted small">
+                Showing <strong>{{ $invoices->firstItem() ?? 0 }}-{{ $invoices->lastItem() ?? 0 }}</strong> of <strong>{{ $invoices->total() }}</strong> invoices
+            </div>
+            <div>
+                {{ $invoices->links('pagination::bootstrap-5') }}
+            </div>
         </div>
     @endif
 </div>

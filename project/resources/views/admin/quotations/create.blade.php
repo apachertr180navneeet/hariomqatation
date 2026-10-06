@@ -139,17 +139,17 @@
 
                 <!-- Product Line Items Table -->
                 <div class="table-responsive">
-                    <table class="table table-bordered table-hoc align-middle mb-0">
-                        <thead class="table-light small">
+                    <table class="table table-catalog align-middle mb-0">
+                        <thead>
                             <tr>
-                                <th class="text-center" style="width: 50px;">#</th>
+                                <th class="text-center ps-3" style="width: 50px;">#</th>
                                 <th>Product Description</th>
                                 <th class="text-center" style="width: 110px;">Qty</th>
                                 <th class="text-end" style="width: 150px;">Base Rate (Excl GST)</th>
                                 <th class="text-end" style="width: 130px;">Discount (₹)</th>
                                 <th class="text-center" style="width: 100px;">GST %</th>
                                 <th class="text-end" style="width: 150px;">Total (₹)</th>
-                                <th class="text-center" style="width: 60px;">Action</th>
+                                <th class="text-center pe-3" style="width: 60px;">Action</th>
                             </tr>
                         </thead>
                         <tbody id="quote-items-tbody">
@@ -263,9 +263,9 @@ document.addEventListener("DOMContentLoaded", function () {
                     <td class="text-end fw-bold text-slate-800" style="width: 150px;">
                         ₹${item.amount.toLocaleString('en-IN', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
                     </td>
-                    <td class="text-center" style="width: 60px;">
-                        <button type="button" class="btn btn-sm btn-outline-danger btn-remove-item" data-index="${index}" title="Remove Item">
-                            <i class="bi bi-trash"></i>
+                    <td class="text-center pe-3" style="width: 60px;">
+                        <button type="button" class="catalog-action-btn btn-danger btn-remove-item" data-index="${index}" title="Remove Item">
+                            <i class="bi bi-trash3"></i>
                         </button>
                     </td>
                 </tr>
