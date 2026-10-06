@@ -49,12 +49,11 @@
                     <label class="form-label small fw-bold" for="filter-category">Category</label>
                     <select id="filter-category" class="form-select form-select-sm rounded-3">
                         <option value="ALL">All Categories</option>
-                        <option value="Laptops" {{ request('cat') == 'Laptops' ? 'selected' : '' }}>Laptops</option>
-                        <option value="Desktop Computers" {{ request('cat') == 'Desktop Computers' ? 'selected' : '' }}>Desktop Computers</option>
-                        <option value="Components" {{ request('cat') == 'Components' ? 'selected' : '' }}>Components (CPU/GPU/RAM)</option>
-                        <option value="Display & Monitors" {{ request('cat') == 'Display' ? 'selected' : '' }}>Monitors & Displays</option>
-                        <option value="Accessories" {{ request('cat') == 'Accessories' ? 'selected' : '' }}>Accessories</option>
-                        <option value="Networking" {{ request('cat') == 'Networking' ? 'selected' : '' }}>Networking</option>
+                        @foreach($categories as $category)
+                            <option value="{{ $category->name }}" {{ (request('cat') == $category->name || request('cat') == $category->slug) ? 'selected' : '' }}>
+                                {{ $category->name }}
+                            </option>
+                        @endforeach
                     </select>
                 </div>
 
@@ -63,18 +62,11 @@
                     <label class="form-label small fw-bold" for="filter-brand">Brand</label>
                     <select id="filter-brand" class="form-select form-select-sm rounded-3">
                         <option value="ALL">All Brands</option>
-                        <option value="Dell">Dell</option>
-                        <option value="HP">HP</option>
-                        <option value="Lenovo">Lenovo</option>
-                        <option value="ASUS">ASUS</option>
-                        <option value="Acer">Acer</option>
-                        <option value="Intel">Intel</option>
-                        <option value="AMD">AMD</option>
-                        <option value="NVIDIA">NVIDIA</option>
-                        <option value="Kingston">Kingston</option>
-                        <option value="Samsung">Samsung</option>
-                        <option value="Corsair">Corsair</option>
-                        <option value="Logitech">Logitech</option>
+                        @foreach($brands as $brand)
+                            <option value="{{ $brand->name }}" {{ (request('brand') == $brand->name || request('brand') == $brand->slug) ? 'selected' : '' }}>
+                                {{ $brand->name }}
+                            </option>
+                        @endforeach
                     </select>
                 </div>
 
@@ -125,7 +117,121 @@
             </div>
 
             <div class="row row-cols-2 row-cols-md-3 g-3" id="products-catalog-grid">
-                <!-- Injected dynamically by JavaScript -->
+                @forelse($products as $product)
+                    @php
+                        $discountPct = ($product->mrp && $product->mrp > $product->selling_price) ? round((($product->mrp - $product->selling_price) / $product->mrp) * 100) : 0;
+                        $detailUrl = route('product.details', ['id' => $product->id]);
+                        $subLower = strtolower($product->subcategory->name ?? $product->category->name ?? '');
+                        $nameLower = strtolower($product->name);
+                    @endphp
+                    <div class="col product-grid-item">
+                        <div class="pcmart-product-card card h-100 border rounded-3 position-relative bg-white shadow-xs">
+                            <div class="d-flex justify-content-between align-items-center p-2 position-absolute top-0 start-0 end-0" style="z-index: 2;">
+                                @if($discountPct > 0)
+                                    <span class="badge bg-danger fw-bold rounded-1" style="font-size: 0.65rem;">-{{ $discountPct }}%</span>
+                                @else
+                                    <span class="badge bg-light text-muted border" style="font-size: 0.65rem;">GENUINE</span>
+                                @endif
+                                <button class="btn btn-sm btn-link text-muted p-0" title="Add to Wishlist" type="button">
+                                    <i class="bi bi-heart fs-6"></i>
+                                </button>
+                            </div>
+
+                            <div class="product-media-box p-3 text-center d-flex align-items-center justify-content-center" style="height: 145px;">
+                                @if(str_contains($subLower, 'processor') && str_contains($nameLower, 'intel'))
+                                    <div class="hw-box-render hw-box-intel text-center">
+                                        <div class="hw-box-badge-tag bg-white text-primary mb-1">INTEL CORE</div>
+                                        <i class="bi bi-cpu-fill fs-2 mb-1"></i>
+                                        <div class="fw-bold small" style="font-size: 0.65rem;">{{ $product->brand->name ?? 'Intel' }}</div>
+                                    </div>
+                                @elseif(str_contains($subLower, 'processor'))
+                                    <div class="hw-box-render hw-box-amd text-center">
+                                        <div class="hw-box-badge-tag bg-warning text-dark mb-1">RYZEN</div>
+                                        <i class="bi bi-cpu-fill fs-2 text-warning mb-1"></i>
+                                        <div class="fw-bold small" style="font-size: 0.65rem;">{{ $product->brand->name ?? 'AMD' }}</div>
+                                    </div>
+                                @elseif(str_contains($subLower, 'graphics') || str_contains($subLower, 'gpu'))
+                                    <div class="hw-box-render hw-box-gpu text-center">
+                                        <div class="hw-box-badge-tag bg-success text-white mb-1">GRAPHICS</div>
+                                        <i class="bi bi-gpu-card fs-2 text-warning mb-1"></i>
+                                        <div class="fw-bold small" style="font-size: 0.65rem;">{{ $product->brand->name ?? 'NVIDIA' }}</div>
+                                    </div>
+                                @elseif(str_contains($subLower, 'motherboard'))
+                                    <div class="hw-box-render hw-box-mb text-center">
+                                        <div class="hw-box-badge-tag bg-info text-dark mb-1">MOTHERBOARD</div>
+                                        <i class="bi bi-motherboard fs-2 text-info mb-1"></i>
+                                        <div class="fw-bold small" style="font-size: 0.65rem;">{{ $product->brand->name ?? 'CHIPSET' }}</div>
+                                    </div>
+                                @elseif(str_contains($subLower, 'ram') || str_contains($subLower, 'memory'))
+                                    <div class="hw-box-render hw-box-ram text-center">
+                                        <div class="hw-box-ram-lightbar"></div>
+                                        <div class="hw-box-badge-tag bg-secondary text-white mb-1 mt-1">DDR4 / DDR5</div>
+                                        <i class="bi bi-memory fs-2 text-success mb-1"></i>
+                                        <div class="fw-bold small" style="font-size: 0.65rem;">{{ $product->brand->name ?? 'MEMORY' }}</div>
+                                    </div>
+                                @elseif(str_contains($subLower, 'ssd') || str_contains($subLower, 'storage'))
+                                    <div class="hw-box-render hw-box-ssd text-center">
+                                        <div class="hw-box-badge-tag bg-danger text-white mb-1">NVMe SSD</div>
+                                        <i class="bi bi-device-ssd fs-2 text-danger mb-1"></i>
+                                        <div class="fw-bold small" style="font-size: 0.65rem;">{{ $product->brand->name ?? 'FAST STORAGE' }}</div>
+                                    </div>
+                                @elseif(str_contains($subLower, 'laptop'))
+                                    <div class="hw-box-render bg-light text-primary border text-center">
+                                        <i class="bi bi-laptop display-6 mb-1"></i>
+                                        <div class="fw-bold small" style="font-size: 0.65rem;">{{ $product->brand->name ?? 'LAPTOP' }}</div>
+                                    </div>
+                                @elseif(str_contains($subLower, 'desktop') || str_contains($subLower, 'computer'))
+                                    <div class="hw-box-render bg-light text-primary border text-center">
+                                        <i class="bi bi-pc-display display-6 mb-1"></i>
+                                        <div class="fw-bold small" style="font-size: 0.65rem;">{{ $product->brand->name ?? 'DESKTOP PC' }}</div>
+                                    </div>
+                                @else
+                                    <div class="hw-box-render bg-light text-dark border text-center">
+                                        <i class="bi bi-cpu-fill fs-2 text-primary mb-1"></i>
+                                        <div class="fw-bold small" style="font-size: 0.65rem;">{{ $product->brand->name ?? 'HARDWARE' }}</div>
+                                    </div>
+                                @endif
+                            </div>
+
+                            <div class="card-body p-2.5 d-flex flex-column">
+                                <span class="text-muted small mb-1" style="font-size: 0.7rem; font-weight: 600;">{{ $product->subcategory->name ?? $product->category->name }}</span>
+                                <a href="{{ $detailUrl }}" class="product-card-title text-decoration-none text-dark fw-bold mb-1" title="{{ $product->name }}">
+                                    {{ $product->name }}
+                                </a>
+
+                                <div class="d-flex align-items-center gap-1 mb-2 small text-warning" style="font-size: 0.72rem;">
+                                    <i class="bi bi-star-fill"></i>
+                                    <span class="text-dark fw-bold ms-1">4.8</span>
+                                    <span class="text-muted">({{ $product->stock > 0 ? $product->stock . ' ready' : 'Verified' }})</span>
+                                </div>
+
+                                <div class="mt-auto">
+                                    <div class="d-flex align-items-baseline gap-1 mb-2">
+                                        <strong class="fs-6 text-dark fw-black">₹{{ number_format($product->selling_price, 2) }}</strong>
+                                        @if($product->mrp > $product->selling_price)
+                                            <span class="text-muted text-decoration-line-through small" style="font-size: 0.72rem;">₹{{ number_format($product->mrp, 2) }}</span>
+                                        @endif
+                                    </div>
+
+                                    <button class="btn btn-primary btn-sm w-100 rounded-2 fw-semibold btn-add-enquiry" data-id="{{ $product->id }}" data-name="{{ $product->name }}" data-price="{{ $product->selling_price }}" data-sku="{{ $product->sku }}">
+                                        Add to Cart
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                @empty
+                    <div class="col-12 text-center py-5">
+                        <i class="bi bi-search text-muted fs-1 mb-3 d-block"></i>
+                        <h5>No products found in catalog</h5>
+                        <p class="text-muted small">Try selecting another filter or clearing keywords.</p>
+                    </div>
+                @endforelse
+            </div>
+
+            <!-- Server-Side Pagination Links -->
+            <div class="d-flex justify-content-center mt-4" id="server-pagination-links">
+                {{ $products->links() }}
             </div>
         </div>
     </div>
@@ -260,7 +366,11 @@
                 filtered.sort((a, b) => a.name.localeCompare(b.name));
             }
 
-            countLabel.innerText = `Showing ${filtered.length} products`;
+            const paginationEl = document.getElementById("server-pagination-links");
+            const isFiltered = (kw !== "" || cat !== "ALL" || brand !== "ALL" || priceRange !== "ALL" || sortVal !== "featured");
+            if (paginationEl) {
+                paginationEl.style.display = isFiltered ? "none" : "";
+            }
 
             if (filtered.length === 0) {
                 grid.innerHTML = `
@@ -300,7 +410,7 @@
 
                                 <div class="d-flex align-items-center gap-1 mb-2 small text-warning" style="font-size: 0.72rem;">
                                     <i class="bi bi-star-fill"></i>
-                                    <span class="text-dark fw-bold ms-1">4.7</span>
+                                    <span class="text-dark fw-bold ms-1">4.8</span>
                                     <span class="text-muted">(500+)</span>
                                 </div>
 
@@ -310,7 +420,7 @@
                                         ${p.mrp ? `<span class="text-muted text-decoration-line-through small" style="font-size: 0.72rem;">₹${p.mrp.toLocaleString('en-IN')}</span>` : ''}
                                     </div>
 
-                                    <button class="btn btn-primary btn-sm w-100 rounded-2 fw-semibold btn-add-enquiry" data-id="${p.id}" data-name="${p.name}" data-price="${p.sellingPrice}">
+                                    <button class="btn btn-primary btn-sm w-100 rounded-2 fw-semibold btn-add-enquiry" data-id="${p.id}" data-name="${p.name}" data-price="${p.sellingPrice}" data-sku="${p.sku}">
                                         Add to Cart
                                     </button>
                                 </div>
@@ -337,6 +447,7 @@
             document.getElementById("filter-brand").value = "ALL";
             document.getElementById("filter-price-range").value = "ALL";
             document.getElementById("filter-in-stock-only").checked = false;
+            document.getElementById("sort-products-select").value = "featured";
             renderList();
         });
     });

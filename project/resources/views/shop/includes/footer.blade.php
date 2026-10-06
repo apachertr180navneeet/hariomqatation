@@ -119,12 +119,20 @@
             <div class="col-6 col-md-3 col-lg-2 offset-lg-1">
                 <h6 class="fw-bold text-white mb-3 text-uppercase small" style="letter-spacing: 0.05em;">Hardware</h6>
                 <ul class="list-unstyled d-flex flex-column gap-2 small">
-                    <li><a href="{{ route('components', ['sub' => 'Processor']) }}" class="text-light text-opacity-75 text-decoration-none hover-white">Processors (CPUs)</a></li>
-                    <li><a href="{{ route('components', ['sub' => 'Graphics Card']) }}" class="text-light text-opacity-75 text-decoration-none hover-white">Graphics Cards (GPUs)</a></li>
-                    <li><a href="{{ route('components', ['sub' => 'Motherboard']) }}" class="text-light text-opacity-75 text-decoration-none hover-white">Motherboards</a></li>
-                    <li><a href="{{ route('components', ['sub' => 'RAM']) }}" class="text-light text-opacity-75 text-decoration-none hover-white">RAM Memory (DDR5)</a></li>
-                    <li><a href="{{ route('components', ['sub' => 'SSD']) }}" class="text-light text-opacity-75 text-decoration-none hover-white">Storage (NVMe SSD)</a></li>
-                    <li><a href="{{ route('products', ['cat' => 'Display']) }}" class="text-light text-opacity-75 text-decoration-none hover-white">Gaming Monitors</a></li>
+                    @php
+                        $compCat = ($globalCategories ?? collect())->firstWhere('name', 'Components');
+                        $hardwareSubs = $compCat ? $compCat->subcategories->take(6) : collect();
+                    @endphp
+                    @forelse($hardwareSubs as $sub)
+                        <li><a href="{{ route('components', ['sub' => $sub->name]) }}" class="text-light text-opacity-75 text-decoration-none hover-white">{{ $sub->name }}</a></li>
+                    @empty
+                        <li><a href="{{ route('components', ['sub' => 'Processor']) }}" class="text-light text-opacity-75 text-decoration-none hover-white">Processors (CPUs)</a></li>
+                        <li><a href="{{ route('components', ['sub' => 'Graphics Card']) }}" class="text-light text-opacity-75 text-decoration-none hover-white">Graphics Cards (GPUs)</a></li>
+                        <li><a href="{{ route('components', ['sub' => 'Motherboard']) }}" class="text-light text-opacity-75 text-decoration-none hover-white">Motherboards</a></li>
+                        <li><a href="{{ route('components', ['sub' => 'RAM']) }}" class="text-light text-opacity-75 text-decoration-none hover-white">RAM Memory (DDR5)</a></li>
+                        <li><a href="{{ route('components', ['sub' => 'SSD']) }}" class="text-light text-opacity-75 text-decoration-none hover-white">Storage (NVMe SSD)</a></li>
+                        <li><a href="{{ route('products', ['cat' => 'Display']) }}" class="text-light text-opacity-75 text-decoration-none hover-white">Gaming Monitors</a></li>
+                    @endforelse
                 </ul>
             </div>
 

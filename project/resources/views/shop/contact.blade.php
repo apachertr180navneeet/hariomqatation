@@ -85,7 +85,7 @@
                 <h4 class="fw-bold mb-2 text-slate-900" style="font-family: var(--hoc-font-heading);">Send Us a Direct Message</h4>
                 <p class="text-muted small mb-4">Have questions regarding stock availability, bulk quotation pricing, PC compatibility, or warranty? Fill out the form below.</p>
 
-                <form id="contact-page-form" onsubmit="event.preventDefault(); HOC_UTILS.showToast('Thank you for contacting Hari Om Computer! Our team will respond shortly.'); this.reset();">
+                <form id="contact-page-form" onsubmit="event.preventDefault(); if (typeof Swal !== 'undefined') { Swal.fire({ icon: 'success', title: 'Message Sent!', text: 'Thank you for contacting Hari Om Computer. Our team will contact you shortly.', timer: 3000, showConfirmButton: false }); } else { HOC_UTILS.showToast('Thank you for contacting Hari Om Computer! Our team will respond shortly.'); } this.reset();">
                     <div class="row g-3">
                         <div class="col-md-6">
                             <label class="form-label small fw-semibold text-slate-800">Your Full Name *</label>

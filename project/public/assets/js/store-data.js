@@ -1451,21 +1451,34 @@ const DataStore = {
 
   addToEnquiryCart(productId, qty = 1, customSpecs = null) {
     const cart = this.getEnquiryCart();
-    const prod = this.getProductById(productId);
+    let prod = this.getProductById(productId);
+    
+    if (!prod && !customSpecs && typeof document !== 'undefined') {
+      const el = document.querySelector(`[data-id="${productId}"]`);
+      if (el) {
+        customSpecs = {
+          name: el.getAttribute('data-name') || 'Product Item',
+          price: parseFloat(el.getAttribute('data-price')) || 0,
+          sku: el.getAttribute('data-sku') || 'PROD',
+          specs: el.getAttribute('data-name') || ''
+        };
+      }
+    }
+
     if (!prod && !customSpecs) return;
 
-    const existingIndex = cart.findIndex(item => item.id === productId);
+    const existingIndex = cart.findIndex(item => String(item.id) === String(productId));
     if (existingIndex >= 0) {
       cart[existingIndex].qty += qty;
     } else {
       cart.push({
         id: productId,
         name: prod ? prod.name : customSpecs.name,
-        sku: prod ? prod.sku : "CUSTOM-BUILD",
-        price: prod ? prod.sellingPrice : customSpecs.price,
+        sku: prod ? (prod.sku || "PROD") : (customSpecs.sku || "PROD"),
+        price: prod ? (prod.sellingPrice ?? prod.price) : customSpecs.price,
         image: prod ? prod.image : "pc-gaming.jpg",
         category: prod ? prod.category : "Custom PC",
-        specs: prod ? prod.specs : customSpecs.specs,
+        specs: prod ? prod.specs : (customSpecs.specs || customSpecs.name),
         qty: qty
       });
     }

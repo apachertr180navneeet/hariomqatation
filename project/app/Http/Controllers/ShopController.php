@@ -29,9 +29,35 @@ class ShopController extends Controller
         }
 
         $allProducts = Product::active()->with(['category', 'brand', 'subcategory'])->get();
-        $heroGamingRig = Product::active()->computers()->first();
+        $heroGamingRig = Product::active()->computers()->with(['category', 'brand', 'subcategory'])->first();
+        $popularBuilds = Product::active()->computers()->with(['category', 'brand', 'subcategory'])->take(4)->get();
+        $componentProducts = Product::active()
+            ->whereDoesntHave('category', function ($q) {
+                $q->whereIn('slug', ['laptops', 'desktop-computers', 'computers']);
+            })
+            ->with(['category', 'brand', 'subcategory'])
+            ->take(12)
+            ->get();
+
         $categories = Category::active()->withCount('products')->get();
         $brands = Brand::where('status', 'active')->take(12)->get();
+
+        $productsJson = $allProducts->map(function ($p) {
+            return [
+                'id' => (string) $p->id,
+                'name' => $p->name,
+                'sku' => $p->sku,
+                'brand' => $p->brand->name ?? 'Branded',
+                'category' => $p->category->name ?? 'Components',
+                'subcategory' => $p->subcategory->name ?? '',
+                'sellingPrice' => (float) $p->selling_price,
+                'mrp' => (float) $p->mrp,
+                'stock' => (int) $p->stock,
+                'specs' => $p->specs,
+                'status' => 'Active',
+                'rating' => (float) ($p->rating ?: 4.8),
+            ];
+        });
 
         return view('shop.index', [
             'pageTitle' => 'Hari Om Computer | Western Rajasthan\'s Premier Computer & Technology Store (Jodhpur)',
@@ -39,8 +65,10 @@ class ShopController extends Controller
             'showPromoStrip' => true,
             'featuredProducts' => $featuredProducts,
             'allProducts' => $allProducts,
-            'allProductsJson' => $allProducts->toJson(),
+            'allProductsJson' => $productsJson->toJson(),
             'heroGamingRig' => $heroGamingRig,
+            'popularBuilds' => $popularBuilds,
+            'componentProducts' => $componentProducts,
             'categories' => $categories,
             'brands' => $brands,
         ]);
@@ -92,6 +120,10 @@ class ShopController extends Controller
             ->with(['category', 'brand', 'subcategory'])
             ->get();
 
+        $subcategories = \App\Models\Subcategory::whereHas('category', function ($q) {
+            $q->whereNotIn('slug', ['laptops', 'desktop-computers', 'computers']);
+        })->where('status', 'active')->distinct()->get();
+
         $componentsJson = $components->map(function ($p) {
             return [
                 'id' => (string) $p->id,
@@ -111,6 +143,7 @@ class ShopController extends Controller
             'pageTitle' => 'Genuine Computer Components (CPU, GPU, RAM, SSD) | Hari Om Computer (Jodhpur)',
             'currentPage' => 'components',
             'components' => $components,
+            'subcategories' => $subcategories,
             'componentsJson' => $componentsJson,
         ]);
     }

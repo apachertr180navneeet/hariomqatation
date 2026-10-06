@@ -41,76 +41,76 @@
             </span>
         </div>
         <div class="list-group list-group-flush border-bottom">
-            <a href="{{ route('components', ['sub' => 'Processor']) }}" class="list-group-item list-group-item-action d-flex align-items-center justify-content-between py-2 px-3">
-                <span class="d-flex align-items-center gap-3">
-                    <span class="mobile-drawer-icon bg-primary-subtle text-primary"><i class="bi bi-cpu"></i></span>
-                    <span class="fw-semibold small">Processors (CPUs)</span>
-                </span>
-                <i class="bi bi-chevron-right text-muted small"></i>
-            </a>
-            <a href="{{ route('components', ['sub' => 'Graphics Card']) }}" class="list-group-item list-group-item-action d-flex align-items-center justify-content-between py-2 px-3">
-                <span class="d-flex align-items-center gap-3">
-                    <span class="mobile-drawer-icon bg-warning-subtle text-warning"><i class="bi bi-gpu-card"></i></span>
-                    <span class="fw-semibold small">Graphics Cards (GPUs)</span>
-                </span>
-                <i class="bi bi-chevron-right text-muted small"></i>
-            </a>
-            <a href="{{ route('components', ['sub' => 'Motherboard']) }}" class="list-group-item list-group-item-action d-flex align-items-center justify-content-between py-2 px-3">
-                <span class="d-flex align-items-center gap-3">
-                    <span class="mobile-drawer-icon bg-info-subtle text-info"><i class="bi bi-motherboard"></i></span>
-                    <span class="fw-semibold small">Motherboards</span>
-                </span>
-                <i class="bi bi-chevron-right text-muted small"></i>
-            </a>
-            <a href="{{ route('components', ['sub' => 'RAM']) }}" class="list-group-item list-group-item-action d-flex align-items-center justify-content-between py-2 px-3">
-                <span class="d-flex align-items-center gap-3">
-                    <span class="mobile-drawer-icon bg-success-subtle text-success"><i class="bi bi-memory"></i></span>
-                    <span class="fw-semibold small">RAM Memory (DDR4 / DDR5)</span>
-                </span>
-                <i class="bi bi-chevron-right text-muted small"></i>
-            </a>
-            <a href="{{ route('components', ['sub' => 'SSD']) }}" class="list-group-item list-group-item-action d-flex align-items-center justify-content-between py-2 px-3">
-                <span class="d-flex align-items-center gap-3">
-                    <span class="mobile-drawer-icon bg-secondary-subtle text-secondary"><i class="bi bi-device-ssd"></i></span>
-                    <span class="fw-semibold small">Storage (NVMe SSD / HDD)</span>
-                </span>
-                <i class="bi bi-chevron-right text-muted small"></i>
-            </a>
-            <a href="{{ route('components', ['sub' => 'SMPS/PSU']) }}" class="list-group-item list-group-item-action d-flex align-items-center justify-content-between py-2 px-3">
-                <span class="d-flex align-items-center gap-3">
-                    <span class="mobile-drawer-icon bg-danger-subtle text-danger"><i class="bi bi-plug"></i></span>
-                    <span class="fw-semibold small">Power Supply (PSU)</span>
-                </span>
-                <i class="bi bi-chevron-right text-muted small"></i>
-            </a>
-            <a href="{{ route('computers') }}" class="list-group-item list-group-item-action d-flex align-items-center justify-content-between py-2 px-3">
-                <span class="d-flex align-items-center gap-3">
-                    <span class="mobile-drawer-icon bg-primary-subtle text-primary"><i class="bi bi-pc-display"></i></span>
-                    <span class="fw-semibold small">Pre-Built & Gaming PCs</span>
-                </span>
-                <i class="bi bi-chevron-right text-muted small"></i>
-            </a>
-            <a href="{{ route('laptops') }}" class="list-group-item list-group-item-action d-flex align-items-center justify-content-between py-2 px-3">
-                <span class="d-flex align-items-center gap-3">
-                    <span class="mobile-drawer-icon bg-info-subtle text-info"><i class="bi bi-laptop"></i></span>
-                    <span class="fw-semibold small">Laptops & Ultrabooks</span>
-                </span>
-                <i class="bi bi-chevron-right text-muted small"></i>
-            </a>
-            <a href="{{ route('products', ['cat' => 'Display']) }}" class="list-group-item list-group-item-action d-flex align-items-center justify-content-between py-2 px-3">
-                <span class="d-flex align-items-center gap-3">
-                    <span class="mobile-drawer-icon bg-warning-subtle text-warning"><i class="bi bi-display"></i></span>
-                    <span class="fw-semibold small">Monitors</span>
-                </span>
-                <i class="bi bi-chevron-right text-muted small"></i>
-            </a>
-            <a href="{{ route('products', ['cat' => 'Accessories']) }}" class="list-group-item list-group-item-action d-flex align-items-center justify-content-between py-2 px-3">
-                <span class="d-flex align-items-center gap-3">
-                    <span class="mobile-drawer-icon bg-dark-subtle text-dark"><i class="bi bi-headphones"></i></span>
-                    <span class="fw-semibold small">Accessories</span>
-                </span>
-                <i class="bi bi-chevron-right text-muted small"></i>
-            </a>
+            @php
+                $iconMap = [
+                    'processor' => ['icon' => 'bi-cpu', 'bg' => 'bg-primary-subtle text-primary'],
+                    'graphics card' => ['icon' => 'bi-gpu-card', 'bg' => 'bg-warning-subtle text-warning'],
+                    'motherboard' => ['icon' => 'bi-motherboard', 'bg' => 'bg-info-subtle text-info'],
+                    'ram' => ['icon' => 'bi-memory', 'bg' => 'bg-success-subtle text-success'],
+                    'ssd' => ['icon' => 'bi-device-ssd', 'bg' => 'bg-secondary-subtle text-secondary'],
+                    'smps/psu' => ['icon' => 'bi-plug', 'bg' => 'bg-danger-subtle text-danger'],
+                    'cabinet' => ['icon' => 'bi-box', 'bg' => 'bg-dark-subtle text-dark'],
+                    'desktop computers' => ['icon' => 'bi-pc-display', 'bg' => 'bg-primary-subtle text-primary'],
+                    'laptops' => ['icon' => 'bi-laptop', 'bg' => 'bg-info-subtle text-info'],
+                    'display & monitors' => ['icon' => 'bi-display', 'bg' => 'bg-warning-subtle text-warning'],
+                    'accessories' => ['icon' => 'bi-headphones', 'bg' => 'bg-dark-subtle text-dark'],
+                ];
+            @endphp
+
+            @forelse($globalCategories ?? [] as $gCat)
+                @php
+                    $catLower = strtolower($gCat->name);
+                @endphp
+                @if($catLower === 'components' && $gCat->subcategories->count() > 0)
+                    @foreach($gCat->subcategories as $sub)
+                        @php
+                            $subLower = strtolower($sub->name);
+                            $style = $iconMap[$subLower] ?? ['icon' => 'bi-cpu', 'bg' => 'bg-primary-subtle text-primary'];
+                        @endphp
+                        <a href="{{ route('components', ['sub' => $sub->name]) }}" class="list-group-item list-group-item-action d-flex align-items-center justify-content-between py-2 px-3">
+                            <span class="d-flex align-items-center gap-3">
+                                <span class="mobile-drawer-icon {{ $style['bg'] }}"><i class="bi {{ $style['icon'] }}"></i></span>
+                                <span class="fw-semibold small">{{ $sub->name }}</span>
+                            </span>
+                            <span class="badge bg-light text-muted small rounded-pill">{{ $sub->products_count ?? $sub->products()->count() }}</span>
+                        </a>
+                    @endforeach
+                @else
+                    @php
+                        $style = $iconMap[$catLower] ?? ['icon' => 'bi-grid', 'bg' => 'bg-primary-subtle text-primary'];
+                        $link = route('products', ['cat' => $gCat->name]);
+                        if (str_contains($catLower, 'laptop')) {
+                            $link = route('laptops');
+                        } elseif (str_contains($catLower, 'desktop') || str_contains($catLower, 'computer')) {
+                            $link = route('computers');
+                        } elseif ($catLower === 'components') {
+                            $link = route('components');
+                        }
+                    @endphp
+                    <a href="{{ $link }}" class="list-group-item list-group-item-action d-flex align-items-center justify-content-between py-2 px-3">
+                        <span class="d-flex align-items-center gap-3">
+                            <span class="mobile-drawer-icon {{ $style['bg'] }}"><i class="bi {{ $style['icon'] }}"></i></span>
+                            <span class="fw-semibold small">{{ $gCat->name }}</span>
+                        </span>
+                        <span class="badge bg-light text-muted small rounded-pill">{{ $gCat->products_count }}</span>
+                    </a>
+                @endif
+            @empty
+                <a href="{{ route('components', ['sub' => 'Processor']) }}" class="list-group-item list-group-item-action d-flex align-items-center justify-content-between py-2 px-3">
+                    <span class="d-flex align-items-center gap-3">
+                        <span class="mobile-drawer-icon bg-primary-subtle text-primary"><i class="bi bi-cpu"></i></span>
+                        <span class="fw-semibold small">Processors (CPUs)</span>
+                    </span>
+                    <i class="bi bi-chevron-right text-muted small"></i>
+                </a>
+                <a href="{{ route('components', ['sub' => 'Graphics Card']) }}" class="list-group-item list-group-item-action d-flex align-items-center justify-content-between py-2 px-3">
+                    <span class="d-flex align-items-center gap-3">
+                        <span class="mobile-drawer-icon bg-warning-subtle text-warning"><i class="bi bi-gpu-card"></i></span>
+                        <span class="fw-semibold small">Graphics Cards</span>
+                    </span>
+                    <i class="bi bi-chevron-right text-muted small"></i>
+                </a>
+            @endforelse
         </div>
 
         <!-- Section: Store Pages -->
@@ -178,100 +178,57 @@
                 <span class="dept-trigger-text">ALL DEPARTMENTS</span>
             </button>
             <ul class="dropdown-menu department-dropdown-menu shadow-lg border-0 py-2" aria-labelledby="departmentDropdownBtn">
-                <li>
-                    <a class="dropdown-item d-flex align-items-center justify-content-between py-2" href="{{ route('components', ['sub' => 'Processor']) }}">
-                        <span class="d-flex align-items-center gap-2">
-                            <span class="dept-menu-icon bg-primary-subtle text-primary"><i class="bi bi-cpu"></i></span>
-                            <span class="dept-item-name">Processors (CPUs)</span>
-                        </span>
-                        <i class="bi bi-chevron-right text-muted small dept-arrow"></i>
-                    </a>
-                </li>
-                <li>
-                    <a class="dropdown-item d-flex align-items-center justify-content-between py-2" href="{{ route('components', ['sub' => 'Graphics Card']) }}">
-                        <span class="d-flex align-items-center gap-2">
-                            <span class="dept-menu-icon bg-warning-subtle text-warning"><i class="bi bi-gpu-card"></i></span>
-                            <span class="dept-item-name">Graphics Cards (GPUs)</span>
-                        </span>
-                        <i class="bi bi-chevron-right text-muted small dept-arrow"></i>
-                    </a>
-                </li>
-                <li>
-                    <a class="dropdown-item d-flex align-items-center justify-content-between py-2" href="{{ route('components', ['sub' => 'Motherboard']) }}">
-                        <span class="d-flex align-items-center gap-2">
-                            <span class="dept-menu-icon bg-info-subtle text-info"><i class="bi bi-motherboard"></i></span>
-                            <span class="dept-item-name">Motherboards</span>
-                        </span>
-                        <i class="bi bi-chevron-right text-muted small dept-arrow"></i>
-                    </a>
-                </li>
-                <li>
-                    <a class="dropdown-item d-flex align-items-center justify-content-between py-2" href="{{ route('components', ['sub' => 'RAM']) }}">
-                        <span class="d-flex align-items-center gap-2">
-                            <span class="dept-menu-icon bg-success-subtle text-success"><i class="bi bi-memory"></i></span>
-                            <span class="dept-item-name">RAM Memory (DDR4 / DDR5)</span>
-                        </span>
-                        <i class="bi bi-chevron-right text-muted small dept-arrow"></i>
-                    </a>
-                </li>
-                <li>
-                    <a class="dropdown-item d-flex align-items-center justify-content-between py-2" href="{{ route('components', ['sub' => 'SSD']) }}">
-                        <span class="d-flex align-items-center gap-2">
-                            <span class="dept-menu-icon bg-secondary-subtle text-secondary"><i class="bi bi-device-ssd"></i></span>
-                            <span class="dept-item-name">Storage (NVMe / SSD / HDD)</span>
-                        </span>
-                        <i class="bi bi-chevron-right text-muted small dept-arrow"></i>
-                    </a>
-                </li>
-                <li>
-                    <a class="dropdown-item d-flex align-items-center justify-content-between py-2" href="{{ route('components', ['sub' => 'SMPS/PSU']) }}">
-                        <span class="d-flex align-items-center gap-2">
-                            <span class="dept-menu-icon bg-danger-subtle text-danger"><i class="bi bi-plug"></i></span>
-                            <span class="dept-item-name">Power Supplies (PSU)</span>
-                        </span>
-                        <i class="bi bi-chevron-right text-muted small dept-arrow"></i>
-                    </a>
-                </li>
-                <li>
-                    <a class="dropdown-item d-flex align-items-center justify-content-between py-2" href="{{ route('computers') }}">
-                        <span class="d-flex align-items-center gap-2">
-                            <span class="dept-menu-icon bg-primary-subtle text-primary"><i class="bi bi-pc-display"></i></span>
-                            <span class="dept-item-name">Pre-Built & Gaming PCs</span>
-                        </span>
-                        <i class="bi bi-chevron-right text-muted small dept-arrow"></i>
-                    </a>
-                </li>
-                <li>
-                    <a class="dropdown-item d-flex align-items-center justify-content-between py-2" href="{{ route('laptops') }}">
-                        <span class="d-flex align-items-center gap-2">
-                            <span class="dept-menu-icon bg-info-subtle text-info"><i class="bi bi-laptop"></i></span>
-                            <span class="dept-item-name">Laptops & Ultrabooks</span>
-                        </span>
-                        <i class="bi bi-chevron-right text-muted small dept-arrow"></i>
-                    </a>
-                </li>
-                <li>
-                    <a class="dropdown-item d-flex align-items-center justify-content-between py-2" href="{{ route('products', ['cat' => 'Display']) }}">
-                        <span class="d-flex align-items-center gap-2">
-                            <span class="dept-menu-icon bg-warning-subtle text-warning"><i class="bi bi-display"></i></span>
-                            <span class="dept-item-name">Gaming & 4K Monitors</span>
-                        </span>
-                        <i class="bi bi-chevron-right text-muted small dept-arrow"></i>
-                    </a>
-                </li>
-                <li>
-                    <a class="dropdown-item d-flex align-items-center justify-content-between py-2" href="{{ route('products', ['cat' => 'Accessories']) }}">
-                        <span class="d-flex align-items-center gap-2">
-                            <span class="dept-menu-icon bg-secondary-subtle text-dark"><i class="bi bi-headphones"></i></span>
-                            <span class="dept-item-name">Peripherals & Accessories</span>
-                        </span>
-                        <i class="bi bi-chevron-right text-muted small dept-arrow"></i>
-                    </a>
-                </li>
+                @forelse($globalCategories ?? [] as $gCat)
+                    @php
+                        $catLower = strtolower($gCat->name);
+                    @endphp
+                    @if($catLower === 'components' && $gCat->subcategories->count() > 0)
+                        @foreach($gCat->subcategories as $sub)
+                            @php
+                                $subLower = strtolower($sub->name);
+                                $style = $iconMap[$subLower] ?? ['icon' => 'bi-cpu', 'bg' => 'bg-primary-subtle text-primary'];
+                            @endphp
+                            <li>
+                                <a class="dropdown-item d-flex align-items-center justify-content-between py-2" href="{{ route('components', ['sub' => $sub->name]) }}">
+                                    <span class="d-flex align-items-center gap-2">
+                                        <span class="dept-menu-icon {{ $style['bg'] }}"><i class="bi {{ $style['icon'] }}"></i></span>
+                                        <span class="dept-item-name">{{ $sub->name }}</span>
+                                    </span>
+                                    <span class="badge bg-light text-muted small rounded-pill">{{ $sub->products_count ?? $sub->products()->count() }}</span>
+                                </a>
+                            </li>
+                        @endforeach
+                    @else
+                        @php
+                            $style = $iconMap[$catLower] ?? ['icon' => 'bi-grid', 'bg' => 'bg-primary-subtle text-primary'];
+                            $link = route('products', ['cat' => $gCat->name]);
+                            if (str_contains($catLower, 'laptop')) {
+                                $link = route('laptops');
+                            } elseif (str_contains($catLower, 'desktop') || str_contains($catLower, 'computer')) {
+                                $link = route('computers');
+                            } elseif ($catLower === 'components') {
+                                $link = route('components');
+                            }
+                        @endphp
+                        <li>
+                            <a class="dropdown-item d-flex align-items-center justify-content-between py-2" href="{{ $link }}">
+                                <span class="d-flex align-items-center gap-2">
+                                    <span class="dept-menu-icon {{ $style['bg'] }}"><i class="bi {{ $style['icon'] }}"></i></span>
+                                    <span class="dept-item-name">{{ $gCat->name }}</span>
+                                </span>
+                                <span class="badge bg-light text-muted small rounded-pill">{{ $gCat->products_count }}</span>
+                            </a>
+                        </li>
+                    @endif
+                @empty
+                    <li>
+                        <a class="dropdown-item py-2" href="{{ route('products') }}">All Products</a>
+                    </li>
+                @endforelse
                 <li><hr class="dropdown-divider my-1"></li>
                 <li>
                     <a class="dropdown-item text-center fw-bold text-primary py-2 small" href="{{ route('products') }}">
-                        <i class="bi bi-grid me-1"></i> View Entire Catalog (500+ Items) &rarr;
+                        <i class="bi bi-grid me-1"></i> View Entire Catalog &rarr;
                     </a>
                 </li>
             </ul>

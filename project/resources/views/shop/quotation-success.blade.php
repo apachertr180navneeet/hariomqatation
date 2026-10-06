@@ -31,21 +31,27 @@
                 <div class="p-3 bg-light rounded-3 text-start mb-4 border">
                     <div class="d-flex justify-content-between mb-2">
                         <span class="text-muted small">Quotation Ref ID:</span>
-                        <strong class="text-primary" id="success-quote-ref">HOC/QTN/2026/0005</strong>
+                        <strong class="text-primary" id="success-quote-ref">{{ $quotation?->quotation_no ?? $quotationNo }}</strong>
                     </div>
                     <div class="d-flex justify-content-between mb-2">
                         <span class="text-muted small">Customer Name:</span>
-                        <span class="fw-semibold text-dark" id="success-cust-name">Valued Customer</span>
+                        <span class="fw-semibold text-dark" id="success-cust-name">{{ $quotation?->customer_name ?? 'Valued Customer' }}</span>
                     </div>
                     <div class="d-flex justify-content-between">
                         <span class="text-muted small">Estimated Total:</span>
-                        <strong class="text-slate-900 fs-5" id="success-quote-total">₹0</strong>
+                        <strong class="text-slate-900 fs-5" id="success-quote-total">₹{{ number_format($quotation?->grand_total ?? 0, 2) }}</strong>
                     </div>
                 </div>
 
                 <!-- Fast WhatsApp Action -->
+                @php
+                    $qNo = $quotation?->quotation_no ?? $quotationNo;
+                    $cName = $quotation?->customer_name ?? 'Customer';
+                    $totalFormatted = '₹' . number_format($quotation?->grand_total ?? 0, 2);
+                    $defaultWaMsg = "Hello Hari Om Computer, I just submitted Quotation Request {$qNo} for {$cName} (Est. Amount: {$totalFormatted}). Please share the official quotation PDF.";
+                @endphp
                 <div class="mb-4">
-                    <a href="#" id="btn-success-whatsapp" target="_blank" class="btn btn-success fw-bold w-100 py-2 rounded-pill shadow-sm" rel="noopener noreferrer">
+                    <a href="https://wa.me/919829012345?text={{ urlencode($defaultWaMsg) }}" id="btn-success-whatsapp" target="_blank" class="btn btn-success fw-bold w-100 py-2 rounded-pill shadow-sm" rel="noopener noreferrer">
                         <i class="bi bi-whatsapp me-2"></i> Track Quotation on WhatsApp
                     </a>
                 </div>

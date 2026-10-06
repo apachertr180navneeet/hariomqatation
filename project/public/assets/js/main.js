@@ -34,15 +34,36 @@ const StoreApp = {
       if (addBtn) {
         e.preventDefault();
         const prodId = addBtn.getAttribute("data-id");
-        DataStore.addToEnquiryCart(prodId, 1);
-        HOC_UTILS.showToast("Product added to your Enquiry list!");
+        const prodName = addBtn.getAttribute("data-name");
+        const prodPrice = parseFloat(addBtn.getAttribute("data-price")) || 0;
+        const prodSku = addBtn.getAttribute("data-sku") || "PROD";
+        const customSpecs = prodName ? { name: prodName, price: prodPrice, sku: prodSku } : null;
+
+        DataStore.addToEnquiryCart(prodId, 1, customSpecs);
+        if (typeof Swal !== 'undefined') {
+          Swal.fire({
+            toast: true,
+            position: 'top-end',
+            icon: 'success',
+            title: 'Added to Quote Cart',
+            showConfirmButton: false,
+            timer: 2000
+          });
+        } else {
+          HOC_UTILS.showToast("Product added to your Enquiry list!");
+        }
       }
 
       const quickQuoteBtn = e.target.closest(".btn-get-quick-quote");
       if (quickQuoteBtn) {
         e.preventDefault();
         const prodId = quickQuoteBtn.getAttribute("data-id");
-        DataStore.addToEnquiryCart(prodId, 1);
+        const prodName = quickQuoteBtn.getAttribute("data-name");
+        const prodPrice = parseFloat(quickQuoteBtn.getAttribute("data-price")) || 0;
+        const prodSku = quickQuoteBtn.getAttribute("data-sku") || "PROD";
+        const customSpecs = prodName ? { name: prodName, price: prodPrice, sku: prodSku } : null;
+
+        DataStore.addToEnquiryCart(prodId, 1, customSpecs);
         window.location.href = "/enquiry";
       }
     });
