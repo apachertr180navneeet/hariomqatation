@@ -39,12 +39,12 @@
 </div>
 
 <!-- =========================================================================
-     Unimart Home Electronics - Hero Section (3-Column Layout)
+     Unimart Home Electronics - Hero Showcase Section (3-Column Layout)
      ========================================================================= -->
 <section class="unimart-hero-section py-3 py-md-4">
     <div class="container">
         <div class="row g-3 align-items-stretch">
-            <!-- Left Column: Vertical Category Menu (Unimart Sidebar, Desktop only) -->
+            <!-- Left Column: Vertical Category Menu (Desktop only) -->
             <div class="col-lg-3 d-none d-lg-block">
                 <div class="unimart-category-sidebar">
                     <div class="category-sidebar-header">
@@ -172,8 +172,8 @@
                                 <span class="glow-cyan-text">Workstation PCs</span>
                             </h1>
 
-                            <p class="hero-banner-desc mb-3 small text-light text-opacity-80">
-                                Assembled with 14th Gen Intel Core & NVIDIA RTX 40-Series. Stress-tested with Arctic MX paste & clean routing.
+                            <p class="hero-banner-desc mb-3 small">
+                                Assembled with 14th Gen Intel Core & NVIDIA RTX 40-Series. Stress-tested with Arctic MX paste & clean routing in Jodhpur.
                             </p>
 
                             <div class="d-flex flex-wrap gap-2 mb-3">
@@ -276,7 +276,7 @@
                     </div>
                     <div>
                         <div class="service-title">Showroom Pickup & Courier</div>
-                        <div class="service-desc">Instant pickup in Jodhpur or express delivery</div>
+                        <div class="service-desc">Same-day pickup in Jodhpur or express dispatch</div>
                     </div>
                 </div>
             </div>
@@ -335,56 +335,72 @@
         <div class="row g-3 g-md-4">
             <div class="col-6 col-md-4 col-lg-3">
                 <a href="{{ route('laptops') }}" class="category-card">
-                    <div class="category-icon-wrapper"><i class="bi bi-laptop"></i></div>
-                    <div class="category-card-title">Laptops</div>
+                    <div class="category-icon-wrapper" style="background: linear-gradient(135deg, #eff6ff 0%, #dbeafe 100%); color: #0284c7;">
+                        <i class="bi bi-laptop"></i>
+                    </div>
+                    <div class="category-card-title">Laptops & Ultrabooks</div>
                     <div class="category-card-count">Gaming, Student & Business</div>
                 </a>
             </div>
             <div class="col-6 col-md-4 col-lg-3">
                 <a href="{{ route('computers') }}" class="category-card">
-                    <div class="category-icon-wrapper"><i class="bi bi-pc-display"></i></div>
+                    <div class="category-icon-wrapper" style="background: linear-gradient(135deg, #f5f3ff 0%, #ede9fe 100%); color: #6366f1;">
+                        <i class="bi bi-pc-display"></i>
+                    </div>
                     <div class="category-card-title">Desktop Computers</div>
                     <div class="category-card-count">Office, Workstation & Gaming</div>
                 </a>
             </div>
             <div class="col-6 col-md-4 col-lg-3">
                 <a href="{{ route('components') }}" class="category-card">
-                    <div class="category-icon-wrapper"><i class="bi bi-cpu"></i></div>
+                    <div class="category-icon-wrapper" style="background: linear-gradient(135deg, #ecfdf5 0%, #d1fae5 100%); color: #059669;">
+                        <i class="bi bi-cpu"></i>
+                    </div>
                     <div class="category-card-title">Processors & CPUs</div>
                     <div class="category-card-count">Intel 14th Gen & AMD Ryzen</div>
                 </a>
             </div>
             <div class="col-6 col-md-4 col-lg-3">
                 <a href="{{ route('components') }}" class="category-card">
-                    <div class="category-icon-wrapper"><i class="bi bi-gpu-card"></i></div>
+                    <div class="category-icon-wrapper" style="background: linear-gradient(135deg, #fffbeb 0%, #fef3c7 100%); color: #d97706;">
+                        <i class="bi bi-gpu-card"></i>
+                    </div>
                     <div class="category-card-title">Graphics Cards</div>
                     <div class="category-card-count">NVIDIA RTX 4000 Series</div>
                 </a>
             </div>
             <div class="col-6 col-md-4 col-lg-3">
                 <a href="{{ route('components') }}" class="category-card">
-                    <div class="category-icon-wrapper"><i class="bi bi-device-ssd"></i></div>
+                    <div class="category-icon-wrapper" style="background: linear-gradient(135deg, #faf5ff 0%, #f3e8ff 100%); color: #9333ea;">
+                        <i class="bi bi-device-ssd"></i>
+                    </div>
                     <div class="category-card-title">RAM & Storage</div>
                     <div class="category-card-count">NVMe Gen4 SSDs & DDR5</div>
                 </a>
             </div>
             <div class="col-6 col-md-4 col-lg-3">
                 <a href="{{ route('products', ['cat' => 'Display']) }}" class="category-card">
-                    <div class="category-icon-wrapper"><i class="bi bi-display"></i></div>
+                    <div class="category-icon-wrapper" style="background: linear-gradient(135deg, #ecfeff 0%, #cffafe 100%); color: #0891b2;">
+                        <i class="bi bi-display"></i>
+                    </div>
                     <div class="category-card-title">Monitors & LED</div>
                     <div class="category-card-count">Gaming & 4K IPS Panels</div>
                 </a>
             </div>
             <div class="col-6 col-md-4 col-lg-3">
                 <a href="{{ route('products', ['cat' => 'Accessories']) }}" class="category-card">
-                    <div class="category-icon-wrapper"><i class="bi bi-keyboard"></i></div>
+                    <div class="category-icon-wrapper" style="background: linear-gradient(135deg, #f1f5f9 0%, #e2e8f0 100%); color: #334155;">
+                        <i class="bi bi-keyboard"></i>
+                    </div>
                     <div class="category-card-title">Accessories</div>
                     <div class="category-card-count">Keyboards, Mouse & UPS</div>
                 </a>
             </div>
             <div class="col-6 col-md-4 col-lg-3">
                 <a href="{{ route('products', ['cat' => 'Networking']) }}" class="category-card">
-                    <div class="category-icon-wrapper"><i class="bi bi-router"></i></div>
+                    <div class="category-icon-wrapper" style="background: linear-gradient(135deg, #eff6ff 0%, #dbeafe 100%); color: #2563eb;">
+                        <i class="bi bi-router"></i>
+                    </div>
                     <div class="category-card-title">Networking</div>
                     <div class="category-card-count">Routers, Switches & WiFi</div>
                 </a>
@@ -414,8 +430,95 @@
             </div>
         </div>
 
-        <div class="row g-4" id="home-featured-products-grid">
-            <!-- Populated dynamically via JS -->
+        <div class="row g-3 g-md-4" id="home-featured-products-grid">
+            @forelse($featuredProducts as $p)
+                @php
+                    $catName = $p->category->name ?? '';
+                    $subName = $p->subcategory->name ?? '';
+                    $artClass = 'art-default';
+                    $artIcon = 'bi-cpu-fill';
+                    if ($catName === 'Laptops') { $artClass = 'art-laptop'; $artIcon = 'bi-laptop'; }
+                    elseif ($catName === 'Desktop Computers') { $artClass = 'art-desktop'; $artIcon = 'bi-pc-display'; }
+                    elseif (str_contains($catName, 'Display') || str_contains($catName, 'Monitor')) { $artClass = 'art-monitor'; $artIcon = 'bi-display'; }
+                    elseif (str_contains($subName, 'Graphics') || str_contains($subName, 'GPU')) { $artClass = 'art-gpu'; $artIcon = 'bi-gpu-card'; }
+                    elseif (str_contains($subName, 'Processor') || str_contains($subName, 'CPU')) { $artClass = 'art-cpu'; $artIcon = 'bi-cpu'; }
+                    elseif (str_contains($subName, 'RAM') || str_contains($subName, 'SSD')) { $artClass = 'art-ram'; $artIcon = 'bi-device-ssd'; }
+
+                    $discountPct = ($p->mrp && $p->mrp > $p->selling_price) ? round((($p->mrp - $p->selling_price) / $p->mrp) * 100) : 0;
+                    $savings = ($p->mrp && $p->mrp > $p->selling_price) ? ($p->mrp - $p->selling_price) : 0;
+                    $specParts = array_slice(array_filter(array_map('trim', explode('|', $p->specs))), 0, 3);
+                    $detailUrl = route('product.details', ['id' => $p->id]);
+                @endphp
+                <div class="col-6 col-md-4 col-lg-3">
+                    <div class="unimart-product-card">
+                        <div class="unimart-card-media {{ $artClass }}">
+                            <div class="card-badge-top-left">
+                                @if($discountPct > 0)
+                                    <span class="badge-discount">-{{ $discountPct }}%</span>
+                                @endif
+                                <span class="badge-brand">{{ $p->brand->name ?? 'Branded' }}</span>
+                            </div>
+                            <div class="card-badge-top-right">
+                                <span class="badge-stock"><span class="pulse-dot-green"></span> In Stock</span>
+                            </div>
+                            <div class="card-media-center">
+                                <i class="bi {{ $artIcon }} product-art-icon"></i>
+                            </div>
+                            <div class="card-hover-actions">
+                                <a href="{{ $detailUrl }}" class="card-quick-action-btn" title="View Specifications">
+                                    <i class="bi bi-eye"></i>
+                                </a>
+                                <button type="button" class="card-quick-action-btn btn-add-enquiry" data-id="{{ $p->id }}" title="Add to Enquiry">
+                                    <i class="bi bi-cart-plus"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="unimart-card-body">
+                            <div class="card-cat-label">{{ $p->subcategory->name ?? ($p->category->name ?? 'Hardware') }}</div>
+                            <a href="{{ $detailUrl }}" class="unimart-product-title" title="{{ $p->name }}">{{ $p->name }}</a>
+                            
+                            <div class="card-rating-strip mb-2">
+                                <span class="text-warning small">
+                                    <i class="bi bi-star-fill"></i>
+                                    <i class="bi bi-star-fill"></i>
+                                    <i class="bi bi-star-fill"></i>
+                                    <i class="bi bi-star-fill"></i>
+                                    <i class="bi bi-star-fill"></i>
+                                </span>
+                                <span class="rating-num ms-1">4.9</span>
+                                <span class="rating-count text-muted">(24)</span>
+                            </div>
+
+                            <div class="unimart-specs-row mb-3">
+                                @foreach($specParts as $spec)
+                                    <span class="unimart-spec-tag">{{ $spec }}</span>
+                                @endforeach
+                            </div>
+
+                            <div class="card-footer-pricing pt-2 border-top">
+                                <div class="d-flex align-items-baseline justify-content-between mb-2">
+                                    <div>
+                                        <div class="unimart-price-current">₹{{ number_format($p->selling_price, 2) }}</div>
+                                        @if($p->mrp && $p->mrp > $p->selling_price)
+                                            <div class="unimart-price-mrp">MRP: ₹{{ number_format($p->mrp, 2) }}</div>
+                                        @endif
+                                    </div>
+                                    @if($savings > 0)
+                                        <span class="badge-savings">Save ₹{{ number_format($savings, 0) }}</span>
+                                    @endif
+                                </div>
+                                <div class="d-grid gap-2">
+                                    <button class="btn btn-primary btn-sm btn-add-enquiry py-2 fw-semibold" data-id="{{ $p->id }}" data-name="{{ $p->name }}" data-price="{{ $p->selling_price }}">
+                                        <i class="bi bi-cart-plus me-1"></i> Add to Quote
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            @empty
+                <!-- Fallback in case DB is being seeded -->
+            @endforelse
         </div>
     </div>
 </section>
@@ -428,7 +531,7 @@
         <div class="unimart-banner-strip">
             <div class="row align-items-center gy-3">
                 <div class="col-lg-8">
-                    <span class="badge bg-warning text-dark fw-bold mb-2">CUSTOM PC CONFIGURATOR</span>
+                    <span class="badge bg-warning text-dark fw-bold mb-2 font-monospace">CUSTOM PC CONFIGURATOR</span>
                     <h3 class="fw-bold text-white mb-2">Assemble Your Dream Computer with Real-Time Compatibility</h3>
                     <p class="text-light text-opacity-80 small mb-0">
                         Select CPU, GPU, Motherboard, RAM & Cabinets with automatic socket verification and download an official B2B quotation PDF instantly.
@@ -513,16 +616,18 @@
 <section class="brands-strip py-4 bg-light border-top border-bottom">
     <div class="container">
         <div class="d-flex align-items-center justify-content-between flex-wrap gap-3">
-            <span class="text-muted small fw-bold text-uppercase">Authorized Brands:</span>
+            <span class="text-muted small fw-bold text-uppercase"><i class="bi bi-patch-check-fill text-primary me-1"></i> Authorized Showroom Partners:</span>
             <div class="d-flex flex-wrap gap-2">
-                <span class="brand-pill-badge"><i class="bi bi-cpu text-primary"></i> Intel</span>
-                <span class="brand-pill-badge"><i class="bi bi-cpu-fill text-danger"></i> AMD</span>
-                <span class="brand-pill-badge"><i class="bi bi-gpu-card text-success"></i> NVIDIA</span>
-                <span class="brand-pill-badge"><i class="bi bi-laptop text-info"></i> ASUS</span>
-                <span class="brand-pill-badge"><i class="bi bi-laptop text-primary"></i> Dell</span>
-                <span class="brand-pill-badge"><i class="bi bi-laptop text-dark"></i> HP</span>
-                <span class="brand-pill-badge"><i class="bi bi-memory text-warning"></i> Corsair</span>
-                <span class="brand-pill-badge"><i class="bi bi-device-ssd text-danger"></i> Kingston</span>
+                <span class="brand-pill-badge" style="border-left: 3px solid #0284c7;"><i class="bi bi-cpu text-primary"></i> Intel</span>
+                <span class="brand-pill-badge" style="border-left: 3px solid #ef4444;"><i class="bi bi-cpu-fill text-danger"></i> AMD</span>
+                <span class="brand-pill-badge" style="border-left: 3px solid #10b981;"><i class="bi bi-gpu-card text-success"></i> NVIDIA</span>
+                <span class="brand-pill-badge" style="border-left: 3px solid #06b6d4;"><i class="bi bi-laptop text-info"></i> ASUS</span>
+                <span class="brand-pill-badge" style="border-left: 3px solid #0284c7;"><i class="bi bi-laptop text-primary"></i> Dell</span>
+                <span class="brand-pill-badge" style="border-left: 3px solid #0f172a;"><i class="bi bi-laptop text-dark"></i> HP</span>
+                <span class="brand-pill-badge" style="border-left: 3px solid #e11d48;"><i class="bi bi-laptop text-danger"></i> Lenovo</span>
+                <span class="brand-pill-badge" style="border-left: 3px solid #f59e0b;"><i class="bi bi-memory text-warning"></i> Corsair</span>
+                <span class="brand-pill-badge" style="border-left: 3px solid #dc2626;"><i class="bi bi-device-ssd text-danger"></i> Kingston</span>
+                <span class="brand-pill-badge" style="border-left: 3px solid #2563eb;"><i class="bi bi-device-ssd text-primary"></i> Samsung</span>
             </div>
         </div>
     </div>
@@ -599,46 +704,44 @@
                         "Assembled an RTX 4070 editing workstation for our design studio. Sunil ji gave the best rates in Jodhpur and delivered the system stress-tested with clean wiring. 100% recommended!"
                     </p>
                     <div class="d-flex align-items-center gap-2">
-                        <div class="rounded-circle bg-primary text-white p-2 fw-bold small" style="width: 36px; height: 36px; display: flex; align-items: center; justify-content: center;">VR</div>
+                        <div class="bg-primary text-white rounded-circle d-flex align-items-center justify-content-center fw-bold" style="width: 38px; height: 38px;">RS</div>
                         <div>
-                            <strong class="d-block text-dark small">Vikram Rathore</strong>
-                            <small class="text-muted" style="font-size: 0.75rem;">Rathore Infotech &bull; Jodhpur</small>
+                            <div class="fw-bold small">Rajesh Sharma</div>
+                            <div class="text-muted" style="font-size: 0.72rem;">Jodhpur Tech Labs, Shastri Nagar</div>
                         </div>
                     </div>
                 </div>
             </div>
-
             <div class="col-md-4">
                 <div class="review-card">
                     <div class="text-warning mb-2">
                         <i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i>
                     </div>
                     <p class="small text-muted mb-3">
-                        "Purchased 15 office desktops for our school computer lab. Their instant GST quotation and smooth delivery within 24 hours made the entire procurement effortless."
+                        "Best computer store in Western Rajasthan. Built my gaming PC with Intel Core i5 14th Gen. Got original invoice with GST input tax credit for my business within minutes."
                     </p>
                     <div class="d-flex align-items-center gap-2">
-                        <div class="rounded-circle bg-success text-white p-2 fw-bold small" style="width: 36px; height: 36px; display: flex; align-items: center; justify-content: center;">AC</div>
+                        <div class="bg-success text-white rounded-circle d-flex align-items-center justify-content-center fw-bold" style="width: 38px; height: 38px;">VS</div>
                         <div>
-                            <strong class="d-block text-dark small">Amit Choudhary</strong>
-                            <small class="text-muted" style="font-size: 0.75rem;">Marwar Academy &bull; Pal Road</small>
+                            <div class="fw-bold small">Vikram Singh Rathore</div>
+                            <div class="text-muted" style="font-size: 0.72rem;">Gaming Enthusiast, Ratanada</div>
                         </div>
                     </div>
                 </div>
             </div>
-
             <div class="col-md-4">
                 <div class="review-card">
                     <div class="text-warning mb-2">
                         <i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i>
                     </div>
                     <p class="small text-muted mb-3">
-                        "Bought an ASUS TUF Gaming laptop for college. Genuine warranty registered directly on ASUS website, and they even helped me install all basic software for free."
+                        "Bought 3 Dell laptops for our audit office. Genuine warranty, verified serial numbers, and best quotation price compared to any online portals."
                     </p>
                     <div class="d-flex align-items-center gap-2">
-                        <div class="rounded-circle bg-info text-white p-2 fw-bold small" style="width: 36px; height: 36px; display: flex; align-items: center; justify-content: center;">PS</div>
+                        <div class="bg-info text-white rounded-circle d-flex align-items-center justify-content-center fw-bold" style="width: 38px; height: 38px;">PG</div>
                         <div>
-                            <strong class="d-block text-dark small">Pooja Sharma</strong>
-                            <small class="text-muted" style="font-size: 0.75rem;">Engineering Student &bull; Shastri Nagar</small>
+                            <div class="fw-bold small">Pooja Gehlot</div>
+                            <div class="text-muted" style="font-size: 0.72rem;">Chartered Accountant, Paota</div>
                         </div>
                     </div>
                 </div>
@@ -651,33 +754,59 @@
 @push('scripts')
 <script>
     document.addEventListener("DOMContentLoaded", () => {
-        // 1. Render Featured Products with Rich Hardware Art
         const grid = document.getElementById("home-featured-products-grid");
-        if (!grid || typeof DataStore === 'undefined') return;
+        if (!grid) return;
 
-        const products = DataStore.getProducts();
+        // Load Server Products or DataStore fallback
+        const serverProducts = @json($allProductsJson ? json_decode($allProductsJson) : []);
+        const products = (serverProducts && serverProducts.length > 0) ? serverProducts : (typeof DataStore !== 'undefined' ? DataStore.getProducts() : []);
 
         function getArtClass(cat, sub) {
+            cat = cat || "";
+            sub = sub || "";
             if (cat === 'Laptops') return { cls: 'art-laptop', icon: 'bi-laptop' };
             if (cat === 'Desktop Computers') return { cls: 'art-desktop', icon: 'bi-pc-display' };
-            if (cat === 'Display & Monitors') return { cls: 'art-monitor', icon: 'bi-display' };
-            if (sub === 'Graphics Card') return { cls: 'art-gpu', icon: 'bi-gpu-card' };
-            if (sub === 'Processor') return { cls: 'art-cpu', icon: 'bi-cpu' };
-            if (sub === 'RAM' || sub === 'SSD') return { cls: 'art-ram', icon: 'bi-device-ssd' };
+            if (cat.includes('Display') || cat.includes('Monitor')) return { cls: 'art-monitor', icon: 'bi-display' };
+            if (sub.includes('Graphics') || sub.includes('GPU')) return { cls: 'art-gpu', icon: 'bi-gpu-card' };
+            if (sub.includes('Processor') || sub.includes('CPU')) return { cls: 'art-cpu', icon: 'bi-cpu' };
+            if (sub.includes('RAM') || sub.includes('SSD')) return { cls: 'art-ram', icon: 'bi-device-ssd' };
             return { cls: 'art-default', icon: 'bi-cpu-fill' };
         }
 
         function renderFeatured(category = "ALL") {
-            let list = products.filter(p => p.isFeatured || p.stock > 0);
+            let list = products.filter(p => p.is_featured || p.isFeatured || p.stock > 0);
             if (category !== "ALL") {
-                list = list.filter(p => p.category === category);
+                list = list.filter(p => {
+                    const cName = (p.category && p.category.name) ? p.category.name : (p.category || "");
+                    return cName.toLowerCase().includes(category.toLowerCase());
+                });
             }
             
             let html = "";
-            list.slice(0, 8).forEach(p => {
-                const discountPct = p.mrp ? Math.round(((p.mrp - p.sellingPrice) / p.mrp) * 100) : 0;
-                const savings = p.mrp ? p.mrp - p.sellingPrice : 0;
-                const art = getArtClass(p.category, p.subcategory);
+            const displayList = list.slice(0, 8);
+
+            if (displayList.length === 0) {
+                grid.innerHTML = `
+                    <div class="col-12 text-center py-5">
+                        <i class="bi bi-box-seam fs-1 text-muted d-block mb-2"></i>
+                        <h6 class="fw-bold text-muted">No items found in this department</h6>
+                        <a href="{{ route('products') }}" class="btn btn-sm btn-primary mt-2">Explore Full Catalog</a>
+                    </div>
+                `;
+                return;
+            }
+
+            displayList.forEach(p => {
+                const sPrice = Number(p.selling_price || p.sellingPrice || 0);
+                const mPrice = Number(p.mrp || 0);
+                const discountPct = (mPrice && mPrice > sPrice) ? Math.round(((mPrice - sPrice) / mPrice) * 100) : 0;
+                const savings = (mPrice && mPrice > sPrice) ? (mPrice - sPrice) : 0;
+
+                const catName = (p.category && p.category.name) ? p.category.name : (p.category || "");
+                const subName = (p.subcategory && p.subcategory.name) ? p.subcategory.name : (p.subcategory || "");
+                const brandName = (p.brand && p.brand.name) ? p.brand.name : (p.brand || "Branded");
+
+                const art = getArtClass(catName, subName);
                 const specParts = (p.specs || "").split("|").map(s => s.trim()).filter(s => s.length > 0).slice(0, 3);
                 const pillsHtml = specParts.map(s => `<span class="unimart-spec-tag">${s}</span>`).join("");
                 const detailUrl = `/product-details?id=${p.id}`;
@@ -688,7 +817,7 @@
                             <div class="unimart-card-media ${art.cls}">
                                 <div class="card-badge-top-left">
                                     ${discountPct > 0 ? `<span class="badge-discount">-${discountPct}%</span>` : ''}
-                                    <span class="badge-brand">${p.brand}</span>
+                                    <span class="badge-brand">${brandName}</span>
                                 </div>
                                 <div class="card-badge-top-right">
                                     <span class="badge-stock"><span class="pulse-dot-green"></span> In Stock</span>
@@ -700,13 +829,13 @@
                                     <a href="${detailUrl}" class="card-quick-action-btn" title="View Specifications">
                                         <i class="bi bi-eye"></i>
                                     </a>
-                                    <button type="button" class="card-quick-action-btn btn-add-enquiry" data-id="${p.id}" title="Add to Enquiry">
+                                    <button type="button" class="card-quick-action-btn btn-add-enquiry" data-id="${p.id}" data-name="${p.name}" data-price="${sPrice}" title="Add to Enquiry">
                                         <i class="bi bi-cart-plus"></i>
                                     </button>
                                 </div>
                             </div>
                             <div class="unimart-card-body">
-                                <div class="card-cat-label">${p.subcategory || p.category}</div>
+                                <div class="card-cat-label">${subName || catName || 'Hardware'}</div>
                                 <a href="${detailUrl}" class="unimart-product-title" title="${p.name}">${p.name}</a>
                                 
                                 <div class="card-rating-strip mb-2">
@@ -728,13 +857,13 @@
                                 <div class="card-footer-pricing pt-2 border-top">
                                     <div class="d-flex align-items-baseline justify-content-between mb-2">
                                         <div>
-                                            <div class="unimart-price-current">${HOC_UTILS.formatINR(p.sellingPrice)}</div>
-                                            ${p.mrp ? `<div class="unimart-price-mrp">MRP: ${HOC_UTILS.formatINR(p.mrp)}</div>` : ''}
+                                            <div class="unimart-price-current">₹${sPrice.toLocaleString('en-IN', {minimumFractionDigits: 2, maximumFractionDigits: 2})}</div>
+                                            ${mPrice > sPrice ? `<div class="unimart-price-mrp">MRP: ₹${mPrice.toLocaleString('en-IN', {minimumFractionDigits: 2, maximumFractionDigits: 2})}</div>` : ''}
                                         </div>
-                                        ${savings > 0 ? `<span class="badge-savings">Save ${HOC_UTILS.formatINR(savings)}</span>` : ''}
+                                        ${savings > 0 ? `<span class="badge-savings">Save ₹${savings.toLocaleString('en-IN')}</span>` : ''}
                                     </div>
                                     <div class="d-grid gap-2">
-                                        <button class="btn btn-primary btn-sm btn-add-enquiry py-2 fw-semibold" data-id="${p.id}">
+                                        <button class="btn btn-primary btn-sm btn-add-enquiry py-2 fw-semibold" data-id="${p.id}" data-name="${p.name}" data-price="${sPrice}">
                                             <i class="bi bi-cart-plus me-1"></i> Add to Quote
                                         </button>
                                     </div>
@@ -746,8 +875,6 @@
             });
             grid.innerHTML = html;
         }
-
-        renderFeatured("ALL");
 
         // Tabs click listener
         document.querySelectorAll("#home-featured-filter-tabs button").forEach(btn => {
@@ -796,12 +923,24 @@
 
             const addBtn = document.getElementById("rec-add-btn");
             addBtn.onclick = () => {
-                DataStore.addToEnquiryCart(config.id, 1, {
-                    name: config.title,
-                    price: Number(config.price.replace(/[^0-9]/g, '')),
-                    specs: config.specs
-                });
-                HOC_UTILS.showToast(`${config.title} added to your Enquiry Cart!`);
+                if (typeof DataStore !== 'undefined' && DataStore.addToEnquiryCart) {
+                    DataStore.addToEnquiryCart(config.id, 1, {
+                        name: config.title,
+                        price: Number(config.price.replace(/[^0-9]/g, '')),
+                        specs: config.specs
+                    });
+                }
+                if (typeof HOC_UTILS !== 'undefined' && HOC_UTILS.showToast) {
+                    HOC_UTILS.showToast(`${config.title} added to your Enquiry Cart!`);
+                } else if (typeof Swal !== 'undefined') {
+                    Swal.fire({
+                        icon: 'success',
+                        title: 'Added to Quote!',
+                        text: `${config.title} has been added to your Enquiry Cart.`,
+                        timer: 2000,
+                        showConfirmButton: false
+                    });
+                }
             };
         }
 

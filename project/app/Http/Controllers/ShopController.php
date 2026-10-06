@@ -20,14 +20,15 @@ class ShopController extends Controller
     {
         $featuredProducts = Product::active()
             ->where('is_featured', true)
-            ->with(['category', 'brand'])
+            ->with(['category', 'brand', 'subcategory'])
             ->take(8)
             ->get();
 
         if ($featuredProducts->isEmpty()) {
-            $featuredProducts = Product::active()->with(['category', 'brand'])->take(8)->get();
+            $featuredProducts = Product::active()->with(['category', 'brand', 'subcategory'])->take(8)->get();
         }
 
+        $allProducts = Product::active()->with(['category', 'brand', 'subcategory'])->get();
         $heroGamingRig = Product::active()->computers()->first();
         $categories = Category::active()->withCount('products')->get();
         $brands = Brand::where('status', 'active')->take(12)->get();
@@ -37,6 +38,8 @@ class ShopController extends Controller
             'currentPage' => 'home',
             'showPromoStrip' => true,
             'featuredProducts' => $featuredProducts,
+            'allProducts' => $allProducts,
+            'allProductsJson' => $allProducts->toJson(),
             'heroGamingRig' => $heroGamingRig,
             'categories' => $categories,
             'brands' => $brands,

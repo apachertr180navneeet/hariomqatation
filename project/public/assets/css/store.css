@@ -1671,10 +1671,10 @@ nav .flex-sm-fill > div:first-child p {
 
 /* Center Hero Banner */
 .unimart-hero-banner {
-  background: radial-gradient(circle at 75% 35%, #132247 0%, #0c1833 45%, #050914 100%);
+  background: linear-gradient(135deg, #091a36 0%, #0d2858 50%, #0369a1 100%);
   color: #ffffff;
-  border-radius: 16px;
-  padding: 34px 28px;
+  border-radius: 18px;
+  padding: 38px 30px;
   position: relative;
   overflow: hidden;
   height: 100%;
@@ -1682,14 +1682,14 @@ nav .flex-sm-fill > div:first-child p {
   display: flex;
   flex-direction: column;
   justify-content: center;
-  box-shadow: 0 12px 36px rgba(15, 23, 42, 0.15);
-  border: 1px solid rgba(255, 255, 255, 0.08);
+  box-shadow: 0 16px 40px rgba(13, 40, 88, 0.22);
+  border: 1px solid rgba(255, 255, 255, 0.12);
 }
 .hero-banner-title {
   font-family: var(--hoc-font-heading);
-  font-size: 2.15rem;
+  font-size: 2.25rem;
   font-weight: 900;
-  line-height: 1.18;
+  line-height: 1.15;
   letter-spacing: -0.03em;
 }
 .glow-cyan-text {
@@ -1697,27 +1697,27 @@ nav .flex-sm-fill > div:first-child p {
   text-shadow: 0 0 25px rgba(56, 189, 248, 0.45);
 }
 .hero-banner-desc {
-  font-size: 0.88rem;
-  color: #94a3b8;
-  line-height: 1.5;
+  font-size: 0.92rem;
+  color: #cbd5e1;
+  line-height: 1.55;
 }
 .hero-hardware-img {
-  max-height: 290px;
+  max-height: 310px;
   width: auto;
   object-fit: contain;
   transition: transform 0.4s ease;
-  filter: drop-shadow(0 14px 28px rgba(0, 0, 0, 0.6));
+  filter: drop-shadow(0 16px 32px rgba(0, 0, 0, 0.5));
 }
 .unimart-hero-banner:hover .hero-hardware-img {
-  transform: scale(1.04) translateY(-3px);
+  transform: scale(1.05) translateY(-4px);
 }
 .hero-spec-pill {
-  background: rgba(255, 255, 255, 0.08);
-  border: 1px solid rgba(255, 255, 255, 0.15);
-  color: #e2e8f0;
-  padding: 5px 12px;
-  border-radius: 8px;
-  font-size: 0.74rem;
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  color: #ffffff;
+  padding: 6px 14px;
+  border-radius: 9999px;
+  font-size: 0.76rem;
   font-weight: 600;
   display: inline-flex;
   align-items: center;
@@ -1729,46 +1729,47 @@ nav .flex-sm-fill > div:first-child p {
   width: 450px;
   height: 450px;
   border-radius: 50%;
-  background: radial-gradient(circle, rgba(2, 132, 199, 0.25) 0%, transparent 70%);
+  background: radial-gradient(circle, rgba(56, 189, 248, 0.3) 0%, transparent 70%);
   top: -120px;
   right: -100px;
   pointer-events: none;
-  filter: blur(40px);
+  filter: blur(50px);
 }
 
 /* Right Stacked Promo Banners */
 .unimart-promo-card {
   border-radius: 16px;
-  padding: 18px 20px;
+  padding: 22px 20px;
   position: relative;
   overflow: hidden;
   display: flex;
   flex-direction: column;
   justify-content: center;
-  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.08);
-  transition: transform 0.25s ease;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
 }
 .unimart-promo-card:hover {
-  transform: translateY(-3px);
-  box-shadow: 0 10px 26px rgba(0, 0, 0, 0.14);
+  transform: translateY(-4px);
+  box-shadow: 0 14px 32px rgba(0, 0, 0, 0.14);
 }
 .promo-card-laptops {
-  background: linear-gradient(135deg, #1e1b4b 0%, #0f172a 100%);
-  border: 1px solid rgba(255, 255, 255, 0.1);
+  background: linear-gradient(135deg, #1e1b4b 0%, #312e81 60%, #4338ca 100%);
+  border: 1px solid rgba(255, 255, 255, 0.14);
 }
 .promo-card-builder {
-  background: linear-gradient(135deg, #0369a1 0%, #0284c7 100%);
-  border: 1px solid rgba(255, 255, 255, 0.15);
+  background: linear-gradient(135deg, #0284c7 0%, #0369a1 60%, #0f172a 100%);
+  border: 1px solid rgba(255, 255, 255, 0.14);
 }
 .promo-img-thumb {
-  max-height: 110px;
+  max-height: 115px;
   width: 100%;
   object-fit: cover;
-  border-radius: 10px;
+  border-radius: 12px;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.2);
   transition: transform 0.3s ease;
 }
 .unimart-promo-card:hover .promo-img-thumb {
-  transform: scale(1.06);
+  transform: scale(1.07);
 }
 
 /* 5. Trust Badges Strip */
@@ -1776,7 +1777,18 @@ nav .flex-sm-fill > div:first-child p {
   display: flex;
   align-items: center;
   gap: 14px;
-  padding: 12px 6px;
+  padding: 14px 18px;
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+  border-radius: 14px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.02);
+  height: 100%;
+  transition: all 0.22s ease;
+}
+.service-feature-card:hover {
+  transform: translateY(-2px);
+  border-color: #bae6fd;
+  box-shadow: 0 8px 20px rgba(2, 132, 199, 0.08);
 }
 .service-icon-box {
   width: 48px;
@@ -1907,7 +1919,7 @@ nav .flex-sm-fill > div:first-child p {
   border-color: #bae6fd;
 }
 
-/* Media Box with Category Themes */
+/* Media Box with Clean Modern Aesthetics */
 .unimart-card-media,
 .product-visual-art {
   height: 200px;
@@ -1916,7 +1928,8 @@ nav .flex-sm-fill > div:first-child p {
   align-items: center;
   justify-content: center;
   overflow: hidden;
-  background: #0f172a;
+  background: #f8fafc;
+  border-bottom: 1px solid #f1f5f9;
 }
 .unimart-card-media::before,
 .product-visual-art::before {
@@ -1925,65 +1938,65 @@ nav .flex-sm-fill > div:first-child p {
   width: 140px;
   height: 140px;
   border-radius: 50%;
-  background: radial-gradient(circle, rgba(255, 255, 255, 0.12) 0%, transparent 70%);
+  background: radial-gradient(circle, rgba(255, 255, 255, 0.9) 0%, transparent 70%);
   pointer-events: none;
 }
 
-/* Specific Category Themed Backgrounds & Glow */
+/* Category Themed Soft Tech Backdrops */
 .art-laptop {
-  background: radial-gradient(circle at 50% 50%, #1e1b4b 0%, #0f172a 100%) !important;
+  background: linear-gradient(145deg, #eff6ff 0%, #dbeafe 100%) !important;
 }
 .art-laptop .product-art-icon {
-  color: #38bdf8 !important;
+  color: #0284c7 !important;
 }
 
 .art-desktop {
-  background: radial-gradient(circle at 50% 50%, #172554 0%, #090e1a 100%) !important;
+  background: linear-gradient(145deg, #f5f3ff 0%, #ede9fe 100%) !important;
 }
 .art-desktop .product-art-icon {
-  color: #818cf8 !important;
+  color: #6366f1 !important;
 }
 
 .art-gpu {
-  background: radial-gradient(circle at 50% 50%, #311042 0%, #180828 100%) !important;
+  background: linear-gradient(145deg, #fffbeb 0%, #fef3c7 100%) !important;
 }
 .art-gpu .product-art-icon {
-  color: #fbbf24 !important;
+  color: #d97706 !important;
 }
 
 .art-cpu {
-  background: radial-gradient(circle at 50% 50%, #064e3b 0%, #022c22 100%) !important;
+  background: linear-gradient(145deg, #ecfdf5 0%, #d1fae5 100%) !important;
 }
 .art-cpu .product-art-icon {
-  color: #34d399 !important;
+  color: #059669 !important;
 }
 
 .art-ram {
-  background: radial-gradient(circle at 50% 50%, #2e1065 0%, #180a33 100%) !important;
+  background: linear-gradient(145deg, #faf5ff 0%, #f3e8ff 100%) !important;
 }
 .art-ram .product-art-icon {
-  color: #c084fc !important;
+  color: #9333ea !important;
 }
 
 .art-monitor {
-  background: radial-gradient(circle at 50% 50%, #0c4a6e 0%, #082f49 100%) !important;
+  background: linear-gradient(145deg, #ecfeff 0%, #cffafe 100%) !important;
 }
 .art-monitor .product-art-icon {
-  color: #38bdf8 !important;
+  color: #0891b2 !important;
 }
 
 .art-default {
-  background: radial-gradient(circle at 50% 50%, #1e293b 0%, #0f172a 100%) !important;
+  background: linear-gradient(145deg, #f8fafc 0%, #f1f5f9 100%) !important;
 }
 .art-default .product-art-icon {
-  color: #60a5fa !important;
+  color: #0284c7 !important;
 }
 
 /* Hardware Art Icon */
 .product-art-icon {
-  font-size: 4.2rem;
-  filter: drop-shadow(0 10px 18px rgba(0, 0, 0, 0.45));
-  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  font-size: 4.4rem;
+  filter: drop-shadow(0 6px 14px rgba(0, 0, 0, 0.08));
+  transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
   z-index: 1;
 }
 .unimart-product-card:hover .product-art-icon,
@@ -2257,21 +2270,21 @@ nav .flex-sm-fill > div:first-child p {
 .brand-pill-badge {
   background: #ffffff;
   border: 1px solid #e2e8f0;
-  border-radius: 9999px;
-  padding: 6px 16px;
+  border-radius: 12px;
+  padding: 8px 18px;
   font-weight: 700;
-  font-size: 0.85rem;
+  font-size: 0.88rem;
   color: #1e293b;
   display: inline-flex;
   align-items: center;
   gap: 8px;
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.03);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.03);
   transition: all 0.2s ease;
 }
 .brand-pill-badge:hover {
   border-color: #0284c7;
   transform: translateY(-2px);
-  box-shadow: 0 6px 14px rgba(2, 132, 199, 0.15);
+  box-shadow: 0 8px 18px rgba(2, 132, 199, 0.12);
 }
 
 /* 12. Advantage Feature Box */
